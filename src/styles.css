@@ -1,1 +1,43 @@
 /* You can add global styles to this file, and also import other style files */
+.navbar {
+    min-height: 4rem;
+    
+    box-shadow: 0 0.5rem 1rem rgba(0,0,0,.05), inset 0 -1px 0 rgba(0,0,0,.1);
+}
+
+a{
+    margin-left: 1rem;
+}
+
+body{
+    background-image: url("../src/assets/doctor.jpg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+form{
+    width: 80%;
+    margin-left: 10%;
+    margin-top: 2rem;
+    border: black 0.61rem solid;
+    border-radius: 0.5rem;
+    background-color: rgb(214, 187, 112);
+}
+
+.form-group{
+    margin-top: 5%;
+    margin-left: 10%;
+    width: 80%;
+}
+
+button{
+    margin-top: 5%;
+    margin-left: 15%;
+    margin-bottom: 5%;
+}
+
+a:hover{
+    background-color: rgb(77, 19, 72);
+    border-radius: 2rem;
+    
+}
