@@ -8,10 +8,10 @@ export class ServicioService {
   constructor() { }
 //////////codigo de firebase/////////////
  /* service firebase.storage {
-    match /b/{bucket}/o {
-      match /{allPaths=**} {
-        allow read, write: if request.auth != null;
-      }
+  match /b/{bucket}/o {
+    match /{allPaths=**} {
+      allow read, write: if request.auth != null;
     }
-  }*/
+  }
+}*/
 }
