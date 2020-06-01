@@ -7,6 +7,7 @@ import {environment} from '../environments/environment';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {auth} from 'firebase/app';
 import {AngularFireStorageModule} from '@angular/fire/storage';
+import {RecaptchaModule, RecaptchaFormsModule} from 'ng-recaptcha';
 
 
 import { AppComponent } from './app.component';
@@ -32,7 +33,9 @@ import { NavComponent } from './componentes/nav/nav.component';
     RutasRoutingModule, 
     AngularFireModule.initializeApp(environment.firebaseConfig),
     FormsModule, 
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    RecaptchaModule,
+    RecaptchaFormsModule
   ],
   providers: [ServicioService, AngularFireAuth],
   bootstrap: [AppComponent]
