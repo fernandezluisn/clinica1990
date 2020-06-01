@@ -21,7 +21,7 @@ export class RegistroComponent implements OnInit {
   profesion:string;
   profesion2:string;
   detallar:boolean;
-
+  captchaResuelto:boolean;
   
 
   uploadPercent1: Observable<number>;
@@ -39,6 +39,7 @@ export class RegistroComponent implements OnInit {
     this.tipoU=true;
     this.detallar=false;
     this.profesion="Clinico";
+    this.captchaResuelto=false;
   }
 
   ngOnInit(): void {
@@ -64,7 +65,7 @@ export class RegistroComponent implements OnInit {
   }
 
   registrar(){
-    if(this.pass1==this.pass2){
+    if(this.pass1==this.pass2 && this.captchaResuelto){
       this.servicio.registrarUsuario(this.mail, this.pass2).then((res)=>{
         this.router.navigate(['turnos']);
       }).catch(err=>{
@@ -72,8 +73,10 @@ export class RegistroComponent implements OnInit {
       });
 
 
-    }else{      
+    }else if(this.pass1!=this.pass2){      
       alert("Los passwords no coinciden.");
+    }else{
+      alert("Marque el captcha");
     }
 
   }
@@ -91,4 +94,8 @@ export class RegistroComponent implements OnInit {
     console.log(img);
   }
 
+  hecho(e){
+    console.log(e);
+    this.captchaResuelto=true;
+  }
 }
