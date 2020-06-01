@@ -6,6 +6,8 @@ import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
 import {AngularFireAuth} from '@angular/fire/auth';
 import {auth} from 'firebase/app';
+import {AngularFireStorageModule} from '@angular/fire/storage';
+
 
 import { AppComponent } from './app.component';
 import {RutasRoutingModule} from '../app/rutas/rutas-routing.module';
@@ -29,7 +31,8 @@ import { NavComponent } from './componentes/nav/nav.component';
     BrowserModule,
     RutasRoutingModule, 
     AngularFireModule.initializeApp(environment.firebaseConfig),
-    FormsModule
+    FormsModule, 
+    AngularFireStorageModule
   ],
   providers: [ServicioService, AngularFireAuth],
   bootstrap: [AppComponent]
