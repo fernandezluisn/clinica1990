@@ -1,2 +1,8 @@
 
-<h1>{{usuario.email}}</h1>
+<div *ngIf="hayUsuario">
+    <h1>Bienvenido {{usuario.email}}</h1>
+</div>
+
+<div *ngIf="!hayUsuario">
+    <h1>No tiene permiso a acceder aquí.</h1>
+</div>

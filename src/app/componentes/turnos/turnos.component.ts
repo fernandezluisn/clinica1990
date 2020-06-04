@@ -13,7 +13,7 @@ export class TurnosComponent implements OnInit {
   hayU:boolean;
   constructor( private serv:ServicioService) { 
     serv.tomarUsuario().then(res=>{
-      this.usuario=res;
+      this.usuario=res;      
     }).catch(err=>{
       alert(err);
     });
@@ -22,6 +22,10 @@ export class TurnosComponent implements OnInit {
 
   ngOnInit(): void {
     console.log(this.usuario);
+    
+    if(this.usuario!=null && this.usuario!="undefined")
+    this.hayU=true;
+    
   }
 
 }
