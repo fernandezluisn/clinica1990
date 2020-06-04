@@ -2,7 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
 import { Router } from '@angular/router';
 
-import {ServicioService} from '../../servicio.service';
+import {ServicioService} from '../../servicios/servicio.service';
 
 
 @Component({

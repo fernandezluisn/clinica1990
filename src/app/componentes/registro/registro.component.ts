@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {ServicioService} from '../../servicio.service';
+import {ServicioService} from '../../servicios/servicio.service';
 import { Router } from '@angular/router';
+
 import {AngularFireStorage} from '@angular/fire/storage';
+
 import {finalize} from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
@@ -85,13 +87,20 @@ export class RegistroComponent implements OnInit {
     console.log(img);
     const com=Math.random().toString(36).substring(2);
     const file= img.target.files[0];
-    const path= 'imagenes/'+ com;
-    const ref= this.storage.ref(path);
-    const task= this.storage.upload(path, file);
+    const path= 'imagenes1/'+ com;
+    
+    const task=this.storage.upload(path, file);
+    this.uploadPercent1=task.percentageChanges();
+    console.log(this.uploadPercent1);
   }
 
   imagen2(img){
-    console.log(img);
+    
+    const com=Math.random().toString(36).substring(2);
+    const file= img.target.files[0];
+    const path= 'imagenes2/'+ com;
+    const task2=this.storage.upload(path, file);
+    this.uploadPercent2=task2.percentageChanges();
   }
 
   hecho(e){

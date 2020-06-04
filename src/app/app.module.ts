@@ -16,7 +16,9 @@ import { TurnosComponent } from './componentes/turnos/turnos.component';
 import { LoginComponent } from './componentes/login/login.component';
 import { RegistroComponent } from './componentes/registro/registro.component';
 import { BienvenidaComponent } from './componentes/bienvenida/bienvenida.component';
-import { ServicioService } from './servicio.service';
+import { ServicioService } from './servicios/servicio.service';
+import {StorageService} from './servicios/storage.service';
+import {BdaService} from './servicios/bda.service';
 import { NavComponent } from './componentes/nav/nav.component';
 
 @NgModule({
@@ -37,7 +39,7 @@ import { NavComponent } from './componentes/nav/nav.component';
     RecaptchaModule,
     RecaptchaFormsModule
   ],
-  providers: [ServicioService, AngularFireAuth],
+  providers: [ServicioService, AngularFireAuth, StorageService, BdaService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
