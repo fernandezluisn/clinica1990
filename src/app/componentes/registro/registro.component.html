@@ -41,6 +41,9 @@
         <input type="file" accept=".png, .jpg" (change)="imagen2($event)">
         
     </div>
+    <div class="progress" style="margin-left: 10%; margin-right: 10%; width: 25rem;">
+      <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [style.width]="(uploadPercent2 | async) +'%'"></div>
+    </div>
     
       <div class="form-group" *ngIf="!tipoU">
         <label >Ingrese su especialidad</label>
