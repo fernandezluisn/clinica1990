@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['turnos']);
       
     }).catch(error=>{
-      console.log(error.message);      
+      alert(error.message);      
     }
     );
     

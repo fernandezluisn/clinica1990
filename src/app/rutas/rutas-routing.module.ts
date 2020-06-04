@@ -7,9 +7,9 @@ import {BienvenidaComponent} from '../componentes/bienvenida/bienvenida.componen
 
 const routes: Routes = [
   {path:"", component:BienvenidaComponent},
-  {path:"login", component:LoginComponent},
+  {path:"login", component:LoginComponent, data: {animation: 'Login'}},
   {path:"registro", component:RegistroComponent},
-  {path:"turnos", component:TurnosComponent}
+  {path:"turnos", component:TurnosComponent, data: {animation: 'Turnos'}}
 ];
 
 @NgModule({

@@ -8,6 +8,7 @@ import {AngularFireAuth} from '@angular/fire/auth';
 import {auth} from 'firebase/app';
 import {AngularFireStorageModule} from '@angular/fire/storage';
 import {RecaptchaModule, RecaptchaFormsModule} from 'ng-recaptcha';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 import { AppComponent } from './app.component';
@@ -37,7 +38,8 @@ import { NavComponent } from './componentes/nav/nav.component';
     FormsModule, 
     AngularFireStorageModule,
     RecaptchaModule,
-    RecaptchaFormsModule
+    RecaptchaFormsModule,
+    BrowserAnimationsModule
   ],
   providers: [ServicioService, AngularFireAuth, StorageService, BdaService],
   bootstrap: [AppComponent]
