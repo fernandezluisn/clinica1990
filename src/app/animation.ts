@@ -18,15 +18,15 @@ export const slideInAnimation =
       query(':leave', animateChild()),
       group([
         query(':leave', [
-          animate('1000ms ease-out', style({ left: '100%'}))
+          animate('1000ms ease-in', style({ left: '100%'}))
         ]),
         query(':enter', [
-          animate('1000ms ease-out', style({ left: '0%'}))
+          animate('1000ms ease-in', style({ left: '0%'}))
         ])
       ]),
       query(':enter', animateChild()),
     ]),
-    transition(' Turnos => Login', [
+    transition('Usuario => Login', [
       style({ position: 'relative' }),
       query(':enter, :leave', [
         style({
