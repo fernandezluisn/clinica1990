@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {ServicioService} from '../../servicios/servicio.service';
+
 
 @Component({
   selector: 'app-turnos',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TurnosComponent implements OnInit {
 
-  constructor() { }
+  usuario;
+  hayU:boolean;
+  constructor( private serv:ServicioService) { 
+    serv.tomarUsuario().then(res=>{
+      this.usuario=res;
+    }).catch(err=>{
+      alert(err);
+    });
+    this.hayU=false;
+  }
 
   ngOnInit(): void {
+    console.log(this.usuario);
   }
 
 }
