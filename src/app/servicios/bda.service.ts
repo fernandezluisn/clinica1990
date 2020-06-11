@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {AngularFirestore} from '@angular/fire/firestore';
+import {AngularFirestore, DocumentReference} from '@angular/fire/firestore';
 import { Observable, Subject } from 'rxjs';
 import { empleado } from '../clases/empleado';
 import { paciente } from '../clases/paciente';
@@ -17,6 +17,8 @@ export class BdaService {
   constructor(private db:AngularFirestore ) {
 
     this.listaUsuarios=new Subject<paciente[]>();
+    
+    
     this.listaPacientes=this.db.collection('usuarios').snapshotChanges().pipe(
       map(actions=>{
         return actions.map(
@@ -39,7 +41,7 @@ export class BdaService {
   ;
 
   devolverListado(){
-    return this.listaUsuarios;
+    return this.listaPacientes;
   }
   
 }

@@ -27,6 +27,7 @@ export class TurnosComponent implements OnInit {
 
     this.bda.devolverListado().subscribe(lista => {
       this.listadoPacientes = lista;
+      console.log(lista);
     })
     console.log(this.listadoPacientes);
     console.log(this.bda.listaPacientes);

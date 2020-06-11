@@ -4,7 +4,7 @@ import {AngularFireAuth} from '@angular/fire/auth';
 
 
 
-import {paciente} from '../clases/paciente';
+
 
 @Injectable({
   providedIn: 'root'
@@ -42,9 +42,6 @@ tomarUsuario(){
   return this.afAuth.currentUser;
 }
 
-guardarPacienteEnBD(paciente: paciente){
-  
 
-}
 
 }
