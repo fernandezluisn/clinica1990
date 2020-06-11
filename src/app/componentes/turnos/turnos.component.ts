@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ServicioService} from '../../servicios/servicio.service';
+import {BdaService} from '../../servicios/bda.service';
 
 
 @Component({
@@ -11,7 +12,9 @@ export class TurnosComponent implements OnInit {
 
   usuario;
   hayU:boolean;
-  constructor( private serv:ServicioService) { 
+  listadoPacientes;
+
+  constructor( private serv:ServicioService, private bda:BdaService) { 
     serv.tomarUsuario().then(res=>{
       this.usuario=res;      
     }).catch(err=>{
@@ -21,7 +24,12 @@ export class TurnosComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.usuario);
+
+    this.bda.devolverListado().subscribe(lista => {
+      this.listadoPacientes = lista;
+    })
+    console.log(this.listadoPacientes);
+    console.log(this.bda.listaPacientes);
     
     if(this.usuario!=null && this.usuario!="undefined")
     this.hayU=true;
