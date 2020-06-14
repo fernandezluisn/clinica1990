@@ -4,8 +4,8 @@ export class empleado extends persona {
 
     especialidades:string[]; 
 
-    constructor(nombre, apellido, mail, especialidades:string[]) {
-        super(nombre, apellido, mail);
+    constructor(nombre, apellido, mail, especialidades:string[], id:string) {
+        super(nombre, apellido, mail, id);
         this.especialidades=especialidades;
         
     }

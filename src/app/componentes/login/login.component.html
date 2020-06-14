@@ -1,3 +1,5 @@
+<app-nav></app-nav>
+
 <form action="">
     <div class="form-group">
         <label >Ingrese su email</label>
@@ -9,10 +11,7 @@
         <input [(ngModel)]='pass' type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" [ngModelOptions]="{standalone: true}">
       </div>
       
-      <div class="form-group form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1">Recordar usuario</label>
-      </div>
+      
       <button type="submit" class="btn btn-primary" (click)="onLogin()">Ingresar</button>
 
 </form>

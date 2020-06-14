@@ -29,7 +29,7 @@ export class TurnosComponent implements OnInit {
       this.listadoPacientes = lista;
       console.log(lista);
     })
-    console.log(this.listadoPacientes);
+    console.log("lista componente "+ this.listadoPacientes);
     console.log(this.bda.listaPacientes);
     
     if(this.usuario!=null && this.usuario!="undefined")
