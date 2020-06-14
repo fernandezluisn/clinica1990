@@ -78,7 +78,7 @@ export class RegistroComponent implements OnInit {
       let reg;
 
       this.servicio.registrarUsuario(this.mail, this.pass2).then(async (res)=>{
-        
+        this.servicio.loginUser(this.mail, this.pass2);
         this.servicio.tomarUsuario().then(res=>{
           reg=res;      
         }).catch(err=>{
