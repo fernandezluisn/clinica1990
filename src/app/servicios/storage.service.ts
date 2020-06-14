@@ -10,13 +10,12 @@ export class StorageService {
   porc1:Observable<number>;
   constructor(private storage:AngularFireStorage) { }
 
-  subirArchivo(nombreArchivo:string, file:any) {
+  subirArchivo(nombreArchivo:string, file:any) { 
     
-    
-    
-    const task= this.storage.upload(nombreArchivo, file);
+    return this.storage.upload(nombreArchivo, file);
+    /*const task= this.storage.upload(nombreArchivo, file);
     this.porc1=task.percentageChanges();
-    return this.porc1;
+    return this.porc1;*/
   }
 
   getReferencia(nombreArchivo:string) {

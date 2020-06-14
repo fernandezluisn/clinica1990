@@ -29,11 +29,13 @@ export class RegistroComponent implements OnInit {
   captchaResuelto:boolean;
   
 
+  
+
   uploadPercent1: Observable<number>;
-  url1: Observable<string>;
+  url1: string;
 
   uploadPercent2: Observable<number>;
-  url2: Observable<string>;
+  url2: string;
 
   constructor(private servicio:ServicioService, private router:Router, private storage:AngularFireStorage, private bda:BdaService) { 
     this.mail="";
@@ -70,6 +72,7 @@ export class RegistroComponent implements OnInit {
   }
 
   registrar(){
+    
     if(this.pass1==this.pass2 && this.captchaResuelto){
 
       let u;
@@ -87,9 +90,10 @@ export class RegistroComponent implements OnInit {
         
         if(this.tipoU)        
         {
-          console.log(this.url1);
-         // u=new paciente(this.nombre, this.apellido, this.mail, this.url1, this.url2, reg.uid);
-         // this.bda.createPaciente(u);
+          
+          
+         u=new paciente(this.nombre, this.apellido, this.mail, this.url1, this.url2, reg.uid);
+         this.bda.createPaciente(u);
         }          
         else
         {
@@ -121,8 +125,9 @@ export class RegistroComponent implements OnInit {
     const task=this.storage.upload(path, file);
     this.uploadPercent1=task.percentageChanges();
     
-    task.snapshotChanges().pipe(finalize(()=>this.url1=ref.getDownloadURL())).subscribe();
+    task.snapshotChanges().pipe(finalize(()=>ref.getDownloadURL().subscribe(url=> this.url1=url)));
     
+    console.log("u1 "+this.url1);
   }
 
   imagen2(img){
@@ -133,11 +138,13 @@ export class RegistroComponent implements OnInit {
     const ref2=this.storage.ref(path2); 
     const task2=this.storage.upload(path2, file2);
     this.uploadPercent2=task2.percentageChanges();
-    task2.snapshotChanges().pipe(finalize(()=>this.url2=ref2.getDownloadURL())).subscribe();
+    task2.snapshotChanges().pipe(finalize(()=>ref2.getDownloadURL().subscribe(url=>this.url2=url))).subscribe();
+
+    console.log("u2 "+this.url2);
   }
 
   hecho(e){
-    console.log(e);
+    console.log("captcha "+e);
     this.captchaResuelto=true;
   }
 }
