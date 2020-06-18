@@ -63,11 +63,15 @@ export class BdaService {
   }
 
   createEmpleado(emp:empleado): Promise<DocumentReference> {
-    return this.db.collection('usuarios').add({...emp});
+    return this.db.collection('empleados').add({...emp});
   }
 
-  devolverListado(){
+  devolverListadoPacientes(){
     return this.listaPacientes;
+  }
+
+  devolverListadoEmpleados(){
+    return this.listaEmpleados;
   }
 
   

@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {FormsModule} from '@angular/forms';
+import { NgxSpinnerModule } from "ngx-spinner";
 
 import {AngularFireModule} from '@angular/fire'; 
 import {environment} from '../environments/environment';
@@ -21,6 +22,7 @@ import { ServicioService } from './servicios/servicio.service';
 import {StorageService} from './servicios/storage.service';
 import {BdaService} from './servicios/bda.service';
 import { NavComponent } from './componentes/nav/nav.component';
+import { ProfesionalComponent } from './componentes/profesional/profesional.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,8 @@ import { NavComponent } from './componentes/nav/nav.component';
     LoginComponent,
     RegistroComponent,
     BienvenidaComponent,
-    NavComponent
+    NavComponent,
+    ProfesionalComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +42,8 @@ import { NavComponent } from './componentes/nav/nav.component';
     AngularFireStorageModule,
     RecaptchaModule,
     RecaptchaFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgxSpinnerModule
   ],
   providers: [ServicioService, AngularFireAuth, StorageService, BdaService],
   bootstrap: [AppComponent]

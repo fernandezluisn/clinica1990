@@ -63,7 +63,8 @@
       </div>
 <br><br>
      
-      <div style="margin-left: 10rem;">
+      <button type="button" (click)="quitarCaptcha()" class="btn btn-primary">sacar captcha</button>
+      <div style="margin-left: 10rem;" *ngIf="capt">
         <re-captcha (resolved)="hecho($event)" siteKey="6LejLP8UAAAAACqNtBzf-L8-HMSJav05u1CIxxGo" ></re-captcha>
       </div>
       
@@ -71,3 +72,12 @@
       <button type="submit" class="btn btn-primary">Registrarse</button>
 
 </form>
+
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-scale-multiple"
+>
+  <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>

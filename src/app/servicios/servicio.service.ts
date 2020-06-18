@@ -6,17 +6,29 @@ import {AngularFireAuth} from '@angular/fire/auth';
 
 
 
+
+
 @Injectable({
   providedIn: 'root'
 })
 export class ServicioService {
 
-  constructor(public afAuth:AngularFireAuth) { }
+  redirectUrl: string;
+  user;
+  constructor(public afAuth:AngularFireAuth) { 
+    this.user=this.tomarUsuario().then(res=>this.user=res);    
+   
+  }
+
+ 
+
 
 loginUser(email:string, password:string){
   return new Promise((resolve, reject)=>{
     this.afAuth.signInWithEmailAndPassword(email, password)
-    .then( userData=>resolve(userData),
+    .then( userData=>
+      resolve(userData),
+    
     err=>reject(err));
   });
   
@@ -38,7 +50,7 @@ registrarUsuario(mail:string, password: string){
   
 }
 
-tomarUsuario(){
+async tomarUsuario(){  
   return this.afAuth.currentUser;
 }
 

@@ -25,7 +25,7 @@ export class TurnosComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.bda.devolverListado().subscribe(lista => {
+    this.bda.devolverListadoPacientes().subscribe(lista => {
       this.listadoPacientes = lista;
       console.log(lista);
     })

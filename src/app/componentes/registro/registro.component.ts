@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ServicioService} from '../../servicios/servicio.service';
 import { Router } from '@angular/router';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 import {AngularFireStorage} from '@angular/fire/storage';
 
@@ -9,6 +10,7 @@ import { Observable } from 'rxjs';
 import { paciente } from 'src/app/clases/paciente';
 import { empleado } from 'src/app/clases/empleado';
 import { BdaService } from 'src/app/servicios/bda.service';
+import { async } from 'rxjs/internal/scheduler/async';
 
 
 @Component({
@@ -27,6 +29,7 @@ export class RegistroComponent implements OnInit {
   profesion2:string;
   detallar:boolean;
   captchaResuelto:boolean;
+  capt:boolean;
   
 
   
@@ -37,7 +40,7 @@ export class RegistroComponent implements OnInit {
   uploadPercent2: Observable<number>;
   url2: string;
 
-  constructor(private servicio:ServicioService, private router:Router, private storage:AngularFireStorage, private bda:BdaService) { 
+  constructor(private ngx:NgxSpinnerService, private servicio:ServicioService, private router:Router, private storage:AngularFireStorage, private bda:BdaService) { 
     this.mail="";
     this.pass2="";
     this.pass1="";
@@ -47,9 +50,18 @@ export class RegistroComponent implements OnInit {
     this.detallar=false;
     this.profesion="Clinico";
     this.captchaResuelto=false;
+    this.capt=true;
   }
 
   ngOnInit(): void {
+    
+  }
+
+  spinner(){
+    this.ngx.show();
+    setTimeout(()=>{
+      this.ngx.hide();
+    }, 2000)
   }
 
   cambiarP(){
@@ -71,6 +83,11 @@ export class RegistroComponent implements OnInit {
     }
   }
 
+  quitarCaptcha(){
+    this.captchaResuelto=true;
+    this.capt=false;
+  }
+
   registrar(){
     
     if(this.pass1==this.pass2 && this.captchaResuelto){
@@ -78,31 +95,37 @@ export class RegistroComponent implements OnInit {
       let u;
       let j=new Array();
       j.push(this.profesion);
-      let reg;
-
+      
+      let j2=new Array();
+      j2.push(this.profesion2);
+      
       this.servicio.registrarUsuario(this.mail, this.pass2).then(async (res)=>{
         this.servicio.loginUser(this.mail, this.pass2);
-        this.servicio.tomarUsuario().then(res=>{
-          reg=res;      
-        }).catch(err=>{
-          alert(err);
-        });
+        
         
         if(this.tipoU)        
-        {
-          
-          
-         u=new paciente(this.nombre, this.apellido, this.mail, this.url1, this.url2, reg.uid);
-         this.bda.createPaciente(u);
+        {        
+          this.spinner();
+         u=new paciente(this.nombre, this.apellido, this.url1, this.url2, this.mail);
+         this.bda.createPaciente(u).then(async (res)=>{
+          this.router.navigate(['turnos']);
+         }).catch(err=>{
+           alert("error en el guardado de datos "+err);
+         });
         }          
         else
         {
-          u=new empleado(this.nombre, this.apellido, this.mail, j, reg.uid);
-          this.bda.createEmpleado(u);
-        }     
-
-
-        this.router.navigate(['turnos']);
+          if(this.detallar){
+            u=new empleado(this.nombre, this.apellido,  j2, this.mail);
+          }else{
+            u=new empleado(this.nombre, this.apellido,  j, this.mail);
+          }
+          this.spinner();
+          this.bda.createEmpleado(u).then(async (res)=>{
+            this.router.navigate(['turnos']);
+          }).catch(err=>alert("error en el guardado de datos "+err));
+        }}).catch(err=>{
+        alert(err);
       }).catch(err=>{
         alert(err);
       });
@@ -125,9 +148,8 @@ export class RegistroComponent implements OnInit {
     const task=this.storage.upload(path, file);
     this.uploadPercent1=task.percentageChanges();
     
-    task.snapshotChanges().pipe(finalize(()=>ref.getDownloadURL().subscribe(url=> this.url1=url)));
+    task.snapshotChanges().pipe(finalize(()=>ref.getDownloadURL().subscribe(url=> this.url1=url))).subscribe();  
     
-    console.log("u1 "+this.url1);
   }
 
   imagen2(img){
@@ -140,7 +162,7 @@ export class RegistroComponent implements OnInit {
     this.uploadPercent2=task2.percentageChanges();
     task2.snapshotChanges().pipe(finalize(()=>ref2.getDownloadURL().subscribe(url=>this.url2=url))).subscribe();
 
-    console.log("u2 "+this.url2);
+    
   }
 
   hecho(e){
