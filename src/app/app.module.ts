@@ -6,10 +6,11 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import {AngularFireModule} from '@angular/fire'; 
 import {environment} from '../environments/environment';
 import {AngularFireAuth} from '@angular/fire/auth';
-import {auth} from 'firebase/app';
+
 import {AngularFireStorageModule} from '@angular/fire/storage';
 import {RecaptchaModule, RecaptchaFormsModule} from 'ng-recaptcha';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 
 import { AppComponent } from './app.component';
@@ -23,6 +24,7 @@ import {StorageService} from './servicios/storage.service';
 import {BdaService} from './servicios/bda.service';
 import { NavComponent } from './componentes/nav/nav.component';
 import { ProfesionalComponent } from './componentes/profesional/profesional.component';
+import { HorarioMedicosComponent } from './componentes/horario-medicos/horario-medicos.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,8 @@ import { ProfesionalComponent } from './componentes/profesional/profesional.comp
     RegistroComponent,
     BienvenidaComponent,
     NavComponent,
-    ProfesionalComponent
+    ProfesionalComponent,
+    HorarioMedicosComponent
   ],
   imports: [
     BrowserModule,

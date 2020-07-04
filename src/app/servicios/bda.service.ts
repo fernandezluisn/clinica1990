@@ -37,7 +37,7 @@ export class BdaService {
    
     
     
-    this.listaPacientes=this.db.collection('usuarios').snapshotChanges().pipe(
+    this.listaPacientes=this.db.collection('pacientes').snapshotChanges().pipe(
       map(actions=>{
         return actions.map(
           a=>{
@@ -59,7 +59,7 @@ export class BdaService {
   ;
 
   createPaciente(pac:paciente): Promise<DocumentReference> {
-    return this.db.collection('usuarios').add({...pac});
+    return this.db.collection('pacientes').add({...pac});
   }
 
   createEmpleado(emp:empleado): Promise<DocumentReference> {

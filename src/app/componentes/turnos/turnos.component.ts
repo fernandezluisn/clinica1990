@@ -11,7 +11,7 @@ import {BdaService} from '../../servicios/bda.service';
 export class TurnosComponent implements OnInit {
 
   usuario;
-  hayU:boolean;
+  
   listadoPacientes;
 
   constructor( private serv:ServicioService, private bda:BdaService) { 
@@ -20,7 +20,7 @@ export class TurnosComponent implements OnInit {
     }).catch(err=>{
       alert(err);
     });
-    this.hayU=false;
+    console.log(this.usuario.uid);
   }
 
   ngOnInit(): void {
@@ -32,8 +32,7 @@ export class TurnosComponent implements OnInit {
     console.log("lista componente "+ this.listadoPacientes);
     console.log(this.bda.listaPacientes);
     
-    if(this.usuario!=null && this.usuario!="undefined")
-    this.hayU=true;
+    
     
   }
 
