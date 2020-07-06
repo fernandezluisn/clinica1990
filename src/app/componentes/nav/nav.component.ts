@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ServicioService } from 'src/app/servicios/servicio.service';
 import { isNull } from 'util';
-import { BdaService } from 'src/app/servicios/bda.service';
+
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -15,9 +16,10 @@ export class NavComponent implements OnInit {
   listaU;
   user;
   logeado:boolean;
+  @Input() tipo:boolean;
 
   usuarioLista;
-  constructor(private service:ServicioService, private bda:BdaService) { 
+  constructor(private service:ServicioService, private router: Router) { 
     
     this.service.tomarUsuario().then(res=>{
       this.user=res;
@@ -39,6 +41,8 @@ export class NavComponent implements OnInit {
 
   cerrar(){
     this.service.logOutUser();
+    this.logeado=false;
+    this.router.navigate(['']);
   }
 
 }

@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 import { paciente } from 'src/app/clases/paciente';
 import { empleado } from 'src/app/clases/empleado';
 import { BdaService } from 'src/app/servicios/bda.service';
+import { especialidad } from 'src/app/clases/especialidad';
 
 
 
@@ -53,10 +54,14 @@ export class RegistroComponent implements OnInit {
     this.captchaResuelto=false;
     this.capt=true;
 
+   
+
     this.bda.devolverListadoEspecialidades().subscribe(lista => {
       this.listaEspecialidades = lista;       
-      
+      console.log(lista);
       });
+
+      
 
   }
 
@@ -68,7 +73,7 @@ export class RegistroComponent implements OnInit {
     this.ngx.show();
     setTimeout(()=>{
       this.ngx.hide();
-    }, 2000)
+    }, 3000)
   }
 
   cambiarP(){
@@ -77,6 +82,7 @@ export class RegistroComponent implements OnInit {
 
   cambiarE(){
     this.tipoU=false;
+    
   }
 
   carg(){
@@ -100,7 +106,7 @@ export class RegistroComponent implements OnInit {
     if(this.pass1==this.pass2 && this.captchaResuelto){
 
       let u;
-      let p;
+      
       let j=new Array();
       j.push(this.profesion);
       
@@ -119,26 +125,26 @@ export class RegistroComponent implements OnInit {
          this.bda.createPaciente(u).then(async (res)=>{
           this.router.navigate(['turnos']);
          }).catch(err=>{
-           alert("error en el guardado de datos "+err);
+           alert("error en el guardado de datos "+err.message);
          });
         }          
         else
         {
           if(this.detallar){
             u=new empleado(this.nombre, this.apellido,  j2, this.mail);
+            let e=new especialidad(this.profesion2);
+            this.bda.createEspecialidad(e);
           }else{
             u=new empleado(this.nombre, this.apellido,  j, this.mail);
           }
           this.spinner();
           this.bda.createUsuario(u);
           this.bda.createEmpleado(u).then(async (res)=>{
-            this.router.navigate(['turnos']);
-          }).catch(err=>alert("error en el guardado de datos "+err));
-        }}).catch(err=>{
-        alert(err);
-      }).catch(err=>{
-        alert(err);
-      });
+            this.router.navigate(['home']);
+          }).catch(err=>alert("error en el guardado de datos "+err.message));
+        }}).catch(error=>{
+          alert(error.message);      
+        });
 
 
     }else if(this.pass1!=this.pass2){      

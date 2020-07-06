@@ -10,9 +10,10 @@ a{
 }
 
 body{
-    background-image: url("../src/assets/doctor.jpg");
-    background-repeat: no-repeat;
+    background-image: url("../src/assets/fondo.jpg");
+    background-repeat: repeat;
     background-size: 100%;
+   
 }
 
 form{
@@ -39,7 +40,7 @@ button{
 a:hover{
     background-color: rgb(77, 19, 72);
     border-radius: 2rem;
-    
+    cursor: pointer;
 }
 
 li:hover{

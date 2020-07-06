@@ -3,6 +3,8 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 
 import {ServicioService} from '../../servicios/servicio.service';
+import { BdaService } from 'src/app/servicios/bda.service';
+import { element } from 'protractor';
 
 
 @Component({
@@ -16,7 +18,7 @@ export class LoginComponent implements OnInit {
   email:string;
   pass:string;
   log:boolean;
-  constructor(private router: Router, private servicio:ServicioService) {
+  constructor(private router: Router, private servicio:ServicioService, private bda:BdaService) {
     this.log=false;
     this.email="";
     this.pass="";
@@ -29,12 +31,18 @@ export class LoginComponent implements OnInit {
 
   onLogin(){
     console.log(this.email);
-    
+    let v=false;
     this.servicio.loginUser(this.email, this.pass).then
     ((res)=>{
       this.log=true;    
       this.logeado.emit(this.log);
-      this.router.navigate(['turnos']);
+      this.bda.devolverListadoPacientes().subscribe(lista=>{
+        lista.forEach(element=>{
+          if(element.id.toLowerCase()==this.email.toLowerCase())
+          this.router.navigate(['turnos']);
+        })
+      })
+      this.router.navigate(["home"]);
       
     }).catch(error=>{
       alert(error.message);      
