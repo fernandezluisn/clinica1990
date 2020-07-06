@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 import { paciente } from 'src/app/clases/paciente';
 import { empleado } from 'src/app/clases/empleado';
 import { BdaService } from 'src/app/servicios/bda.service';
-import { async } from 'rxjs/internal/scheduler/async';
+
 
 
 @Component({
@@ -30,6 +30,7 @@ export class RegistroComponent implements OnInit {
   detallar:boolean;
   captchaResuelto:boolean;
   capt:boolean;
+  listaEspecialidades;
   
 
   
@@ -51,6 +52,12 @@ export class RegistroComponent implements OnInit {
     this.profesion="Clinico";
     this.captchaResuelto=false;
     this.capt=true;
+
+    this.bda.devolverListadoEspecialidades().subscribe(lista => {
+      this.listaEspecialidades = lista;       
+      
+      });
+
   }
 
   ngOnInit(): void {
@@ -93,6 +100,7 @@ export class RegistroComponent implements OnInit {
     if(this.pass1==this.pass2 && this.captchaResuelto){
 
       let u;
+      let p;
       let j=new Array();
       j.push(this.profesion);
       
@@ -107,6 +115,7 @@ export class RegistroComponent implements OnInit {
         {        
           this.spinner();
          u=new paciente(this.nombre, this.apellido, this.url1, this.url2, this.mail);
+         this.bda.createUsuario(u);
          this.bda.createPaciente(u).then(async (res)=>{
           this.router.navigate(['turnos']);
          }).catch(err=>{
@@ -121,6 +130,7 @@ export class RegistroComponent implements OnInit {
             u=new empleado(this.nombre, this.apellido,  j, this.mail);
           }
           this.spinner();
+          this.bda.createUsuario(u);
           this.bda.createEmpleado(u).then(async (res)=>{
             this.router.navigate(['turnos']);
           }).catch(err=>alert("error en el guardado de datos "+err));

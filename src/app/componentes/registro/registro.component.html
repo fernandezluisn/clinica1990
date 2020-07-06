@@ -50,10 +50,7 @@
       <div class="form-group" *ngIf="!tipoU">
         <label >Especialidad:</label>
         <select [(ngModel)]="profesion" class="form-control" style="width: 12rem;" (change)="carg()" name="SelectEsp">
-          <option value=Clinico>Clinico</option>
-          <option value=Cardiología>Cardiologo</option>
-          <option value=Dermatología>Dermatologo</option>
-          <option value=Otra>Otra</option>
+          <option [value]="item.nombre" *ngFor="let item of listaEspecialidades">{{item.nombre}}</option>
         </select>        
       </div>
 

@@ -1,8 +1,29 @@
 <app-nav></app-nav>
 
 
-    <h1>Bienvenido/a {{usuario.email}}</h1>
-    <h1>Bienvenido {{usuario.uid}}</h1>
+    <h1>Bienvenido/a {{usuarioLista.nombre}}</h1>
+
+    <div style="margin-left: 10%; margin-top: 5%; margin-bottom: 2%;">
+    <h2 >Solicite su próximo turno</h2>
+    <p>Las solicitudes están supeditadas a la disponibilidad del profesional</p>
+    </div>
+    
+    <div style="justify-content: flex-start; flex-direction: row; display: flex; background-color: rgba(128, 128, 128, 0.144); width: 60%; height: 30rem; border-radius: 5rem; margin-left: 6%; margin-top: 2rem;">
+    <div class="col-xs-12 col-4 col-md-3 form-group">      
+        <label for="d1" style="margin-right: 1rem;">Seleccione fecha</label>
+        <input min="{{hoy | date: 'yyyy-MM-dd'}}" max="{{quinceDias | date: 'yyyy-MM-dd'}}" [(ngModel)]="fecha" type="date" name="d1" id="d1" (change)="mostrarFecha()">
+        
+      </div>
+
+      <div class="col-xs-12 col-4 col-md-3 form-group">  
+        <label for="d1" style="margin-right: 1rem;">Seleccione hora</label><br>
+
+      <input [(ngModel)]="hora" (change)="mostrarHora()" type="time" name="d2" id="d2">
+    </div> <br><br><br>
+    <div style="width: 10rem; margin-top: 23.5rem; margin-left: 10%; position: absolute;">
+    <button type="button" (click)="subirTurno()" class="btn btn-primary" *ngIf="v3">Solicitar turno</button>
+    </div>
+</div> 
 
     
 

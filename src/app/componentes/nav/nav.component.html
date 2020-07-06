@@ -1,11 +1,10 @@
 <header style="background-color: rgb(158, 158, 209);" class="navbar navbar-dark bg-info navbar-expand  " >
-    <div class="navbar-nav-scroll" style="width: 40%;">
+    <div class="navbar-nav-scroll" style="width: 100%;">
       <a class="navbar-brand" routerLink='/'>Inicio</a>
       <a class="navbar-brand" routerLink='/registro' *ngIf="logeado">Registrarse</a>
       <a class="navbar-brand" routerLink='/login' *ngIf="logeado">Ingresar</a>
-      <a class="navbar-brand" routerLink='/turnos' >Sistema de turnos</a>
-      <button style="margin-left: 40%;" class="btn btn-secondary" *ngIf="!logeado" (click)="cerrar()">Cerrar sesión</button>
-      
+      <a class="navbar-brand" routerLink='/turnos' >Turnos</a>
+      <button style="margin-left: 65%; margin-top: 0%; position: absolute;" class="btn btn-secondary" *ngIf="!logeado" (click)="cerrar()">Cerrar sesión</button>      
      
       
       <!--img src="{{}}" alt="1rem"-->

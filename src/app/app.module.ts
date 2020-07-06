@@ -3,9 +3,12 @@ import { NgModule } from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import { NgxSpinnerModule } from "ngx-spinner";
 
+
 import {AngularFireModule} from '@angular/fire'; 
 import {environment} from '../environments/environment';
 import {AngularFireAuth} from '@angular/fire/auth';
+
+
 
 import {AngularFireStorageModule} from '@angular/fire/storage';
 import {RecaptchaModule, RecaptchaFormsModule} from 'ng-recaptcha';
@@ -25,6 +28,8 @@ import {BdaService} from './servicios/bda.service';
 import { NavComponent } from './componentes/nav/nav.component';
 import { ProfesionalComponent } from './componentes/profesional/profesional.component';
 import { HorarioMedicosComponent } from './componentes/horario-medicos/horario-medicos.component';
+import { TablaTurnosComponent } from './componentes/tabla-turnos/tabla-turnos.component';
+
 
 @NgModule({
   declarations: [
@@ -35,7 +40,8 @@ import { HorarioMedicosComponent } from './componentes/horario-medicos/horario-m
     BienvenidaComponent,
     NavComponent,
     ProfesionalComponent,
-    HorarioMedicosComponent
+    HorarioMedicosComponent,
+    TablaTurnosComponent
   ],
   imports: [
     BrowserModule,

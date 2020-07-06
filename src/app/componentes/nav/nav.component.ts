@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ServicioService } from 'src/app/servicios/servicio.service';
 import { isNull } from 'util';
+import { BdaService } from 'src/app/servicios/bda.service';
+
 
 @Component({
   selector: 'app-nav',
@@ -13,25 +15,26 @@ export class NavComponent implements OnInit {
   listaU;
   user;
   logeado:boolean;
-  constructor(private service:ServicioService) { 
-    
-    this.user=this.service.tomarUsuario().then(res=>this.user=res);
 
-    if(isNull(this.user) || this.user=="undefined")
-    this.logeado=true;
-    else
-    this.logeado=false;
+  usuarioLista;
+  constructor(private service:ServicioService, private bda:BdaService) { 
+    
+    this.service.tomarUsuario().then(res=>{
+      this.user=res;
+      if(isNull(this.user) || this.user=="undefined")
+      this.logeado=true;
+      else
+      this.logeado=false;
+    
+    })
+
+    
   }
 
   ngOnInit(): void {
     
 
-    if(isNull(this.user) || this.user=="undefined")
-    this.logeado=true;
-    else
-    this.logeado=false;
-
-    console.log("hay usuario nav "+this.user);
+    
   }
 
   cerrar(){
