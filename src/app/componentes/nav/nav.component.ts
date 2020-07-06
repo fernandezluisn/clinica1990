@@ -30,6 +30,10 @@ export class NavComponent implements OnInit {
     
     })
 
+    if(this.tipo==true){
+      this.logeado=false;
+    }
+
     
   }
 

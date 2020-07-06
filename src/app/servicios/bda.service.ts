@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {AngularFirestore, DocumentReference} from '@angular/fire/firestore';
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { empleado } from '../clases/empleado';
 import { paciente } from '../clases/paciente';
 import { map } from 'rxjs/operators';
@@ -126,6 +126,14 @@ export class BdaService {
 
   devolverListadoEmpleados(){
     return this.listaEmpleados;
+  }
+
+  updateEmpleado(usuario:empleado, id:string) {
+    this.db.doc('empleados/' + id).update({...usuario});
+  }
+
+  updateUsuario(usuario:empleado, id:string) {
+    this.db.doc('usuarios/' + id).update({...usuario});
   }
 
   

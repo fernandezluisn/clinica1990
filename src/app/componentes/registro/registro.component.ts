@@ -11,6 +11,7 @@ import { paciente } from 'src/app/clases/paciente';
 import { empleado } from 'src/app/clases/empleado';
 import { BdaService } from 'src/app/servicios/bda.service';
 import { especialidad } from 'src/app/clases/especialidad';
+import { MedicosService } from 'src/app/servicios/medicos.service';
 
 
 
@@ -42,7 +43,7 @@ export class RegistroComponent implements OnInit {
   uploadPercent2: Observable<number>;
   url2: string;
 
-  constructor(private ngx:NgxSpinnerService, private servicio:ServicioService, private router:Router, private storage:AngularFireStorage, private bda:BdaService) { 
+  constructor(private ngx:NgxSpinnerService, private servicio:ServicioService, private router:Router, private storage:AngularFireStorage, private bda:BdaService, private bdaEspecialidades:MedicosService) { 
     this.mail="";
     this.pass2="";
     this.pass1="";
@@ -134,8 +135,10 @@ export class RegistroComponent implements OnInit {
             u=new empleado(this.nombre, this.apellido,  j2, this.mail);
             let e=new especialidad(this.profesion2);
             this.bda.createEspecialidad(e);
+            this.bdaEspecialidades.createEspecialidad(e, this.mail);
           }else{
             u=new empleado(this.nombre, this.apellido,  j, this.mail);
+            this.bdaEspecialidades.createEspecialidad(u, this.mail);
           }
           this.spinner();
           this.bda.createUsuario(u);

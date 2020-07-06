@@ -4,6 +4,7 @@
     <thead>
         <tr>
           <th scope="col">Nombre</th>
+          <th scope="col">Especialidades</th>
           
           
          
@@ -12,7 +13,8 @@
       </thead>
       <tbody>
         <tr *ngFor="let medico of listaMedicos" (click)="evento(medico)">
-          <td scope="row" >{{medico.nombre}}</td>
+          <td scope="row" >{{medico.nombre}} {{medico.apellido}}</td>
+          <td scope="row" >{{medico.especialidades}}</td>
          
           
          

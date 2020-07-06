@@ -1,0 +1,15 @@
+<!--Acá tengo que agregar a las dos listas de la BdA--->
+
+<div class="form-group">
+    <label >Especialidad:</label>
+    <select [(ngModel)]="profesion" class="form-control" style="width: 12rem;" (change)="carg()" name="SelectEsp">
+      <option [value]="item.nombre" *ngFor="let item of listaEspecialidades">{{item.nombre}}</option>
+    </select>        
+  </div>
+
+  <div class="form-group" *ngIf="detallar">
+    <label for="exampleInputPassword1">Ingrese aquí su Especialidad, en caso de no estar en la lista anterior.</label>
+    <input [(ngModel)]="profesion2" type="text" class="form-control"  placeholder="Especialidad" name="profesion2">
+  </div>
+
+  <button type="button" (click)="agregar()" class="btn btn-primary">Agregar especialidad</button>

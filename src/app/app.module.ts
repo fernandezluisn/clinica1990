@@ -31,6 +31,8 @@ import { HorarioMedicosComponent } from './componentes/horario-medicos/horario-m
 import { TablaTurnosComponent } from './componentes/tabla-turnos/tabla-turnos.component';
 import { TurnosPipe } from './pipes/turnos.pipe';
 import { TablaMedicosComponent } from './componentes/tabla-medicos/tabla-medicos.component';
+import { AgregarEspecialidadComponent } from './componentes/agregar-especialidad/agregar-especialidad.component';
+import { DetalleEmpleadoComponent } from './componentes/detalle-empleado/detalle-empleado.component';
 
 
 @NgModule({
@@ -45,7 +47,9 @@ import { TablaMedicosComponent } from './componentes/tabla-medicos/tabla-medicos
     HorarioMedicosComponent,
     TablaTurnosComponent,
     TurnosPipe,
-    TablaMedicosComponent
+    TablaMedicosComponent,
+    AgregarEspecialidadComponent,
+    DetalleEmpleadoComponent
   ],
   imports: [
     BrowserModule,

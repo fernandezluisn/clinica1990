@@ -1,1 +1,13 @@
 <app-nav [tipo]="true"></app-nav>
+
+<div style="justify-content: flex-start; flex-direction: row; display: flex; padding-left: 1rem; background-color: rgba(128, 128, 128, 0.144); width: 60%; height: 30rem; border-radius: 5rem; margin-left: 6%; margin-top: 2rem;">
+
+    <div>
+        <app-detalle-empleado style="margin-left: 10%;" [empleado]="medicoLogeado"></app-detalle-empleado>
+    </div>
+
+    <div style="margin-left: 20%;">
+        <app-agregar-especialidad></app-agregar-especialidad>
+    </div>
+    
+</div>
