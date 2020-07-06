@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {ServicioService} from '../../servicios/servicio.service';
 import {BdaService} from '../../servicios/bda.service';
+import {TurnosPipe} from '../../pipes/turnos.pipe';
+import { TurnosService } from 'src/app/servicios/turnos.service';
+import { turno } from 'src/app/clases/turno';
+import { empleado } from 'src/app/clases/empleado';
 
 
 
@@ -16,27 +20,45 @@ export class TurnosComponent implements OnInit {
   usuarioLista;
 
   fecha:Date;
-  hora:string;
+
+  medicoDetalle:empleado;
+ 
 
   hoy;
   quinceDias;
   v1:boolean;
   v2:boolean;
   v3:boolean;
+  esDomingo:boolean;
+  nTurno:number;
   
   listadoPacientes;
+
+  listadoEspecialistas;
+  
+  //hacer
+  listaHorariosTurnos;
+  listaTurnosTomados;
+  listaTurnosDia;
 
   events: any[];
 
   options: any;
 
-  constructor( private serv:ServicioService, private bda:BdaService) { 
+  constructor( private serv:ServicioService, private bda:BdaService, private turnosS:TurnosService) { 
     this.serv.tomarUsuario().then(res=>{
+      
       this.usuario=res;   
+
+      this.bda.devolverListadoEmpleados().subscribe(lista=>{
+        this.listadoEspecialistas=lista;
+      });
+      
       this.bda.devolverListadoPacientes().subscribe(lista=>{
         lista.forEach(element=>{
           if(element.id.toLowerCase()==this.usuario.email.toLowerCase())
           this.usuarioLista=element;
+          
         })
 
       })
@@ -45,6 +67,7 @@ export class TurnosComponent implements OnInit {
       alert(err);
     });
 
+    this.esDomingo=false;
     this.hoy=new Date();
     this.quinceDias=new Date(this.hoy.getFullYear(), this.hoy.getMonth(), this.hoy.getDate()+15);
     console.log(this.quinceDias);
@@ -53,38 +76,92 @@ export class TurnosComponent implements OnInit {
     this.v3=false;
   }
 
-  ngOnInit(): void {
-
-    this.bda.devolverListadoPacientes().subscribe(lista => {
-      this.listadoPacientes = lista;
-      console.log(this.hoy);
-    })
-    console.log("lista componente "+ this.listadoPacientes);
-    console.log(this.bda.listaPacientes);
-    
+  ngOnInit(): void {  
   
     
   }
 
   mostrarBoton(){
-    if(this.v1==true && this.v2==true){
+    if(this.v1==true && this.v2==true && !this.esDomingo){
       this.v3=true;
     }
   }
 
   mostrarFecha(){
-    console.log(this.fecha);
+    this.listaTurnosDia=new Array();
+    let d=new Date(this.fecha);
+    console.log(d.getDay());
+    switch(d.getDay()){
+      case 0:
+        this.esDomingo=true;
+      break;
+      case 1:
+        this.esDomingo=false;
+        for(let n=1; n<23; n++)
+        {
+          this.listaTurnosDia.push(n);
+        }
+      break;
+      case 2:
+        this.esDomingo=false;
+        for(let n=1; n<23; n++)
+        {
+          this.listaTurnosDia.push(n);
+        }
+      break;
+      case 3:
+        this.esDomingo=false;
+        for(let n=1; n<23; n++)
+        {
+          this.listaTurnosDia.push(n);
+        }
+      break;
+      case 4:
+        this.esDomingo=false;
+        for(let n=1; n<23; n++)
+        {
+          this.listaTurnosDia.push(n);
+        }
+      break;
+      case 5:
+        this.esDomingo=false;
+        for(let n=1; n<23; n++)
+        {
+          this.listaTurnosDia.push(n);
+        }
+      break;
+      case 6:
+        this.esDomingo=false;
+        for(let n=1; n<13; n++)
+        {
+          this.listaTurnosDia.push(n);
+        }
+      break;
+    }
     this.v1=true;
-    this.mostrarBoton();
+    
   }
 
   mostrarHora(){
-    console.log(this.hora);
+    console.log(this.nTurno);
     this.v2=true;
     this.mostrarBoton();
   }
 
+  tomarMedico(medico){
+    this.medicoDetalle=medico;
+    console.log(this.medicoDetalle.id);
+  }
+
   subirTurno(){
+    let t=new turno(this.medicoDetalle.id, this.usuario.email, "a confirmar", this.fecha, this.nTurno);
+    let s=this.fecha.toString()+this.medicoDetalle.id;
+    this.turnosS.createTurno(t, s).then(res=>{
+      alert("Su turno se ha registrado correctamente.");
+    });
+  }
+
+  buscarTurnosDelDía(){
 
   }
 

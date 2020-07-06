@@ -29,6 +29,8 @@ import { NavComponent } from './componentes/nav/nav.component';
 import { ProfesionalComponent } from './componentes/profesional/profesional.component';
 import { HorarioMedicosComponent } from './componentes/horario-medicos/horario-medicos.component';
 import { TablaTurnosComponent } from './componentes/tabla-turnos/tabla-turnos.component';
+import { TurnosPipe } from './pipes/turnos.pipe';
+import { TablaMedicosComponent } from './componentes/tabla-medicos/tabla-medicos.component';
 
 
 @NgModule({
@@ -41,7 +43,9 @@ import { TablaTurnosComponent } from './componentes/tabla-turnos/tabla-turnos.co
     NavComponent,
     ProfesionalComponent,
     HorarioMedicosComponent,
-    TablaTurnosComponent
+    TablaTurnosComponent,
+    TurnosPipe,
+    TablaMedicosComponent
   ],
   imports: [
     BrowserModule,
