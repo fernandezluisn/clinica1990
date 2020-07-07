@@ -154,8 +154,8 @@ export class TurnosComponent implements OnInit {
   }
 
   subirTurno(){
-    let t=new turno(this.medicoDetalle.id, this.usuario.email, "a confirmar", this.fecha, this.nTurno);
-    let s=this.fecha.toString()+this.medicoDetalle.id;
+    let t=new turno(this.medicoDetalle.email, this.usuario.email, "a confirmar", this.fecha, this.nTurno);
+    let s=this.fecha.toString()+this.medicoDetalle.email;
     this.turnosS.createTurno(t, s).then(res=>{
       alert("Su turno se ha registrado correctamente.");
     });
