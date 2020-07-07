@@ -56,7 +56,7 @@ export class TurnosComponent implements OnInit {
       
       this.bda.devolverListadoPacientes().subscribe(lista=>{
         lista.forEach(element=>{
-          if(element.id.toLowerCase()==this.usuario.email.toLowerCase())
+          if(element.email.toLowerCase()==this.usuario.email.toLowerCase())
           this.usuarioLista=element;
           
         })

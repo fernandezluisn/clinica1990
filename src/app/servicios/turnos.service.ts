@@ -13,4 +13,8 @@ export class TurnosService {
   createTurno(turno:turno, id:string): Promise<DocumentReference> {
     return this.db.collection(id).add({...turno});
   }
+
+  turnosFiltradosPorMedico(){
+    
+  }
 }

@@ -6,6 +6,7 @@ import { paciente } from '../clases/paciente';
 import { map } from 'rxjs/operators';
 import { especialidad } from '../clases/especialidad';
 import { persona } from '../clases/persona';
+import { element } from 'protractor';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,7 @@ export class BdaService {
   listaUsuarios:Observable<persona[]>;
 
   listaEspecialidades:Observable<especialidad[]>;
+
 
   constructor(private db:AngularFirestore ) {
 
@@ -54,6 +56,9 @@ export class BdaService {
 
      
     );
+
+
+
 
     this.listaUsuarios=this.db.collection('usuarios').snapshotChanges().pipe(
       map(actions=>{
@@ -128,12 +133,42 @@ export class BdaService {
     return this.listaEmpleados;
   }
 
-  updateEmpleado(usuario:empleado, id:string) {
-    this.db.doc('empleados/' + id).update({...usuario});
+  updateEmpleado(usuario:empleado) {
+    
+    let l;
+  
+    this.listaEmpleados.subscribe(lista=>{
+      console.log(lista);
+      lista.forEach(element=>{
+        if(element.email.toLowerCase()==usuario.email.toLowerCase())
+        {
+          l=element;
+          console.log("final "+l.id);
+          this.db.doc('empleados/' + l.id).update({...usuario});
+        }
+      })
+      
+    });
+    
   }
 
-  updateUsuario(usuario:empleado, id:string) {
-    this.db.doc('usuarios/' + id).update({...usuario});
+  updateUsuario(usuario:empleado) {
+    let l;
+  
+    this.listaUsuarios.subscribe(lista=>{
+      console.log(lista);
+      lista.forEach(element=>{
+        if(element.email.toLowerCase()==usuario.email.toLowerCase())
+        {
+          l=element;
+          usuario.id=element.id;
+          this.db.doc('usuarios/' + l.id).update({...usuario});
+        }
+      })
+      
+    });
+    
+    
   }
 
   

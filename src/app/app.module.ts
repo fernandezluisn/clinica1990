@@ -33,6 +33,8 @@ import { TurnosPipe } from './pipes/turnos.pipe';
 import { TablaMedicosComponent } from './componentes/tabla-medicos/tabla-medicos.component';
 import { AgregarEspecialidadComponent } from './componentes/agregar-especialidad/agregar-especialidad.component';
 import { DetalleEmpleadoComponent } from './componentes/detalle-empleado/detalle-empleado.component';
+import { TurnosAConfirmarComponent } from './componentes/turnos-aconfirmar/turnos-aconfirmar.component';
+import { TurnosConfirmadosComponent } from './componentes/turnos-confirmados/turnos-confirmados.component';
 
 
 @NgModule({
@@ -49,7 +51,9 @@ import { DetalleEmpleadoComponent } from './componentes/detalle-empleado/detalle
     TurnosPipe,
     TablaMedicosComponent,
     AgregarEspecialidadComponent,
-    DetalleEmpleadoComponent
+    DetalleEmpleadoComponent,
+    TurnosAConfirmarComponent,
+    TurnosConfirmadosComponent
   ],
   imports: [
     BrowserModule,
