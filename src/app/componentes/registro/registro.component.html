@@ -61,7 +61,7 @@
 <br><br>
      
       <button type="button" (click)="quitarCaptcha()" class="btn btn-primary">sacar captcha</button>
-      <div style="margin-left: 15%;" *ngIf="capt">
+      <div style="margin-left: 10%;" *ngIf="capt">
         <re-captcha (resolved)="hecho($event)" siteKey="6LejLP8UAAAAACqNtBzf-L8-HMSJav05u1CIxxGo" ></re-captcha>
       </div>
       
