@@ -10,6 +10,8 @@ import {TurnosAConfirmarComponent} from '../componentes/turnos-aconfirmar/turnos
 import {TurnosConfirmadosComponent} from '../componentes/turnos-confirmados/turnos-confirmados.component';
 import {HomeMedicoComponent} from '../componentes/home-medico/home-medico.component';
 import {AgregarAdminComponent} from '../componentes/agregar-admin/agregar-admin.component';
+import {HabilitarUsuariosComponent} from '../componentes/habilitar-usuarios/habilitar-usuarios.component';
+import {AtencionPacienteComponent} from '../componentes/atencion-paciente/atencion-paciente.component';
 
 const redirectUnauthorizedToLogin=()=>redirectUnauthorizedTo(["login"]);
 
@@ -21,7 +23,9 @@ const routes: Routes = [
   {path:"turnos", component:TurnosComponent, data: {animation: 'Turnos'}, ...canActivate(redirectUnauthorizedToLogin)},
   {path:"pendientes", component:TurnosAConfirmarComponent},
   {path:"homeMedico", component:HomeMedicoComponent},
+  {path:"atencion", component:AtencionPacienteComponent},
   {path:"altaAdmin", component:AgregarAdminComponent},
+  {path:"altaUsuario", component:HabilitarUsuariosComponent},
   {path:"confirmados", component:TurnosConfirmadosComponent}
 ];
 

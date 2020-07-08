@@ -3,4 +3,9 @@
 <h1>{{empleado.nombre}} {{empleado.apellido}}</h1>
 <h2>Especialidades</h2>
 <h3>{{empleado.especialidades}}</h3>
+<div *ngIf="esAdmin">
+    <h2>Habilitado</h2>
+    <h3>{{empleado.aprobadoPorAdmin}}</h3>
+    <button (click)="elegir(empleado)">Habilitar </button>
+</div>
 </div>

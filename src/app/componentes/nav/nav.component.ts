@@ -15,10 +15,10 @@ export class NavComponent implements OnInit {
   listaE;
   listaU;
   user;
-  logeado:boolean;
+  @Input() logeado:boolean;
   @Input() tipoMedico:boolean;
   @Input() tipoAdmin:boolean;
-  tipoPaciente:boolean;
+  @Input() tipoPaciente:boolean;
   @Input() inicio:boolean;
 
   usuarioLista;
@@ -26,10 +26,7 @@ export class NavComponent implements OnInit {
     
     this.service.tomarUsuario().then(res=>{
       this.user=res;
-      if(isNull(this.user) || this.user=="undefined")
-      this.logeado=false;
-      else
-      this.logeado=true;
+      
     
     })
 

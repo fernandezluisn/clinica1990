@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ServicioService } from 'src/app/servicios/servicio.service';
+import { BdaService } from 'src/app/servicios/bda.service';
+import { TurnosService } from 'src/app/servicios/turnos.service';
 
 @Component({
   selector: 'app-turnos-confirmados',
@@ -7,7 +10,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TurnosConfirmadosComponent implements OnInit {
 
-  constructor() { }
+  user;
+  listaTurnos;
+  medicoLogeado;
+
+  constructor(private service:ServicioService, private bda:BdaService, private turnosBDA:TurnosService) {
+    this.service.tomarUsuario().then(element=>
+      {
+        this.user=element;
+        this.turnosBDA.turnosFiltradosPorMedico(this.user.email).subscribe(lista=>{
+          this.listaTurnos=lista;
+          this.bda.devolverListadoEmpleados().subscribe(lista=>{
+            lista.forEach(elementL=>{
+              if(elementL.email.toLowerCase()==this.user.email.toLowerCase())
+              this.medicoLogeado=elementL;
+            })
+          });
+        })
+      }
+      );
+   }
 
   ngOnInit(): void {
   }

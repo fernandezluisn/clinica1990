@@ -1,7 +1,7 @@
-<app-nav [tipoMedico]="true" [inicio]="false" [logeado]="true" [tipoPaciente]="false"></app-nav>
+<app-nav [tipoMedico]="true" [logeado]="true" [tipoPaciente]="false"></app-nav>
 
 <div *ngIf="this.medicoLogeado.aprobadoPorAdmin">
-
+    <textarea  [(ngModel)]='txtResenia' cols="30" rows="10"></textarea>
 </div>
 
 <div *ngIf="!this.medicoLogeado.aprobadoPorAdmin">

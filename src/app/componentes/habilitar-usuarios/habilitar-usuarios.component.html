@@ -1,0 +1,9 @@
+<app-nav [tipoAdmin]="true" [inicio]="false"></app-nav>
+
+<div style="margin:5%; width: 50%;">
+<app-tabla-medicos [listaMedicos]="listaFiltrada" (saleMedico)="tomarMedico($event)"></app-tabla-medicos>
+</div>
+
+<div *ngIf="hayMedico">
+    <app-detalle-empleado [empleado]="medicoElegido" (saleEmp)="habilitar($event)" [esAdmin]="true"></app-detalle-empleado>
+</div>

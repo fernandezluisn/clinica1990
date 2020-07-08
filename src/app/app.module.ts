@@ -26,7 +26,6 @@ import { ServicioService } from './servicios/servicio.service';
 import {StorageService} from './servicios/storage.service';
 import {BdaService} from './servicios/bda.service';
 import { NavComponent } from './componentes/nav/nav.component';
-import { ProfesionalComponent } from './componentes/profesional/profesional.component';
 import { HorarioMedicosComponent } from './componentes/horario-medicos/horario-medicos.component';
 import { TablaTurnosComponent } from './componentes/tabla-turnos/tabla-turnos.component';
 import { TurnosPipe } from './pipes/turnos.pipe';
@@ -37,6 +36,8 @@ import { TurnosAConfirmarComponent } from './componentes/turnos-aconfirmar/turno
 import { TurnosConfirmadosComponent } from './componentes/turnos-confirmados/turnos-confirmados.component';
 import { HomeMedicoComponent } from './componentes/home-medico/home-medico.component';
 import { AgregarAdminComponent } from './componentes/agregar-admin/agregar-admin.component';
+import { HabilitarUsuariosComponent } from './componentes/habilitar-usuarios/habilitar-usuarios.component';
+import { AtencionPacienteComponent } from './componentes/atencion-paciente/atencion-paciente.component';
 
 
 @NgModule({
@@ -47,7 +48,6 @@ import { AgregarAdminComponent } from './componentes/agregar-admin/agregar-admin
     RegistroComponent,
     BienvenidaComponent,
     NavComponent,
-    ProfesionalComponent,
     HorarioMedicosComponent,
     TablaTurnosComponent,
     TurnosPipe,
@@ -57,7 +57,9 @@ import { AgregarAdminComponent } from './componentes/agregar-admin/agregar-admin
     TurnosAConfirmarComponent,
     TurnosConfirmadosComponent,
     HomeMedicoComponent,
-    AgregarAdminComponent
+    AgregarAdminComponent,
+    HabilitarUsuariosComponent,
+    AtencionPacienteComponent
   ],
   imports: [
     BrowserModule,

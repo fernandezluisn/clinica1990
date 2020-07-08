@@ -1,3 +1,9 @@
-<app-nav [tipoMedico]="true" [inicio]="false"></app-nav>
+<app-nav [tipoMedico]="true" [tipoPaciente]="false" [logeado]="true"></app-nav>
 
-<app-tabla-turnos [confirmados]="true"></app-tabla-turnos>
+<div *ngIf="this.medicoLogeado.aprobadoPorAdmin">
+<app-tabla-turnos [confirmados]="true" [listaTurnos]="listaTurnos"></app-tabla-turnos>
+</div>
+
+<div *ngIf="!this.medicoLogeado.aprobadoPorAdmin" >
+    <h1 style="color:red">Debe ser habilitado por el administrador para poder utilizar esta página.</h1>
+</div>

@@ -18,7 +18,7 @@
           <td scope="row" >{{turno.fecha}}</td>
           <td scope="row" >{{turno.numeroTurno | turnos}}</td>
           <td scope="row" *ngIf="confirmados"><button (click)="cancelar()" class="btn btn-warning">Cancelar turno</button> </td>
-          <td scope="row" *ngIf="!confirmados"><button (click)="aprobar()">Aprobar turno</button> </td>
+          <td scope="row" *ngIf="!confirmados"><button (click)="aprobar()" class="btn btn-primary">Aprobar turno</button> </td>
          
           
          
