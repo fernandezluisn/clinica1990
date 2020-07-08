@@ -8,6 +8,8 @@ import {HorarioMedicosComponent} from '../componentes/horario-medicos/horario-me
 import {redirectUnauthorizedTo, canActivate} from "@angular/fire/auth-guard";
 import {TurnosAConfirmarComponent} from '../componentes/turnos-aconfirmar/turnos-aconfirmar.component';
 import {TurnosConfirmadosComponent} from '../componentes/turnos-confirmados/turnos-confirmados.component';
+import {HomeMedicoComponent} from '../componentes/home-medico/home-medico.component';
+import {AgregarAdminComponent} from '../componentes/agregar-admin/agregar-admin.component';
 
 const redirectUnauthorizedToLogin=()=>redirectUnauthorizedTo(["login"]);
 
@@ -15,9 +17,11 @@ const routes: Routes = [
   {path:"", component:BienvenidaComponent},
   {path:"login", component:LoginComponent, data: {animation: 'Login'}},
   {path:"registro", component:RegistroComponent},
-  {path:"home", component:HorarioMedicosComponent},
+  {path:"homeAdmin", component:HorarioMedicosComponent},
   {path:"turnos", component:TurnosComponent, data: {animation: 'Turnos'}, ...canActivate(redirectUnauthorizedToLogin)},
   {path:"pendientes", component:TurnosAConfirmarComponent},
+  {path:"homeMedico", component:HomeMedicoComponent},
+  {path:"altaAdmin", component:AgregarAdminComponent},
   {path:"confirmados", component:TurnosConfirmadosComponent}
 ];
 

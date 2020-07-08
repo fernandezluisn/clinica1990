@@ -5,6 +5,7 @@ import {TurnosPipe} from '../../pipes/turnos.pipe';
 import { TurnosService } from 'src/app/servicios/turnos.service';
 import { turno } from 'src/app/clases/turno';
 import { empleado } from 'src/app/clases/empleado';
+import { isNull } from 'util';
 
 
 
@@ -19,9 +20,11 @@ export class TurnosComponent implements OnInit {
   usuario;
   usuarioLista;
 
+  hayTurno=false;
+
   fecha:Date;
 
-  medicoDetalle:empleado;
+  medicoDetalle:empleado=null;
  
 
   hoy;
@@ -146,19 +149,33 @@ export class TurnosComponent implements OnInit {
     console.log(this.nTurno);
     this.v2=true;
     this.mostrarBoton();
+    if(!isNull(this.medicoDetalle))
+    this.hayTurno=true;
   }
 
   tomarMedico(medico){
     this.medicoDetalle=medico;
     console.log(this.medicoDetalle.id);
+    if(this.v2)
+    this.hayTurno=true;
   }
 
   subirTurno(){
-    let t=new turno(this.medicoDetalle.email, this.usuario.email, "a confirmar", this.fecha, this.nTurno);
-    let s=this.fecha.toString()+this.medicoDetalle.email;
-    this.turnosS.createTurno(t, s).then(res=>{
-      alert("Su turno se ha registrado correctamente.");
-    });
+    if(isNull(this.medicoDetalle))
+    {
+      alert("Debe seleccionar un médico presionando sobre la tabla.");
+    }else{
+      let t=new turno(this.medicoDetalle, this.usuarioLista, "a confirmar", this.fecha, this.nTurno);
+      let s=this.fecha.toString()+this.medicoDetalle.email;
+      this.turnosS.createTurno(t, s).then(res=>{
+        alert("Su turno se ha registrado correctamente.");
+        this.turnosS.createTurno(t, "turnosEmpleado"+this.medicoDetalle.email);
+        this.turnosS.createTurno(t, "turnosPaciente"+this.usuario.email);
+      });
+
+      
+    }
+      
   }
 
   buscarTurnosDelDía(){

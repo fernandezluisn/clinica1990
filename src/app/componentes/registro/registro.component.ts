@@ -132,18 +132,18 @@ export class RegistroComponent implements OnInit {
         else
         {
           if(this.detallar){
-            u=new empleado(this.nombre, this.apellido,  j2, this.mail);
+            u=new empleado(this.nombre, this.apellido,  j2, this.mail, false);
             let e=new especialidad(this.profesion2);
             this.bda.createEspecialidad(e);
             this.bdaEspecialidades.createEspecialidad(e, this.mail);
           }else{
-            u=new empleado(this.nombre, this.apellido,  j, this.mail);
+            u=new empleado(this.nombre, this.apellido,  j, this.mail, false);
             this.bdaEspecialidades.createEspecialidad(u, this.mail);
           }
           this.spinner();
           this.bda.createUsuario(u);
           this.bda.createEmpleado(u).then(async (res)=>{
-            this.router.navigate(['home']);
+            this.router.navigate(['homeMedico']);
           }).catch(err=>alert("error en el guardado de datos "+err.message));
         }}).catch(error=>{
           alert(error.message);      

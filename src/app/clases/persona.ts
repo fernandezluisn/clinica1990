@@ -4,6 +4,7 @@ export abstract class persona {
     nombre:string;
     apellido:string;
     email:string;
+    
    
 
     constructor(nombre: string, apellido: string, email:string) {
@@ -11,6 +12,7 @@ export abstract class persona {
         this.apellido=apellido;
         this.nombre=nombre;
         this.email=email;
+        
         
     }
 }

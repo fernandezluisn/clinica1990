@@ -35,6 +35,8 @@ import { AgregarEspecialidadComponent } from './componentes/agregar-especialidad
 import { DetalleEmpleadoComponent } from './componentes/detalle-empleado/detalle-empleado.component';
 import { TurnosAConfirmarComponent } from './componentes/turnos-aconfirmar/turnos-aconfirmar.component';
 import { TurnosConfirmadosComponent } from './componentes/turnos-confirmados/turnos-confirmados.component';
+import { HomeMedicoComponent } from './componentes/home-medico/home-medico.component';
+import { AgregarAdminComponent } from './componentes/agregar-admin/agregar-admin.component';
 
 
 @NgModule({
@@ -53,7 +55,9 @@ import { TurnosConfirmadosComponent } from './componentes/turnos-confirmados/tur
     AgregarEspecialidadComponent,
     DetalleEmpleadoComponent,
     TurnosAConfirmarComponent,
-    TurnosConfirmadosComponent
+    TurnosConfirmadosComponent,
+    HomeMedicoComponent,
+    AgregarAdminComponent
   ],
   imports: [
     BrowserModule,

@@ -38,11 +38,19 @@ export class LoginComponent implements OnInit {
       this.logeado.emit(this.log);
       this.bda.devolverListadoPacientes().subscribe(lista=>{
         lista.forEach(element=>{
-          if(element.id.toLowerCase()==this.email.toLowerCase())
+          if(element.email.toLowerCase()==this.email.toLowerCase())
           this.router.navigate(['turnos']);
         })
       })
-      this.router.navigate(["home"]);
+      this.bda.devolverListadoAdministradores().subscribe(lista=>
+        {
+          lista.forEach(elementA=>{
+            if(elementA.email.toLowerCase()==this.email.toLowerCase())
+            this.router.navigate(["homeAdmin"]);
+          })
+        }
+        )
+      this.router.navigate(["homeMedico"]);
       
     }).catch(error=>{
       alert(error.message);      

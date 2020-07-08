@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { turno } from 'src/app/clases/turno';
+import {TurnosPipe} from '../../pipes/turnos.pipe';
 
 @Component({
   selector: 'app-tabla-turnos',
@@ -7,10 +9,20 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class TablaTurnosComponent implements OnInit {
 
-  @Input() aConfirmar:boolean;
+  @Input() confirmados:boolean;
+  @Input() listaTurnos:turno[];
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  aprobar(){
+
+  }
+
+  cancelar(){
+
   }
 
 }

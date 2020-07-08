@@ -1,13 +1,15 @@
 <header style="background-color: rgb(158, 158, 209);" class="navbar navbar-dark bg-info navbar-expand  " >
     <div class="navbar-nav-scroll" style="width: 100%;">
-      <a class="navbar-brand" routerLink='/' *ngIf="!tipo">Inicio</a>
-      <a class="navbar-brand" routerLink='/registro' *ngIf="logeado">Registrarse</a>
-      <a class="navbar-brand" routerLink='/login' *ngIf="logeado">Ingresar</a>
-      <a class="navbar-brand" routerLink='/turnos' *ngIf="!tipo">Turnos</a>
-      <a class="navbar-brand" routerLink='/home' *ngIf="tipo">Home</a>
-      <a class="navbar-brand" routerLink='/pendientes' *ngIf="tipo">Solicitudes de turnos</a>
-      <a class="navbar-brand" routerLink='/confirmados' *ngIf="tipo">Turnos confirmados</a>
-      <button style="margin-left: 65%; margin-top: 0%; position: absolute;" class="btn btn-secondary" *ngIf="!logeado" (click)="cerrar()">Cerrar sesión</button>      
+      <a class="navbar-brand" style="margin-top: 1%;; margin-bottom: 1%" routerLink='/' *ngIf="!logeado">Inicio</a>
+      <a class="navbar-brand" style="margin-top: 1%;; margin-bottom: 1%" routerLink='/registro' *ngIf="!logeado">Registrarse</a>
+      <a class="navbar-brand" style="margin-top: 1%;; margin-bottom: 1%" routerLink='/login' *ngIf="!logeado">Ingresar</a>
+      <a class="navbar-brand" style="margin-top: 1%;; margin-bottom: 1%" routerLink='/turnos' *ngIf="inicio">Solicitar turno</a>
+      <a class="navbar-brand" style="margin-top: 1%;; margin-bottom: 1%" routerLink='/homeAdmin' *ngIf="tipoAdmin">Principal</a>
+      <a class="navbar-brand" style="margin-top: 1%;; margin-bottom: 1%" routerLink='/altaAdmin' *ngIf="tipoAdmin">Agregar administrador</a>
+      <a class="navbar-brand" style="margin-top: 1%;; margin-bottom: 1%" routerLink='/homeMedico' *ngIf="tipoMedico">Principal</a>
+      <a class="navbar-brand"  style="margin-top: 1%;; margin-bottom: 1%" routerLink='/pendientes' *ngIf="tipoMedico">Solicitudes de turnos</a>
+      <a class="navbar-brand" style="margin-top: 1%; margin-bottom: 1%;" routerLink='/confirmados' *ngIf="tipoMedico">Turnos confirmados</a>
+      <button style="margin-left: 65%; margin-top: 1%; margin-bottom: 1%; position:static;" class="btn btn-secondary" *ngIf="logeado" (click)="cerrar()">Cerrar sesión</button>      
      
       
       <!--img src="{{}}" alt="1rem"-->

@@ -13,12 +13,12 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td scope="row" ></td>
-          <td scope="row" ></td>
-          <td scope="row" ></td>
-          <td scope="row" *ngIf="aConfirmar"></td>
-          <td scope="row" *ngIf="aConfirmar"></td>
+        <tr *ngFor="let turno of listaTurnos">
+          <td scope="row" >{{turno.paciente.nombre}} {{turno.paciente.apellido}}</td>
+          <td scope="row" >{{turno.fecha}}</td>
+          <td scope="row" >{{turno.numeroTurno | turnos}}</td>
+          <td scope="row" *ngIf="confirmados"><button (click)="cancelar()" class="btn btn-warning">Cancelar turno</button> </td>
+          <td scope="row" *ngIf="!confirmados"><button (click)="aprobar()">Aprobar turno</button> </td>
          
           
          

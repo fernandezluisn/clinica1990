@@ -16,7 +16,10 @@ export class NavComponent implements OnInit {
   listaU;
   user;
   logeado:boolean;
-  @Input() tipo:boolean;
+  @Input() tipoMedico:boolean;
+  @Input() tipoAdmin:boolean;
+  tipoPaciente:boolean;
+  @Input() inicio:boolean;
 
   usuarioLista;
   constructor(private service:ServicioService, private router: Router) { 
@@ -24,14 +27,27 @@ export class NavComponent implements OnInit {
     this.service.tomarUsuario().then(res=>{
       this.user=res;
       if(isNull(this.user) || this.user=="undefined")
-      this.logeado=true;
-      else
       this.logeado=false;
+      else
+      this.logeado=true;
     
     })
 
-    if(this.tipo==true){
-      this.logeado=false;
+    
+
+    if(this.tipoMedico==true){
+      this.logeado=true;
+      this.tipoAdmin=false;
+      this.tipoPaciente=false;
+      this.inicio=false;
+    }else if(this.tipoAdmin==true){
+      this.logeado=true;
+      this.tipoMedico=false;
+      this.tipoPaciente=false;
+      this.inicio=false;
+    }else{
+      this.tipoPaciente=true;
+      this.inicio=true;
     }
 
     

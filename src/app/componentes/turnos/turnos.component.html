@@ -1,7 +1,8 @@
 <app-nav></app-nav>
 
 
-    <h1>Bienvenido/a {{usuarioLista.nombre}}</h1>
+    <h1>Bienvenido/a {{usuarioLista.nombre}}</h1> <h2 *ngIf="hayTurno" style="color: red;">Solicita turno con {{medicoDetalle.nombre}} {{medicoDetalle.apellido}} el día {{fecha | date: 'dd-MM-yyyy'}} a las {{nTurno | turnos}}. Cliquee el botón azul para solicitar.</h2>
+    <h2 *ngIf="!hayTurno">Ingrese datos de la fecha, el horario y el médico que requiere.</h2>
 
     <div style="margin-left: 10%; margin-top: 5%; margin-bottom: 2%; width: 50%;">
         <h2 >Solicite su próximo turno</h2>

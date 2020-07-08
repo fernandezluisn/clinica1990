@@ -1,13 +1,20 @@
-<app-nav [tipo]="true"></app-nav>
+<app-nav [tipoAdmin]="true" [inicio]="false"></app-nav>
+
+<h1>Bienvenido {{adminLogeado.nombre}}</h1>
+<p>Acá podes agregar especialidades a los médicos</p>
 
 <div style="justify-content: flex-start; flex-direction: row; display: flex; padding-left: 1rem; background-color: rgba(128, 128, 128, 0.144); width: 60%; height: 30rem; border-radius: 5rem; margin-left: 6%; margin-top: 2rem;">
-
+ 
     <div>
-        <app-detalle-empleado style="margin-left: 10%;" [empleado]="medicoLogeado"></app-detalle-empleado>
+        <app-tabla-medicos [listaMedicos]="listadoEspecialistas" (saleMedico)="tomarMedico($event)"></app-tabla-medicos>
     </div>
 
-    <div style="margin-left: 20%;">
+    <div style="margin-left: 20%;" *ngIf="hayMedico">
         <app-agregar-especialidad (actualizar)="agregar($event)"></app-agregar-especialidad>
+    </div>
+
+    <div>
+        <app-detalle-empleado style="margin-left: 10%;" *ngIf="hayMedico" [empleado]="medicoElegido"></app-detalle-empleado>
     </div>
     
 </div>

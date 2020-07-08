@@ -1,15 +1,20 @@
+import { empleado } from './empleado';
+import { paciente } from './paciente';
+
 export class  turno {
-    idProfesional:string;
-    idPaciente:string;
+
+    id:string;
+    empleado:empleado;
+    paciente:paciente;
     estado:string;
     fecha:Date;
     numeroTurno:number;
     reseña: string;
 
-    constructor(medico:string, paciente:string, estado:string, fecha:Date, turno:number){
+    constructor(medico:empleado, paciente:paciente, estado:string, fecha:Date, turno:number){
         this.fecha=fecha;
-        this.idPaciente=paciente;
-        this.idProfesional=medico;
+        this.paciente=paciente;
+        this.empleado=medico;
         this.estado=estado;
         this.numeroTurno=turno;
     }

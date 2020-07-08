@@ -7,6 +7,7 @@ import { map } from 'rxjs/operators';
 import { especialidad } from '../clases/especialidad';
 import { persona } from '../clases/persona';
 import { element } from 'protractor';
+import { admin } from '../clases/admin';
 
 @Injectable({
   providedIn: 'root'
@@ -21,10 +22,29 @@ export class BdaService {
 
   listaEspecialidades:Observable<especialidad[]>;
 
+  listaAdministradores:Observable<admin[]>;
+
 
   constructor(private db:AngularFirestore ) {
 
+
+    this.listaAdministradores=this.db.collection('administradores').snapshotChanges().pipe(
+      map(actions=>{
+        return actions.map(
+          a=>{
+            const data= a.payload.doc.data();
+            const id=a.payload.doc.id;
+            return {id, ...(data as any)}
+          }
+        );
+      }
+
+      )
+
+     
+    );
     
+
     this.listaEmpleados=this.db.collection('empleados').snapshotChanges().pipe(
       map(actions=>{
         return actions.map(
@@ -69,11 +89,7 @@ export class BdaService {
             return {id, ...(data as any)}
           }
         );
-      }
-
-      )
-
-     
+      })   
     );
 
 
@@ -101,6 +117,10 @@ export class BdaService {
 
   ;
 
+  createAdmin(pac:admin): Promise<DocumentReference> {
+    return this.db.collection('administradores').add({...pac});
+  }
+
   createEspecialidad(pac:especialidad): Promise<DocumentReference> {
     return this.db.collection('especialidades').add({...pac});
   }
@@ -119,6 +139,10 @@ export class BdaService {
 
   devolverListadoEspecialidades(){
     return this.listaEspecialidades;
+  }
+
+  devolverListadoAdministradores(){
+    return this.listaAdministradores;
   }
 
   devolverListadoUsuarios(){
