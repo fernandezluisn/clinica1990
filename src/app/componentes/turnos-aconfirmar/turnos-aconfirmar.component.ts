@@ -20,14 +20,15 @@ export class TurnosAConfirmarComponent implements OnInit {
   constructor(private service:ServicioService, private turnosBDA:TurnosService, private bda:BdaService) { 
     this.service.tomarUsuario().then(element=>
       {
+        this.listaTurnos=new Array();
         this.user=element;
-        this.turnosBDA.turnosFiltradosPorMedico(this.user.email).subscribe(lista=>{
-          this.listaTurnos=lista;
+        this.filtrarTurnos();
+          
           this.bda.devolverListadoEmpleados().subscribe(lista=>{
             lista.forEach(elementL=>{
               if(elementL.email.toLowerCase()==this.user.email.toLowerCase())
               this.medicoLogeado=elementL;
-            })
+            
           });
         })
       }
@@ -35,6 +36,29 @@ export class TurnosAConfirmarComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  filtrarTurnos(){
+    let j=new Array();
+    
+    this.turnosBDA.turnosFiltradosPorMedico(this.user.email).subscribe(lista=>{
+      lista.filter(element=>{
+        if(element.estado=="a confirmar")
+        j.push(element);
+      })
+
+      this.listaTurnos=j;
+  })};
+
+  cargarTurno(turno){
+    try{
+      this.turnosBDA.confirmarTurno(turno);
+      alert("El turno se aprobó correctamente.");
+      this.filtrarTurnos();
+    }catch(err){
+      alert(err.message)
+    }
+    
   }
 
 }

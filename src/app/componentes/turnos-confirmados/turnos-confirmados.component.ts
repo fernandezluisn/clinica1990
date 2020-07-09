@@ -18,13 +18,12 @@ export class TurnosConfirmadosComponent implements OnInit {
     this.service.tomarUsuario().then(element=>
       {
         this.user=element;
-        this.turnosBDA.turnosFiltradosPorMedico(this.user.email).subscribe(lista=>{
-          this.listaTurnos=lista;
+        this.filtrarTurnos();
           this.bda.devolverListadoEmpleados().subscribe(lista=>{
             lista.forEach(elementL=>{
               if(elementL.email.toLowerCase()==this.user.email.toLowerCase())
               this.medicoLogeado=elementL;
-            })
+            
           });
         })
       }
@@ -33,5 +32,17 @@ export class TurnosConfirmadosComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  filtrarTurnos(){
+    let j=new Array();
+    
+    this.turnosBDA.turnosFiltradosPorMedico(this.user.email).subscribe(lista=>{
+      lista.filter(element=>{
+        if(element.estado=="confirmado")
+        j.push(element);
+      })
+
+      this.listaTurnos=j;
+  })};
 
 }

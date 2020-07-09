@@ -6,5 +6,5 @@
 </div>
 
 <div *ngIf="this.medicoLogeado.aprobadoPorAdmin">
-<app-tabla-turnos [confirmados]="false" [listaTurnos]="listaTurnos"></app-tabla-turnos>
+<app-tabla-turnos [confirmados]="false" [listaTurnos]="listaTurnos" (aprobarTurno)="cargarTurno($event)"></app-tabla-turnos>
 </div>
