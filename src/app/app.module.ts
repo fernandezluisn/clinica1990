@@ -38,6 +38,7 @@ import { HomeMedicoComponent } from './componentes/home-medico/home-medico.compo
 import { AgregarAdminComponent } from './componentes/agregar-admin/agregar-admin.component';
 import { HabilitarUsuariosComponent } from './componentes/habilitar-usuarios/habilitar-usuarios.component';
 import { AtencionPacienteComponent } from './componentes/atencion-paciente/atencion-paciente.component';
+import { TurnosHoraPipe } from './pipes/turnos-hora.pipe';
 
 
 @NgModule({
@@ -59,7 +60,8 @@ import { AtencionPacienteComponent } from './componentes/atencion-paciente/atenc
     HomeMedicoComponent,
     AgregarAdminComponent,
     HabilitarUsuariosComponent,
-    AtencionPacienteComponent
+    AtencionPacienteComponent,
+    TurnosHoraPipe
   ],
   imports: [
     BrowserModule,

@@ -6,6 +6,8 @@ import { TurnosService } from 'src/app/servicios/turnos.service';
 import { turno } from 'src/app/clases/turno';
 import { empleado } from 'src/app/clases/empleado';
 import { isNull } from 'util';
+import { element } from 'protractor';
+
 
 
 
@@ -29,6 +31,7 @@ export class TurnosComponent implements OnInit {
 
   hoy;
   quinceDias;
+  v0:boolean;
   v1:boolean;
   v2:boolean;
   v3:boolean;
@@ -74,6 +77,7 @@ export class TurnosComponent implements OnInit {
     this.hoy=new Date();
     this.quinceDias=new Date(this.hoy.getFullYear(), this.hoy.getMonth(), this.hoy.getDate()+15);
     console.log(this.quinceDias);
+    this.v0=false;
     this.v1=false;
     this.v2=false;
     this.v3=false;
@@ -84,6 +88,28 @@ export class TurnosComponent implements OnInit {
     
   }
 
+  filtrarListaTurnosDia(){
+    this.turnosS.turnosFiltradosPorFechaYEmpleado(this.medicoDetalle.email, this.fecha.toString()).subscribe(
+      lista=>{
+        
+        lista.forEach(elementT=>{
+          
+          this.listaTurnosDia.forEach(elementF => {
+            
+            if(elementT.numeroTurno==elementF)
+            {
+             
+              let indice=this.listaTurnosDia.indexOf(elementF);
+              this.listaTurnosDia.splice(indice, 1);
+            }
+          })
+        }
+         
+          )
+      }
+    )
+  }
+
   mostrarBoton(){
     if(this.v1==true && this.v2==true && !this.esDomingo){
       this.v3=true;
@@ -92,8 +118,9 @@ export class TurnosComponent implements OnInit {
 
   mostrarFecha(){
     this.listaTurnosDia=new Array();
+    
     let d=new Date(this.fecha);
-    console.log(d.getDay());
+   
     switch(d.getDay()){
       case 0:
         this.esDomingo=true;
@@ -141,6 +168,7 @@ export class TurnosComponent implements OnInit {
         }
       break;
     }
+    this.filtrarListaTurnosDia();
     this.v1=true;
     
   }
@@ -156,8 +184,7 @@ export class TurnosComponent implements OnInit {
   tomarMedico(medico){
     this.medicoDetalle=medico;
     console.log(this.medicoDetalle.id);
-    if(this.v2)
-    this.hayTurno=true;
+    this.v0=true;
   }
 
   subirTurno(){
@@ -171,15 +198,13 @@ export class TurnosComponent implements OnInit {
         alert("Su turno se ha registrado correctamente.");
         this.turnosS.createTurno(t, "turnosEmpleado"+this.medicoDetalle.email);
         this.turnosS.createTurno(t, "turnosPaciente"+this.usuario.email);
+        
       });
 
       
     }
       
   }
-
-  buscarTurnosDelDía(){
-
-  }
+ 
 
 }

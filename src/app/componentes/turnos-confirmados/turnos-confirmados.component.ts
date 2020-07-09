@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ServicioService } from 'src/app/servicios/servicio.service';
 import { BdaService } from 'src/app/servicios/bda.service';
 import { TurnosService } from 'src/app/servicios/turnos.service';
+import { turno } from 'src/app/clases/turno';
 
 @Component({
   selector: 'app-turnos-confirmados',
@@ -13,6 +14,7 @@ export class TurnosConfirmadosComponent implements OnInit {
   user;
   listaTurnos;
   medicoLogeado;
+  descargo:boolean;
 
   constructor(private service:ServicioService, private bda:BdaService, private turnosBDA:TurnosService) {
     this.service.tomarUsuario().then(element=>
@@ -23,7 +25,7 @@ export class TurnosConfirmadosComponent implements OnInit {
             lista.forEach(elementL=>{
               if(elementL.email.toLowerCase()==this.user.email.toLowerCase())
               this.medicoLogeado=elementL;
-            
+              this.descargo=true;
           });
         })
       }
@@ -44,5 +46,10 @@ export class TurnosConfirmadosComponent implements OnInit {
 
       this.listaTurnos=j;
   })};
+
+  cancelar(turno:turno){
+    this.turnosBDA.actualizarTurno(turno, 4);
+    this.filtrarTurnos
+  }
 
 }

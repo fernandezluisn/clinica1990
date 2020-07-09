@@ -17,6 +17,7 @@ export class HorarioMedicosComponent implements OnInit {
   hayMedico:boolean;
   listadoEspecialistas;
   user;
+  descargo:boolean;
 
   constructor(private service: ServicioService, private bda:BdaService) {
     this.hayMedico=false;
@@ -32,6 +33,7 @@ export class HorarioMedicosComponent implements OnInit {
         lista.forEach(elementB=>{
           if(element.email.toLowerCase()===elementB.email.toLowerCase())
           this.adminLogeado=elementB;
+          this.descargo=true;
         })
       })
     })

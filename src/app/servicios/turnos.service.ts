@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import {AngularFirestore, DocumentReference} from '@angular/fire/firestore';
-import { Observable, Subject } from 'rxjs';
 import { turno } from '../clases/turno';
 import { map } from 'rxjs/operators';
-import { element } from 'protractor';
+import {TurnosPipe} from '../pipes/turnos.pipe';
+
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +15,8 @@ export class TurnosService {
   createTurno(turno:turno, id:string): Promise<DocumentReference> {
     return this.db.collection(id).add({...turno});
   } 
+
+ 
 
   turnosFiltradosPorMedico(emailMedico:string){
     let listaTurnosPorMedico=this.db.collection("turnosEmpleado"+emailMedico).snapshotChanges().pipe(
@@ -46,7 +48,7 @@ export class TurnosService {
     return listaTurnosPorPaciente;
   }
 
-  turnoFiltradoPorFecha(emailEmpleado:string, fecha:string){
+  turnosFiltradosPorFechaYEmpleado(emailEmpleado:string, fecha:string){
     let listaFecha= this.db.collection(fecha+emailEmpleado).snapshotChanges().pipe(
       map(actions=>{
         return actions.map(
@@ -61,15 +63,30 @@ export class TurnosService {
       return listaFecha;
   }
 
-  confirmarTurno(turno:turno) {  
-    turno.estado="confirmado";
+  actualizarTurno(turno:turno, estado:number) {  
+    let nuevoEstado:string;
+    switch(estado){
+      case 1:
+        nuevoEstado="a confirmar";
+        break; 
+      case 2:
+        nuevoEstado="confirmado";
+        break;
+      case 3:
+        nuevoEstado="realizado";
+        break;
+      case 4:
+        nuevoEstado="cancelado";
+        break;
+    }
+    turno.estado=nuevoEstado;
     this.db.doc('turnosEmpleado' + turno.empleado.email +'/'+turno.id).update({...turno});
     
-    this.turnoFiltradoPorFecha(turno.empleado.email, turno.fecha.toString()).subscribe(lista=>
+    this.turnosFiltradosPorFechaYEmpleado(turno.empleado.email, turno.fecha.toString()).subscribe(lista=>
       
       lista.forEach(turnoB=>{
         if(turnoB.numeroTurno==turno.numeroTurno){
-          turnoB.estado="confirmado";
+          turnoB.estado=nuevoEstado;
           this.db.doc( turno.fecha.toString()+turno.empleado.email+'/'+turnoB.id).update({...turnoB});
         }
       })
@@ -82,7 +99,7 @@ export class TurnosService {
         if(turno.fecha.toString()==element.fecha.toString() && turno.paciente.email==element.paciente.email && turno.numeroTurno==element.numeroTurno)
         {
           l=element;
-          l.estado="confirmado";
+          l.estado=nuevoEstado;
           this.db.doc("turnosPaciente"+turno.paciente.email+'/'+l.id).update({...l});
         }
       }

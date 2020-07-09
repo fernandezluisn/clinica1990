@@ -16,6 +16,7 @@ export class TurnosAConfirmarComponent implements OnInit {
   listaTurnos:turno[];
   user;
   medicoLogeado:empleado;
+  descargo:boolean;
 
   constructor(private service:ServicioService, private turnosBDA:TurnosService, private bda:BdaService) { 
     this.service.tomarUsuario().then(element=>
@@ -28,7 +29,7 @@ export class TurnosAConfirmarComponent implements OnInit {
             lista.forEach(elementL=>{
               if(elementL.email.toLowerCase()==this.user.email.toLowerCase())
               this.medicoLogeado=elementL;
-            
+              this.descargo=true;
           });
         })
       }
@@ -52,7 +53,7 @@ export class TurnosAConfirmarComponent implements OnInit {
 
   cargarTurno(turno){
     try{
-      this.turnosBDA.confirmarTurno(turno);
+      this.turnosBDA.actualizarTurno(turno, 2);
       alert("El turno se aprobó correctamente.");
       this.filtrarTurnos();
     }catch(err){

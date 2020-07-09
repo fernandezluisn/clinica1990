@@ -12,6 +12,7 @@ export class AtencionPacienteComponent implements OnInit {
   txtResenia:string;
   user;
   medicoLogeado;
+  descargo:boolean;
   constructor(private service:ServicioService, private bda:BdaService) { 
     this.service.tomarUsuario().then(element=>{
       this.user=element;
@@ -19,6 +20,7 @@ export class AtencionPacienteComponent implements OnInit {
         lista.forEach(elementL=>{
           if(elementL.email.toLowerCase()==this.user.email.toLowerCase())
           this.medicoLogeado=elementL;
+          this.descargo=true;
         })
       });
     });

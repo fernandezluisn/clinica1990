@@ -22,7 +22,7 @@ form{
     margin-top: 2rem;
     border: black 0.61rem solid;
     border-radius: 0.5rem;
-    background-color: rgb(214, 187, 112);
+    background-color: rgba(14, 66, 75, 0.534);
 }
 
 .form-group{

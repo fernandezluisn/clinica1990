@@ -1,9 +1,114 @@
 <app-nav [tipoMedico]="true" [inicio]="false" [logeado]="true" [tipoPaciente]="false"></app-nav>
 
-<div *ngIf="this.medicoLogeado.aprobadoPorAdmin">
+<div *ngIf="descargo">
+    <div *ngIf="this.medicoLogeado.aprobadoPorAdmin">
+        <h1 >Bienvenido/a {{medicoLogeado.nombre}}</h1>
+        <h2>Aquí puede seleccionar los días y horarios en los que atenderás en la clínica.</h2>
 
-</div>
+        <form action="subirHorarios()">
+            <table class="table" style="width: 100%; text-align: center;">
+                <thead>
+                    <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Día</th>
+                    <th scope="col">Horario de entrada</th> 
+                    <th scope="col">Horario de salida</th> 
+                    <th scope="col">Marque para seleccionar</th>                  
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row"></th>
+                        <td>Lunes</td>
+                        <td><select [(ngModel)]="nTurnoE1" class="form-control" style="width: 12rem;" name="SelectEsp" (change)="checkbox1()">
+                            <option [value]="item" *ngFor="let item of listaTurnosEntrada">{{item | turnosHora}}</option>
+                          </select>  </td>
+                          <td><select [(ngModel)]="nTurnoS1" class="form-control" style="width: 12rem;" name="SelectEsp" (change)="checkbox1()">
+                            <option [value]="item" *ngFor="let item of listaTurnosSalida">{{item | turnosHora}}</option>
+                          </select>  </td>
+                        <td><input type="checkbox" (change)="checkbox1()"></td>
+                    </tr>
+                    <tr>
+                    <th scope="row"></th>
+                    
+                    <tr>
+                        <th scope="row"></th>
+                        <td>Martes</td>
+                        <td><select [(ngModel)]="nTurnoE2" class="form-control" style="width: 12rem;" name="SelectEsp" (change)="checkbox2()">
+                            <option [value]="item" *ngFor="let item of listaTurnosEntrada">{{item | turnosHora}}</option>
+                          </select>  </td>
+                          <td><select [(ngModel)]="nTurnoS2" class="form-control" style="width: 12rem;" name="SelectEsp" (change)="checkbox2()">
+                            <option [value]="item" *ngFor="let item of listaTurnosSalida">{{item | turnosHora}}</option>
+                          </select>  </td>
+                        <td><input type="checkbox" (change)="checkbox2()"></td>
+                    </tr>   
 
-<div *ngIf="!this.medicoLogeado.aprobadoPorAdmin">
-    <h1 style="color:red">Debe ser habilitado por el administrador para poder utilizar esta página.</h1>
+                    <tr>
+                        <th scope="row"></th>
+                        <td>Miercoles</td>
+                        <td><select [(ngModel)]="nTurnoE3" class="form-control" style="width: 12rem;" name="SelectEsp" (change)="checkbox3()"> 
+                            <option [value]="item" *ngFor="let item of listaTurnosEntrada">{{item | turnosHora}}</option>
+                          </select>  </td>
+                          <td><select [(ngModel)]="nTurnoS3" class="form-control" style="width: 12rem;" name="SelectEsp" (change)="checkbox3()">
+                            <option [value]="item" *ngFor="let item of listaTurnosSalida">{{item | turnosHora}}</option>
+                          </select>  </td>
+                        <td><input type="checkbox" (change)="checkbox3()"></td>
+                    </tr>                    
+                    <tr>
+                        <th scope="row"></th>
+                        <td>Jueves</td>
+                        <td><select [(ngModel)]="nTurnoE4" class="form-control" style="width: 12rem;" name="SelectEsp" (change)="checkbox4()">
+                            <option [value]="item" *ngFor="let item of listaTurnosEntrada">{{item | turnosHora}}</option>
+                          </select>  </td>
+                          <td><select [(ngModel)]="nTurnoS4" class="form-control" style="width: 12rem;" name="SelectEsp" (change)="checkbox4()">
+                            <option [value]="item" *ngFor="let item of listaTurnosSalida">{{item | turnosHora}}</option>
+                          </select>  </td>
+                        <td><input type="checkbox" (change)="checkbox4()"></td>
+                    </tr>
+                    
+                    <tr>
+                        <th scope="row"></th>
+                        <td>Viernes</td>
+                        <td><select [(ngModel)]="nTurnoE5" class="form-control" style="width: 12rem;" name="SelectEsp" (change)="checkbox5()">
+                            <option [value]="item" *ngFor="let item of listaTurnosEntrada">{{item | turnosHora}}</option>
+                          </select>  </td>
+                          <td><select [(ngModel)]="nTurnoS5" class="form-control" style="width: 12rem;" name="SelectEsp" (change)="checkbox5()">
+                            <option [value]="item" *ngFor="let item of listaTurnosSalida">{{item | turnosHora}}</option>
+                          </select>  </td>
+                        <td><input type="checkbox" (change)="checkbox5()"></td>
+                    </tr>
+                    
+                    <tr>
+                        <th scope="row"></th>
+                        <td>Sabado</td>
+                        <td><select [(ngModel)]="nTurnoE6" class="form-control" style="width: 12rem;" name="SelectEsp" (change)="checkbox6()">
+                            <option [value]="item" *ngFor="let item of listaTurnosEntradaSabado" >{{item | turnosHora}}</option>
+                          </select>  </td>
+                          <td><select [(ngModel)]="nTurnoS6" class="form-control" style="width: 12rem;" name="SelectEsp" (change)="checkbox6()">
+                            <option [value]="item" *ngFor="let item of listaTurnosSalidaSabado">{{item | turnosHora}}</option>
+                          </select>  </td>
+                        <td><input type="checkbox" (change)="checkbox6()"></td>
+                    </tr>
+            </table>
+
+            <div class="form-group">
+                <label for="tiempoTurno">Seleccione el tiempo de duración de los turnos.</label>
+                <td><select [(ngModel)]="tiempoTurno" class="form-control" style="width: 12rem;" name="SelectEsp">
+                    <option [value]=30 >30 minutos</option>
+                    <option [value]=45>45 minutos</option>
+                    <option [value]=60>60 minutos</option>
+                  </select>  </td>
+            </div>
+
+
+            <div class="form-group">
+            <button type="submit" class="btn btn-primary">Cargar horario.</button>
+        </div>
+        </form>
+
+    </div>
+
+    <div *ngIf="!this.medicoLogeado.aprobadoPorAdmin">
+        <h1 style="color:red">Debe ser habilitado por el administrador para poder utilizar esta página.</h1>
+    </div>
 </div>
