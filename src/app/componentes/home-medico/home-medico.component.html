@@ -4,9 +4,9 @@
     <div *ngIf="this.medicoLogeado.aprobadoPorAdmin">
         <h1 >Bienvenido/a {{medicoLogeado.nombre}}</h1>
         <h2>Aquí puede seleccionar los días y horarios en los que atenderás en la clínica.</h2>
-
-        <form action="subirHorarios()">
-            <table class="table" style="width: 100%; text-align: center;">
+    <div style="width: 60%;">
+        <form>
+            <table class="table" style="width: 80%; text-align: center;">
                 <thead>
                     <tr>
                     <th scope="col"></th>
@@ -94,7 +94,7 @@
             <div class="form-group">
                 <label for="tiempoTurno">Seleccione el tiempo de duración de los turnos.</label>
                 <td><select [(ngModel)]="tiempoTurno" class="form-control" style="width: 12rem;" name="SelectEsp">
-                    <option [value]=30 >30 minutos</option>
+                    <option [value]=30>30 minutos</option>
                     <option [value]=45>45 minutos</option>
                     <option [value]=60>60 minutos</option>
                   </select>  </td>
@@ -102,13 +102,19 @@
 
 
             <div class="form-group">
-            <button type="submit" class="btn btn-primary">Cargar horario.</button>
+            <button (click)="subirHorarios()" class="btn btn-primary">Cargar horario.</button>
         </div>
         </form>
+    </div>
 
+    <!---Mostrar turnos actuales acá--
+    <div style="width: 40%;">
+
+    </div>-->
     </div>
 
     <div *ngIf="!this.medicoLogeado.aprobadoPorAdmin">
         <h1 style="color:red">Debe ser habilitado por el administrador para poder utilizar esta página.</h1>
     </div>
 </div>
+

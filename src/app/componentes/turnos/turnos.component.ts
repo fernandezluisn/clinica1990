@@ -127,42 +127,42 @@ export class TurnosComponent implements OnInit {
       break;
       case 1:
         this.esDomingo=false;
-        for(let n=1; n<23; n++)
+        for(let n=0; n<23; n++)
         {
           this.listaTurnosDia.push(n);
         }
       break;
       case 2:
         this.esDomingo=false;
-        for(let n=1; n<23; n++)
+        for(let n=0; n<23; n++)
         {
           this.listaTurnosDia.push(n);
         }
       break;
       case 3:
         this.esDomingo=false;
-        for(let n=1; n<23; n++)
+        for(let n=0; n<23; n++)
         {
           this.listaTurnosDia.push(n);
         }
       break;
       case 4:
         this.esDomingo=false;
-        for(let n=1; n<23; n++)
+        for(let n=0; n<23; n++)
         {
           this.listaTurnosDia.push(n);
         }
       break;
       case 5:
         this.esDomingo=false;
-        for(let n=1; n<23; n++)
+        for(let n=0; n<23; n++)
         {
           this.listaTurnosDia.push(n);
         }
       break;
       case 6:
         this.esDomingo=false;
-        for(let n=1; n<13; n++)
+        for(let n=0; n<13; n++)
         {
           this.listaTurnosDia.push(n);
         }

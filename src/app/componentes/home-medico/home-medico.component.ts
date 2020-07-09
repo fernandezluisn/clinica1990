@@ -3,6 +3,8 @@ import { ServicioService } from 'src/app/servicios/servicio.service';
 import { BdaService } from 'src/app/servicios/bda.service';
 import { empleado } from 'src/app/clases/empleado';
 import {TurnosHoraPipe} from '../../pipes/turnos-hora.pipe';
+import { MedicosService } from 'src/app/servicios/medicos.service';
+import { jornadaSemanal } from 'src/app/clases/jornadaSemanal';
 
 @Component({
   selector: 'app-home-medico',
@@ -15,24 +17,24 @@ export class HomeMedicoComponent implements OnInit {
   user;
 
   descargo:boolean;
-  nTurnoE1:number;
-  nTurnoS1:number;
-  nTurnoE2:number;
-  nTurnoS2:number;
-  nTurnoE3:number;
-  nTurnoS3:number;
-  nTurnoE4:number;
-  nTurnoS4:number;
-  nTurnoE5:number;
-  nTurnoS5:number;
-  nTurnoE6:number;
-  nTurnoS6:number;
-  ch1:boolean;
-  ch2:boolean;
-  ch3:boolean;
-  ch4:boolean;
-  ch5:boolean;
-  ch6:boolean;
+  nTurnoE1:number=0;
+  nTurnoS1:number=11;
+  nTurnoE2:number=0;
+  nTurnoS2:number=11;
+  nTurnoE3:number=0;
+  nTurnoS3:number=11;
+  nTurnoE4:number=0;
+  nTurnoS4:number=11;
+  nTurnoE5:number=0;
+  nTurnoS5:number=11;
+  nTurnoE6:number=0;
+  nTurnoS6:number=11;
+  ch1:boolean=false;
+  ch2:boolean=false;
+  ch3:boolean=false;
+  ch4:boolean=false;
+  ch5:boolean=false;
+  ch6:boolean=false;
   
   sePuedeSubir1:boolean;
   sePuedeSubir2:boolean;
@@ -50,20 +52,21 @@ export class HomeMedicoComponent implements OnInit {
   listaTurnosEntradaSabado;
   listaTurnosSalidaSabado;
 
-  constructor(private service:ServicioService, private bda:BdaService) { 
+  constructor(private service:ServicioService, private bda:BdaService, private medicoService:MedicosService) { 
     this.service.tomarUsuario().then(element=>{
       this.user=element;
       
       this.bda.devolverListadoEmpleados().subscribe(lista=>{
         lista.forEach(elementL=>{
           if(elementL.email.toLowerCase()==this.user.email.toLowerCase())
+          console.log(elementL);
           this.medicoLogeado=elementL;
           this.descargo=true;
         })
       });
     });
 
-    this.tiempoTurno="30 minutos";
+    this.tiempoTurno=30;
 
     this.sePuedeSubir1=true;
     this.sePuedeSubir2=true;
@@ -73,21 +76,21 @@ export class HomeMedicoComponent implements OnInit {
     this.sePuedeSubir6=true;
 
     this.listaTurnosEntrada=new Array();
-    for(let i=1; i<11; i++){
+    for(let i=0; i<11; i++){
       this.listaTurnosEntrada.push(i);
     }
     this.listaTurnosSalida=new Array();
-    for(let i=2; i<12; i++){
+    for(let i=1; i<12; i++){
       this.listaTurnosSalida.push(i);
     }
 
     this.listaTurnosEntradaSabado=new Array();
-    for(let i=1; i<7; i++){
+    for(let i=0; i<7; i++){
       this.listaTurnosEntradaSabado.push(i);
     }
 
     this.listaTurnosSalidaSabado=new Array();
-    for(let i=2; i<8; i++){
+    for(let i=1; i<8; i++){
       this.listaTurnosSalidaSabado.push(i);
     }
     
@@ -194,7 +197,50 @@ export class HomeMedicoComponent implements OnInit {
   }
 
   subirHorarios(){
+    console.log("entró al horario");
+    let j=new jornadaSemanal(this.ch1, this.ch2, this.ch3, this.ch4, this.ch5, this.ch6, this.medicoLogeado);
 
+    if(this.ch1)
+    {
+      j.lunesE=this.nTurnoE1;
+      j.lunesS=this.nTurnoS1;
+    }
+
+    if(this.ch2)
+    {
+      j.lunesE=this.nTurnoE2;
+      j.lunesS=this.nTurnoS2;
+    }
+
+    if(this.ch3)
+    {
+      j.lunesE=this.nTurnoE3;
+      j.lunesS=this.nTurnoS3;
+    }
+
+    if(this.ch4)
+    {
+      j.lunesE=this.nTurnoE4;
+      j.lunesS=this.nTurnoS4;
+    }
+
+    if(this.ch5)
+    {
+      j.lunesE=this.nTurnoE5;
+      j.lunesS=this.nTurnoS5;
+    }
+
+    if(this.ch6)
+    {
+      j.lunesE=this.nTurnoE6;
+      j.lunesS=this.nTurnoS6;
+    }
+
+    j.tiempoTurnos=this.tiempoTurno;
+
+    this.medicoService.createHorario(j).then(res=>{
+      alert("Sus horarios se han cargado correctamente");
+    })
   }
   
 

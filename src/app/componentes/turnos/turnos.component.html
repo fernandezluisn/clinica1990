@@ -5,12 +5,12 @@
     <h2 *ngIf="!hayTurno">Ingrese datos en el siguiente orden: el médico, la fecha y el horario que requiere.</h2>
 <div style="display: flex; justify-content:flex-start; flex-direction: row;">
     <div *ngIf="v0" >
-        <div style="margin-left: 10%; margin-top: 5%; margin-bottom: 2%; width: 60rem;" >
+        <div style="margin-left: 5%; margin-top: 5%; margin-bottom: 2%; width: 70%;" >
           <h2 >Solicite su próximo turno</h2>
           <p>Las solicitudes están supeditadas a la disponibilidad del profesional</p>
         </div>
         
-        <div style="justify-content: flex-start; flex-direction: row; display: flex; background-color: rgba(128, 128, 128, 0.144); width: 60rem; height: 30rem; border-radius: 5rem; margin-left: 6%; margin-top: 2rem;">
+        <div style="justify-content: flex-start; flex-direction: row; display: flex; background-color: rgba(128, 128, 128, 0.144); width: 100%; height: 30rem; border-radius: 5rem; margin-left: 6%; margin-top: 2rem;">
           <div class="col-xs-12 col-4 col-md-3 form-group">      
               <label for="d1" style="margin-right: 1rem;">Seleccione fecha</label>
               <input min="{{hoy | date: 'yyyy-MM-dd'}}" max="{{quinceDias | date: 'yyyy-MM-dd'}}" [(ngModel)]="fecha" type="date" name="d1" id="d1" (change)="mostrarFecha()">            
@@ -30,7 +30,7 @@
           </div>
       </div>
     </div> 
-    <app-tabla-medicos style="margin-left: 10%; width: 19%; margin-top: 8rem;" [listaMedicos]="listadoEspecialistas" (saleMedico)="tomarMedico($event)"></app-tabla-medicos>
+    <app-tabla-medicos style="margin-left: 5%; width: 20%; margin-top: 8rem;" [listaMedicos]="listadoEspecialistas" (saleMedico)="tomarMedico($event)"></app-tabla-medicos>
   </div>
 
 
