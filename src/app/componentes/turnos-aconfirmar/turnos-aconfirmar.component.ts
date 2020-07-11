@@ -13,7 +13,7 @@ import { BdaService } from 'src/app/servicios/bda.service';
 })
 export class TurnosAConfirmarComponent implements OnInit {
 
-  listaTurnos:turno[];
+  listaTurnosA:turno[];
   user;
   medicoLogeado:empleado;
   descargo:boolean;
@@ -21,7 +21,7 @@ export class TurnosAConfirmarComponent implements OnInit {
   constructor(private service:ServicioService, private turnosBDA:TurnosService, private bda:BdaService) { 
     this.service.tomarUsuario().then(element=>
       {
-        this.listaTurnos=new Array();
+        this.listaTurnosA=new Array();
         this.user=element;
         this.filtrarTurnos();
           
@@ -48,11 +48,13 @@ export class TurnosAConfirmarComponent implements OnInit {
         j.push(element);
       })
 
-      this.listaTurnos=j;
+      this.listaTurnosA=j;
   })};
 
   cargarTurno(turno){
     try{
+      console.log(turno.id)
+      turno.resenia="No hay";
       this.turnosBDA.actualizarTurno(turno, 2);
       alert("El turno se aprobó correctamente.");
       this.filtrarTurnos();

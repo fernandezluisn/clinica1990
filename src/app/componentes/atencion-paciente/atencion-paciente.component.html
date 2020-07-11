@@ -1,11 +1,39 @@
 <app-nav [tipoMedico]="true" [logeado]="true" [tipoPaciente]="false"></app-nav>
 
 <div *ngIf="descargo">
-<div *ngIf="this.medicoLogeado.aprobadoPorAdmin">
-    <textarea  [(ngModel)]='txtResenia' cols="30" rows="10"></textarea>
-</div>
+    <div *ngIf="this.medicoLogeado.aprobadoPorAdmin">
+        <div  style="display: flex; flex-direction: row; justify-content: start;">
+            <div *ngIf="turnoSeleccionado" style="width: 40%;">
+                <form >
+                    
+                    <p class="form-group">Ingrese anotaciones de la consulta.</p>
+                    <textarea class="form-group" [(ngModel)]='txtResenia' style="width: 80%; height: 20rem;" cols="50" rows="30" [ngModelOptions]="{standalone: true}"></textarea>
+                    <button class="btn btn-primary" (click)="subirResenia()">Subir Reseña</button>
+                </form>
+            </div>
+            
+                              
+            
+        
 
-<div *ngIf="!this.medicoLogeado.aprobadoPorAdmin">
-    <h1 style="color:red">Debe ser habilitado por el administrador para poder utilizar esta página.</h1>
-</div>
+            <div style="width: 50%; margin-left: 5%; margin-top: 5%;">
+                <p *ngIf="turnoSeleccionado">Historia clínica del paciente.</p>  
+                <h2 *ngIf="!turnoSeleccionado">Seleccione Turno a informar presionando en aprobar turno.</h2>
+                <app-tabla-turnos [listaTurnos]="turnosDelDia" [confirmados]="false" [noConfirmados]="!turnoSeleccionado" (aprobarTurno)="mostrarFormulario($event)" [resenia]="turnoSeleccionado"></app-tabla-turnos>
+            </div>
+        </div>
+    </div>
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div *ngIf="!this.medicoLogeado.aprobadoPorAdmin">
+        <h1 style="color:red">Debe ser habilitado por el administrador para poder utilizar esta página.</h1>
+    </div>
 </div>

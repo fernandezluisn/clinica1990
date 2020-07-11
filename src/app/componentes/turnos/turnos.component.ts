@@ -52,6 +52,7 @@ export class TurnosComponent implements OnInit {
   options: any;
 
   constructor( private serv:ServicioService, private bda:BdaService, private turnosS:TurnosService) { 
+    this.nTurno=null;
     this.serv.tomarUsuario().then(res=>{
       
       this.usuario=res;   
@@ -127,35 +128,35 @@ export class TurnosComponent implements OnInit {
       break;
       case 1:
         this.esDomingo=false;
-        for(let n=0; n<23; n++)
+        for(let n=0; n<22; n++)
         {
           this.listaTurnosDia.push(n);
         }
       break;
       case 2:
         this.esDomingo=false;
-        for(let n=0; n<23; n++)
+        for(let n=0; n<22; n++)
         {
           this.listaTurnosDia.push(n);
         }
       break;
       case 3:
         this.esDomingo=false;
-        for(let n=0; n<23; n++)
+        for(let n=0; n<22; n++)
         {
           this.listaTurnosDia.push(n);
         }
       break;
       case 4:
         this.esDomingo=false;
-        for(let n=0; n<23; n++)
+        for(let n=0; n<22; n++)
         {
           this.listaTurnosDia.push(n);
         }
       break;
       case 5:
         this.esDomingo=false;
-        for(let n=0; n<23; n++)
+        for(let n=0; n<22; n++)
         {
           this.listaTurnosDia.push(n);
         }
@@ -192,7 +193,7 @@ export class TurnosComponent implements OnInit {
     {
       alert("Debe seleccionar un médico presionando sobre la tabla.");
     }else{
-      let t=new turno(this.medicoDetalle, this.usuarioLista, "a confirmar", this.fecha, this.nTurno);
+      let t=new turno(this.medicoDetalle, this.usuarioLista, "a confirmar", this.fecha, this.nTurno, "No hay");
       let s=this.fecha.toString()+this.medicoDetalle.email;
       this.turnosS.createTurno(t, s).then(res=>{
         alert("Su turno se ha registrado correctamente.");

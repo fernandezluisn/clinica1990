@@ -4,8 +4,10 @@
     <thead>
         <tr>
           <th scope="col">Paciente</th>
+          <th scope="col">Medico</th>
           <th scope="col">Fecha</th>
           <th scope="col">Hora</th>
+          <th scope="col" *ngIf="resenia">Reseñas</th>
           
           
          
@@ -15,10 +17,12 @@
       <tbody>
         <tr *ngFor="let turno of listaTurnos">
           <td scope="row" >{{turno.paciente.nombre}} {{turno.paciente.apellido}}</td>
+          <td scope="row" >{{turno.empleado.nombre}} {{turno.empleado.apellido}}</td>
           <td scope="row" >{{turno.fecha}}</td>
           <td scope="row" >{{turno.numeroTurno | turnos}}</td>
+          <td scope="row" *ngIf="resenia">{{turno.resenia}}</td>
           <td scope="row" *ngIf="confirmados"><button (click)="cancelar(turno)" class="btn btn-warning">Cancelar turno</button> </td>
-          <td scope="row" *ngIf="!confirmados"><button (click)="aprobar(turno)" class="btn btn-primary">Aprobar turno</button> </td>
+          <td scope="row" *ngIf="noConfirmados"><button (click)="aprobar(turno)" class="btn btn-primary">Aprobar turno</button> </td>
          
           
          

@@ -2,7 +2,7 @@
 
 <div *ngIf="descargo">
 <div *ngIf="this.medicoLogeado.aprobadoPorAdmin">
-<app-tabla-turnos [confirmados]="true" [listaTurnos]="listaTurnos" (cancelarTurno)="cancelar($event)"></app-tabla-turnos>
+<app-tabla-turnos [confirmados]="true" [listaTurnos]="listaTurnosC" (cancelarTurno)="cancelar($event)"></app-tabla-turnos>
 </div>
 
 <div *ngIf="!this.medicoLogeado.aprobadoPorAdmin" >

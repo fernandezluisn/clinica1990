@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, SimpleChange } from '@angular/core';
 import { turno } from 'src/app/clases/turno';
 import {TurnosPipe} from '../../pipes/turnos.pipe';
 
@@ -9,15 +9,24 @@ import {TurnosPipe} from '../../pipes/turnos.pipe';
 })
 export class TablaTurnosComponent implements OnInit {
 
-  @Input() confirmados:boolean;
+  @Input() resenia=false;
+  @Input() noConfirmados=false;
+  @Input() confirmados=false;
   @Input() listaTurnos:turno[];
   @Output() aprobarTurno:EventEmitter<any>=new EventEmitter<any>();
   @Output() cancelarTurno:EventEmitter<any>=new EventEmitter<any>();
 
-  constructor() { }
+  constructor() {
+    
+   }
 
   ngOnInit(): void {
   }
+
+  ngOnChanges() {
+    if(this.confirmados==true)
+    console.log("true");
+}
 
   aprobar(turno){
     this.aprobarTurno.emit(turno);

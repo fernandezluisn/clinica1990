@@ -12,7 +12,7 @@ import { turno } from 'src/app/clases/turno';
 export class TurnosConfirmadosComponent implements OnInit {
 
   user;
-  listaTurnos;
+  listaTurnosC;
   medicoLogeado;
   descargo:boolean;
 
@@ -44,7 +44,7 @@ export class TurnosConfirmadosComponent implements OnInit {
         j.push(element);
       })
 
-      this.listaTurnos=j;
+      this.listaTurnosC=j;
   })};
 
   cancelar(turno:turno){

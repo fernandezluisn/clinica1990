@@ -1,10 +1,12 @@
 <app-nav [tipoMedico]="true" [inicio]="false" [logeado]="true" [tipoPaciente]="false"></app-nav>
-
+    
 <div *ngIf="descargo">
-    <div *ngIf="this.medicoLogeado.aprobadoPorAdmin">
-        <h1 >Bienvenido/a {{medicoLogeado.nombre}}</h1>
-        <h2>Aquí puede seleccionar los días y horarios en los que atenderás en la clínica.</h2>
-    <div style="width: 60%;">
+    <h1 >Bienvenido/a {{medicoLogeado.nombre}}</h1>
+        <h2>Aquí puede modificar los días y horarios en los que atenderás en la clínica, así como la duración de los turnos.</h2>
+
+    <div *ngIf="this.medicoLogeado.aprobadoPorAdmin" style="display: flex; justify-content: start; flex-direction: row;">
+        
+    <div style="width: 50%;">
         <form>
             <table class="table" style="width: 80%; text-align: center;">
                 <thead>
@@ -107,10 +109,71 @@
         </form>
     </div>
 
-    <!---Mostrar turnos actuales acá--
-    <div style="width: 40%;">
-
-    </div>-->
+    
+    <div style="width: 40%; margin-top: 5%; text-align: center;" *ngIf="descargoH">
+        <h2>Horario Registrado actualmente.</h2>
+    
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">Día</th>
+                <th scope="col">Horario de entrada</th> 
+                <th scope="col">Horario de salida</th> 
+                <th scope="col">Trabaja</th>                  
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row"></th>
+                    <td>Lunes</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                
+            </tr>
+            <tr>
+                <th scope="row"> </th>
+                    <td>Martes</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+               
+            </tr>
+            <tr>
+                <th scope="row"></th>
+                    <td>Miercoles</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                
+            </tr>
+            <tr>
+                <th scope="row"></th>
+                    <td>Jueves</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                
+            </tr>
+            <tr>
+                <th scope="row"> </th>
+                    <td>Viernes</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+               
+            </tr>
+            <tr>
+                <th scope="row"></th>
+                    <td>Sabado</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                
+            </tr>
+        </tbody>
+        </table>
     </div>
 
     <div *ngIf="!this.medicoLogeado.aprobadoPorAdmin">

@@ -63,7 +63,8 @@ export class TurnosService {
       return listaFecha;
   }
 
-  actualizarTurno(turno:turno, estado:number) {  
+  actualizarTurno(turnoA:turno, estado:number) {  
+    console.log("Numero real"+turnoA.numeroTurno);
     let nuevoEstado:string;
     switch(estado){
       case 1:
@@ -73,34 +74,37 @@ export class TurnosService {
         nuevoEstado="confirmado";
         break;
       case 3:
-        nuevoEstado="realizado";
+        nuevoEstado="atendido";
         break;
       case 4:
         nuevoEstado="cancelado";
         break;
     }
-    turno.estado=nuevoEstado;
-    this.db.doc('turnosEmpleado' + turno.empleado.email +'/'+turno.id).update({...turno});
+    turnoA.estado=nuevoEstado;
+    this.db.doc('turnosEmpleado' + turnoA.empleado.email +'/'+turnoA.id).update({...turno});
     
-    this.turnosFiltradosPorFechaYEmpleado(turno.empleado.email, turno.fecha.toString()).subscribe(lista=>
+    this.turnosFiltradosPorFechaYEmpleado(turnoA.empleado.email, turnoA.fecha.toString()).subscribe(lista=>
       
       lista.forEach(turnoB=>{
-        if(turnoB.numeroTurno==turno.numeroTurno){
+        if(turnoB.numeroTurno==turnoA.numeroTurno){
+          console.log(turnoB.numeroTurno+" a: "+ turnoA.numeroTurno);
           turnoB.estado=nuevoEstado;
-          this.db.doc( turno.fecha.toString()+turno.empleado.email+'/'+turnoB.id).update({...turnoB});
+          turnoB.resenia=turnoA.resenia;
+          this.db.doc( turnoA.fecha.toString()+turnoA.empleado.email+'/'+turnoB.id).update({...turnoB});
         }
       })
       )
 
-    this.turnosFiltradosPorPaciente(turno.paciente.email).subscribe(lista=>{
-      lista.forEach(element=>{
-        console.log(element);
+    this.turnosFiltradosPorPaciente(turnoA.paciente.email).subscribe(listaB=>{
+      listaB.forEach(element=>{
+        
         let l:turno;
-        if(turno.fecha.toString()==element.fecha.toString() && turno.paciente.email==element.paciente.email && turno.numeroTurno==element.numeroTurno)
+        if(turnoA.fecha.toString()==element.fecha.toString() && turnoA.paciente.email==element.paciente.email && turnoA.numeroTurno===element.numeroTurno)
         {
           l=element;
           l.estado=nuevoEstado;
-          this.db.doc("turnosPaciente"+turno.paciente.email+'/'+l.id).update({...l});
+          l.resenia=turnoA.resenia;
+          this.db.doc("turnosPaciente"+turnoA.paciente.email+'/'+l.id).update({...l});
         }
       }
         

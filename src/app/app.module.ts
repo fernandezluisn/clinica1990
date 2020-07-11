@@ -42,6 +42,9 @@ import { TurnosHoraPipe } from './pipes/turnos-hora.pipe';
 import { TurnosCuarentaPipe } from './pipes/turnos-cuarenta.pipe';
 
 
+import { DatePipe } from '@angular/common'
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -76,7 +79,7 @@ import { TurnosCuarentaPipe } from './pipes/turnos-cuarenta.pipe';
     BrowserAnimationsModule,
     NgxSpinnerModule
   ],
-  providers: [ServicioService, AngularFireAuth, StorageService, BdaService],
+  providers: [ServicioService, AngularFireAuth, StorageService, BdaService, DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

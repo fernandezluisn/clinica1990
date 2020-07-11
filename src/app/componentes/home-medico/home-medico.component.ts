@@ -5,6 +5,7 @@ import { empleado } from 'src/app/clases/empleado';
 import {TurnosHoraPipe} from '../../pipes/turnos-hora.pipe';
 import { MedicosService } from 'src/app/servicios/medicos.service';
 import { jornadaSemanal } from 'src/app/clases/jornadaSemanal';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-home-medico',
@@ -17,6 +18,8 @@ export class HomeMedicoComponent implements OnInit {
   user;
 
   descargo:boolean;
+  descargoH:boolean;
+
   nTurnoE1:number=0;
   nTurnoS1:number=11;
   nTurnoE2:number=0;
@@ -43,7 +46,7 @@ export class HomeMedicoComponent implements OnInit {
   sePuedeSubir5:boolean;
   sePuedeSubir6:boolean;
 
-
+  jornada:jornadaSemanal;
   
   tiempoTurno;
 
@@ -53,17 +56,21 @@ export class HomeMedicoComponent implements OnInit {
   listaTurnosSalidaSabado;
 
   constructor(private service:ServicioService, private bda:BdaService, private medicoService:MedicosService) { 
+    this.medicoLogeado=null;
     this.service.tomarUsuario().then(element=>{
       this.user=element;
       
       this.bda.devolverListadoEmpleados().subscribe(lista=>{
         lista.forEach(elementL=>{
           if(elementL.email.toLowerCase()==this.user.email.toLowerCase())
-          console.log(elementL);
+          console.log("El nombre es ",elementL.nombre);
           this.medicoLogeado=elementL;
-          this.descargo=true;
+          this.descargo=true;          
+          
         })
       });
+
+      
     });
 
     this.tiempoTurno=30;
@@ -98,6 +105,13 @@ export class HomeMedicoComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+ 
+   
+     
+      
+    
+  
 
   checkbox1(){
     if(this.ch1==false)
