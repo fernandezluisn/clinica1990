@@ -39,6 +39,12 @@ export class MedicosService {
   devolverListadoJornadas(){
     return this.listaJornadas;
   }
+
+  updateJornada(jornada:jornadaSemanal) {    
+          
+          this.db.doc('jornadas/' + jornada.id).update({...jornada});     
+    
+  }
    
 
  

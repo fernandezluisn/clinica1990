@@ -5,7 +5,7 @@ import { TurnosService } from 'src/app/servicios/turnos.service';
 import { turno } from 'src/app/clases/turno';
 import { DatePipe } from '@angular/common'
 import { empleado } from 'src/app/clases/empleado';
-import { element } from 'protractor';
+
 
 @Component({
   selector: 'app-atencion-paciente',
@@ -30,10 +30,10 @@ export class AtencionPacienteComponent implements OnInit {
       this.user=element;
       let dia=new Date();      
       let l=this.datepipe.transform(dia, 'yyyy-MM-dd');
-      console.log(l);
-      this.turnosService.turnosFiltradosPorFechaYEmpleado(this.user.email, l).subscribe(lista=>{
-        lista.forEach(elemet=>{
-          if(elemet.estado=="atendido" || elemet.estado=="confirmado")
+     
+      this.turnosService.devolverListadoTurnos().subscribe(lista=>{
+        lista.filter(elemet=>{
+          if((elemet.estado=="atendido" || elemet.estado=="confirmado") && elemet.fecha.toString()==l && elemet.empleado.email.toLowerCase()==this.user.email.toLowerCase())
           this.turnosDelDia.push(elemet); 
         })
                
@@ -66,25 +66,8 @@ export class AtencionPacienteComponent implements OnInit {
     
     
     try{
-      this.turnosService.turnosFiltradosPorMedico(this.medicoLogeado.email).subscribe(lista=>
-        {     
-          
-          lista.forEach(element=>
-            {
-              if(element.empleado.email.toLowerCase()==this.medicoLogeado.email.toLowerCase() && element.numeroTurno==this.turnoACompletar.numeroTurno){
-                element.resenia=this.txtResenia;
-                this.turnoACompletar=element;
-                this.turnoACompletar.resenia=this.txtResenia;
-                this.turnosService.actualizarTurno(this.turnoACompletar, 3);
-              }
-            })
-        }
-        );      
-      let dia=new Date();      
-      let l=this.datepipe.transform(dia, 'yyyy-MM-dd');
-      this.turnosService.turnosFiltradosPorFechaYEmpleado(this.user.email, l).subscribe(lista=>{
-        this.turnosDelDia=lista;        
-      });
+      this.turnoACompletar.resenia=this.txtResenia;
+      this.turnosService.actualizarTurno(this.turnoACompletar, 3);
       alert("El turno se informó correctamente");
     }catch(err)
     {

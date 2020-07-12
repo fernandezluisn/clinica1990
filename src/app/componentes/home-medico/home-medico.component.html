@@ -109,8 +109,10 @@
         </form>
     </div>
 
+    <div style="width: 40%; margin-top: 5%; text-align: center;" *ngIf="!hayJornada">
+    <h1>Usted no tiene horario registrado actualmente.</h1></div>
     
-    <div style="width: 40%; margin-top: 5%; text-align: center;" *ngIf="descargoH">
+    <div style="width: 40%; margin-top: 5%; text-align: center;" *ngIf="hayJornada">
         <h2>Horario Registrado actualmente.</h2>
     
         <table class="table">
@@ -127,16 +129,16 @@
             <tr>
                 <th scope="row"></th>
                     <td>Lunes</td>
-                    <td></td>
-                    <td></td>
+                    <td >{{jornadaActual.lunesE | turnosHora}}</td>
+                    <td>{{jornadaActual.lunesS | turnosHora}}</td>
                     <td></td>
                 
             </tr>
             <tr>
                 <th scope="row"> </th>
                     <td>Martes</td>
-                    <td></td>
-                    <td></td>
+                    <td>{{jornadaActual.martesE}}</td>
+                    <td>{{jornadaActual.martesS}}</td>
                     <td></td>
                
             </tr>

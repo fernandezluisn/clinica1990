@@ -42,22 +42,34 @@ export class TurnosAConfirmarComponent implements OnInit {
   filtrarTurnos(){
     let j=new Array();
     
-    this.turnosBDA.turnosFiltradosPorMedico(this.user.email).subscribe(lista=>{
+    this.turnosBDA.devolverListadoTurnos().subscribe(lista=>{
       lista.filter(element=>{
-        if(element.estado=="a confirmar")
-        j.push(element);
+        if(element.estado=="a confirmar" && element.empleado.email==this.user.email)
+        {
+          j.push(element);
+          console.log(element);
+        }
+        
       })
 
       this.listaTurnosA=j;
+      this.ordenarTabla();
   })};
+
+  ordenarTabla(){
+    
+    this.listaTurnosA.sort((a,b) => Number(Date.parse(a.fecha.toString())) - Number(Date.parse(b.fecha.toString())));
+   
+  }
 
   cargarTurno(turno){
     try{
       console.log(turno.id)
       turno.resenia="No hay";
       this.turnosBDA.actualizarTurno(turno, 2);
-      alert("El turno se aprobó correctamente.");
       this.filtrarTurnos();
+      alert("El turno se aprobó correctamente.");
+      
     }catch(err){
       alert(err.message)
     }

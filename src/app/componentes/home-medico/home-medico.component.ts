@@ -15,10 +15,10 @@ import { element } from 'protractor';
 export class HomeMedicoComponent implements OnInit {
 
   medicoLogeado:empleado;
+  
   user;
 
-  descargo:boolean;
-  descargoH:boolean;
+  descargo:boolean;  
 
   nTurnoE1:number=0;
   nTurnoS1:number=11;
@@ -55,18 +55,32 @@ export class HomeMedicoComponent implements OnInit {
   listaTurnosEntradaSabado;
   listaTurnosSalidaSabado;
 
+  jornadaActual:jornadaSemanal;
+  hayJornada=false;
+
   constructor(private service:ServicioService, private bda:BdaService, private medicoService:MedicosService) { 
-    this.medicoLogeado=null;
+    
     this.service.tomarUsuario().then(element=>{
       this.user=element;
       
       this.bda.devolverListadoEmpleados().subscribe(lista=>{
         lista.forEach(elementL=>{
           if(elementL.email.toLowerCase()==this.user.email.toLowerCase())
+          {
           console.log("El nombre es ",elementL.nombre);
           this.medicoLogeado=elementL;
-          this.descargo=true;          
+          this.descargo=true;       
           
+          this.medicoService.devolverListadoJornadas().subscribe(listaJo=>{
+            listaJo.filter(elementJo=>{
+              if(elementJo.medico.email.toLowerCase()==this.user.email.toLowerCase()){
+                this.jornadaActual=elementJo;
+                this.hayJornada=true;
+              }
+            })
+          }
+            );
+          }
         })
       });
 
@@ -212,49 +226,103 @@ export class HomeMedicoComponent implements OnInit {
 
   subirHorarios(){
     console.log("entró al horario");
-    let j=new jornadaSemanal(this.ch1, this.ch2, this.ch3, this.ch4, this.ch5, this.ch6, this.medicoLogeado);
+ 
+    
 
-    if(this.ch1)
+    if(this.hayJornada==false)
     {
-      j.lunesE=this.nTurnoE1;
-      j.lunesS=this.nTurnoS1;
+      let j=new jornadaSemanal(this.ch1, this.ch2, this.ch3, this.ch4, this.ch5, this.ch6, this.medicoLogeado);
+      
+      if(this.ch1)
+      {
+        j.lunesE=this.nTurnoE1;
+        j.lunesS=this.nTurnoS1;
+      }
+
+      if(this.ch2)
+      {
+        j.martesE=this.nTurnoE2;
+        j.martesS=this.nTurnoS2;
+      }
+  
+      if(this.ch3)
+      {
+        j.miercolesE=this.nTurnoE3;
+        j.miercolesS=this.nTurnoS3;
+      }
+  
+      if(this.ch4)
+      {
+        j.juevesE=this.nTurnoE4;
+        j.juevesS=this.nTurnoS4;
+      }
+  
+      if(this.ch5)
+      {
+        j.viernesE=this.nTurnoE5;
+        j.viernesS=this.nTurnoS5;
+      }
+  
+      if(this.ch6)
+      {
+        j.SabadoE=this.nTurnoE6;
+        j.sabadoS=this.nTurnoS6;
+      }
+
+      j.tiempoTurnos=this.tiempoTurno;    
+
+    
+      this.medicoService.createHorario(j).then(res=>{
+        alert("Sus horarios se han cargado correctamente");
+      })
+    }else{
+      
+      if(this.ch1)
+    {
+      this.jornadaActual.lunes=true;
+      this.jornadaActual.lunesE=this.nTurnoE1;
+      this.jornadaActual.lunesS=this.nTurnoS1;
     }
 
     if(this.ch2)
     {
-      j.lunesE=this.nTurnoE2;
-      j.lunesS=this.nTurnoS2;
+      this.jornadaActual.martes=true;
+      this.jornadaActual.martesE=this.nTurnoE2;
+      this.jornadaActual.martesS=this.nTurnoS2;
     }
 
     if(this.ch3)
     {
-      j.lunesE=this.nTurnoE3;
-      j.lunesS=this.nTurnoS3;
+      this.jornadaActual.miercoles=true;
+      this.jornadaActual.miercolesE=this.nTurnoE3;
+      this.jornadaActual.miercolesS=this.nTurnoS3;
     }
 
     if(this.ch4)
     {
-      j.lunesE=this.nTurnoE4;
-      j.lunesS=this.nTurnoS4;
+      this.jornadaActual.jueves=true;
+      this.jornadaActual.juevesE=this.nTurnoE4;
+      this.jornadaActual.juevesS=this.nTurnoS4;
     }
 
     if(this.ch5)
     {
-      j.lunesE=this.nTurnoE5;
-      j.lunesS=this.nTurnoS5;
+      this.jornadaActual.viernes=true;
+      this.jornadaActual.viernesE=this.nTurnoE5;
+      this.jornadaActual.viernesS=this.nTurnoS5;
     }
 
     if(this.ch6)
     {
-      j.lunesE=this.nTurnoE6;
-      j.lunesS=this.nTurnoS6;
+      this.jornadaActual.sabado=true;
+      this.jornadaActual.SabadoE=this.nTurnoE6;
+      this.jornadaActual.sabadoS=this.nTurnoS6;
     }
+        this.medicoService.updateJornada(this.jornadaActual);
+    }
+  
 
-    j.tiempoTurnos=this.tiempoTurno;
-
-    this.medicoService.createHorario(j).then(res=>{
-      alert("Sus horarios se han cargado correctamente");
-    })
+    
   }
   
 

@@ -9,7 +9,7 @@
       <a class="navbar-brand" style="margin-top: 1%;; margin-bottom: 1%" routerLink='/altaUsuario' *ngIf="tipoAdmin">Alta de usuarios</a>
       <a class="navbar-brand" style="margin-top: 1%;; margin-bottom: 1%" routerLink='/homeMedico' *ngIf="tipoMedico">Principal</a>
       <a class="navbar-brand"  style="margin-top: 1%;; margin-bottom: 1%" routerLink='/pendientes' *ngIf="tipoMedico">Solicitudes de turnos</a>
-      <a class="navbar-brand" style="margin-top: 1%; margin-bottom: 1%;" routerLink='/confirmados' *ngIf="tipoMedico">Turnos confirmados</a>
+      <a class="navbar-brand" style="margin-top: 1%; margin-bottom: 1%;" routerLink='/confirmados' *ngIf="tipoMedico">Agenda de turnos</a>
       <a class="navbar-brand" style="margin-top: 1%; margin-bottom: 1%;" routerLink='/atencion' *ngIf="tipoMedico">Subir informe medico</a>
       <button style="margin-left: 45%; margin-top: 1%; margin-bottom: 1%; position:static;" class="btn btn-secondary" *ngIf="logeado" (click)="cerrar()">Cerrar sesión</button>      
      

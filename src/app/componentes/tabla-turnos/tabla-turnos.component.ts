@@ -1,6 +1,9 @@
-import { Component, OnInit, Input, Output, EventEmitter, SimpleChange } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, SimpleChange, ɵConsole } from '@angular/core';
 import { turno } from 'src/app/clases/turno';
 import {TurnosPipe} from '../../pipes/turnos.pipe';
+import { element } from 'protractor';
+
+
 
 @Component({
   selector: 'app-tabla-turnos',
@@ -25,7 +28,7 @@ export class TablaTurnosComponent implements OnInit {
 
   ngOnChanges() {
     if(this.confirmados==true)
-    console.log("true");
+    console.log();
 }
 
   aprobar(turno){
@@ -35,5 +38,7 @@ export class TablaTurnosComponent implements OnInit {
   cancelar(turno){
     this.cancelarTurno.emit(turno);
   }
+
+ 
 
 }

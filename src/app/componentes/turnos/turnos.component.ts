@@ -7,6 +7,7 @@ import { turno } from 'src/app/clases/turno';
 import { empleado } from 'src/app/clases/empleado';
 import { isNull } from 'util';
 import { element } from 'protractor';
+import { DatePipe } from '@angular/common';
 
 
 
@@ -51,7 +52,7 @@ export class TurnosComponent implements OnInit {
 
   options: any;
 
-  constructor( private serv:ServicioService, private bda:BdaService, private turnosS:TurnosService) { 
+  constructor( private serv:ServicioService, private bda:BdaService, private turnosS:TurnosService, public datepipe: DatePipe) { 
     this.nTurno=null;
     this.serv.tomarUsuario().then(res=>{
       
@@ -90,14 +91,16 @@ export class TurnosComponent implements OnInit {
   }
 
   filtrarListaTurnosDia(){
-    this.turnosS.turnosFiltradosPorFechaYEmpleado(this.medicoDetalle.email, this.fecha.toString()).subscribe(
+   
+    console.log(this.fecha.toString());
+    this.turnosS.devolverListadoTurnos().subscribe(
       lista=>{
         
         lista.forEach(elementT=>{
           
           this.listaTurnosDia.forEach(elementF => {
             
-            if(elementT.numeroTurno==elementF)
+            if(elementT.numeroTurno==elementF && elementT.fecha.toString()==this.fecha.toString())
             {
              
               let indice=this.listaTurnosDia.indexOf(elementF);
@@ -121,9 +124,9 @@ export class TurnosComponent implements OnInit {
     this.listaTurnosDia=new Array();
     
     let d=new Date(this.fecha);
-   
+    console.log("día "+d.getDay());
     switch(d.getDay()){
-      case 0:
+      case 6:
         this.esDomingo=true;
       break;
       case 1:
@@ -154,14 +157,14 @@ export class TurnosComponent implements OnInit {
           this.listaTurnosDia.push(n);
         }
       break;
-      case 5:
+      case 0:
         this.esDomingo=false;
         for(let n=0; n<22; n++)
         {
           this.listaTurnosDia.push(n);
         }
       break;
-      case 6:
+      case 5:
         this.esDomingo=false;
         for(let n=0; n<13; n++)
         {
@@ -193,12 +196,9 @@ export class TurnosComponent implements OnInit {
     {
       alert("Debe seleccionar un médico presionando sobre la tabla.");
     }else{
-      let t=new turno(this.medicoDetalle, this.usuarioLista, "a confirmar", this.fecha, this.nTurno, "No hay");
-      let s=this.fecha.toString()+this.medicoDetalle.email;
-      this.turnosS.createTurno(t, s).then(res=>{
-        alert("Su turno se ha registrado correctamente.");
-        this.turnosS.createTurno(t, "turnosEmpleado"+this.medicoDetalle.email);
-        this.turnosS.createTurno(t, "turnosPaciente"+this.usuario.email);
+      let t=new turno(this.medicoDetalle, this.usuarioLista, "a confirmar", this.fecha, this.nTurno, "No hay");      
+      this.turnosS.createTurno(t).then(res=>{
+        alert("Su turno se ha registrado correctamente.");        
         
       });
 

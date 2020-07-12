@@ -2,6 +2,8 @@ import { empleado } from './empleado';
 
 export class jornadaSemanal{
 
+    id:string
+
     medico:empleado;
     tiempoTurnos:number;
 

@@ -3,6 +3,7 @@ import { ServicioService } from 'src/app/servicios/servicio.service';
 import { BdaService } from 'src/app/servicios/bda.service';
 import { TurnosService } from 'src/app/servicios/turnos.service';
 import { turno } from 'src/app/clases/turno';
+import { DatePipe } from '@angular/common'
 
 @Component({
   selector: 'app-turnos-confirmados',
@@ -12,11 +13,11 @@ import { turno } from 'src/app/clases/turno';
 export class TurnosConfirmadosComponent implements OnInit {
 
   user;
-  listaTurnosC;
+  listaTurnosC:turno[];
   medicoLogeado;
   descargo:boolean;
 
-  constructor(private service:ServicioService, private bda:BdaService, private turnosBDA:TurnosService) {
+  constructor(private service:ServicioService, private bda:BdaService, private turnosBDA:TurnosService, public datepipe:DatePipe) {
     this.service.tomarUsuario().then(element=>
       {
         this.user=element;
@@ -38,18 +39,26 @@ export class TurnosConfirmadosComponent implements OnInit {
   filtrarTurnos(){
     let j=new Array();
     
-    this.turnosBDA.turnosFiltradosPorMedico(this.user.email).subscribe(lista=>{
+    this.turnosBDA.devolverListadoTurnos().subscribe(lista=>{
       lista.filter(element=>{
-        if(element.estado=="confirmado")
+        if(element.estado=="confirmado" && element.empleado.email==this.user.email)
         j.push(element);
       })
 
       this.listaTurnosC=j;
+      this.ordenarTabla();
   })};
 
   cancelar(turno:turno){
     this.turnosBDA.actualizarTurno(turno, 4);
-    this.filtrarTurnos
+    this.filtrarTurnos();
+    alert("El turno se ha cancelado y se le informará al paciente.");
+  }
+
+  ordenarTabla(){
+    
+    this.listaTurnosC.sort((a,b) => Number(Date.parse(a.fecha.toString())) - Number(Date.parse(b.fecha.toString())));
+    console.log(this.listaTurnosC);
   }
 
 }
