@@ -16,6 +16,7 @@ export class TurnosConfirmadosComponent implements OnInit {
   listaTurnosC:turno[];
   medicoLogeado;
   descargo:boolean;
+  noHayTurnos=false;
 
   constructor(private service:ServicioService, private bda:BdaService, private turnosBDA:TurnosService, public datepipe:DatePipe) {
     this.service.tomarUsuario().then(element=>
@@ -47,6 +48,9 @@ export class TurnosConfirmadosComponent implements OnInit {
 
       this.listaTurnosC=j;
       this.ordenarTabla();
+
+     
+
   })};
 
   cancelar(turno:turno){
@@ -59,6 +63,11 @@ export class TurnosConfirmadosComponent implements OnInit {
     
     this.listaTurnosC.sort((a,b) => Number(Date.parse(a.fecha.toString())) - Number(Date.parse(b.fecha.toString())));
     console.log(this.listaTurnosC);
+
+    if(this.listaTurnosC.length==0)
+    this.noHayTurnos=true;
+    else
+    this.noHayTurnos=false;
   }
 
 }

@@ -2,27 +2,40 @@
 
 
     <h1>Bienvenido/a {{usuarioLista.nombre}}</h1> <h2 *ngIf="hayTurno" style="color: red;">Solicita turno con {{medicoDetalle.nombre}} {{medicoDetalle.apellido}} el día {{fecha | date: 'dd-MM-yyyy'}} a las {{ nTurno | turnos }}. Cliquee el botón azul para solicitar.</h2>
-    <h2 *ngIf="!hayTurno">Ingrese datos en el siguiente orden: el médico, la fecha y el horario que requiere.</h2>
+    <h2 *ngIf="!hayTurno">Ingrese datos en el siguiente orden: el médico, la especialidad, la fecha y el horario que requiere.</h2>
 <div style="display: flex; justify-content:flex-start; flex-direction: row;">
     <div *ngIf="v0" >
         <div style="margin-left: 5%; margin-top: 5%; margin-bottom: 2%; width: 70%;" >
           <h2 >Solicite su próximo turno</h2>
           <p>Las solicitudes están supeditadas a la disponibilidad del profesional</p>
         </div>
+
+
+
         
-        <div style="justify-content: flex-start; flex-direction: row; display: flex; background-color: rgba(128, 128, 128, 0.144); width: 100%; height: 30rem; border-radius: 5rem; margin-left: 6%; margin-top: 2rem;">
-          <div class="col-xs-12 col-4 col-md-3 form-group">      
-              <label for="d1" style="margin-right: 1rem;">Seleccione fecha</label>
+        <div style="justify-content: flex-start; flex-direction: row; display: flex; background-color: rgba(128, 128, 128, 0.144); width: 50rem; height: 30rem; border-radius: 5rem; margin-left: 6%; margin-top: 2rem;">
+          <div class="form-group">
+            <label for="">Seleccione especialidad</label>
+            <select  [(ngModel)]="especialidad" class="form-control" style="width: 12rem;" (change)="mostrarEspecialidad()" name="SelectEsp">
+              <option (change)="mostrarHora()" [value]="item" *ngFor="let item of medicoDetalle.especialidades">{{item}}</option>
+            </select> 
+          </div>
+         
+         
+          <div class="form-group">      
+              <label for="d1" style="margin-right: 1rem;">Seleccione fecha</label><br>
               <input min="{{hoy | date: 'yyyy-MM-dd'}}" max="{{quinceDias | date: 'yyyy-MM-dd'}}" [(ngModel)]="fecha" type="date" name="d1" id="d1" (change)="mostrarFecha()">            
           </div>
 
-          <div class="col-xs-12 col-4 col-md-3 form-group" *ngIf="v1">  
+          <div class="form-group" *ngIf="v1">  
               <label for="d1" style="margin-right: 1rem;" *ngIf="!esDomingo">Horario disponible</label><br>
               <p *ngIf="esDomingo" style="color: red;">La clínica permanece cerrada los domingos, sepa disculpar.</p>
               <select *ngIf="!esDomingo" [(ngModel)]="nTurno" class="form-control" style="width: 12rem;" (change)="mostrarHora()" name="SelectEsp">
                 <option (change)="mostrarHora()" [value]="item" *ngFor="let item of listaTurnosDia">{{item | turnos}}</option>
               </select>      
-          </div> <br><br><br><br>
+          </div>
+          
+          <br><br><br><br>
 
         
             <div style="width: 10rem; margin-top: 23.5rem; margin-left: 10%; position: absolute;">
@@ -30,7 +43,7 @@
           </div>
       </div>
     </div> 
-    <app-tabla-medicos style="margin-left: 5%; width: 20%; margin-top: 8rem;" [listaMedicos]="listadoEspecialistas" (saleMedico)="tomarMedico($event)"></app-tabla-medicos>
+    <app-tabla-medicos style="margin-left: 10%; width: 20%; margin-top: 8rem;" [listaMedicos]="listadoEspecialistas" (saleMedico)="tomarMedico($event)"></app-tabla-medicos>
   </div>
 
 

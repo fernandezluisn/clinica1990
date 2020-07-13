@@ -42,7 +42,11 @@ import { TurnosHoraPipe } from './pipes/turnos-hora.pipe';
 import { TurnosCuarentaPipe } from './pipes/turnos-cuarenta.pipe';
 
 
-import { DatePipe } from '@angular/common'
+import { DatePipe } from '@angular/common';
+import { TurnosSacadosComponent } from './componentes/turnos-sacados/turnos-sacados.component';
+import { HistoriaClinicaComponent } from './componentes/historia-clinica/historia-clinica.component';
+import { EncuestaComponent } from './componentes/encuesta/encuesta.component';
+
 
 
 @NgModule({
@@ -66,7 +70,10 @@ import { DatePipe } from '@angular/common'
     HabilitarUsuariosComponent,
     AtencionPacienteComponent,
     TurnosHoraPipe,
-    TurnosCuarentaPipe
+    TurnosCuarentaPipe,
+    TurnosSacadosComponent,
+    HistoriaClinicaComponent,
+    EncuestaComponent
   ],
   imports: [
     BrowserModule,

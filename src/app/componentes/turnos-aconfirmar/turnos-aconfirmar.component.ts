@@ -17,6 +17,7 @@ export class TurnosAConfirmarComponent implements OnInit {
   user;
   medicoLogeado:empleado;
   descargo:boolean;
+  noHayTurnos=false;
 
   constructor(private service:ServicioService, private turnosBDA:TurnosService, private bda:BdaService) { 
     this.service.tomarUsuario().then(element=>
@@ -51,6 +52,7 @@ export class TurnosAConfirmarComponent implements OnInit {
         }
         
       })
+      
 
       this.listaTurnosA=j;
       this.ordenarTabla();
@@ -58,8 +60,14 @@ export class TurnosAConfirmarComponent implements OnInit {
 
   ordenarTabla(){
     
+
     this.listaTurnosA.sort((a,b) => Number(Date.parse(a.fecha.toString())) - Number(Date.parse(b.fecha.toString())));
    
+    if(this.listaTurnosA.length==0)
+      this.noHayTurnos=true;
+      else
+      this.noHayTurnos=false;
+      
   }
 
   cargarTurno(turno){

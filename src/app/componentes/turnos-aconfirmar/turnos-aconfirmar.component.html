@@ -1,11 +1,17 @@
 <app-nav [tipoMedico]="true" [logeado]="true" [tipoPaciente]="false"></app-nav>
 
 <div *ngIf="descargo">
-<div *ngIf="!this.medicoLogeado.aprobadoPorAdmin">
-    <h1 style="color:red">Debe ser habilitado por el administrador para poder utilizar esta página.</h1>
-</div>
+    <div *ngIf="!this.medicoLogeado.aprobadoPorAdmin">
+        <h1 style="color:red">Debe ser habilitado por el administrador para poder utilizar esta página.</h1>
+    </div>
 
-<div *ngIf="this.medicoLogeado.aprobadoPorAdmin">
-<app-tabla-turnos [noConfirmados]="true"  [resenia]="false" [listaTurnos]="listaTurnosA" (aprobarTurno)="cargarTurno($event)"></app-tabla-turnos>
-</div>
+    <div *ngIf="this.medicoLogeado.aprobadoPorAdmin">
+        <div *ngIf="noHayTurnos">
+            <h1>No tiene turnos solicitados</h1>
+        </div>
+
+        <div *ngIf="!noHayTurnos">
+            <app-tabla-turnos [noConfirmados]="true"  [resenia]="false" [listaTurnos]="listaTurnosA" (aprobarTurno)="cargarTurno($event)"></app-tabla-turnos>
+        </div>
+    </div>
 </div>

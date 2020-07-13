@@ -4,6 +4,8 @@
       <a class="navbar-brand" style="margin-top: 1%;; margin-bottom: 1%" routerLink='/registro' *ngIf="!logeado">Registrarse</a>
       <a class="navbar-brand" style="margin-top: 1%;; margin-bottom: 1%" routerLink='/login' *ngIf="!logeado">Ingresar</a>
       <a class="navbar-brand" style="margin-top: 1%;; margin-bottom: 1%" routerLink='/turnos' *ngIf="tipoPaciente">Solicitar turno</a>
+      <a class="navbar-brand" style="margin-top: 1%;; margin-bottom: 1%" routerLink='/turnosAprobados' *ngIf="tipoPaciente">Agenda de turnos</a>
+      <a class="navbar-brand" style="margin-top: 1%;; margin-bottom: 1%" routerLink='/historiaClinica' *ngIf="tipoPaciente">Historia clínica</a>
       <a class="navbar-brand" style="margin-top: 1%;; margin-bottom: 1%" routerLink='/homeAdmin' *ngIf="tipoAdmin">Principal</a>
       <a class="navbar-brand" style="margin-top: 1%;; margin-bottom: 1%" routerLink='/altaAdmin' *ngIf="tipoAdmin">Agregar administrador</a>
       <a class="navbar-brand" style="margin-top: 1%;; margin-bottom: 1%" routerLink='/altaUsuario' *ngIf="tipoAdmin">Alta de usuarios</a>
@@ -11,7 +13,7 @@
       <a class="navbar-brand"  style="margin-top: 1%;; margin-bottom: 1%" routerLink='/pendientes' *ngIf="tipoMedico">Solicitudes de turnos</a>
       <a class="navbar-brand" style="margin-top: 1%; margin-bottom: 1%;" routerLink='/confirmados' *ngIf="tipoMedico">Agenda de turnos</a>
       <a class="navbar-brand" style="margin-top: 1%; margin-bottom: 1%;" routerLink='/atencion' *ngIf="tipoMedico">Subir informe medico</a>
-      <button style="margin-left: 45%; margin-top: 1%; margin-bottom: 1%; position:static;" class="btn btn-secondary" *ngIf="logeado" (click)="cerrar()">Cerrar sesión</button>      
+      <button style="margin-left: 25%; margin-top: 1%; margin-bottom: 1%; position:static;" class="btn btn-secondary" *ngIf="logeado" (click)="cerrar()">Cerrar sesión</button>      
      
       
       <!--img src="{{}}" alt="1rem"-->

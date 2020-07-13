@@ -1,0 +1,20 @@
+<app-nav [tipoPaciente]="true" [logeado]="true"></app-nav>
+
+<div *ngIf="mostrar">
+    <div *ngIf="hayTurnos">
+        <app-tabla-turnos [confirmados]="true" [listaTurnos]="turnosDelPaciente" (cancelarTurno)="cancelar($event)"></app-tabla-turnos>
+    </div>
+
+    <div *ngIf="!hayTurnos">
+        <h1>Usted no tiene turnos confirmados.</h1>
+    </div>
+</div>
+
+<ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-scale-multiple"
+>
+  <p style="font-size: 3rem; color: white">Loading...</p>
+</ngx-spinner>

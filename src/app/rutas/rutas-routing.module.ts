@@ -12,6 +12,9 @@ import {HomeMedicoComponent} from '../componentes/home-medico/home-medico.compon
 import {AgregarAdminComponent} from '../componentes/agregar-admin/agregar-admin.component';
 import {HabilitarUsuariosComponent} from '../componentes/habilitar-usuarios/habilitar-usuarios.component';
 import {AtencionPacienteComponent} from '../componentes/atencion-paciente/atencion-paciente.component';
+import {TurnosSacadosComponent} from '../componentes/turnos-sacados/turnos-sacados.component';
+import {HistoriaClinicaComponent} from '../componentes/historia-clinica/historia-clinica.component';
+import {EncuestaComponent} from '../componentes/encuesta/encuesta.component';
 
 const redirectUnauthorizedToLogin=()=>redirectUnauthorizedTo(["login"]);
 
@@ -21,12 +24,15 @@ const routes: Routes = [
   {path:"registro", component:RegistroComponent},
   {path:"homeAdmin", component:HorarioMedicosComponent},
   {path:"turnos", component:TurnosComponent, data: {animation: 'Turnos'}, ...canActivate(redirectUnauthorizedToLogin)},
+  {path:"turnosAprobados", component:TurnosSacadosComponent, ...canActivate(redirectUnauthorizedToLogin)},
   {path:"pendientes", component:TurnosAConfirmarComponent},
   {path:"homeMedico", component:HomeMedicoComponent},
   {path:"atencion", component:AtencionPacienteComponent},
   {path:"altaAdmin", component:AgregarAdminComponent},
   {path:"altaUsuario", component:HabilitarUsuariosComponent},
-  {path:"confirmados", component:TurnosConfirmadosComponent}
+  {path:"encuesta", component:EncuestaComponent},
+  {path:"historiaClinica", component:HistoriaClinicaComponent, ...canActivate(redirectUnauthorizedToLogin)},
+  {path:"confirmados", component:TurnosConfirmadosComponent, ...canActivate(redirectUnauthorizedToLogin)}
 ];
 
 @NgModule({

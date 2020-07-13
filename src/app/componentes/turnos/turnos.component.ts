@@ -39,6 +39,8 @@ export class TurnosComponent implements OnInit {
   esDomingo:boolean;
   nTurno:number;
   
+  especialidad:string;
+
   listadoPacientes;
 
   listadoEspecialistas;
@@ -100,9 +102,8 @@ export class TurnosComponent implements OnInit {
           
           this.listaTurnosDia.forEach(elementF => {
             
-            if(elementT.numeroTurno==elementF && elementT.fecha.toString()==this.fecha.toString())
-            {
-             
+            if(elementT.numeroTurno==elementF && elementT.fecha.toString()==this.fecha.toString() && elementT.estado!="cancelado")
+            {             
               let indice=this.listaTurnosDia.indexOf(elementF);
               this.listaTurnosDia.splice(indice, 1);
             }
@@ -191,12 +192,17 @@ export class TurnosComponent implements OnInit {
     this.v0=true;
   }
 
+  mostrarEspecialidad(){
+    this.especialidad;
+    console.log(this.especialidad);
+  }
+
   subirTurno(){
     if(isNull(this.medicoDetalle))
     {
       alert("Debe seleccionar un médico presionando sobre la tabla.");
     }else{
-      let t=new turno(this.medicoDetalle, this.usuarioLista, "a confirmar", this.fecha, this.nTurno, "No hay");      
+      let t=new turno(this.medicoDetalle, this.usuarioLista, "a confirmar", this.fecha, this.nTurno, "No hay", this.especialidad);      
       this.turnosS.createTurno(t).then(res=>{
         alert("Su turno se ha registrado correctamente.");        
         
