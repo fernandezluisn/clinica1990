@@ -4,6 +4,7 @@ import { turno } from '../clases/turno';
 import { map } from 'rxjs/operators';
 import {TurnosPipe} from '../pipes/turnos.pipe';
 import { Observable } from 'rxjs';
+import { encuesta } from '../clases/encuesta';
 
 
 @Injectable({
@@ -32,7 +33,9 @@ export class TurnosService {
     return this.db.collection('turnos').add({...turno});
   }   
 
-  
+  createEncuesta(encuesta:encuesta): Promise<DocumentReference> {
+    return this.db.collection('encuestas').add({...encuesta});
+  }   
 
 
   actualizarTurno(turnoA:turno, estado:number) {  

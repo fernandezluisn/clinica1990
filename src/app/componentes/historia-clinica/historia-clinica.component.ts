@@ -13,6 +13,8 @@ export class HistoriaClinicaComponent implements OnInit {
 
   turnosDelPaciente:turno[];
   user;
+  turnoParaDetalle:turno;
+  hayTurno=false;
 
   constructor(private servicio:ServicioService, private turnosService:TurnosService) { 
   
@@ -45,5 +47,9 @@ export class HistoriaClinicaComponent implements OnInit {
       this.turnosDelPaciente.sort((a,b) => Number(Date.parse(a.fecha.toString())) - Number(Date.parse(b.fecha.toString())));
   }
   
+  tomarTurno(turno){
+    this.turnoParaDetalle=turno;
+    this.hayTurno=true;
+  }
 
 }

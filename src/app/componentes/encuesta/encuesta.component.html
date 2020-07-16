@@ -1,8 +1,27 @@
-¿Cómo calificaría la atención del profesional?
-<div class="star-rating">
-    <a href="#">&#9733;</a>
-    <a href="#">&#9733;</a>
-    <a href="#">&#9733;</a>
-    <a href="#">&#9733;</a>
-    <a href="#">&#9733;</a>
+ <div>
+     <h1> Antes de finalizar le solicitamos que responda esta breve encuesta.</h1>
+    <div class="form-group">
+    ¿Cómo calificaría ha resultado la atención al paciente?
+        <select [(ngModel)]="condicionesPacienteR" class="form-control" style="width: 12rem;" (change)="carg1()">
+            <option [value]="item" *ngFor="let item of condicionesPaciente">{{item}}</option>
+            
+        </select>  
+    </div>
+
+    <div class="form-group">
+        ¿Cómo calificaría las condiciones de infraestructura del hospital?
+    <select [(ngModel)]="infraestructuraHospitalR" class="form-control" style="width: 12rem;" (change)="carg2()">
+        <option [value]="item" *ngFor="let item of infraestructuraHospital">{{item}}</option>
+    </select>  
+    </div>
+
+
+    <div class="form-group">
+        ¿Cómo calificaría la provisión de insumos del hospital?
+    <select [(ngModel)]="insumosHospitalR" class="form-control" style="width: 12rem;" (change)="carg3()">
+        <option [value]="item" *ngFor="let item of insumosHospital">{{item}}</option>
+    </select>  
+    </div>  
+
+    <button class="btn btn-success" (click)="subirEncuesta()">Finalizar >>>>></button>
 </div>

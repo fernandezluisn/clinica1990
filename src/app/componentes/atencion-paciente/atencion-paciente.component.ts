@@ -105,7 +105,7 @@ export class AtencionPacienteComponent implements OnInit {
       this.turnoACompletar.resenia=this.txtResenia;
       this.turnosService.actualizarTurno(this.turnoACompletar, 3);
       alert("El turno se informó correctamente");
-      this.router.navigate(["encuesta"]);
+      this.router.navigate(["encuesta/"+ this.turnoACompletar.id]);
     }catch(err)
     {
       alert(err);

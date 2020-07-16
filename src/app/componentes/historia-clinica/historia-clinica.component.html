@@ -1,3 +1,7 @@
 <app-nav [tipoPaciente]="true" [logeado]="true"></app-nav>
 
-<app-tabla-turnos [listaTurnos]="turnosDelPaciente" [confirmados]="false" [noConfirmados]="false" [resenia]="true"></app-tabla-turnos>
+<app-tabla-turnos [listaTurnos]="turnosDelPaciente" [confirmados]="false" [noConfirmados]="false" [resenia]="true" (pasarTurno)="tomarTurno($event)"></app-tabla-turnos>
+
+<div *ngIf="hayTurno">
+    <app-detalle-resenia [turno]="turnoParaDetalle"></app-detalle-resenia>
+</div>

@@ -17,7 +17,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let turno of listaTurnos">
+        <tr *ngFor="let turno of listaTurnos" (click)="pasarTurnoE(turno)">
           <td scope="row" >{{turno.paciente.nombre}} {{turno.paciente.apellido}}</td>
           <td scope="row" >{{turno.empleado.nombre}} {{turno.empleado.apellido}}</td>
           <td scope="row" >{{turno.especialidad}}</td>

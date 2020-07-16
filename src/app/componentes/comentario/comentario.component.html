@@ -1,0 +1,28 @@
+<form >
+    <div class="form-group">
+        ¿Cómo calificaría ha resultado la atención del profesional?
+            <select [(ngModel)]="condicionesPacienteR" class="form-control" style="width: 12rem;" (change)="carg1()">
+                <option [value]="item" *ngFor="let item of condicionesPaciente">{{item}}</option>
+                
+            </select>  
+        </div>
+    
+        <div class="form-group">
+            ¿Cómo calificaría las condiciones de infraestructura del hospital?
+        <select [(ngModel)]="infraestructuraHospitalR" class="form-control" style="width: 12rem;" (change)="carg2()">
+            <option [value]="item" *ngFor="let item of infraestructuraHospital">{{item}}</option>
+        </select>  
+        </div>
+    
+    
+        <div class="form-group">
+            ¿Cómo calificaría la provisión de insumos del hospital?
+        <select [(ngModel)]="insumosHospitalR" class="form-control" style="width: 12rem;" (change)="carg3()">
+            <option [value]="item" *ngFor="let item of insumosHospital">{{item}}</option>
+        </select>  
+        </div>  
+                                
+    <p class="form-group" style="margin-bottom: 0%;">Ingrese comentarios sobre la atención recibida.</p>
+    <textarea class="form-group" [(ngModel)]='txtComentario' style="width: 80%; height: 20rem; margin-top: 2%;" cols="40" rows="25" [ngModelOptions]="{standalone: true}"></textarea>
+    <button class="btn btn-primary" (click)="subirComentario()">Subir Reseña</button>
+</form>

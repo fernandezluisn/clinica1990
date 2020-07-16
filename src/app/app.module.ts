@@ -46,6 +46,8 @@ import { DatePipe } from '@angular/common';
 import { TurnosSacadosComponent } from './componentes/turnos-sacados/turnos-sacados.component';
 import { HistoriaClinicaComponent } from './componentes/historia-clinica/historia-clinica.component';
 import { EncuestaComponent } from './componentes/encuesta/encuesta.component';
+import { DetalleReseniaComponent } from './componentes/detalle-resenia/detalle-resenia.component';
+import { ComentarioComponent } from './componentes/comentario/comentario.component';
 
 
 
@@ -73,7 +75,9 @@ import { EncuestaComponent } from './componentes/encuesta/encuesta.component';
     TurnosCuarentaPipe,
     TurnosSacadosComponent,
     HistoriaClinicaComponent,
-    EncuestaComponent
+    EncuestaComponent,
+    DetalleReseniaComponent,
+    ComentarioComponent
   ],
   imports: [
     BrowserModule,

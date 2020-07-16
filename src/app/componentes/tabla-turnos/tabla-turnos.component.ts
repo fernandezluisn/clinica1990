@@ -18,6 +18,7 @@ export class TablaTurnosComponent implements OnInit {
   @Input() listaTurnos:turno[];
   @Output() aprobarTurno:EventEmitter<any>=new EventEmitter<any>();
   @Output() cancelarTurno:EventEmitter<any>=new EventEmitter<any>();
+  @Output() pasarTurno:EventEmitter<any>=new EventEmitter<any>();
 
   constructor() {
     
@@ -39,6 +40,10 @@ export class TablaTurnosComponent implements OnInit {
     this.cancelarTurno.emit(turno);
   }
 
+  pasarTurnoE(turno){
+    this.pasarTurno.emit(turno);
+    console.log(turno);
+  }
  
 
 }

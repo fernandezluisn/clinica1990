@@ -11,6 +11,9 @@ export class  turno {
     numeroTurno:number;
     resenia: string;    
     especialidad:string;
+    encuestaRespondidaMedico:boolean=false;
+    encuestaRespondidaPaciente:boolean=false;
+    comentario:string;
 
     constructor(medico:empleado, paciente:paciente, estado:string, fecha:Date, turno:number, resenia:string, especialidad:string){
         this.fecha=fecha;
