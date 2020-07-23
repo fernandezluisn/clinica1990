@@ -1,13 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import {ServicioService} from '../../servicios/servicio.service';
 import {BdaService} from '../../servicios/bda.service';
+
 import {TurnosPipe} from '../../pipes/turnos.pipe';
+import {TurnosHoraPipe} from '../../pipes/turnos-hora.pipe';
+import {TurnosCuarentaPipe} from '../../pipes/turnos-cuarenta.pipe';
+
 import { TurnosService } from 'src/app/servicios/turnos.service';
 import { turno } from 'src/app/clases/turno';
 import { empleado } from 'src/app/clases/empleado';
 import { isNull } from 'util';
 import { element } from 'protractor';
 import { DatePipe } from '@angular/common';
+import { MedicosService } from 'src/app/servicios/medicos.service';
+import { jornadaSemanal } from 'src/app/clases/jornadaSemanal';
+import { timingSafeEqual } from 'crypto';
 
 
 
@@ -19,6 +26,8 @@ import { DatePipe } from '@angular/common';
   styleUrls: ['./turnos.component.css']
 })
 export class TurnosComponent implements OnInit {
+
+  txtBuscar:string;
 
   usuario;
   usuarioLista;
@@ -43,26 +52,50 @@ export class TurnosComponent implements OnInit {
 
   listadoPacientes;
 
-  listadoEspecialistas;
+  listadoEspecialistas:empleado[];
+  listadoEspecialistasB:empleado[];
+
+  nohayTurnosDia=false;
+
+  jornada:jornadaSemanal;
+
+  turnosHora=false;
+  turnosMedia=false;
+  turnosCuarenta=false;
+  noHayJornada=false;
   
   //hacer
   listaHorariosTurnos;
   listaTurnosTomados;
   listaTurnosDia;
+  listaJornadas:jornadaSemanal[];
 
   events: any[];
 
   options: any;
 
-  constructor( private serv:ServicioService, private bda:BdaService, private turnosS:TurnosService, public datepipe: DatePipe) { 
+  constructor( private serv:ServicioService, private bda:BdaService, private turnosS:TurnosService, public datepipe: DatePipe, private medicoS:MedicosService) { 
     this.nTurno=null;
     this.serv.tomarUsuario().then(res=>{
       
       this.usuario=res;   
 
+      let j=new Array();
       this.bda.devolverListadoEmpleados().subscribe(lista=>{
-        this.listadoEspecialistas=lista;
+        
+        lista.filter(element=>{
+          if(element.aprobadoPorAdmin==true)
+          {
+            j.push(element);
+          }
+        })
+        this.listadoEspecialistas=j;
+        this.listadoEspecialistasB=this.listadoEspecialistas;
       });
+
+      this.medicoS.devolverListadoJornadas().subscribe(listaM=>{
+        this.listaJornadas=listaM;
+      })
       
       this.bda.devolverListadoPacientes().subscribe(lista=>{
         lista.forEach(element=>{
@@ -92,9 +125,29 @@ export class TurnosComponent implements OnInit {
     
   }
 
-  filtrarListaTurnosDia(){
-   
-    console.log(this.fecha.toString());
+  filtrarLista(){
+    console.log(this.listadoEspecialistas);
+    let j=new Array();
+    
+    
+    this.listadoEspecialistas.filter(element=>{
+      if(element.apellido.toLowerCase().includes(this.txtBuscar.toLowerCase()) || element.nombre.toLowerCase().includes(this.txtBuscar.toLowerCase())){
+        j.push(element);
+      }else{
+        element.especialidades.filter(elementB=>{
+          if (elementB.toLowerCase().includes(this.txtBuscar.toLowerCase())){
+            j.push(element);
+          }
+        })
+      }
+    })
+    this.listadoEspecialistasB=j;
+  }
+
+  filtrarListaTurnosDia(){  
+    
+    this.nTurno=null;
+    console.log(this.listaTurnosDia);
     this.turnosS.devolverListadoTurnos().subscribe(
       lista=>{
         
@@ -113,7 +166,16 @@ export class TurnosComponent implements OnInit {
           )
       }
     )
+
+    if(this.listaTurnosDia.length==0){
+      console.log("no hay");
+    this.noHayJornada=true
+    }else{
+      this.noHayJornada=false;
+    }
   }
+
+  
 
   mostrarBoton(){
     if(this.v1==true && this.v2==true && !this.esDomingo){
@@ -126,54 +188,138 @@ export class TurnosComponent implements OnInit {
     
     let d=new Date(this.fecha);
     console.log("día "+d.getDay());
-    switch(d.getDay()){
-      case 6:
-        this.esDomingo=true;
-      break;
-      case 1:
-        this.esDomingo=false;
-        for(let n=0; n<22; n++)
-        {
-          this.listaTurnosDia.push(n);
+     
+    this.listaJornadas.filter(element=>{
+      if(element.medico.email.toLowerCase()==this.medicoDetalle.email.toLowerCase())
+      {
+        this.jornada=element;
+      }
+    })
+    if(!isNull(this.jornada))
+    {
+      if(this.jornada.tiempoTurnos==30)
+      {
+  
+  
+        this.turnosHora=false;
+        this.turnosMedia=true;
+        this.turnosCuarenta=false;
+        this.noHayJornada=false;
+  
+        switch(d.getDay()){
+          case 6:
+            this.esDomingo=true;
+          break;
+          case 0:
+            this.esDomingo=false;
+            for(let n:number=(this.jornada.lunesE*2); n<(this.jornada.lunesS*2); n++)
+            {
+              this.listaTurnosDia.push(n);
+            }
+          break;
+          case 1:
+            this.esDomingo=false;
+            for(let n=(this.jornada.martesE*2); n<(this.jornada.martesS*2); n++)
+            {
+              this.listaTurnosDia.push(n);
+            }
+          break;
+          case 2:
+            this.esDomingo=false;
+            for(let n=(this.jornada.miercolesE*2); n<(this.jornada.miercolesS*2); n++)
+            {
+              this.listaTurnosDia.push(n);
+            }
+          break;
+          case 3:
+            this.esDomingo=false;
+            for(let n=(this.jornada.juevesE*2); n<(this.jornada.juevesS*2); n++)
+            {
+              this.listaTurnosDia.push(n);
+            }
+          break;
+          case 4:
+            this.esDomingo=false;
+            for(let n=(this.jornada.viernesE*2); n<(this.jornada.viernesS*2); n++)
+            {
+              this.listaTurnosDia.push(n);
+            }
+          break;
+          case 5:
+            this.esDomingo=false;
+            for(let n=(this.jornada.SabadoE*2); n<(this.jornada.sabadoS*2); n++)
+            {
+              this.listaTurnosDia.push(n);
+            }
+          break;
         }
-      break;
-      case 2:
-        this.esDomingo=false;
-        for(let n=0; n<22; n++)
-        {
-          this.listaTurnosDia.push(n);
+
+        
+      }else{
+  
+        this.turnosHora=true;
+        this.turnosMedia=false;
+        this.turnosCuarenta=false;
+        this.noHayJornada=false;
+  
+  
+        switch(d.getDay()){
+          case 6:
+            this.esDomingo=true;
+          break;
+          case 0:
+            this.esDomingo=false;
+            for(let n=this.jornada.lunesE*1; n<this.jornada.lunesS; n++)
+            {
+              this.listaTurnosDia.push(n);
+            }
+          break;
+          case 1:
+            this.esDomingo=false;
+            for(let n=this.jornada.martesE*1; n<this.jornada.martesS; n++)
+            {
+              this.listaTurnosDia.push(n);
+            }
+          break;
+          case 2:
+            this.esDomingo=false;
+            for(let n=this.jornada.miercolesE*1; n<this.jornada.miercolesS; n++)
+            {
+              this.listaTurnosDia.push(n);
+            }
+          break;
+          case 3:
+            this.esDomingo=false;
+            for(let n=this.jornada.juevesE*1; n<this.jornada.juevesS; n++)
+            {
+              this.listaTurnosDia.push(n);
+            }
+          break;
+          case 4:
+            this.esDomingo=false;
+            for(let n=this.jornada.viernesE*1; n<this.jornada.viernesS; n++)
+            {
+              this.listaTurnosDia.push(n);
+            }
+          break;
+          case 5:
+            this.esDomingo=false;
+            for(let n=this.jornada.SabadoE*1; n<this.jornada.sabadoS; n++)
+            {
+              this.listaTurnosDia.push(n);
+            }
+          break;
         }
-      break;
-      case 3:
-        this.esDomingo=false;
-        for(let n=0; n<22; n++)
-        {
-          this.listaTurnosDia.push(n);
-        }
-      break;
-      case 4:
-        this.esDomingo=false;
-        for(let n=0; n<22; n++)
-        {
-          this.listaTurnosDia.push(n);
-        }
-      break;
-      case 0:
-        this.esDomingo=false;
-        for(let n=0; n<22; n++)
-        {
-          this.listaTurnosDia.push(n);
-        }
-      break;
-      case 5:
-        this.esDomingo=false;
-        for(let n=0; n<13; n++)
-        {
-          this.listaTurnosDia.push(n);
-        }
-      break;
+      }
+    
+      this.filtrarListaTurnosDia();
+    }else{
+      this.turnosHora=false;
+        this.turnosMedia=false;
+        this.turnosCuarenta=false;
+        this.noHayJornada=true;
     }
-    this.filtrarListaTurnosDia();
+    
     this.v1=true;
     
   }
@@ -190,6 +336,8 @@ export class TurnosComponent implements OnInit {
     this.medicoDetalle=medico;
     console.log(this.medicoDetalle.id);
     this.v0=true;
+    this.mostrarFecha();
+    this.especialidad=null;
   }
 
   mostrarEspecialidad(){
@@ -201,14 +349,20 @@ export class TurnosComponent implements OnInit {
     if(isNull(this.medicoDetalle))
     {
       alert("Debe seleccionar un médico presionando sobre la tabla.");
+    }else if(isNull(this.nTurno)){
+      alert("No es posible reservar turno este día");
+      
+    }else if(isNull(this.especialidad)){
+      alert("Debe seleccionar especialidad");
+      
     }else{
+      
       let t=new turno(this.medicoDetalle, this.usuarioLista, "a confirmar", this.fecha, this.nTurno, "No hay", this.especialidad);      
       this.turnosS.createTurno(t).then(res=>{
         alert("Su turno se ha registrado correctamente.");        
         
       });
 
-      
     }
       
   }

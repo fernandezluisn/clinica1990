@@ -50,6 +50,8 @@ export class HomeMedicoComponent implements OnInit {
   
   tiempoTurno;
 
+  
+
   listaTurnosEntrada:number[];
   listaTurnosSalida:number[];
   listaTurnosEntradaSabado;
@@ -224,8 +226,7 @@ export class HomeMedicoComponent implements OnInit {
     }
   }
 
-  subirHorarios(){
-    console.log("entró al horario");
+  subirHorarios(){   
  
     
 
@@ -318,7 +319,10 @@ export class HomeMedicoComponent implements OnInit {
       this.jornadaActual.SabadoE=this.nTurnoE6;
       this.jornadaActual.sabadoS=this.nTurnoS6;
     }
+      this.jornadaActual.tiempoTurnos=this.tiempoTurno; 
         this.medicoService.updateJornada(this.jornadaActual);
+        console.log(this.jornadaActual.tiempoTurnos);
+        alert("Sus horarios se han cargado correctamente");
     }
   
 

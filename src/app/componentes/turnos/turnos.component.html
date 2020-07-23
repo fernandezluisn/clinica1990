@@ -2,6 +2,11 @@
 
 
     <h1>Bienvenido/a {{usuarioLista.nombre}}</h1> <h2 *ngIf="hayTurno" style="color: red;">Solicita turno con {{medicoDetalle.nombre}} {{medicoDetalle.apellido}} el día {{fecha | date: 'dd-MM-yyyy'}} a las {{ nTurno | turnos }}. Cliquee el botón azul para solicitar.</h2>
+    
+    <div>
+      <input type="text" [(ngModel)]="txtBuscar" (change)="filtrarLista()">
+    </div>
+    
     <h2 *ngIf="!hayTurno">Ingrese datos en el siguiente orden: el médico, la especialidad, la fecha y el horario que requiere.</h2>
 <div style="display: flex; justify-content:flex-start; flex-direction: row;">
     <div *ngIf="v0" >
@@ -30,9 +35,27 @@
           <div class="form-group" *ngIf="v1">  
               <label for="d1" style="margin-right: 1rem;" *ngIf="!esDomingo">Horario disponible</label><br>
               <p *ngIf="esDomingo" style="color: red;">La clínica permanece cerrada los domingos, sepa disculpar.</p>
-              <select *ngIf="!esDomingo" [(ngModel)]="nTurno" class="form-control" style="width: 12rem;" (change)="mostrarHora()" name="SelectEsp">
-                <option (change)="mostrarHora()" [value]="item" *ngFor="let item of listaTurnosDia">{{item | turnos}}</option>
-              </select>      
+
+              <div *ngIf="!noHayJornada">
+                <div *ngIf="turnosMedia">
+                  <select *ngIf="!esDomingo" [(ngModel)]="nTurno" class="form-control" style="width: 12rem;" (change)="mostrarHora()" name="SelectEsp">
+                    <option (change)="mostrarHora()" [value]="item" *ngFor="let item of listaTurnosDia">{{item | turnos}}</option>
+                  </select>   
+                </div>
+
+                
+                
+                <div *ngIf="turnosHora">
+                  <select *ngIf="!esDomingo" [(ngModel)]="nTurno" class="form-control" style="width: 12rem;" (change)="mostrarHora()" name="SelectEsp">
+                    <option (change)="mostrarHora()" [value]="item" *ngFor="let item of listaTurnosDia">{{item | turnosHora}}</option>
+                  </select>  
+                </div>
+              </div>
+              
+              <div *ngIf="noHayJornada">
+                <h3>El médico seleccionado no tiene turnos disponibles este día. Disculpe la molestia.</h3>
+              </div>
+            
           </div>
           
           <br><br><br><br>
@@ -43,7 +66,7 @@
           </div>
       </div>
     </div> 
-    <app-tabla-medicos style="margin-left: 10%; width: 20%; margin-top: 8rem;" [listaMedicos]="listadoEspecialistas" (saleMedico)="tomarMedico($event)"></app-tabla-medicos>
+    <app-tabla-medicos style="margin-left: 10%; width: 20%; margin-top: 8rem;" [listaMedicos]="listadoEspecialistasB" (saleMedico)="tomarMedico($event)"></app-tabla-medicos>
   </div>
 
 
