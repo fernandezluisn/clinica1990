@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { turno } from 'src/app/clases/turno';
 import { ServicioService } from 'src/app/servicios/servicio.service';
 import { TurnosService } from 'src/app/servicios/turnos.service';
-import { element } from 'protractor';
 
 @Component({
   selector: 'app-historia-clinica',
@@ -15,6 +14,7 @@ export class HistoriaClinicaComponent implements OnInit {
   user;
   turnoParaDetalle:turno;
   hayTurno=false;
+  vacio:boolean;
 
   constructor(private servicio:ServicioService, private turnosService:TurnosService) { 
   
@@ -43,8 +43,14 @@ export class HistoriaClinicaComponent implements OnInit {
         })
       })
 
-      this.turnosDelPaciente=a;
-      this.turnosDelPaciente.sort((a,b) => Number(Date.parse(a.fecha.toString())) - Number(Date.parse(b.fecha.toString())));
+      if(a.length>0){
+        this.turnosDelPaciente=a;
+        this.turnosDelPaciente.sort((a,b) => Number(Date.parse(a.fecha.toString())) - Number(Date.parse(b.fecha.toString())));
+        this.vacio=false;
+      }else{
+        this.vacio=true;
+      }
+      
   }
   
   tomarTurno(turno){

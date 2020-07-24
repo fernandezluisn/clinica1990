@@ -29,13 +29,15 @@ export class HabilitarUsuariosComponent implements OnInit {
   }
 
   actualizarLista(){
-    this.listaFiltrada=new Array();
+    let b=new Array();
     this.bda.devolverListadoEmpleados().subscribe(lista=>{
       lista.filter(element=>{
         if(element.aprobadoPorAdmin==false)
-        this.listaFiltrada.push(element);
+        b.push(element);
       });
     });
+
+    this.listaFiltrada=b;
   }
 
   habilitar(medico){

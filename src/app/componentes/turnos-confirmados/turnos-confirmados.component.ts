@@ -4,6 +4,7 @@ import { BdaService } from 'src/app/servicios/bda.service';
 import { TurnosService } from 'src/app/servicios/turnos.service';
 import { turno } from 'src/app/clases/turno';
 import { DatePipe } from '@angular/common'
+import { Mailer } from 'src/app/clases/mailer';
 
 @Component({
   selector: 'app-turnos-confirmados',
@@ -17,6 +18,7 @@ export class TurnosConfirmadosComponent implements OnInit {
   medicoLogeado;
   descargo:boolean;
   noHayTurnos=false;
+  
 
   constructor(private service:ServicioService, private bda:BdaService, private turnosBDA:TurnosService, public datepipe:DatePipe) {
     this.service.tomarUsuario().then(element=>
@@ -50,7 +52,7 @@ export class TurnosConfirmadosComponent implements OnInit {
       this.ordenarTabla();
 
      
-
+      
   })};
 
   cancelar(turno:turno){

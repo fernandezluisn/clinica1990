@@ -43,11 +43,25 @@ export class HorarioMedicosComponent implements OnInit {
   }
 
   agregar(espec){
+
+    let a=espec.nombre;
+    let yaTieneEspecialidad=false;
+
+    this.medicoElegido.especialidades.forEach(element=>{
+      if(element.toLowerCase()==a.toLowerCase()){
+        yaTieneEspecialidad=true
+      }
+      
+    })
+    if(yaTieneEspecialidad==false){
+      this.medicoElegido.especialidades.push(espec.nombre);
+      console.log(this.medicoElegido.especialidades);
+      this.bda.updateUsuario(this.medicoElegido);
+      this.bda.updateEmpleado(this.medicoElegido);
+    }else{
+      alert("A este médico ya se le asignó esa especialidad.");
+    }
     
-    this.medicoElegido.especialidades.push(espec.nombre);
-    console.log(this.medicoElegido.especialidades);
-    this.bda.updateUsuario(this.medicoElegido);
-    this.bda.updateEmpleado(this.medicoElegido);
   }
 
   tomarMedico(medico){

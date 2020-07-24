@@ -4,17 +4,15 @@ import {BdaService} from '../../servicios/bda.service';
 
 import {TurnosPipe} from '../../pipes/turnos.pipe';
 import {TurnosHoraPipe} from '../../pipes/turnos-hora.pipe';
-import {TurnosCuarentaPipe} from '../../pipes/turnos-cuarenta.pipe';
 
 import { TurnosService } from 'src/app/servicios/turnos.service';
 import { turno } from 'src/app/clases/turno';
 import { empleado } from 'src/app/clases/empleado';
 import { isNull } from 'util';
-import { element } from 'protractor';
 import { DatePipe } from '@angular/common';
 import { MedicosService } from 'src/app/servicios/medicos.service';
 import { jornadaSemanal } from 'src/app/clases/jornadaSemanal';
-import { timingSafeEqual } from 'crypto';
+import {Mailer} from '../../clases/mailer';
 
 
 
@@ -71,6 +69,7 @@ export class TurnosComponent implements OnInit {
   listaJornadas:jornadaSemanal[];
 
   events: any[];
+  mailer:Mailer;
 
   options: any;
 
@@ -125,12 +124,100 @@ export class TurnosComponent implements OnInit {
     
   }
 
+  filtrarPorDia(lista:empleado[], str:string){
+
+    let s0="lunes";
+    let s1="martes";
+    let s2="miercoles";
+    let s3="jueves";
+    let s4="viernes";
+    let s5="sabado";
+
+    let listM:empleado[]=new Array();
+    
+    
+
+    if(s0.includes(str.toLowerCase()))
+    {
+      lista.filter(element=>{
+        this.listaJornadas.filter(elementJ=>{
+          if(element.email.toLowerCase()==elementJ.medico.email.toLowerCase()){
+            if(elementJ.lunes==true){
+              listM.push(element);
+            }
+          }
+        })
+        
+      })
+    }else if(s1.includes(str.toLowerCase())){
+      lista.filter(element=>{
+        this.listaJornadas.filter(elementJ=>{
+          if(element.email.toLowerCase()==elementJ.medico.email.toLowerCase()){
+            if(elementJ.martes==true){
+              listM.push(element);
+            }
+          }
+        })
+        
+        })
+    }else if(s2.includes(str.toLowerCase())){
+      lista.filter(element=>{
+        this.listaJornadas.filter(elementJ=>{
+          if(element.email.toLowerCase()==elementJ.medico.email.toLowerCase()){
+            if(elementJ.miercoles==true){
+              listM.push(element);
+            }
+          }
+        })
+        
+      })
+    }else if(s3.includes(str.toLowerCase())){
+      lista.filter(element=>{
+        this.listaJornadas.filter(elementJ=>{
+          if(element.email.toLowerCase()==elementJ.medico.email.toLowerCase()){
+            if(elementJ.jueves==true){
+              listM.push(element);
+            }
+          }
+        })
+        
+      })
+    }else if(s4.includes(str.toLowerCase())){
+      lista.filter(element=>{
+        this.listaJornadas.filter(elementJ=>{
+          if(element.email.toLowerCase()==elementJ.medico.email.toLowerCase()){
+            if(elementJ.viernes==true){
+              listM.push(element);
+            }
+          }
+        })
+        
+      })
+    }else if(s5.includes(str.toLowerCase())){
+      lista.filter(element=>{
+        this.listaJornadas.filter(elementJ=>{
+          if(element.email.toLowerCase()==elementJ.medico.email.toLowerCase()){
+            if(elementJ.sabado==true){
+              listM.push(element);
+            }
+          }
+        })
+        
+      })
+    }
+    return listM;
+  }
+
   filtrarLista(){
     console.log(this.listadoEspecialistas);
-    let j=new Array();
-    
-    
+    let j=new Array();   
+   
+
+
     this.listadoEspecialistas.filter(element=>{
+
+
+
       if(element.apellido.toLowerCase().includes(this.txtBuscar.toLowerCase()) || element.nombre.toLowerCase().includes(this.txtBuscar.toLowerCase())){
         j.push(element);
       }else{
@@ -141,7 +228,19 @@ export class TurnosComponent implements OnInit {
         })
       }
     })
-    this.listadoEspecialistasB=j;
+    let j2=this.filtrarPorDia(this.listadoEspecialistas, this.txtBuscar);
+
+    j.filter(elementj=>{
+      j2.forEach(elementj2=>{
+        if(elementj.email.toLowerCase()==elementj2.email.toLowerCase()){
+          let indice=j2.indexOf(elementj2);
+              j2.splice(indice, 1);
+        }
+      })
+      
+    })
+
+    this.listadoEspecialistasB=j2.concat(j);
   }
 
   filtrarListaTurnosDia(){  
@@ -364,7 +463,7 @@ export class TurnosComponent implements OnInit {
       });
 
     }
-      
+      this.mailer.sendMail("aaa");
   }
  
 

@@ -3,9 +3,7 @@
 
     <h1>Bienvenido/a {{usuarioLista.nombre}}</h1> <h2 *ngIf="hayTurno" style="color: red;">Solicita turno con {{medicoDetalle.nombre}} {{medicoDetalle.apellido}} el día {{fecha | date: 'dd-MM-yyyy'}} a las {{ nTurno | turnos }}. Cliquee el botón azul para solicitar.</h2>
     
-    <div>
-      <input type="text" [(ngModel)]="txtBuscar" (change)="filtrarLista()">
-    </div>
+    
     
     <h2 *ngIf="!hayTurno">Ingrese datos en el siguiente orden: el médico, la especialidad, la fecha y el horario que requiere.</h2>
 <div style="display: flex; justify-content:flex-start; flex-direction: row;">
@@ -66,7 +64,14 @@
           </div>
       </div>
     </div> 
-    <app-tabla-medicos style="margin-left: 10%; width: 20%; margin-top: 8rem;" [listaMedicos]="listadoEspecialistasB" (saleMedico)="tomarMedico($event)"></app-tabla-medicos>
+
+    <div style="margin-left: 10%; margin-top: 10%;">
+
+      Puede filtrar la tabla por el nombre, <br> día de la semana que atiende o especialidad del medico <br> <input type="text" [(ngModel)]="txtBuscar" (change)="filtrarLista()"><br><br>
+      
+      <app-tabla-medicos style="margin-top: 2%;" [listaMedicos]="listadoEspecialistasB" (saleMedico)="tomarMedico($event)"></app-tabla-medicos>
+
+    </div>
   </div>
 
 

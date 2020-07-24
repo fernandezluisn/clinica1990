@@ -1,6 +1,8 @@
 <app-nav [tipoPaciente]="true" [logeado]="true"></app-nav>
 
-<app-tabla-turnos [listaTurnos]="turnosDelPaciente" [confirmados]="false" [noConfirmados]="false" [resenia]="true" (pasarTurno)="tomarTurno($event)"></app-tabla-turnos>
+<app-tabla-turnos *ngIf="!vacio" [listaTurnos]="turnosDelPaciente" [confirmados]="false" [noConfirmados]="false" [resenia]="true" (pasarTurno)="tomarTurno($event)"></app-tabla-turnos>
+
+<div *ngIf="vacio"><h1>Usted no tiene Historia Clínica registrada en nuestra clínica.</h1></div>
 
 <div *ngIf="hayTurno">
     <app-detalle-resenia [turno]="turnoParaDetalle"></app-detalle-resenia>
