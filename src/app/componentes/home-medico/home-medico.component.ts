@@ -320,9 +320,14 @@ export class HomeMedicoComponent implements OnInit {
       this.jornadaActual.sabadoS=this.nTurnoS6;
     }
       this.jornadaActual.tiempoTurnos=this.tiempoTurno; 
+      if(this.sePuedeSubir1 && this.sePuedeSubir2 && this.sePuedeSubir3 && this.sePuedeSubir4 && this.sePuedeSubir5 && this.sePuedeSubir6){
         this.medicoService.updateJornada(this.jornadaActual);
-        console.log(this.jornadaActual.tiempoTurnos);
+        
         alert("Sus horarios se han cargado correctamente");
+      }else{
+        alert("Los horarios ingresados no son validos")
+      }
+        
     }
   
 

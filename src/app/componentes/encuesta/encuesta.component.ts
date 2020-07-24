@@ -62,7 +62,7 @@ export class EncuestaComponent implements OnInit {
   subirEncuesta(){  
     if(this.v1==true && this.v2==true && this.v3==true){
       let encu=new encuesta(this.condicionesPacienteR, this.insumosHospitalR, this.infraestructuraHospitalR, this.id, this.turno.empleado.email, this.turno.paciente.email);      
-
+      encu
       this.turno.encuestaRespondidaMedico=true;
       this.turnosS.actualizarTurno(this.turno, 3);
       this.turnosS.createEncuesta(encu);

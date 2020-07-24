@@ -13,6 +13,37 @@
                                 
                                 <p class="form-group">Ingrese anotaciones de la consulta.</p>
                                 <textarea class="form-group" [(ngModel)]='txtResenia' style="width: 80%; height: 20rem;" cols="50" rows="30" [ngModelOptions]="{standalone: true}"></textarea>
+                                <button class="btn btn-info" (click)="agregarDatos()" *ngIf="!seAgregaronDatos">Ingresar datos extra</button>
+                                
+                                <div *ngIf="seAgregaronDatos">
+                                    <div class="form-group">
+                                        <label for="">Edad del paciente</label><br>
+                                        <input type="number" [(ngModel)]="edad"><br>
+                                        <label for="">Temperatura corporal</label><br>
+                                        <input type="text" [(ngModel)]="temperatura"><br>
+                                        <label for="">Presión arterial</label><br>
+                                        <input type="text" [(ngModel)]="presion"><br>
+                                        <button class="btn btn-info" (click)="sumarDato()">Ingresar otro dato.</button>
+                                        
+                                        <div style="margin-bottom: 1rem;" *ngIf="n1">
+                                            
+                                            <input type="text" placeholder="Categoría" name="d1n" [(ngModel)]="dato1n" [ngModelOptions]="{standalone: true}">
+                                            <input style="margin-left: 0.5rem;" name="d1" type="text" placeholder="valor" [(ngModel)]="dato1" [ngModelOptions]="{standalone: true}">
+                                        </div>
+
+                                        <div style="margin-bottom: 1rem;" *ngIf="n2">
+                                           
+                                            <input type="text" placeholder="Categoría" name="d2n" [(ngModel)]="dato2n" [ngModelOptions]="{standalone: true}">
+                                            <input style="margin-left: 0.5rem;" type="text" name="d2" placeholder="valor" [(ngModel)]="dato2" [ngModelOptions]="{standalone: true}">
+                                        </div>
+
+                                        <div style="margin-bottom: 1rem;" *ngIf="n3">                                            
+                                            <input type="text" placeholder="Categoría"  name="d3n"[(ngModel)]="dato3n" [ngModelOptions]="{standalone: true}">
+                                            <input style="margin-left: 0.5rem;" type="text" name="d3" placeholder="valor" [(ngModel)]="dato3" [ngModelOptions]="{standalone: true}">
+                                        </div>
+                                    </div>
+                                </div>
+                                
                                 <button class="btn btn-primary" (click)="subirResenia()">Subir Reseña</button>
                             </form>
                         </div>
@@ -24,7 +55,9 @@
                         <div style="width: 50%; margin-left: 5%; margin-top: 5%;">
                             <p *ngIf="turnoSeleccionado">Historia clínica del paciente.</p>  
                             <h2 *ngIf="!turnoSeleccionado">Seleccione Turno a informar presionando en aprobar turno.</h2>
-                            <app-tabla-turnos [listaTurnos]="turnosDelDia" [confirmados]="false" [noConfirmados]="!turnoSeleccionado" (aprobarTurno)="mostrarFormulario($event)" [resenia]="turnoSeleccionado"></app-tabla-turnos>
+                            
+                            
+                            <app-tabla-turnos  [listaTurnos]="turnosDelDia" [confirmados]="false" [noConfirmados]="!turnoSeleccionado" (aprobarTurno)="mostrarFormulario($event)" [resenia]="turnoSeleccionado"></app-tabla-turnos>
                         </div>
                     </div>
                 </div>

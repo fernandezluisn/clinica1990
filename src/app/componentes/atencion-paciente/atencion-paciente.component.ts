@@ -25,10 +25,36 @@ export class AtencionPacienteComponent implements OnInit {
   listadoCompleto:turno[];
   noHayTurnos=true;
 
+  seAgregaronDatos=false;
+
   turnoSeleccionado=false;
+
+  edad:number;
+  temperatura:number;
+  presion:number;
+
+  dato1:any;
+  dato2:any;
+  dato3:any;
+
+  dato1n:string;
+  dato2n:string;
+  dato3n:string;
+
+  n1=false;
+  n2=false;
+  n3=false;
+
+  contador=0;
+
+ 
 
   constructor(private router: Router, private service:ServicioService, private bda:BdaService, private turnosService:TurnosService, public datepipe: DatePipe) { 
     
+    this.edad=30;
+    this.temperatura=36.1;
+    this.presion=14.3;
+
     this.txtResenia=null;
     this.service.tomarUsuario().then(element=>{
       this.user=element;
@@ -88,8 +114,8 @@ export class AtencionPacienteComponent implements OnInit {
       }
     })
 
-    this.turnosDelDia=j;
-    this.turnosDelDia.sort((a,b) => Number(Date.parse(a.fecha.toString())) - Number(Date.parse(b.fecha.toString())));
+   
+    
   }
 
   mostrarFormulario(turno:turno){
@@ -100,7 +126,36 @@ export class AtencionPacienteComponent implements OnInit {
 
   subirResenia(){
     
+    console.log(this.turnoACompletar);
+    if(this.seAgregaronDatos)
+    {
+      this.turnoACompletar.presión=this.presion;
+      this.turnoACompletar.edad=this.edad;
+      this.turnoACompletar.temperatura=this.temperatura;
+      switch(this.contador){
+        case(1):
+          this.turnoACompletar.dato1n=this.dato1n;
+          this.turnoACompletar.dato1v=this.dato1;
+        break;
+        case(2):
+          this.turnoACompletar.dato1n=this.dato1n;
+          this.turnoACompletar.dato1v=this.dato1;
+          this.turnoACompletar.dato2n=this.dato2n;
+          this.turnoACompletar.dato2v=this.dato2;
+        break;
+        case(3):
+        console.log(this.dato1n);
+        this.turnoACompletar.dato1n=this.dato1n;
+          this.turnoACompletar.dato1v=this.dato1;
+          this.turnoACompletar.dato2n=this.dato2n;
+          this.turnoACompletar.dato2v=this.dato2;
+          this.turnoACompletar.dato3n=this.dato3n;
+          this.turnoACompletar.dato3v=this.dato3;          
+        break;        
+      }  
+    }
     
+
     try{
       this.turnoACompletar.resenia=this.txtResenia;
       this.turnosService.actualizarTurno(this.turnoACompletar, 3);
@@ -109,6 +164,36 @@ export class AtencionPacienteComponent implements OnInit {
     }catch(err)
     {
       alert(err);
+    }
+    
+  }
+
+  agregarDatos(){
+    this.seAgregaronDatos=true;
+  }
+
+  sumarDato(){
+    if(this.contador<3){
+      console.log(this.contador);
+
+      switch(this.contador){
+        case(0):
+        this.n1=true;
+        this.n2=false;
+        this.n3=false;
+        break;
+        case(1):
+        this.n1=true;
+        this.n2=true;
+        this.n3=false;
+        case(2):
+        this.n1=true;
+        this.n2=true;
+        this.n3=true;
+      }
+      this.contador++;
+    }else{
+      alert("No puede agregar más de 3 nuevas categorías.");
     }
     
   }
