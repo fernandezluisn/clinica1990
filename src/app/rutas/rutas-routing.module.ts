@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import {LoginComponent} from '../componentes/login/login.component';
 import {RegistroComponent} from '../componentes/registro/registro.component';
@@ -20,17 +21,17 @@ import {ComentarioComponent} from '../componentes/comentario/comentario.componen
 const redirectUnauthorizedToLogin=()=>redirectUnauthorizedTo(["login"]);
 
 const routes: Routes = [
-  {path:"", component:BienvenidaComponent},
+  {path:"", component:BienvenidaComponent, data: {animation: 'Inicio'}},
   {path:"login", component:LoginComponent, data: {animation: 'Login'}},
-  {path:"registro", component:RegistroComponent},
-  {path:"homeAdmin", component:HorarioMedicosComponent, ...canActivate(redirectUnauthorizedToLogin)},
-  {path:"turnos", component:TurnosComponent, data: {animation: 'Turnos'}, ...canActivate(redirectUnauthorizedToLogin)},
+  {path:"registro", component:RegistroComponent, data: {animation: 'Registrarse'}},
+  {path:"homeAdmin", component:HorarioMedicosComponent, data: {animation: 'Admin'}, ...canActivate(redirectUnauthorizedToLogin)},
+  {path:"turnos", component:TurnosComponent, ...canActivate(redirectUnauthorizedToLogin)},
   {path:"turnosAprobados", component:TurnosSacadosComponent, ...canActivate(redirectUnauthorizedToLogin)},
   {path:"pendientes", component:TurnosAConfirmarComponent, ...canActivate(redirectUnauthorizedToLogin)},
   {path:"homeMedico", component:HomeMedicoComponent, ...canActivate(redirectUnauthorizedToLogin)},
   {path:"atencion", component:AtencionPacienteComponent, ...canActivate(redirectUnauthorizedToLogin)},
   {path:"altaAdmin", component:AgregarAdminComponent, ...canActivate(redirectUnauthorizedToLogin)},
-  {path:"altaUsuario", component:HabilitarUsuariosComponent, ...canActivate(redirectUnauthorizedToLogin)},
+  {path:"altaUsuario", component:HabilitarUsuariosComponent, ...canActivate(redirectUnauthorizedToLogin), data: {animation: 'altaUsuario'}},
   {path:"comentario/:idTurno", component:ComentarioComponent, ...canActivate(redirectUnauthorizedToLogin)},
   {path:"encuesta/:idTurno", component:EncuestaComponent, ...canActivate(redirectUnauthorizedToLogin)},
   {path:"historiaClinica", component:HistoriaClinicaComponent, ...canActivate(redirectUnauthorizedToLogin), data: {animation: 'HistoriaClinica'}},
@@ -38,7 +39,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [CommonModule, RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class RutasRoutingModule { }

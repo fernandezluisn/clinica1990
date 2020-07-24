@@ -1,5 +1,5 @@
 import { Component} from '@angular/core';  
-import { slideInAnimation } from './animation';
+import { slideInAnimation } from './animations';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
@@ -15,6 +15,6 @@ export class AppComponent {
   title = 'Clinica';
 
   prepareRoute(outlet: RouterOutlet) {
-    return outlet && outlet.activatedRouteData && outlet.activatedRouteData.animation;
+    return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
   }
 }
