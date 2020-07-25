@@ -1,0 +1,10 @@
+<app-nav [tipoMedico]="true" [inicio]="false" [logeado]="true" [tipoPaciente]="false"></app-nav>
+
+<div style="display: flex; justify-content: left; flex-direction: row;">
+    <div style="width: 50%; margin: 3%;">
+        <app-tabla-turnos [listaTurnos]="listaTurnosC" (pasarTurno)="tomarTurno($event)"></app-tabla-turnos>
+    </div>
+    <div *ngIf="hayTurno" style="width: 35%; margin-top: 3%;">
+        <app-detalle-resenia [turno]="turnoElegido" [esPaciente]="false"></app-detalle-resenia>
+    </div>
+</div>

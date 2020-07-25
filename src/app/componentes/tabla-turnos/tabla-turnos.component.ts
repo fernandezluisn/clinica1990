@@ -15,6 +15,7 @@ export class TablaTurnosComponent implements OnInit {
   @Input() resenia=false;
   @Input() noConfirmados=false;
   @Input() confirmados=false;
+
   @Input() listaTurnos:turno[];
   @Output() aprobarTurno:EventEmitter<any>=new EventEmitter<any>();
   @Output() cancelarTurno:EventEmitter<any>=new EventEmitter<any>();

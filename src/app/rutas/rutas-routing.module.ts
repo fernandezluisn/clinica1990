@@ -17,6 +17,7 @@ import {TurnosSacadosComponent} from '../componentes/turnos-sacados/turnos-sacad
 import {HistoriaClinicaComponent} from '../componentes/historia-clinica/historia-clinica.component';
 import {EncuestaComponent} from '../componentes/encuesta/encuesta.component';
 import {ComentarioComponent} from '../componentes/comentario/comentario.component';
+import {HistorialPacientesComponent} from '../componentes/historial-pacientes/historial-pacientes.component';
 
 const redirectUnauthorizedToLogin=()=>redirectUnauthorizedTo(["login"]);
 
@@ -34,6 +35,7 @@ const routes: Routes = [
   {path:"altaUsuario", component:HabilitarUsuariosComponent, ...canActivate(redirectUnauthorizedToLogin), data: {animation: 'altaUsuario'}},
   {path:"comentario/:idTurno", component:ComentarioComponent, ...canActivate(redirectUnauthorizedToLogin)},
   {path:"encuesta/:idTurno", component:EncuestaComponent, ...canActivate(redirectUnauthorizedToLogin)},
+  {path:"historial", component:HistorialPacientesComponent, ...canActivate(redirectUnauthorizedToLogin)},
   {path:"historiaClinica", component:HistoriaClinicaComponent, ...canActivate(redirectUnauthorizedToLogin), data: {animation: 'HistoriaClinica'}},
   {path:"confirmados", component:TurnosConfirmadosComponent, ...canActivate(redirectUnauthorizedToLogin)}
 ];

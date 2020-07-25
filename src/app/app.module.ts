@@ -24,6 +24,7 @@ import { RegistroComponent } from './componentes/registro/registro.component';
 import { BienvenidaComponent } from './componentes/bienvenida/bienvenida.component';
 import { ServicioService } from './servicios/servicio.service';
 import {StorageService} from './servicios/storage.service';
+import {ArchivosService} from './servicios/archivos.service';
 import {BdaService} from './servicios/bda.service';
 import { NavComponent } from './componentes/nav/nav.component';
 import { HorarioMedicosComponent } from './componentes/horario-medicos/horario-medicos.component';
@@ -48,6 +49,7 @@ import { HistoriaClinicaComponent } from './componentes/historia-clinica/histori
 import { EncuestaComponent } from './componentes/encuesta/encuesta.component';
 import { DetalleReseniaComponent } from './componentes/detalle-resenia/detalle-resenia.component';
 import { ComentarioComponent } from './componentes/comentario/comentario.component';
+import { HistorialPacientesComponent } from './componentes/historial-pacientes/historial-pacientes.component';
 
 
 
@@ -77,7 +79,8 @@ import { ComentarioComponent } from './componentes/comentario/comentario.compone
     HistoriaClinicaComponent,
     EncuestaComponent,
     DetalleReseniaComponent,
-    ComentarioComponent
+    ComentarioComponent,
+    HistorialPacientesComponent
   ],
   imports: [
     BrowserModule,
@@ -90,7 +93,7 @@ import { ComentarioComponent } from './componentes/comentario/comentario.compone
     BrowserAnimationsModule,
     NgxSpinnerModule
   ],
-  providers: [ServicioService, AngularFireAuth, StorageService, BdaService, DatePipe],
+  providers: [ServicioService, AngularFireAuth, StorageService, BdaService, DatePipe, ArchivosService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

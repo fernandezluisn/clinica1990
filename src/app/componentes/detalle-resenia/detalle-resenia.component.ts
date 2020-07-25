@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 export class DetalleReseniaComponent implements OnInit {
 
   @Input() turno:turno;
+  @Input() esPaciente:boolean;
   constructor(private router: Router) { }
 
   ngOnInit(): void {

@@ -5,8 +5,12 @@
     <h3>{{turno.especialidad}}</h3>
     <h2>Medico</h2>
     <h3>{{turno.empleado.nombre}} {{turno.empleado.apellido}}</h3>
-
+    <h2>Paciente</h2>
+    <h3>{{turno.paciente.nombre}} {{turno.paciente.apellido}}</h3>
+    <label for="">Reseña</label>
     <p>{{turno.resenia}}</p>
+    <label for="" *ngIf="!esPaciente">Comentario</label>
+    <p *ngIf="!esPaciente">{{turno.comentario}}</p>
 
-    <button (click)="registrar()" class="btn btn-primary">Devolver comentario</button>
+    <button (click)="registrar()" class="btn btn-primary" *ngIf="esPaciente">Devolver comentario</button>
     </div>

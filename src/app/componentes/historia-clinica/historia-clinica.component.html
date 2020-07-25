@@ -5,5 +5,5 @@
 <div *ngIf="vacio"><h1>Usted no tiene Historia Clínica registrada en nuestra clínica.</h1></div>
 
 <div *ngIf="hayTurno">
-    <app-detalle-resenia [turno]="turnoParaDetalle"></app-detalle-resenia>
+    <app-detalle-resenia [turno]="turnoParaDetalle" [esPaciente]="true"></app-detalle-resenia>
 </div>
