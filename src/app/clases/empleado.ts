@@ -4,6 +4,7 @@ export class empleado extends persona {
 
     especialidades:string[]; 
     aprobadoPorAdmin:boolean;
+    cantidadTurnos:number;
 
     constructor(nombre, apellido, especialidades:string[], id:string, aprobadoPorAdmin:boolean) {
         super(nombre, apellido,id);

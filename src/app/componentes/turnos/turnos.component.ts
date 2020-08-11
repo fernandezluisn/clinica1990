@@ -13,6 +13,7 @@ import { DatePipe } from '@angular/common';
 import { MedicosService } from 'src/app/servicios/medicos.service';
 import { jornadaSemanal } from 'src/app/clases/jornadaSemanal';
 import {Mailer} from '../../clases/mailer';
+import { Router } from '@angular/router';
 
 
 
@@ -73,7 +74,7 @@ export class TurnosComponent implements OnInit {
 
   options: any;
 
-  constructor( private serv:ServicioService, private bda:BdaService, private turnosS:TurnosService, public datepipe: DatePipe, private medicoS:MedicosService) { 
+  constructor( private serv:ServicioService, private bda:BdaService, private turnosS:TurnosService, public datepipe: DatePipe, private medicoS:MedicosService, private router:Router) { 
     this.nTurno=null;
     this.serv.tomarUsuario().then(res=>{
       
@@ -459,11 +460,12 @@ export class TurnosComponent implements OnInit {
       let t=new turno(this.medicoDetalle, this.usuarioLista, "a confirmar", this.fecha, this.nTurno, "No hay", this.especialidad);      
       this.turnosS.createTurno(t).then(res=>{
         alert("Su turno se ha registrado correctamente.");        
-        
+        this.router.navigate(["turnosAprobados"]);
       });
 
+
     }
-      this.mailer.sendMail("aaa");
+     // this.mailer.sendMail("aaa");
   }
  
 

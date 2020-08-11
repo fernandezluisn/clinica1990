@@ -1,0 +1,22 @@
+<div class="form-group">
+    <label >Seleccione un lapso de tiempo:</label>
+    <select [(ngModel)]="lapso" class="form-control" style="width: 12rem;" (change)="carg()" name="SelectEsp">
+        <option [value]="item" *ngFor="let item of lapsos">{{item}}</option>
+    </select>        
+</div>
+
+<div *ngIf="cargo">
+    <div>
+        <div>
+        <div style="display: block">
+            <canvas baseChart
+            [datasets]="barChartData"
+            [labels]="barChartLabels"
+            [options]="barChartOptions"
+            [plugins]="barChartPlugins"
+            [legend]="barChartLegend"
+            [chartType]="barChartType">
+            </canvas>
+        
+    </div>
+</div>

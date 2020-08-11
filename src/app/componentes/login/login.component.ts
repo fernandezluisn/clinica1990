@@ -59,6 +59,38 @@ export class LoginComponent implements OnInit {
     
   }
 
+  pacienteUno(){
+
+    this.servicio.loginUser("fernandezluisn@gmail.com","123456").then(res=>{
+      this.router.navigate(['turnos']);
+    })
+    
+  }
+
+  pacienteDos(){
+    this.servicio.loginUser("cosme@gmail.com","123456").then(res=>{
+      this.router.navigate(['turnos']);
+    })
+  }
+
+  admin(){
+    this.servicio.loginUser("admin2@gmail.com","123456").then(res=>{
+      this.router.navigate(['homeAdmin']);
+    })
+  }
+
+  medicoUno(){
+    this.servicio.loginUser("mdiaz@gmail.com","123456").then(res=>{
+      this.router.navigate(['homeMedico']);
+    })
+  }
+
+  medicoDos(){
+    this.servicio.loginUser("juanc@gmail.com","123456").then(res=>{
+      this.router.navigate(['homeMedico']);
+    })
+  }
+
   onLogOut(){
     this.servicio.logOutUser();
     this.log=false;

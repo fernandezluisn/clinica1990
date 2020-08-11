@@ -18,6 +18,7 @@ import {HistoriaClinicaComponent} from '../componentes/historia-clinica/historia
 import {EncuestaComponent} from '../componentes/encuesta/encuesta.component';
 import {ComentarioComponent} from '../componentes/comentario/comentario.component';
 import {HistorialPacientesComponent} from '../componentes/historial-pacientes/historial-pacientes.component';
+import {DatosAdminComponent} from '../componentes/datos-admin/datos-admin.component';
 
 const redirectUnauthorizedToLogin=()=>redirectUnauthorizedTo(["login"]);
 
@@ -37,7 +38,8 @@ const routes: Routes = [
   {path:"encuesta/:idTurno", component:EncuestaComponent, ...canActivate(redirectUnauthorizedToLogin)},
   {path:"historial", component:HistorialPacientesComponent, ...canActivate(redirectUnauthorizedToLogin)},
   {path:"historiaClinica", component:HistoriaClinicaComponent, ...canActivate(redirectUnauthorizedToLogin), data: {animation: 'HistoriaClinica'}},
-  {path:"confirmados", component:TurnosConfirmadosComponent, ...canActivate(redirectUnauthorizedToLogin)}
+  {path:"confirmados", component:TurnosConfirmadosComponent, ...canActivate(redirectUnauthorizedToLogin)},
+  {path:"datos", component:DatosAdminComponent, ...canActivate(redirectUnauthorizedToLogin)}
 ];
 
 @NgModule({

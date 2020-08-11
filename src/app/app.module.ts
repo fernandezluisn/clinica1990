@@ -8,7 +8,7 @@ import {AngularFireModule} from '@angular/fire';
 import {environment} from '../environments/environment';
 import {AngularFireAuth} from '@angular/fire/auth';
 
-
+import { ChartsModule } from 'ng2-charts';
 
 import {AngularFireStorageModule} from '@angular/fire/storage';
 import {RecaptchaModule, RecaptchaFormsModule} from 'ng-recaptcha';
@@ -50,6 +50,9 @@ import { EncuestaComponent } from './componentes/encuesta/encuesta.component';
 import { DetalleReseniaComponent } from './componentes/detalle-resenia/detalle-resenia.component';
 import { ComentarioComponent } from './componentes/comentario/comentario.component';
 import { HistorialPacientesComponent } from './componentes/historial-pacientes/historial-pacientes.component';
+import { TurnosPorDiaComponent } from './componentes/turnos-por-dia/turnos-por-dia.component';
+import { DatosAdminComponent } from './componentes/datos-admin/datos-admin.component';
+import { MedicosBarrasComponent } from './componentes/medicos-barras/medicos-barras.component';
 
 
 
@@ -80,7 +83,10 @@ import { HistorialPacientesComponent } from './componentes/historial-pacientes/h
     EncuestaComponent,
     DetalleReseniaComponent,
     ComentarioComponent,
-    HistorialPacientesComponent
+    HistorialPacientesComponent,
+    TurnosPorDiaComponent,
+    DatosAdminComponent,
+    MedicosBarrasComponent
   ],
   imports: [
     BrowserModule,
@@ -91,7 +97,8 @@ import { HistorialPacientesComponent } from './componentes/historial-pacientes/h
     RecaptchaModule,
     RecaptchaFormsModule,
     BrowserAnimationsModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    ChartsModule
   ],
   providers: [ServicioService, AngularFireAuth, StorageService, BdaService, DatePipe, ArchivosService],
   bootstrap: [AppComponent]
