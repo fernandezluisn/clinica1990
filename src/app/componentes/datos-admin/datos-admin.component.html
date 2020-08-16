@@ -2,10 +2,16 @@
 
 <h1>Aquí puede visualizar información sobre la utilización de la app.</h1>
 
-<div class="grafico">
-    <app-turnos-por-dia style="margin: 1%;"></app-turnos-por-dia>
-</div>
+<div *ngIf="cargo">
+    <div class="grafico">
+        <app-turnos-por-dia [listadoTurnos]="listadoTurnos" style="margin: 1%;"></app-turnos-por-dia>
+    </div>
 
-<div class="grafico" style="margin-top: 20rem;">
-    <app-medicos-barras style="margin: 1%;"></app-medicos-barras>
+    <div class="grafico" style="margin-top: 20rem;">
+        <app-medicos-barras [listadoTurnos]="listadoTurnos" [listadoEmpleados]="listadoEmpleados" [listadoLogins]="listadoLogins" style="margin: 1%;"></app-medicos-barras>
+    </div>
+
+    <div class="grafico">
+        <app-turnos-por-sector></app-turnos-por-sector>
+    </div>
 </div>

@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { turno } from 'src/app/clases/turno';
 import { ServicioService } from 'src/app/servicios/servicio.service';
 import { TurnosService } from 'src/app/servicios/turnos.service';
-import { element } from 'protractor';
 import { empleado } from 'src/app/clases/empleado';
 import { BdaService } from 'src/app/servicios/bda.service';
+import { especialidad } from 'src/app/clases/especialidad';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-turnos-aconfirmar',
@@ -18,6 +19,7 @@ export class TurnosAConfirmarComponent implements OnInit {
   medicoLogeado:empleado;
   descargo:boolean;
   noHayTurnos=false;
+  listaEspecialidades:especialidad[];
 
   constructor(private service:ServicioService, private turnosBDA:TurnosService, private bda:BdaService) { 
     this.service.tomarUsuario().then(element=>
@@ -35,6 +37,10 @@ export class TurnosAConfirmarComponent implements OnInit {
         })
       }
       );
+
+      this.bda.devolverListadoEspecialidades().subscribe(lista=>{
+        this.listaEspecialidades=lista;
+      })
   }
 
   ngOnInit(): void {
@@ -70,9 +76,20 @@ export class TurnosAConfirmarComponent implements OnInit {
       
   }
 
-  cargarTurno(turno){
+  cargarTurno(turno:turno){
+
+    let e:especialidad;
+
     try{
-      console.log(turno.id)
+      this.listaEspecialidades.forEach(element=>{
+        if (element.nombre==turno.especialidad){
+          e=element;
+        }
+      })
+
+      e.operaciones++;
+
+      this.bda.updateEspecialidad(e);
       turno.resenia="No hay";
       this.turnosBDA.actualizarTurno(turno, 2);
       this.filtrarTurnos();

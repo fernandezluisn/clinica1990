@@ -18,7 +18,7 @@ export class HomeMedicoComponent implements OnInit {
   
   user;
 
-  descargo:boolean;  
+  descargo=false;  
 
   nTurnoE1:number=0;
   nTurnoS1:number=11;

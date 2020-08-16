@@ -7,6 +7,7 @@ import { DatePipe } from '@angular/common'
 import { empleado } from 'src/app/clases/empleado';
 import { element } from 'protractor';
 import { Router } from '@angular/router';
+import { especialidad } from 'src/app/clases/especialidad';
 
 
 @Component({
@@ -24,6 +25,8 @@ export class AtencionPacienteComponent implements OnInit {
   turnoACompletar:turno;
   listadoCompleto:turno[];
   noHayTurnos=true;
+
+  listaEspecialidades:especialidad[];
 
   seAgregaronDatos=false;
 
@@ -61,6 +64,9 @@ export class AtencionPacienteComponent implements OnInit {
       let dia=new Date();      
       let l=this.datepipe.transform(dia, 'yyyy-MM-dd');
      
+      this.bda.devolverListadoEspecialidades().subscribe(listaE=>{
+        this.listaEspecialidades=listaE;
+      })
 
      this.bda.devolverListadoEmpleados().subscribe(lista=>{
       lista.filter(elementL=>{
@@ -125,8 +131,19 @@ export class AtencionPacienteComponent implements OnInit {
   }
 
   subirResenia(){
+
+    let esp:especialidad;
+
+    this.listaEspecialidades.forEach(element=>{
+      if(element.nombre==this.turnoACompletar.especialidad){
+        esp=element;
+      }
+    })
+
+    esp.operaciones++;
+
+    this.bda.updateEspecialidad(esp);
     
-    console.log(this.turnoACompletar);
     if(this.seAgregaronDatos)
     {
       this.turnoACompletar.presión=this.presion;

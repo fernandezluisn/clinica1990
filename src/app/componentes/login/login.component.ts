@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 
 import {ServicioService} from '../../servicios/servicio.service';
 import { BdaService } from 'src/app/servicios/bda.service';
-import { element } from 'protractor';
 
 
 @Component({
@@ -36,10 +35,13 @@ export class LoginComponent implements OnInit {
     ((res)=>{
       this.log=true;    
       this.logeado.emit(this.log);
-      this.bda.devolverListadoPacientes().subscribe(lista=>{
-        lista.forEach(element=>{
-          if(element.email.toLowerCase()==this.email.toLowerCase())
-          this.router.navigate(['turnos']);
+      this.bda.devolverListadoEmpleados().subscribe(listaE=>{
+        listaE.forEach(element=>{
+          if(element.email.toLowerCase()==this.email.toLowerCase()){  
+            this.bda.guardarLogin(this.email);        
+            this.router.navigate(['homeMedico']);
+          }
+          
         })
       })
       this.bda.devolverListadoAdministradores().subscribe(lista=>
@@ -50,7 +52,7 @@ export class LoginComponent implements OnInit {
           })
         }
         )
-      this.router.navigate(["homeMedico"]);
+      this.router.navigate(["turnos"]);
       
     }).catch(error=>{
       alert(error.message);      
@@ -62,6 +64,7 @@ export class LoginComponent implements OnInit {
   pacienteUno(){
 
     this.servicio.loginUser("fernandezluisn@gmail.com","123456").then(res=>{
+      
       this.router.navigate(['turnos']);
     })
     
@@ -81,12 +84,14 @@ export class LoginComponent implements OnInit {
 
   medicoUno(){
     this.servicio.loginUser("mdiaz@gmail.com","123456").then(res=>{
+      this.bda.guardarLogin("mdiaz@gmail.com"); 
       this.router.navigate(['homeMedico']);
     })
   }
 
   medicoDos(){
     this.servicio.loginUser("juanc@gmail.com","123456").then(res=>{
+      this.bda.guardarLogin("juanc@gmail.com"); 
       this.router.navigate(['homeMedico']);
     })
   }

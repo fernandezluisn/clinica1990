@@ -1,12 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { TurnosService } from 'src/app/servicios/turnos.service';
+import { Component, OnInit, Input } from '@angular/core';
 import { turno } from 'src/app/clases/turno';
 
 //graficos
-import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
-import * as pluginDataLabels from 'chartjs-plugin-datalabels';
-import { Label } from 'ng2-charts';
-
+import { ChartDataSets, ChartOptions } from 'chart.js';
+import { Color, BaseChartDirective, Label } from 'ng2-charts';
+import * as pluginAnnotations from 'chartjs-plugin-annotation';
 @Component({
   selector: 'app-turnos-por-dia',
   templateUrl: './turnos-por-dia.component.html',
@@ -14,7 +12,8 @@ import { Label } from 'ng2-charts';
 })
 export class TurnosPorDiaComponent implements OnInit {
 
- 
+  cargo=false;
+
   díaFinal;
   diaInicial;
 
@@ -26,25 +25,28 @@ export class TurnosPorDiaComponent implements OnInit {
   sabado;
   domingo=0;
   
-  listadoTurnos:turno[];
+  @Input() listadoTurnos:turno[];
   listaFiltrada:turno[];
 
 
  
 
-  constructor(private bda:TurnosService) { 
+  constructor() { 
     
     let hoy=new Date();
     this.diaInicial=new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate());
-    this.díaFinal=new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()+6);
+    this.díaFinal=new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()+6);   
     
     
     
-    this.bda.devolverListadoTurnos().subscribe(lista=>{
-      this.listadoTurnos=lista;
-      this.filtrarListado(lista);
-    });
   }
+
+  ngOnChanges() {
+    if(this.listadoTurnos.length>0)
+    this.filtrarListado(this.listadoTurnos);
+    else
+    this.cargo=false;
+}
 
   public barChartOptions: ChartOptions = {
     responsive: true,
@@ -57,13 +59,55 @@ export class TurnosPorDiaComponent implements OnInit {
       }
     }
   };
-  public barChartLabels: Label[] = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
-  public barChartType: ChartType = 'bar';
-  public barChartLegend = true;
-  public barChartPlugins = [pluginDataLabels];
+  public lineChartLabels: Label[] = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
 
-  public barChartData: ChartDataSets[]= [
-    { data: [this.lunes, this.martes, this.miercoles, this.jueves, this.viernes, this.sabado, this.domingo], label: 'Cantidad de turnos Por día de la semana' }    
+  public lineChartOptions: (ChartOptions & { annotation: any }) = {
+    responsive: true,
+    scales: {
+      // We use this empty structure as a placeholder for dynamic theming.
+      xAxes: [{}],
+      yAxes: [
+        {
+          id: 'y-axis-0',
+          position: 'left',
+        }
+        
+      ]
+    },
+    annotation: {
+      annotations: [
+        {
+          type: 'line',
+          mode: 'vertical',
+          scaleID: 'x-axis-0',
+          value: 'March',
+          borderColor: 'orange',
+          borderWidth: 2,
+          label: {
+            enabled: true,
+            fontColor: 'orange',
+            content: 'LineAnno'
+          }
+        },
+      ],
+    },
+  };
+  public lineChartColors: Color[] = [
+    { // grey
+      backgroundColor: 'rgba(348,159,177,0.2)',
+      borderColor: 'rgba(348,159,177,1)',
+      pointBackgroundColor: 'rgba(348,159,177,1)',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: 'rgba(348,159,177,0.8)'
+    }
+  ];
+  public lineChartLegend = true;
+  public lineChartType = 'line';
+  public lineChartPlugins = [pluginAnnotations];
+
+  public lineChartData: ChartDataSets[]= [
+    { data: [this.lunes, this.martes, this.miercoles, this.jueves, this.viernes, this.sabado, this.domingo], label: 'Cantidad de turnos por día durante la próxima semana' }    
   ];
  
 
@@ -124,10 +168,11 @@ export class TurnosPorDiaComponent implements OnInit {
     this.viernes=vi;
     this.sabado=sa;
 
-    this.barChartData= [
-      { data: [this.lunes, this.martes, this.miercoles, this.jueves, this.viernes, this.sabado, this.domingo], label: 'Cantidad de turnos Por día de la semana' }    
+    this.lineChartData= [
+      { data: [this.lunes, this.martes, this.miercoles, this.jueves, this.viernes, this.sabado, this.domingo], label: 'Cantidad de turnos por día durante la próxima semana' }    
     ];
 
+    this.cargo=true;
   }
 
 }

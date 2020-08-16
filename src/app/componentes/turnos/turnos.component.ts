@@ -14,6 +14,8 @@ import { MedicosService } from 'src/app/servicios/medicos.service';
 import { jornadaSemanal } from 'src/app/clases/jornadaSemanal';
 import {Mailer} from '../../clases/mailer';
 import { Router } from '@angular/router';
+import { especialidad } from 'src/app/clases/especialidad';
+import { element } from 'protractor';
 
 
 
@@ -69,6 +71,8 @@ export class TurnosComponent implements OnInit {
   listaTurnosDia;
   listaJornadas:jornadaSemanal[];
 
+  listadoEspecialidades:especialidad[];
+
   events: any[];
   mailer:Mailer;
 
@@ -76,6 +80,11 @@ export class TurnosComponent implements OnInit {
 
   constructor( private serv:ServicioService, private bda:BdaService, private turnosS:TurnosService, public datepipe: DatePipe, private medicoS:MedicosService, private router:Router) { 
     this.nTurno=null;
+
+    this.bda.devolverListadoEspecialidades().subscribe(lista=>{
+      this.listadoEspecialidades=lista;
+    });
+    
     this.serv.tomarUsuario().then(res=>{
       
       this.usuario=res;   
@@ -105,7 +114,7 @@ export class TurnosComponent implements OnInit {
         })
 
       })
-      console.log(this.usuario.uid);   
+     
     }).catch(err=>{
       alert(err);
     });
@@ -113,7 +122,7 @@ export class TurnosComponent implements OnInit {
     this.esDomingo=false;
     this.hoy=new Date();
     this.quinceDias=new Date(this.hoy.getFullYear(), this.hoy.getMonth(), this.hoy.getDate()+15);
-    console.log(this.quinceDias);
+   
     this.v0=false;
     this.v1=false;
     this.v2=false;
@@ -456,6 +465,18 @@ export class TurnosComponent implements OnInit {
       alert("Debe seleccionar especialidad");
       
     }else{
+
+      let esp:especialidad;
+
+      this.listadoEspecialidades.forEach(element=>{
+        if(this.especialidad==element.nombre){
+          esp=element;
+        }
+      })
+
+      esp.operaciones++;
+
+      this.bda.updateEspecialidad(esp);
       
       let t=new turno(this.medicoDetalle, this.usuarioLista, "a confirmar", this.fecha, this.nTurno, "No hay", this.especialidad);      
       this.turnosS.createTurno(t).then(res=>{

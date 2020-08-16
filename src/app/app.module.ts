@@ -53,6 +53,7 @@ import { HistorialPacientesComponent } from './componentes/historial-pacientes/h
 import { TurnosPorDiaComponent } from './componentes/turnos-por-dia/turnos-por-dia.component';
 import { DatosAdminComponent } from './componentes/datos-admin/datos-admin.component';
 import { MedicosBarrasComponent } from './componentes/medicos-barras/medicos-barras.component';
+import { TurnosPorSectorComponent } from './componentes/turnos-por-sector/turnos-por-sector.component';
 
 
 
@@ -86,7 +87,8 @@ import { MedicosBarrasComponent } from './componentes/medicos-barras/medicos-bar
     HistorialPacientesComponent,
     TurnosPorDiaComponent,
     DatosAdminComponent,
-    MedicosBarrasComponent
+    MedicosBarrasComponent,
+    TurnosPorSectorComponent
   ],
   imports: [
     BrowserModule,

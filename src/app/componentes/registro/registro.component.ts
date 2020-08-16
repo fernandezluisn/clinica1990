@@ -133,7 +133,8 @@ export class RegistroComponent implements OnInit {
         {
           if(this.detallar){
             u=new empleado(this.nombre, this.apellido,  j2, this.mail, false);
-            let e=new especialidad(this.profesion2);
+            
+            let e=new especialidad(this.profesion2, 0);
             this.bda.createEspecialidad(e);
             this.bdaEspecialidades.createEspecialidad(e, this.mail);
           }else{
@@ -142,7 +143,9 @@ export class RegistroComponent implements OnInit {
           }
           this.spinner();
           this.bda.createUsuario(u);
+         
           this.bda.createEmpleado(u).then(async (res)=>{
+            this.bda.guardarLogin(this.mail);
             this.router.navigate(['homeMedico']);
           }).catch(err=>alert("error en el guardado de datos "+err.message));
         }}).catch(error=>{

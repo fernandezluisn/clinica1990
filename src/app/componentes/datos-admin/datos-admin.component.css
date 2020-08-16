@@ -1,8 +1,8 @@
 .grafico{
     margin: 5%;
-    width: 60%;
+    
     height: 100%;
     border: solid black 0.3rem;
     border-radius: 0.5rem;
-    background-color: rgba(14, 66, 75, 0.158);
+    background-color: rgb(249, 251, 252);
 }

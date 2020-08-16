@@ -16,7 +16,7 @@ export class AgregarEspecialidadComponent implements OnInit {
   detallar:boolean;
   profesion2:string;
 
-  listaEspecialidades;
+  listaEspecialidades:especialidad[];
   constructor(private bda:BdaService) {
     this.bda.devolverListadoEspecialidades().subscribe(lista => {
       this.listaEspecialidades = lista;       
@@ -28,7 +28,7 @@ export class AgregarEspecialidadComponent implements OnInit {
   }
 
   carg(){
-    console.log(this.profesion);
+    
     if(this.profesion=='Otra')
     {
       this.detallar=true;
@@ -40,14 +40,19 @@ export class AgregarEspecialidadComponent implements OnInit {
 
   agregar(){
     if(this.detallar){
-      let e=new especialidad(this.profesion2);
+      let e=new especialidad(this.profesion2, 0);
       this.bda.createEspecialidad(e);
       this.actualizar.emit(e);
     }
     else{
-      let e=new especialidad(this.profesion);
+      let e;
+      this.listaEspecialidades.filter(element => {
+        if(this.profesion==element.nombre)
+        e=element;
+       
+      });
       this.actualizar.emit(e);
-      console.log("se lanza"+e.nombre);
+     
     }
   }
 

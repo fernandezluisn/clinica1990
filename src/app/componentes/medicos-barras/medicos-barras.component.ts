@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { TurnosService } from 'src/app/servicios/turnos.service';
+import { Component, OnInit, Input } from '@angular/core';
 import { turno } from 'src/app/clases/turno';
-import { BdaService } from 'src/app/servicios/bda.service';
 import { empleado } from 'src/app/clases/empleado';
-
+import { log } from 'src/app/clases/log';
 //graficos
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { Label } from 'ng2-charts';
+
+
 
 @Component({
   selector: 'app-medicos-barras',
@@ -24,26 +24,16 @@ export class MedicosBarrasComponent implements OnInit {
 
   lapsos:string[]=["la última semana","las últimas dos semanas","el último mes"];
 
-  listadoTurnos:turno[];
+  @Input() listadoTurnos:turno[];
   listadoTurnosFiltrado:turno[];
 
-  listadoEmpleados:empleado[];
+  @Input() listadoLogins:log[];
+  listadoLoginsFiltrado:log[];
 
-  constructor(private bda:TurnosService, private bdaMedicos:BdaService) { 
-    this.lapso="la última semana";
+  @Input() listadoEmpleados:empleado[];
 
-    this.bda.devolverListadoTurnos().subscribe(lista=>{
-      this.listadoTurnos=lista;
-      this.bdaMedicos.devolverListadoEmpleados().subscribe(listaE=>{
-        this.listadoEmpleados=listaE;
-        this.carg();
-        
-      })
-    })
-
-   
-
-    
+  constructor() { 
+    this.lapso="la última semana";     
   }
 
   public barChartOptions: ChartOptions = {
@@ -67,6 +57,13 @@ export class MedicosBarrasComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  ngOnChanges() {
+    if(this.listadoTurnos.length>0)
+    this.carg();
+    else
+    this.cargo=false;
+}
+
   carg(){
     let hoy=new Date();
     this.diaInicial=new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate());
@@ -83,34 +80,75 @@ export class MedicosBarrasComponent implements OnInit {
         
     }
 
-    this.filtrarListado(this.listadoTurnos);
+    this.listadoTurnosFiltrado=this.filtrarListado(this.listadoTurnos);
+    this.listadoLoginsFiltrado;
+
+    let logs=new Array();
+
+    this.listadoLogins.filter(log=>{
+   
+
+
+     
+      if(Number(Date.parse(log.fecha))<=Number(Date.parse(this.diaInicial.toString())) &&  
+      Number(Date.parse(log.fecha))>=Number(Date.parse(this.diaFinal.toString()))){
+        logs.push(log);
+        
+      }
+    })
+
+    this.listadoLoginsFiltrado=logs;
+
     let numeros=new Array();
+
+    let logins=new Array();
+
+    let cantidadDias=new Array();
 
     let nombres=new Array();
     
     this.listadoEmpleados.forEach(empleado=>{
       nombres.push(empleado.nombre+" "+empleado.apellido);
       empleado.cantidadTurnos=0;
-
+      empleado.cantidadLogins=0;
+      
+      let fechas=new Array();
       this.listadoTurnosFiltrado.forEach(turno=>{
         if(turno.empleado.email.toLowerCase()==empleado.email.toLowerCase()){
           empleado.cantidadTurnos++;
+
+          if(!fechas.includes(turno.fecha))
+          fechas.push(turno.fecha);
         }
       })
 
+      this.listadoLoginsFiltrado.forEach(elementL=>{
+        if(elementL.email.toLowerCase()==empleado.email.toLowerCase()){
+          empleado.cantidadLogins++;
+        }
+      })
+
+      
+      console.log(empleado.email+" "+fechas.length);
+      cantidadDias.push(fechas.length);
+      logins.push(empleado.cantidadLogins);
       numeros.push(empleado.cantidadTurnos);
-      console.log(empleado.email+" "+empleado.cantidadTurnos);
+      
     })
 
-    let s=[{ data: numeros, label: 'Cantidad de turnos por médico durante '+this.lapso } ];
+
+
+    let s=[{ data: numeros, label: 'Cantidad de turnos por médico durante '+this.lapso },
+    { data: cantidadDias, label: 'Cantidad de días trabajados' },
+    { data: logins, label: 'Cantidad de ingresos al sistema' } ];
 
     this.barChartData=s;
     this.barChartLabels=nombres;
-
     this.cargo=true;
+    
   }
 
-  filtrarListado(lista:turno[]){
+  filtrarListado(lista){
     let lT=new Array();
     lista.filter(element=>{
       if(Number(Date.parse(element.fecha.toString()))<=Number(Date.parse(this.diaInicial.toString())) &&  
@@ -119,7 +157,7 @@ export class MedicosBarrasComponent implements OnInit {
       }
     })  
 
-    this.listadoTurnosFiltrado=lT;
+    return lT;
   }
 
 }

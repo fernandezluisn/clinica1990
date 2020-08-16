@@ -6,8 +6,8 @@ import { paciente } from '../clases/paciente';
 import { map } from 'rxjs/operators';
 import { especialidad } from '../clases/especialidad';
 import { persona } from '../clases/persona';
-import { element } from 'protractor';
 import { admin } from '../clases/admin';
+import { log } from '../clases/log';
 
 @Injectable({
   providedIn: 'root'
@@ -25,10 +25,29 @@ export class BdaService {
   listaAdministradores:Observable<admin[]>;
 
 
+  listaLogins:Observable<log[]>;
+
+
   constructor(private db:AngularFirestore ) {
 
 
     this.listaAdministradores=this.db.collection('administradores').snapshotChanges().pipe(
+      map(actions=>{
+        return actions.map(
+          a=>{
+            const data= a.payload.doc.data();
+            const id=a.payload.doc.id;
+            return {id, ...(data as any)}
+          }
+        );
+      }
+
+      )
+
+     
+    );
+
+    this.listaLogins=this.db.collection('logins').snapshotChanges().pipe(
       map(actions=>{
         return actions.map(
           a=>{
@@ -153,22 +172,26 @@ export class BdaService {
     return this.listaPacientes;
   }
 
+  devolverListadoLogins(){
+    return this.listaLogins;
+    
+  }
+
   devolverListadoEmpleados(){
     return this.listaEmpleados;
   }
 
-  updateEmpleado(usuario:empleado) {
+  updateEspecialidad(usuario:especialidad) {
     
     let l;
   
-    this.listaEmpleados.subscribe(lista=>{
-      console.log(lista);
+    this.listaEspecialidades.subscribe(lista=>{
+      
       lista.forEach(element=>{
-        if(element.email.toLowerCase()==usuario.email.toLowerCase())
+        if(element.nombre==usuario.nombre)
         {
-          l=element;
-          console.log("final "+l.id);
-          this.db.doc('empleados/' + l.id).update({...usuario});
+          l=element;          
+          this.db.doc('especialidades/' + l.id).update({...usuario});         
         }
       })
       
@@ -176,11 +199,45 @@ export class BdaService {
     
   }
 
+  updateEmpleado(usuario:empleado) {
+    
+    let l;
+  
+    this.listaEmpleados.subscribe(lista=>{
+      
+      lista.forEach(element=>{
+        if(element.email.toLowerCase()==usuario.email.toLowerCase())
+        {
+          l=element;          
+          this.db.doc('empleados/' + l.id).update({...usuario});         
+        }
+      })
+      
+    });
+    
+  }
+
+  guardarLogin(email:string){
+    
+   
+    let d=new Date().toDateString();
+    let h=new Date().toTimeString();
+   
+
+    let pac=new log(email, d, h);
+
+    return this.db.collection('logins').add({...pac});
+  
+   
+  }
+
+  
+
   updateUsuario(usuario:empleado) {
     let l;
   
     this.listaUsuarios.subscribe(lista=>{
-      console.log(lista);
+      
       lista.forEach(element=>{
         if(element.email.toLowerCase()==usuario.email.toLowerCase())
         {
