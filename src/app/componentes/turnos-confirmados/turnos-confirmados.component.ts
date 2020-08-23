@@ -64,7 +64,7 @@ export class TurnosConfirmadosComponent implements OnInit {
   ordenarTabla(){
     
     this.listaTurnosC.sort((a,b) => Number(Date.parse(a.fecha.toString())) - Number(Date.parse(b.fecha.toString())));
-    console.log(this.listaTurnosC);
+    
 
     if(this.listaTurnosC.length==0)
     this.noHayTurnos=true;

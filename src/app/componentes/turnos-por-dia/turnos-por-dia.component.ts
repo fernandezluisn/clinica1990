@@ -1,10 +1,15 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input} from '@angular/core';
 import { turno } from 'src/app/clases/turno';
+import {ArchivosService} from '../../servicios/archivos.service';
 
 //graficos
 import { ChartDataSets, ChartOptions } from 'chart.js';
-import { Color, BaseChartDirective, Label } from 'ng2-charts';
+import { Color, Label } from 'ng2-charts';
 import * as pluginAnnotations from 'chartjs-plugin-annotation';
+
+import { jsPDF } from "jspdf";
+import html2canvas from "html2canvas";
+
 @Component({
   selector: 'app-turnos-por-dia',
   templateUrl: './turnos-por-dia.component.html',
@@ -24,6 +29,8 @@ export class TurnosPorDiaComponent implements OnInit {
   viernes;
   sabado;
   domingo=0;
+
+  
   
   @Input() listadoTurnos:turno[];
   listaFiltrada:turno[];
@@ -31,7 +38,7 @@ export class TurnosPorDiaComponent implements OnInit {
 
  
 
-  constructor() { 
+  constructor(private impresor:ArchivosService) { 
     
     let hoy=new Date();
     this.diaInicial=new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate());
@@ -47,6 +54,10 @@ export class TurnosPorDiaComponent implements OnInit {
     else
     this.cargo=false;
 }
+
+
+
+
 
   public barChartOptions: ChartOptions = {
     responsive: true,
@@ -115,6 +126,27 @@ export class TurnosPorDiaComponent implements OnInit {
     
   }
 
+  excel(){
+    this.impresor.generarExcel(this.listaFiltrada, "turnos"+Date().toString());
+  }
+
+  pdf(){
+    //this.impresor.generarPdf(Date().toString(), this.listaFiltrada);
+    var element=document.getElementById("my-canvas");
+
+    html2canvas(element).then(canvas=>{
+      console.log(canvas);
+      var imgData=canvas.toDataURL("image/png");
+
+      var doc= new jsPDF('p','pt','a4');
+
+      
+
+      doc.addImage(imgData, 0,0,600,400);
+      doc.save("image.pdf");
+    })
+  }
+
   filtrarListado(lista:turno[]){
     let lT=new Array();
     lista.filter(element=>{
@@ -172,6 +204,7 @@ export class TurnosPorDiaComponent implements OnInit {
       { data: [this.lunes, this.martes, this.miercoles, this.jueves, this.viernes, this.sabado, this.domingo], label: 'Cantidad de turnos por día durante la próxima semana' }    
     ];
 
+    this.listaFiltrada=lT;
     this.cargo=true;
   }
 

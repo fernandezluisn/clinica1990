@@ -69,7 +69,6 @@ export class HomeMedicoComponent implements OnInit {
         lista.forEach(elementL=>{
           if(elementL.email.toLowerCase()==this.user.email.toLowerCase())
           {
-          console.log("El nombre es ",elementL.nombre);
           this.medicoLogeado=elementL;
           this.descargo=true;       
           

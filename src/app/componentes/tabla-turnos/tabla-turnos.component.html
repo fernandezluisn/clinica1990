@@ -1,35 +1,41 @@
- 
-<table class="table">
+<div style="margin: 3rem;">
+  Puede filtrar la tabla por el nombre, el apellido, <br> 
+  día o especialidad del medico <br> 
+  <input type="text" [(ngModel)]="txtBuscar" (change)="filtrarLista()"><br><br>
 
-    <thead>
-        <tr>
-          <th scope="col">Paciente</th>
-          <th scope="col">Medico</th>
-          <th scope="col">Especialidad</th>
-          <th scope="col">Fecha</th>
-          <th scope="col">Hora</th>
-          <th scope="col">Estado</th>
-          <th scope="col" *ngIf="resenia">Reseñas</th>
+
+  <table class="table">
+
+      <thead>
+          <tr>
+            <th scope="col">Paciente</th>
+            <th scope="col">Medico</th>
+            <th scope="col">Especialidad</th>
+            <th scope="col">Fecha</th>
+            <th scope="col">Hora</th>
+            <th scope="col">Estado</th>
+            <th scope="col" *ngIf="resenia">Reseñas</th>
+            
           
-         
+            
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let turno of listaFiltrada" (click)="pasarTurnoE(turno)">
+            <td scope="row" >{{turno.paciente.nombre}} {{turno.paciente.apellido}}</td>
+            <td scope="row" >{{turno.empleado.nombre}} {{turno.empleado.apellido}}</td>
+            <td scope="row" >{{turno.especialidad}}</td>
+            <td scope="row" >{{turno.fecha}}</td>
+            <td scope="row" >{{turno.numeroTurno | turnos}}</td>
+            <td scope="row" >{{turno.estado}}</td>
+            <td scope="row" *ngIf="resenia">{{turno.resenia}}</td>
+            <td scope="row" *ngIf="confirmados"><button (click)="cancelar(turno)" class="btn btn-warning">Cancelar turno</button> </td>
+            <td scope="row" *ngIf="noConfirmados"><button (click)="aprobar(turno)" class="btn btn-primary">Aprobar turno</button> </td>
           
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let turno of listaTurnos" (click)="pasarTurnoE(turno)">
-          <td scope="row" >{{turno.paciente.nombre}} {{turno.paciente.apellido}}</td>
-          <td scope="row" >{{turno.empleado.nombre}} {{turno.empleado.apellido}}</td>
-          <td scope="row" >{{turno.especialidad}}</td>
-          <td scope="row" >{{turno.fecha}}</td>
-          <td scope="row" >{{turno.numeroTurno | turnos}}</td>
-          <td scope="row" >{{turno.estado}}</td>
-          <td scope="row" *ngIf="resenia">{{turno.resenia}}</td>
-          <td scope="row" *ngIf="confirmados"><button (click)="cancelar(turno)" class="btn btn-warning">Cancelar turno</button> </td>
-          <td scope="row" *ngIf="noConfirmados"><button (click)="aprobar(turno)" class="btn btn-primary">Aprobar turno</button> </td>
-         
+            
           
-         
-        
-        </tr>       
-      </tbody>
-</table>
+          
+          </tr>       
+        </tbody>
+  </table>
+</div> 
