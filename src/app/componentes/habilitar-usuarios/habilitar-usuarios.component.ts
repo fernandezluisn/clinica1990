@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { BdaService } from 'src/app/servicios/bda.service';
-import { element } from 'protractor';
 import { empleado } from 'src/app/clases/empleado';
 
 @Component({

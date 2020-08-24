@@ -193,11 +193,12 @@ export class RegistroComponent implements OnInit {
   }
 
   hecho(e){
-    console.log("captcha "+e);
+   
     this.captchaResuelto=true;
   }
 
   respuesta(a:boolean){
     this.captchaResuelto2=a;
+    alert("Cuenta resuelta correctamente.");
   }
 }

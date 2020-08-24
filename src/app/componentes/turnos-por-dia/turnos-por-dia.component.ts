@@ -42,7 +42,7 @@ export class TurnosPorDiaComponent implements OnInit {
     
     let hoy=new Date();
     this.diaInicial=new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate());
-    this.díaFinal=new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()+6);   
+    this.díaFinal=new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()+7);   
     
     
     
