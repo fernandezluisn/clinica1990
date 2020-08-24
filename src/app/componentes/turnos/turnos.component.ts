@@ -39,6 +39,7 @@ export class TurnosComponent implements OnInit {
 
   medicoDetalle:empleado=null;
  
+  capt=true;
 
   hoy;
   quinceDias;
@@ -55,6 +56,8 @@ export class TurnosComponent implements OnInit {
 
   listadoEspecialistas:empleado[];
   listadoEspecialistasB:empleado[];
+
+  captchaResuelto=false;
 
   nohayTurnosDia=false;
 
@@ -132,6 +135,13 @@ export class TurnosComponent implements OnInit {
   ngOnInit(): void {  
   
     
+  }
+
+  respuesta(a:boolean){
+    this.captchaResuelto=a;
+    if(a==true){
+      this.capt=false;
+    }
   }
 
   filtrarPorDia(lista:empleado[], str:string){
@@ -455,6 +465,11 @@ export class TurnosComponent implements OnInit {
   }
 
   subirTurno(){
+    if(this.captchaResuelto==false)
+    {
+      alert("debe resolver el captcha");
+    }else
+
     if(isNull(this.medicoDetalle))
     {
       alert("Debe seleccionar un médico presionando sobre la tabla.");

@@ -65,6 +65,9 @@
         <re-captcha (resolved)="hecho($event)" siteKey="6LejLP8UAAAAACqNtBzf-L8-HMSJav05u1CIxxGo" ></re-captcha>
       </div>
       
+      <div *ngIf="capt">
+        <app-captcha (resp)="respuesta($event)"></app-captcha>
+      </div>
 
       <button type="submit" class="btn btn-primary">Registrarse</button>
 

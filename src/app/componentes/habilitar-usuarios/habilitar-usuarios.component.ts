@@ -29,7 +29,8 @@ export class HabilitarUsuariosComponent implements OnInit {
   }
 
   actualizarLista(){
-    let b=new Array();
+    let b:empleado[]=null;
+    b=new Array();
     this.bda.devolverListadoEmpleados().subscribe(lista=>{
       lista.filter(element=>{
         if(element.aprobadoPorAdmin==false)

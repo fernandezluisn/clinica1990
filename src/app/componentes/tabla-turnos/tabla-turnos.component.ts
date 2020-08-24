@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter, SimpleChange, ɵConsole
 import { turno } from 'src/app/clases/turno';
 import {TurnosPipe} from '../../pipes/turnos.pipe';
 import { element } from 'protractor';
-import { isUndefined } from 'util';
+import { isNullOrUndefined } from 'util';
 
 
 
@@ -65,10 +65,16 @@ export class TablaTurnosComponent implements OnInit {
         listaB.push(element);
       }else
 
-      if(!isUndefined(element.temperatura)){
+      if(!isNullOrUndefined(element.temperatura)){
         if(element.temperatura.toString().includes(this.txtBuscar)){
           listaB.push(element);
         }
+      }else if (!isNullOrUndefined(element.dato1v)){
+        listaB.push(element);
+      }else if (!isNullOrUndefined(element.dato2v)){
+        listaB.push(element);
+      }else if (!isNullOrUndefined(element.dato3v)){
+        listaB.push(element);
       }
     })
 

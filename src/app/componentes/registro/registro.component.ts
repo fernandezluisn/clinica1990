@@ -31,10 +31,12 @@ export class RegistroComponent implements OnInit {
   profesion2:string;
   detallar:boolean;
   captchaResuelto:boolean;
+  captchaResuelto2:boolean;
   capt:boolean;
   listaEspecialidades;
   
-
+  //n1:number;
+  //n2:number;
   
 
   uploadPercent1: Observable<number>;
@@ -53,13 +55,15 @@ export class RegistroComponent implements OnInit {
     this.detallar=false;
     this.profesion="Clinico";
     this.captchaResuelto=false;
+    this.captchaResuelto2=false;
     this.capt=true;
 
-   
+    //this.n1=Math.floor(Math.random()*10);
+    //this.n2=Math.floor(Math.random()*10);
 
     this.bda.devolverListadoEspecialidades().subscribe(lista => {
       this.listaEspecialidades = lista;       
-      console.log(lista);
+      
       });
 
       
@@ -99,12 +103,13 @@ export class RegistroComponent implements OnInit {
 
   quitarCaptcha(){
     this.captchaResuelto=true;
+    this.captchaResuelto2=true;
     this.capt=false;
   }
 
   registrar(){
     
-    if(this.pass1==this.pass2 && this.captchaResuelto){
+    if(this.pass1==this.pass2 && this.captchaResuelto && this.captchaResuelto2){
 
       let u;
       
@@ -190,5 +195,9 @@ export class RegistroComponent implements OnInit {
   hecho(e){
     console.log("captcha "+e);
     this.captchaResuelto=true;
+  }
+
+  respuesta(a:boolean){
+    this.captchaResuelto2=a;
   }
 }

@@ -54,6 +54,8 @@ import { TurnosPorDiaComponent } from './componentes/turnos-por-dia/turnos-por-d
 import { DatosAdminComponent } from './componentes/datos-admin/datos-admin.component';
 import { MedicosBarrasComponent } from './componentes/medicos-barras/medicos-barras.component';
 import { TurnosPorSectorComponent } from './componentes/turnos-por-sector/turnos-por-sector.component';
+import { CaptchaComponent } from './componentes/captcha/captcha.component';
+import { DirecDirective } from './directivas/direc.directive';
 
 
 
@@ -88,7 +90,9 @@ import { TurnosPorSectorComponent } from './componentes/turnos-por-sector/turnos
     TurnosPorDiaComponent,
     DatosAdminComponent,
     MedicosBarrasComponent,
-    TurnosPorSectorComponent
+    TurnosPorSectorComponent,
+    CaptchaComponent,
+    DirecDirective
   ],
   imports: [
     BrowserModule,

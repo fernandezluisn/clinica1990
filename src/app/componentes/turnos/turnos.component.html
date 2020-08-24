@@ -63,6 +63,14 @@
               <button type="button" (click)="subirTurno()" class="btn btn-primary" *ngIf="v3">Solicitar turno</button>
           </div>
       </div>
+
+      <div *ngIf="capt">
+        <app-captcha (resp)="respuesta($event)"></app-captcha>
+      </div>
+
+      <div *ngIf="!capt">
+        <h2>Captcha resuelto.</h2>
+      </div>
     </div> 
 
     <div style="margin-left: 10%; margin-top: 10%;">
