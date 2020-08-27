@@ -9,7 +9,7 @@
                 <div *ngIf="!noHayTurnos">
                     <div  style="display: flex; flex-direction: row; justify-content: start;">
                         <div *ngIf="turnoSeleccionado" style="width: 40%;">
-                            <form >
+                            <div class="anda">
                                 
                                 <p class="form-group">Ingrese anotaciones de la consulta.</p>
                                 <textarea class="form-group" [(ngModel)]='txtResenia' style="width: 80%; height: 20rem;" cols="50" rows="30" [ngModelOptions]="{standalone: true}"></textarea>
@@ -28,24 +28,67 @@
                                         <div style="margin-bottom: 1rem;" *ngIf="n1">
                                             
                                             <input type="text" placeholder="Categoría" name="d1n" [(ngModel)]="dato1n" [ngModelOptions]="{standalone: true}">
-                                            <input style="margin-left: 0.5rem;" name="d1" type="text" placeholder="valor" [(ngModel)]="dato1" [ngModelOptions]="{standalone: true}">
+                                            <div>
+                                                <p>Seleccione control a utilizar</p>
+                                                <select [(ngModel)]="control1" class="form-control" style="width: 12rem;" (change)="control1a()" name="SelectEsp">
+                                                    <option [value]="item" *ngFor="let item of listaControles">{{item}}</option>
+                                                </select>  
+                                                    <div *ngIf="numero1">
+                                                        <input [(ngModel)]="numero1R" type="number" name="" id="">
+                                                    </div>  
+                                                    <div *ngIf="select1">
+                                                        <select [(ngModel)]="select1R" class="form-control" style="width: 12rem;" name="SelectEsp">
+                                                            <option [value]="item" *ngFor="let item of listaSelect">{{item}}</option>
+                                                        </select>  
+                                                    </div>  
+                                                    <div *ngIf="rango1">
+                                                        <input [(ngModel)]="rango1R" type="range" min="0" max="100" value="0">
+                                                    </div>  
+                                            </div>
                                         </div>
 
                                         <div style="margin-bottom: 1rem;" *ngIf="n2">
                                            
                                             <input type="text" placeholder="Categoría" name="d2n" [(ngModel)]="dato2n" [ngModelOptions]="{standalone: true}">
-                                            <input style="margin-left: 0.5rem;" type="text" name="d2" placeholder="valor" [(ngModel)]="dato2" [ngModelOptions]="{standalone: true}">
+                                            <select [(ngModel)]="control2" class="form-control" style="width: 12rem;" (change)="control1b()" name="SelectEsp">
+                                                <option [value]="item" *ngFor="let item of listaControles">{{item}}</option>
+                                              </select>   
+
+                                              <div *ngIf="numero2">
+                                                <input [(ngModel)]="numero2R" type="number" name="" id="">
+                                            </div>  
+                                            <div *ngIf="select2">
+                                                <select [(ngModel)]="select2R" class="form-control" style="width: 12rem;" name="SelectEsp">
+                                                    <option [value]="item" *ngFor="let item of listaSelect">{{item}}</option>
+                                                </select>  
+                                            </div>  
+                                            <div *ngIf="rango2">
+                                                <input [(ngModel)]="rango2R" type="range" min="0" max="100" value="0">
+                                            </div>  
                                         </div>
 
                                         <div style="margin-bottom: 1rem;" *ngIf="n3">                                            
                                             <input type="text" placeholder="Categoría"  name="d3n"[(ngModel)]="dato3n" [ngModelOptions]="{standalone: true}">
-                                            <input style="margin-left: 0.5rem;" type="text" name="d3" placeholder="valor" [(ngModel)]="dato3" [ngModelOptions]="{standalone: true}">
+                                            <select [(ngModel)]="control3" class="form-control" style="width: 12rem;" (change)="control1c()" name="SelectEsp">
+                                                <option [value]="item" *ngFor="let item of listaControles">{{item}}</option>
+                                              </select>   
+                                              <div *ngIf="numero3">
+                                                <input [(ngModel)]="numero3R" type="number">
+                                            </div>  
+                                            <div *ngIf="select3">
+                                                <select [(ngModel)]="select3R" class="form-control" style="width: 12rem;" name="SelectEsp">
+                                                    <option [value]="item" *ngFor="let item of listaSelect">{{item}}</option>
+                                                </select>  
+                                            </div>  
+                                            <div *ngIf="rango3">
+                                                <input [(ngModel)]="rango3R" type="range" min="0" max="100" value="0">
+                                            </div>  
                                         </div>
                                     </div>
                                 </div>
                                 
                                 <button class="btn btn-primary" (click)="subirResenia()">Subir Reseña</button>
-                            </form>
+                            </div>
                         </div>
                         
                                         
@@ -53,7 +96,7 @@
                     
 
                         <div style="width: 50%; margin-left: 5%; margin-top: 5%;">
-                            <p *ngIf="turnoSeleccionado">Historia clínica del paciente.</p>  
+                            <h1 *ngIf="turnoSeleccionado">Historia clínica del paciente.</h1>  
                             <h2 *ngIf="!turnoSeleccionado">Seleccione Turno a informar presionando en aprobar turno.</h2>
                             
                             
