@@ -1,28 +1,40 @@
-<form >
+<div class="form">
     <div class="form-group">
-        ¿Cómo calificaría la atención del profesional?
-            <select [(ngModel)]="condicionesPacienteR" class="form-control" style="width: 12rem;" (change)="carg1()">
-                <option [value]="item" *ngFor="let item of condicionesPaciente">{{item}}</option>
-                
-            </select>  
-        </div>
+        <h2>¿Cómo calificaría la atención del profesional?</h2>
+        <input [(ngModel)]="rango1R" type="range" min="0" max="100" value="0" class="form-control-range">
+    </div>
     
-        <div class="form-group">
-            ¿Cómo calificaría las condiciones de infraestructura del hospital?
-        <select [(ngModel)]="infraestructuraHospitalR" class="form-control" style="width: 12rem;" (change)="carg2()">
-            <option [value]="item" *ngFor="let item of infraestructuraHospital">{{item}}</option>
-        </select>  
-        </div>
+    <div class="form-group">
+            <h2>¿Cómo calificaría las condiciones de infraestructura del hospital?</h2>
+            <div class="form-check" *ngFor="let item of radioValues">
+                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value=item (change)="radio(item)">
+                <label class="form-check-label" for="exampleRadios1">
+                  {{item}}
+                </label>
+              </div>
+            
+    </div>
     
     
-        <div class="form-group">
-            ¿Cómo calificaría la provisión de insumos del hospital?
-        <select [(ngModel)]="insumosHospitalR" class="form-control" style="width: 12rem;" (change)="carg3()">
-            <option [value]="item" *ngFor="let item of insumosHospital">{{item}}</option>
-        </select>  
-        </div>  
+    <div class="form-group">
+            <h2>¿Cómo calificaría la provisión de insumos del hospital?</h2>
+            <div class="star-rating">                
+                <label class="star" (click)="estrella5()" id="estrella5">&#9733;</label>                
+                <label class="star" (click)="estrella4()" id="estrella4">&#9733;</label>                
+                <label class="star" (click)="estrella3()" id="estrella3">&#9733;</label>               
+                <label class="star" (click)="estrella2()" id="estrella2">&#9733;</label>                
+                <label class="star" (click)="estrella1()" id="estrella1">&#9733;</label>
+            </div>
+    </div>  
+    
+    <div class="form-group">
+        <h2>¿Tiene conocidos que se atiendan en el hospital?</h2>
+        <input type="checkbox" (change)="checkbox1()">Familiares<br>
+        <input type="checkbox" (change)="checkbox2()">Amigos<br>
+        <input type="checkbox" (change)="checkbox3()">Compañeros de trabajo
+    </div>
                                 
-    <p class="form-group" style="margin-bottom: 0%;">Ingrese comentarios sobre la atención recibida.</p>
+    <h2 class="form-group" style="margin-bottom: 0%;">Ingrese comentarios sobre la atención recibida.</h2>
     <textarea class="form-group" [(ngModel)]='txtComentario' style="width: 80%; height: 20rem; margin-top: 2%;" cols="40" rows="25" [ngModelOptions]="{standalone: true}"></textarea>
     <button class="btn btn-primary" (click)="subirComentario()">Subir Reseña</button>
-</form>
+</div>

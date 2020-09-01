@@ -34,10 +34,12 @@ export class TurnosSacadosComponent implements OnInit {
 
   cargarTurnos(){
 
+    let d=new Date();
+
     let j=new Array;
     this.turnosService.devolverListadoTurnos().subscribe(lista=>{
       lista.filter(element=>{
-        if((element.estado=="confirmado" || element.estado=="a confirmar") && element.paciente.email.toLowerCase()==this.user.email.toLowerCase()){
+        if((element.estado=="confirmado" || element.estado=="a confirmar") && element.paciente.email.toLowerCase()==this.user.email.toLowerCase() && Number(Date.parse(element.fecha.toString()))>=Number(Date.parse(d.toString()))){
           j.push(element);
           
         }

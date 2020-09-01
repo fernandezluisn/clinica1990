@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { turno } from 'src/app/clases/turno';
 import { ServicioService } from 'src/app/servicios/servicio.service';
 import { TurnosService } from 'src/app/servicios/turnos.service';
+import { NgxSpinnerService } from 'ngx-spinner';
+
 
 @Component({
   selector: 'app-historia-clinica',
@@ -14,9 +16,10 @@ export class HistoriaClinicaComponent implements OnInit {
   user;
   turnoParaDetalle:turno;
   hayTurno=false;
-  vacio:boolean;
+  vacio=true;
+  cargo=false;
 
-  constructor(private servicio:ServicioService, private turnosService:TurnosService) { 
+  constructor(private servicio:ServicioService, private turnosService:TurnosService, private ngx:NgxSpinnerService) { 
   
     this.servicio.tomarUsuario().then(res=>{
       this.user=res;
@@ -32,7 +35,8 @@ export class HistoriaClinicaComponent implements OnInit {
   }
 
   traerTurnos(){
-    let a=new Array();
+    let a=null;
+    a=new Array();
     let d=new Date();
     
     this.turnosService.devolverListadoTurnos().subscribe(lista=>
@@ -41,21 +45,40 @@ export class HistoriaClinicaComponent implements OnInit {
           if(element.paciente.email.toLowerCase()==this.user.email.toLowerCase() && Number(Date.parse(element.fecha.toString()))<=Number(Date.parse(d.toString())))
           a.push(element);
         })
+        this.chequear(a);
+        
+        
       })
 
-      if(a.length>0){
-        this.turnosDelPaciente=a;
-        this.turnosDelPaciente.sort((a,b) => Number(Date.parse(a.fecha.toString())) - Number(Date.parse(b.fecha.toString())));
-        this.vacio=false;
-      }else{
-        this.vacio=true;
-      }
       
+      
+  }
+
+  chequear(lista){
+    if(lista.length>0){
+      this.turnosDelPaciente=lista;
+      this.turnosDelPaciente.sort((a,b) => Number(Date.parse(a.fecha.toString())) - Number(Date.parse(b.fecha.toString())));
+      
+      this.vacio=false;
+      this.cargo=true;
+    }else
+    this.cargo=true;
   }
   
   tomarTurno(turno){
     this.turnoParaDetalle=turno;
     this.hayTurno=true;
+  }
+
+  spinner(){
+    if(this.cargo==false)
+    {
+      this.ngx.show();
+      setTimeout(()=>{
+        this.ngx.hide();
+      }, 2000)
+    }
+    
   }
 
 }

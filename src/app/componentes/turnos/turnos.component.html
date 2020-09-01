@@ -1,7 +1,7 @@
 <app-nav [tipoPaciente]="true" [logeado]="true"></app-nav>
 
 
-    <h1>Bienvenido/a {{usuarioLista.nombre}}</h1> <h2 *ngIf="hayTurno" style="color: red;">Solicita turno con {{medicoDetalle.nombre}} {{medicoDetalle.apellido}} el día {{fecha | date: 'dd-MM-yyyy'}} a las {{ nTurno | turnos }}. Cliquee el botón azul para solicitar.</h2>
+    <h1 *ngIf="cargoU">Bienvenido/a {{usuarioLista.nombre}}</h1> <h2 *ngIf="hayTurno" style="color: red;">Solicita turno con {{medicoDetalle.nombre}} {{medicoDetalle.apellido}} el día {{fecha | date: 'dd-MM-yyyy'}} a las {{ nTurno | turnos }}. Cliquee el botón azul para solicitar.</h2>
     
     
     

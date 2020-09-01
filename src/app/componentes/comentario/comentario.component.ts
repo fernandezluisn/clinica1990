@@ -12,19 +12,19 @@ import { encuesta } from 'src/app/clases/encuesta';
 })
 export class ComentarioComponent implements OnInit {
 
-  txtComentario:string;
+  txtComentario="";
 
-  condicionesPaciente:string[]=["Buena","Regular","Mala"];;
-  infraestructuraHospital:string[]=["Buena","Regular","Mala"];
-  insumosHospital:string[]=["Suficiente","Regular","Insuficiente"];
+  rango1R=50;
+  valoracionEstrellas=1;
 
-  condicionesPacienteR:string;
-  infraestructuraHospitalR:string;
-  insumosHospitalR:string;
+  radioValues=["Muy bueno", "Bueno", "Regular", "Malo", "Muy malo"];
 
-  v1=false;
-  v2=false;
-  v3=false;
+  chF=false;
+  chA=false;
+  chC=false;
+
+  radioV="Muy bueno";
+  
 
   id:string;
 
@@ -45,31 +45,96 @@ export class ComentarioComponent implements OnInit {
   }
 
   subirComentario(){
-    if(this.v1==true && this.v2==true && this.v3==true){
-      this.turno.comentario=this.txtComentario;
-      this.turnosS.actualizarTurno(this.turno, 3);
+    if(true){
+     /* this.turno.comentario=this.txtComentario;
+      this.turno.encuestaRespondidaPaciente=true;
+      this.turnosS.actualizarTurno(this.turno, 3);*/
 
-      let e=new encuesta(this.condicionesPacienteR, this.insumosHospitalR, this.infraestructuraHospitalR, this.id, this.turno.empleado.email, this.turno.paciente.email);
-      e.paciente=true;
-      this.turnosS.createEncuesta(e);
+      console.log(this.rango1R+this.txtComentario+this.chA+this.chF+this.chC+this.radioV);
+      //let e=new encuesta(this.condicionesPacienteR, this.insumosHospitalR, this.infraestructuraHospitalR, this.id);
+      
+      //this.turnosS.createEncuesta(e);
       alert("Gracias por su comentario.");
-      this.router.navigate(["turnos"]);
+      //this.router.navigate(["turnos"]);
     }
     else{
       alert("debe contestar todas las preguntas");
   }  
   }
 
-  carg1(){
-    this.v1=true;
+  checkbox1(){
+    if(this.chF==false)
+    this.chF=true
+    else
+    this.chF=false;
   }
 
-  carg2(){
-    this.v2=true;
+  checkbox2(){
+    if(this.chA==false)
+    this.chA=true
+    else
+    this.chA=false;
   }
 
-  carg3(){
-    this.v3=true;
+  checkbox3(){
+    if(this.chC==false)
+    this.chC=true
+    else
+    this.chC=false;
+  }
+
+  radio(res:string){
+    this.radioV=res;
+  }
+
+  estrella1(){
+    document.getElementById('estrella1').style.color = "yellow";
+    document.getElementById('estrella2').style.color = "black";
+    document.getElementById('estrella3').style.color = "black";
+    document.getElementById('estrella4').style.color = "black";
+    document.getElementById('estrella5').style.color = "black";
+
+    this.valoracionEstrellas=1;
+  }
+
+  estrella2(){
+    document.getElementById('estrella1').style.color = "yellow";
+    document.getElementById('estrella2').style.color = "yellow";
+    document.getElementById('estrella3').style.color = "black";
+    document.getElementById('estrella4').style.color = "black";
+    document.getElementById('estrella5').style.color = "black";  
+  
+    this.valoracionEstrellas=2;
+  }
+
+  estrella3(){
+    document.getElementById('estrella1').style.color = "yellow";
+    document.getElementById('estrella2').style.color = "yellow";
+    document.getElementById('estrella3').style.color = "yellow";
+    document.getElementById('estrella4').style.color = "black";
+    document.getElementById('estrella5').style.color = "black";  
+  
+    this.valoracionEstrellas=3;
+  }
+
+  estrella4(){
+    document.getElementById('estrella1').style.color = "yellow";
+    document.getElementById('estrella2').style.color = "yellow";
+    document.getElementById('estrella3').style.color = "yellow";
+    document.getElementById('estrella4').style.color = "yellow";
+    document.getElementById('estrella5').style.color = "black";  
+  
+    this.valoracionEstrellas=4;
+  }
+  estrella5(){
+    document.getElementById('estrella1').style.color = "yellow";
+    document.getElementById('estrella2').style.color = "yellow";
+    document.getElementById('estrella3').style.color = "yellow";
+    document.getElementById('estrella4').style.color = "yellow";
+    document.getElementById('estrella5').style.color = "yellow";  
+  
+    this.valoracionEstrellas=5;
+  
   }
 
 }

@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import { encuesta } from 'src/app/clases/encuesta';
 import { TurnosService } from 'src/app/servicios/turnos.service';
 import { turno } from 'src/app/clases/turno';
+import { element } from 'protractor';
 
 
 @Component({
@@ -31,14 +32,27 @@ export class EncuestaComponent implements OnInit {
 
   id:string;
 
+  cargo=false;
+  hayEncu=false;
+
   constructor(private router: Router, private tomarId:ActivatedRoute, private turnosS:TurnosService) { 
     this.id=this.tomarId.snapshot.paramMap.get('idTurno');
-    this.turnosS.devolverListadoTurnos().subscribe(lista=>{
+    
+    this.turnosS.devolverListadoEncuestas().subscribe(lista=>{
       lista.filter(element=>{
-        if(element.id==this.id){
-          this.turno=element;
+        if(element.idTurno==this.id){
+          this.hayEncu=true;
         }
       })
+      
+    })
+
+    this.turnosS.devolverListadoTurnos().subscribe(listaT=>{
+      listaT.filter(elementT=>{
+        if(elementT.id==this.id)
+        this.turno=elementT;
+      })
+      this.cargo=true;
     })
 
 
@@ -61,8 +75,8 @@ export class EncuestaComponent implements OnInit {
 
   subirEncuesta(){  
     if(this.v1==true && this.v2==true && this.v3==true){
-      let encu=new encuesta(this.condicionesPacienteR, this.insumosHospitalR, this.infraestructuraHospitalR, this.id, this.turno.empleado.email, this.turno.paciente.email);      
-      encu
+      let encu=new encuesta(this.condicionesPacienteR, this.insumosHospitalR, this.infraestructuraHospitalR, this.id);      
+      
       this.turno.encuestaRespondidaMedico=true;
       this.turnosS.actualizarTurno(this.turno, 3);
       this.turnosS.createEncuesta(encu);
@@ -71,6 +85,10 @@ export class EncuestaComponent implements OnInit {
     }else{
       alert("Debe contestar todas las preguntas");
     }
+  }
+
+  seguir(){
+    this.router.navigate(["homeMedico"]);
   }
 
 }

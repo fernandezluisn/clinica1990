@@ -1,9 +1,24 @@
 <app-nav [tipoPaciente]="true" [logeado]="true"></app-nav>
 
-<app-tabla-turnos *ngIf="!vacio" [listaTurnos]="turnosDelPaciente" [confirmados]="false" [noConfirmados]="false" [resenia]="true" (pasarTurno)="tomarTurno($event)"></app-tabla-turnos>
+<div *ngIf="cargo" style="display: flex; justify-content: start; flex-direction: row;">
+    <div *ngIf="!vacio" style="width: 50%;">
+    <app-tabla-turnos [listaTurnos]="turnosDelPaciente" [confirmados]="false" [noConfirmados]="false" [resenia]="true" (pasarTurno)="tomarTurno($event)"></app-tabla-turnos>
+    </div>
 
-<div *ngIf="vacio"><h1>Usted no tiene Historia Clínica registrada en nuestra clínica.</h1></div>
+    <div *ngIf="vacio"><h1>Usted no tiene Historia Clínica registrada en nuestra clínica.</h1></div>
 
-<div *ngIf="hayTurno">
-    <app-detalle-resenia [turno]="turnoParaDetalle" [esPaciente]="true"></app-detalle-resenia>
+    <div *ngIf="hayTurno" style="width: 40%; margin: 4%; margin-top: 7%;">
+        <app-detalle-resenia [turno]="turnoParaDetalle" [esPaciente]="true"></app-detalle-resenia>
+    </div>
+</div>
+
+<div *ngIf="!cargo">
+    <ngx-spinner
+    bdColor="rgba(51,51,51,0.8)"
+    size="medium"
+    color="#fff"
+    type="ball-scale-multiple"
+    >
+    <p style="font-size: 3rem; color: white">Loading...</p>
+    </ngx-spinner>
 </div>

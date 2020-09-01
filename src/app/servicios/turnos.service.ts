@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import {TurnosPipe} from '../pipes/turnos.pipe';
 import { Observable } from 'rxjs';
 import { encuesta } from '../clases/encuesta';
+import { comentario } from '../clases/comentario';
 
 
 @Injectable({
@@ -13,6 +14,8 @@ import { encuesta } from '../clases/encuesta';
 export class TurnosService {
 
   listaTurnos:Observable<turno[]>;
+  listaEncuestas:Observable<encuesta[]>;
+  listaComentarios:Observable<comentario[]>;
 
   constructor(private db:AngularFirestore) {
 
@@ -27,7 +30,33 @@ export class TurnosService {
         );
       })   
     );
+
+    this.listaComentarios=this.db.collection("comentarios").snapshotChanges().pipe(
+      map(actions=>{
+        return actions.map(
+          a=>{
+            const data= a.payload.doc.data();
+            const id=a.payload.doc.id;
+            return {id, ...(data as any)}
+          }
+        );
+      })   
+    );
+
+    this.listaEncuestas=this.db.collection("encuestas").snapshotChanges().pipe(
+      map(actions=>{
+        return actions.map(
+          a=>{
+            const data= a.payload.doc.data();
+            const id=a.payload.doc.id;
+            return {id, ...(data as any)}
+          }
+        );
+      })   
+    );   
    }
+
+   
 
   createTurno(turno:turno): Promise<DocumentReference> {
     return this.db.collection('turnos').add({...turno});
@@ -35,6 +64,10 @@ export class TurnosService {
 
   createEncuesta(encuesta:encuesta): Promise<DocumentReference> {
     return this.db.collection('encuestas').add({...encuesta});
+  }   
+
+  createComentario(comentario:comentario): Promise<DocumentReference> {
+    return this.db.collection('comentarios').add({...comentario});
   }   
 
 
@@ -62,5 +95,13 @@ export class TurnosService {
 
   devolverListadoTurnos(){
     return this.listaTurnos;
+  }
+
+  devolverListadoEncuestas(){
+    return this.listaEncuestas;
+  }
+
+  devolverListadoComentarios(){
+    return this.listaComentarios;
   }
 }

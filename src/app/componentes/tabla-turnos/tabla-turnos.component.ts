@@ -69,11 +69,13 @@ export class TablaTurnosComponent implements OnInit {
         if(element.temperatura.toString().includes(this.txtBuscar)){
           listaB.push(element);
         }
-      }else if (!isNullOrUndefined(element.dato1v)){
+      }else if (!isNullOrUndefined(element.dato1v) && element.dato1v.includes(this.txtBuscar)){        
         listaB.push(element);
-      }else if (!isNullOrUndefined(element.dato2v)){
+      }else if (!isNullOrUndefined(element.dato2v && element.dato2v.includes(this.txtBuscar))){        
         listaB.push(element);
-      }else if (!isNullOrUndefined(element.dato3v)){
+      }else if (!isNullOrUndefined(element.dato3v) && element.dato3v.includes(this.txtBuscar)){        
+        listaB.push(element);
+      }else if(!isNullOrUndefined(element.resenia) && element.resenia.includes(this.txtBuscar)){
         listaB.push(element);
       }
     })

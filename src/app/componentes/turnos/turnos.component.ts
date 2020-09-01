@@ -15,7 +15,6 @@ import { jornadaSemanal } from 'src/app/clases/jornadaSemanal';
 import {Mailer} from '../../clases/mailer';
 import { Router } from '@angular/router';
 import { especialidad } from 'src/app/clases/especialidad';
-import { element } from 'protractor';
 
 
 
@@ -49,6 +48,8 @@ export class TurnosComponent implements OnInit {
   v3:boolean;
   esDomingo:boolean;
   nTurno:number;
+
+  cargoU=false;
   
   especialidad:string;
 
@@ -68,7 +69,7 @@ export class TurnosComponent implements OnInit {
   turnosCuarenta=false;
   noHayJornada=false;
   
-  //hacer
+  
   listaHorariosTurnos;
   listaTurnosTomados;
   listaTurnosDia;
@@ -113,7 +114,7 @@ export class TurnosComponent implements OnInit {
         lista.forEach(element=>{
           if(element.email.toLowerCase()==this.usuario.email.toLowerCase())
           this.usuarioLista=element;
-          
+          this.cargoU=true;
         })
 
       })
@@ -229,7 +230,6 @@ export class TurnosComponent implements OnInit {
   }
 
   filtrarLista(){
-    console.log(this.listadoEspecialistas);
     let j=new Array();   
    
 
@@ -266,7 +266,6 @@ export class TurnosComponent implements OnInit {
   filtrarListaTurnosDia(){  
     
     this.nTurno=null;
-    console.log(this.listaTurnosDia);
     this.turnosS.devolverListadoTurnos().subscribe(
       lista=>{
         
@@ -287,7 +286,6 @@ export class TurnosComponent implements OnInit {
     )
 
     if(this.listaTurnosDia.length==0){
-      console.log("no hay");
     this.noHayJornada=true
     }else{
       this.noHayJornada=false;
@@ -306,7 +304,6 @@ export class TurnosComponent implements OnInit {
     this.listaTurnosDia=new Array();
     
     let d=new Date(this.fecha);
-    console.log("día "+d.getDay());
      
     this.listaJornadas.filter(element=>{
       if(element.medico.email.toLowerCase()==this.medicoDetalle.email.toLowerCase())
@@ -444,7 +441,6 @@ export class TurnosComponent implements OnInit {
   }
 
   mostrarHora(){
-    console.log(this.nTurno);
     this.v2=true;
     this.mostrarBoton();
     if(!isNull(this.medicoDetalle))
@@ -453,7 +449,6 @@ export class TurnosComponent implements OnInit {
 
   tomarMedico(medico){
     this.medicoDetalle=medico;
-    console.log(this.medicoDetalle.id);
     this.v0=true;
     this.mostrarFecha();
     this.especialidad=null;
@@ -461,7 +456,6 @@ export class TurnosComponent implements OnInit {
 
   mostrarEspecialidad(){
     this.especialidad;
-    console.log(this.especialidad);
   }
 
   subirTurno(){
