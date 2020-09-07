@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { TurnosService } from 'src/app/servicios/turnos.service';
 import { turno } from 'src/app/clases/turno';
 
-import { encuesta } from 'src/app/clases/encuesta';
+import { comentario } from 'src/app/clases/comentario';
 
 @Component({
   selector: 'app-comentario',
@@ -16,6 +16,7 @@ export class ComentarioComponent implements OnInit {
 
   rango1R=50;
   valoracionEstrellas=1;
+  movioEstrellas=false;
 
   radioValues=["Muy bueno", "Bueno", "Regular", "Malo", "Muy malo"];
 
@@ -30,6 +31,8 @@ export class ComentarioComponent implements OnInit {
 
   turno:turno;
 
+  
+
   constructor(private router: Router, private tomarId:ActivatedRoute, private turnosS:TurnosService) { 
     this.id=this.tomarId.snapshot.paramMap.get('idTurno');
     this.turnosS.devolverListadoTurnos().subscribe(lista=>{
@@ -39,23 +42,25 @@ export class ComentarioComponent implements OnInit {
         }
       })
     })
+
+    
   }
 
   ngOnInit(): void {
   }
 
   subirComentario(){
-    if(true){
-     /* this.turno.comentario=this.txtComentario;
+    if(this.txtComentario.length>0 && this.movioEstrellas){
+      this.turno.comentario=this.txtComentario;
       this.turno.encuestaRespondidaPaciente=true;
-      this.turnosS.actualizarTurno(this.turno, 3);*/
+      this.turnosS.actualizarTurno(this.turno, 3);
 
-      console.log(this.rango1R+this.txtComentario+this.chA+this.chF+this.chC+this.radioV);
-      //let e=new encuesta(this.condicionesPacienteR, this.insumosHospitalR, this.infraestructuraHospitalR, this.id);
       
-      //this.turnosS.createEncuesta(e);
+      let e=new comentario(this.rango1R, this.radioV, this.valoracionEstrellas, [this.chF, this.chA,this.chC], this.txtComentario, this.id);
+      
+      this.turnosS.createComentario(e);
       alert("Gracias por su comentario.");
-      //this.router.navigate(["turnos"]);
+      this.router.navigate(["turnos"]);
     }
     else{
       alert("debe contestar todas las preguntas");
@@ -95,6 +100,7 @@ export class ComentarioComponent implements OnInit {
     document.getElementById('estrella5').style.color = "black";
 
     this.valoracionEstrellas=1;
+    this.movioEstrellas=true;
   }
 
   estrella2(){
@@ -105,6 +111,7 @@ export class ComentarioComponent implements OnInit {
     document.getElementById('estrella5').style.color = "black";  
   
     this.valoracionEstrellas=2;
+    this.movioEstrellas=true;
   }
 
   estrella3(){
@@ -115,6 +122,7 @@ export class ComentarioComponent implements OnInit {
     document.getElementById('estrella5').style.color = "black";  
   
     this.valoracionEstrellas=3;
+    this.movioEstrellas=true;
   }
 
   estrella4(){
@@ -125,6 +133,7 @@ export class ComentarioComponent implements OnInit {
     document.getElementById('estrella5').style.color = "black";  
   
     this.valoracionEstrellas=4;
+    this.movioEstrellas=true;
   }
   estrella5(){
     document.getElementById('estrella1').style.color = "yellow";
@@ -134,7 +143,7 @@ export class ComentarioComponent implements OnInit {
     document.getElementById('estrella5').style.color = "yellow";  
   
     this.valoracionEstrellas=5;
-  
+    this.movioEstrellas=true;
   }
 
 }

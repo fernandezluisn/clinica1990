@@ -3,6 +3,7 @@ import { turno } from 'src/app/clases/turno';
 import { ServicioService } from 'src/app/servicios/servicio.service';
 import { TurnosService } from 'src/app/servicios/turnos.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { comentario } from 'src/app/clases/comentario';
 
 
 @Component({
@@ -19,6 +20,8 @@ export class HistoriaClinicaComponent implements OnInit {
   vacio=true;
   cargo=false;
 
+  comentarios:comentario[];
+
   constructor(private servicio:ServicioService, private turnosService:TurnosService, private ngx:NgxSpinnerService) { 
   
     this.servicio.tomarUsuario().then(res=>{
@@ -26,7 +29,10 @@ export class HistoriaClinicaComponent implements OnInit {
     })
 
     this.traerTurnos();
-  
+    
+    this.turnosService.devolverListadoComentarios().subscribe(listaC=>{
+      this.comentarios=listaC;
+    });
 
   }
 
@@ -49,6 +55,8 @@ export class HistoriaClinicaComponent implements OnInit {
         
         
       })
+
+      
 
       
       
