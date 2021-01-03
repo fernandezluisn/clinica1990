@@ -9,6 +9,7 @@ import * as pluginAnnotations from 'chartjs-plugin-annotation';
 
 import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
+import { paciente } from 'src/app/clases/paciente';
 
 @Component({
   selector: 'app-turnos-por-dia',
@@ -30,20 +31,20 @@ export class TurnosPorDiaComponent implements OnInit {
   sabado;
   domingo=0;
 
-  
+  pacienteE:string;
   
   @Input() listadoTurnos:turno[];
   listaFiltrada:turno[];
 
-
- 
+  @Input() pacientes:paciente[];
+  turnosDelPaciente:turno[];
+  turnP=false;
 
   constructor(private impresor:ArchivosService) { 
     
     let hoy=new Date();
     this.diaInicial=new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate());
-    this.díaFinal=new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()+7);   
-    
+    this.díaFinal=new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate()+7);     
     
     
   }
@@ -56,7 +57,24 @@ export class TurnosPorDiaComponent implements OnInit {
 }
 
 
+  carg(){
+    
+    this.turnP=false;
+    let tur:turno[]=new Array();
+    this.listadoTurnos.filter(elem=>{      
+      if(elem.paciente.email==this.pacienteE){
+        tur.push(elem);
+        console.log(elem.paciente.email)
+      }
+    })
+    this.turnosDelPaciente=tur;
 
+    if(tur.length>0){
+      this.turnP=true;
+    }else{
+      this.turnP=false;
+    }
+  }
 
 
   public barChartOptions: ChartOptions = {

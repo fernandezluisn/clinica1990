@@ -38,6 +38,8 @@ export class TablaTurnosComponent implements OnInit {
   ngOnChanges() {
     if(this.confirmados==true)
     console.log();
+
+    this.filtrarLista();
 }
 
   aprobar(turno){
@@ -59,9 +61,13 @@ export class TablaTurnosComponent implements OnInit {
 
 
     this.listaTurnos.filter(element=>{
-      if(element.empleado.apellido.includes(this.txtBuscar) || element.empleado.nombre.includes(this.txtBuscar) || element.especialidad.includes(this.txtBuscar) ||
-      element.paciente.apellido.includes(this.txtBuscar) || element.paciente.nombre.includes(this.txtBuscar) || element.fecha.toString().includes(this.txtBuscar) ||
-      element.estado.includes(this.txtBuscar)){
+      if(element.empleado.apellido.toLowerCase().includes(this.txtBuscar.toLowerCase()) || 
+      element.empleado.nombre.toLowerCase().includes(this.txtBuscar.toLowerCase()) || 
+      element.especialidad.toLowerCase().includes(this.txtBuscar.toLowerCase()) ||
+      element.paciente.apellido.toLowerCase().includes(this.txtBuscar.toLowerCase()) || 
+      element.paciente.nombre.toLowerCase().includes(this.txtBuscar.toLowerCase()) || 
+      element.fecha.toString().includes(this.txtBuscar) ||
+      element.estado.toLowerCase().includes(this.txtBuscar.toLowerCase())){
         listaB.push(element);
       }else
 

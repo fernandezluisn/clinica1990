@@ -5,13 +5,13 @@
 <div *ngIf="cargo">
     <ul class="nav nav-tabs" style="background-color: rgb(233, 219, 219);">
         <li class="active" (click)="verVis()" style="margin-left: 1rem; ">Visitas</li>
-        <li (click)="verTurnos()" style="margin-left: 1rem; ">Turnos por día</li>
+        <li (click)="verTurnos()" style="margin-left: 1rem; ">Turnos</li>
         <li (click)="verMed()" style="margin-left: 1rem; ">Médicos</li>
         <li (click)="verSec()" style="margin-left: 1rem; ">Sectores</li>
       </ul>
 
     <div class="grafico" *ngIf="tur">
-        <app-turnos-por-dia [listadoTurnos]="listadoTurnos" style="margin: 1%;"></app-turnos-por-dia>
+        <app-turnos-por-dia [listadoTurnos]="listadoTurnos" [pacientes]="listadoPacientes" style="margin: 1%;"></app-turnos-por-dia>
     </div>
 
     <div class="grafico" *ngIf="med">

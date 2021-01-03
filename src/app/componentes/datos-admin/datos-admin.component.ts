@@ -4,6 +4,7 @@ import { BdaService } from 'src/app/servicios/bda.service';
 import { turno } from 'src/app/clases/turno';
 import { empleado } from 'src/app/clases/empleado';
 import { log } from 'src/app/clases/log';
+import { paciente } from 'src/app/clases/paciente';
 
 @Component({
   selector: 'app-datos-admin',
@@ -21,10 +22,12 @@ export class DatosAdminComponent implements OnInit {
   listadoTurnos:turno[];
   listadoEmpleados:empleado[];
   listadoLogins:log[];
+  listadoPacientes:paciente[];
   
   
   constructor(private bda:TurnosService, private bdaMedicos:BdaService) {
     this.bda.devolverListadoTurnos().subscribe(lista=>{
+      this.bdaMedicos.devolverListadoPacientes().subscribe(listaP=>this.listadoPacientes=listaP)
       this.listadoTurnos=lista;
       this.bdaMedicos.devolverListadoEmpleados().subscribe(listaE=>{
         this.listadoEmpleados=listaE;
@@ -35,6 +38,7 @@ export class DatosAdminComponent implements OnInit {
             this.cargo=true;
           }
         )
+        
         
         
       })

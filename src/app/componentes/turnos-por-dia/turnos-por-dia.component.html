@@ -1,6 +1,7 @@
 
 <div *ngIf="cargo">   
-      
+  <div>
+      <h1>Por día</h1>
       <div class="flex">
         <div class="flex-item">
           <div style="display: block;" >
@@ -19,6 +20,26 @@
       </div>
       <button class="btn btn-success" (click)="excel()">Imprimir en excel</button>
       <button class="btn btn-danger" (click)="pdf()">Imprimir en pdf</button>
+    </div>
+
+      <div>
+        <h1>Por paciente</h1>
+        <div class="form-group">
+          <label >Seleccione un paciente:</label>
+          <select [(ngModel)]="pacienteE" class="form-control" (change)="carg()" style="width: 12rem;"  name="SelectEsp">
+              <option [value]="item.email"  *ngFor="let item of pacientes">{{item.nombre}}  {{item.apellido}}</option>
+          </select>  
+          
+          <div *ngIf="turnP">           
+
+            <app-tabla-turnos [listaTurnos]="turnosDelPaciente"></app-tabla-turnos>
+          </div>
+
+          <div *ngIf="!turnP">
+            <h3>Este paciente no tiene turnos cargados</h3>
+          </div>
+      </div>
+    </div>
 </div>
 
 <div *ngIf="!cargo">
