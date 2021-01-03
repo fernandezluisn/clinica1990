@@ -56,6 +56,9 @@ import { MedicosBarrasComponent } from './componentes/medicos-barras/medicos-bar
 import { TurnosPorSectorComponent } from './componentes/turnos-por-sector/turnos-por-sector.component';
 import { CaptchaComponent } from './componentes/captcha/captcha.component';
 import { DirecDirective } from './directivas/direc.directive';
+import { LineasLogsComponent } from './componentes/lineas-logs/lineas-logs.component';
+import { MedicosService } from './servicios/medicos.service';
+import { TurnosService } from './servicios/turnos.service';
 
 
 
@@ -92,7 +95,8 @@ import { DirecDirective } from './directivas/direc.directive';
     MedicosBarrasComponent,
     TurnosPorSectorComponent,
     CaptchaComponent,
-    DirecDirective
+    DirecDirective,    
+    LineasLogsComponent
   ],
   imports: [
     BrowserModule,
@@ -106,7 +110,7 @@ import { DirecDirective } from './directivas/direc.directive';
     NgxSpinnerModule,
     ChartsModule
   ],
-  providers: [ServicioService, AngularFireAuth, StorageService, BdaService, DatePipe, ArchivosService],
+  providers: [ServicioService, AngularFireAuth, StorageService, BdaService, DatePipe, ArchivosService, MedicosService, TurnosService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

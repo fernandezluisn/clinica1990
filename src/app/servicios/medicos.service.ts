@@ -3,8 +3,6 @@ import { AngularFirestore, DocumentReference } from '@angular/fire/firestore';
 import { especialidad } from '../clases/especialidad';
 import { jornadaSemanal } from '../clases/jornadaSemanal';
 import { map } from 'rxjs/operators';
-import { empleado } from '../clases/empleado';
-import { element } from 'protractor';
 import { Observable } from 'rxjs';
 
 @Injectable({

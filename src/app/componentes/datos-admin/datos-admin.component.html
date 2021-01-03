@@ -3,15 +3,26 @@
 <h1>Aquí puede visualizar información sobre la utilización de la app.</h1>
 
 <div *ngIf="cargo">
-    <div class="grafico">
+    <ul class="nav nav-tabs" style="background-color: rgb(233, 219, 219);">
+        <li class="active" (click)="verVis()" style="margin-left: 1rem; ">Visitas</li>
+        <li (click)="verTurnos()" style="margin-left: 1rem; ">Turnos por día</li>
+        <li (click)="verMed()" style="margin-left: 1rem; ">Médicos</li>
+        <li (click)="verSec()" style="margin-left: 1rem; ">Sectores</li>
+      </ul>
+
+    <div class="grafico" *ngIf="tur">
         <app-turnos-por-dia [listadoTurnos]="listadoTurnos" style="margin: 1%;"></app-turnos-por-dia>
     </div>
 
-    <div class="grafico" style="margin-top: 20rem;">
+    <div class="grafico" *ngIf="med">
         <app-medicos-barras [listadoTurnos]="listadoTurnos" [listadoEmpleados]="listadoEmpleados" [listadoLogins]="listadoLogins" style="margin: 1%;"></app-medicos-barras>
     </div>
 
-    <div class="grafico">
+    <div class="grafico" *ngIf="sec">
         <app-turnos-por-sector></app-turnos-por-sector>
+    </div>
+
+    <div class="grafico" *ngIf="vis">
+        <app-lineas-logs></app-lineas-logs>
     </div>
 </div>

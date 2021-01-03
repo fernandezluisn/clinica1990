@@ -118,7 +118,7 @@ export class TurnosPorDiaComponent implements OnInit {
   public lineChartPlugins = [pluginAnnotations];
 
   public lineChartData: ChartDataSets[]= [
-    { data: [this.lunes, this.martes, this.miercoles, this.jueves, this.viernes, this.sabado, this.domingo], label: 'Cantidad de turnos por día durante la próxima semana' }    
+    //{ data: [this.lunes, this.martes, this.miercoles, this.jueves, this.viernes, this.sabado, this.domingo], label: 'Cantidad de turnos por día durante la próxima semana' }    
   ];
  
 

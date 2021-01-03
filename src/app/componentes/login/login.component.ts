@@ -35,6 +35,7 @@ export class LoginComponent implements OnInit {
     ((res)=>{
       this.log=true;    
       this.logeado.emit(this.log);
+      this.bda.guardarLogin(this.email);
       this.bda.devolverListadoEmpleados().subscribe(listaE=>{
         listaE.forEach(element=>{
           if(element.email.toLowerCase()==this.email.toLowerCase()){  
@@ -64,7 +65,7 @@ export class LoginComponent implements OnInit {
   pacienteUno(){
 
     this.servicio.loginUser("fernandezluisn@gmail.com","123456").then(res=>{
-      
+      this.bda.guardarLogin("fernandezluisn@gmail.com"); 
       this.router.navigate(['turnos']);
     })
     
@@ -73,12 +74,14 @@ export class LoginComponent implements OnInit {
   pacienteDos(){
     this.servicio.loginUser("cosme@gmail.com","123456").then(res=>{
       this.router.navigate(['turnos']);
+      this.bda.guardarLogin("cosme@gmail.com"); 
     })
   }
 
   admin(){
     this.servicio.loginUser("admin2@gmail.com","123456").then(res=>{
       this.router.navigate(['homeAdmin']);
+      this.bda.guardarLogin("admin2@gmail.com"); 
     })
   }
 

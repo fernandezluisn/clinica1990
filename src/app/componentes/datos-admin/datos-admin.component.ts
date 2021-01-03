@@ -12,6 +12,11 @@ import { log } from 'src/app/clases/log';
 })
 export class DatosAdminComponent implements OnInit {
 
+  vis=false; //no tagea
+  tur=true;
+  med=false;
+  sec=false;
+
   cargo=false;
   listadoTurnos:turno[];
   listadoEmpleados:empleado[];
@@ -39,4 +44,31 @@ export class DatosAdminComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  verVis(){
+    this.vis=true; //no tagea
+    this.tur=false;
+    this.med=false;
+    this.sec=false;
+  }
+
+  verTurnos(){
+    this.vis=false; //no tagea
+    this.tur=true;
+    this.med=false;
+    this.sec=false;
+  }
+
+  verMed(){
+    this.vis=false; //no tagea
+    this.tur=false;
+    this.med=true;
+    this.sec=false;
+  }
+
+  verSec(){
+    this.vis=false; //no tagea
+    this.tur=false;
+    this.med=false;
+    this.sec=true;
+  }
 }
