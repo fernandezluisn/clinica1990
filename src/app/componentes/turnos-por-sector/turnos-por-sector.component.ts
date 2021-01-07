@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { BdaService } from 'src/app/servicios/bda.service';
 import { especialidad } from 'src/app/clases/especialidad';
 
 import { ChartType, ChartOptions } from 'chart.js';
 import { Label } from 'ng2-charts';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
-import { element } from 'protractor';
+import { turno } from 'src/app/clases/turno';
 
 @Component({
   selector: 'app-turnos-por-sector',
@@ -14,11 +14,16 @@ import { element } from 'protractor';
 })
 export class TurnosPorSectorComponent implements OnInit {
 
+  @Input() listadoTurnos:turno[];
 
   public pieChartLabels: Label[];
   public pieChartData: number[];
+  public pieChartData2: number[];
+  public pieChartData3: number[];
   listaLabels:Label[];
   listaDatos:number[];
+  listaDatos2:number[];
+  listaDatos3:number[];
   colores;
 
   listaEspecialidades:especialidad[];
@@ -27,6 +32,8 @@ export class TurnosPorSectorComponent implements OnInit {
   constructor(private bda:BdaService) { 
     let l:string[]=new Array();
     let datos:number[]=new Array();
+    let datosEspecialistas:number[]=new Array();
+    let datosPacientes:number[]=new Array();
     let col=new Array();
     this.bda.devolverListadoEspecialidades().subscribe(lista=>{
      
@@ -38,19 +45,48 @@ export class TurnosPorSectorComponent implements OnInit {
         }else{
           l.push(element.nombre);
           datos.push(element.operaciones);
-          let n=Math.floor(Math.random()*1000);
-          let c=Math.floor(Math.random()*1000);
-          let x=Math.floor(Math.random()*1000);
+          let n=Math.floor(Math.random()*Math.random()*1000);
+          let c=Math.floor(Math.random()*Math.random()*200);
+          let x=Math.floor(Math.random()*Math.random()*600);
           let color='rgba('+n+','+c+','+x+',0.9)';
-          console.log(color);
+          
           col.push(color);
         }
         
+        this.bda.devolverListadoEmpleados().subscribe(listaE=>{
+          if(element.nombre!="Otra"){
+            let cont=0;
+            listaE.forEach(emple=>{
+              emple.especialidades.forEach(espec=>{
+                if(espec==element.nombre){
+                  cont++;
+                }           
+              })
+            })
+            datosEspecialistas.push(cont);
+          }
+          
+        })
+
+        if(element.nombre!="Otra"){        
+          let turnosF:string[]=new Array();
+          this.listadoTurnos.forEach(turn=>{
+            if(turn.especialidad==element.nombre && !turnosF.includes(turn.paciente.email)){
+              turnosF.push(turn.paciente.email);
+            }
+          })
+          datosPacientes.push(turnosF.length);
+        }
       })
       this.colores=col;
       this.listaLabels=l;
       this.listaDatos=datos;
-     
+      this.listaDatos2=datosEspecialistas;
+      this.listaDatos3=datosPacientes;
+      
+      
+
+      
       this.escucha();
     })
     ;
@@ -80,7 +116,7 @@ export class TurnosPorSectorComponent implements OnInit {
   public pieChartPlugins = [pluginDataLabels];
   public pieChartColors = [
     {
-      backgroundColor: this.colores,
+      //backgroundColor: this.colores,
     },
   ];
 
@@ -88,9 +124,12 @@ export class TurnosPorSectorComponent implements OnInit {
     if(this.listaEspecialidades.length>0)
     {
       this.pieChartData=this.listaDatos;
+      this.pieChartData2=this.listaDatos2;
+      this.pieChartData3=this.listaDatos3;
       this.pieChartLabels= this.listaLabels;
       this.cargo=true;
-
+      console.log(this.listaDatos2);
+      console.log(this.listaDatos3);
       this.pieChartColors = [
         {
           backgroundColor: this.colores,

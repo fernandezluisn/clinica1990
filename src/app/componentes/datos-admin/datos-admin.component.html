@@ -8,7 +8,12 @@
         <li (click)="verTurnos()" style="margin-left: 1rem; ">Turnos</li>
         <li (click)="verMed()" style="margin-left: 1rem; ">Médicos</li>
         <li (click)="verSec()" style="margin-left: 1rem; ">Sectores</li>
+        <li (click)="verEnc()" style="margin-left: 1rem; ">Encuestas</li>
       </ul>
+
+      <div class="grafico" *ngIf="vis">
+        <app-lineas-logs style="margin: 1%;"></app-lineas-logs>
+    </div>
 
     <div class="grafico" *ngIf="tur">
         <app-turnos-por-dia [listadoTurnos]="listadoTurnos" [pacientes]="listadoPacientes" style="margin: 1%;"></app-turnos-por-dia>
@@ -19,10 +24,10 @@
     </div>
 
     <div class="grafico" *ngIf="sec">
-        <app-turnos-por-sector></app-turnos-por-sector>
+        <app-turnos-por-sector  [listadoTurnos]="listadoTurnos"></app-turnos-por-sector>
     </div>
 
-    <div class="grafico" *ngIf="vis">
-        <app-lineas-logs></app-lineas-logs>
+    <div class="grafico" *ngIf="enc">
+        <app-informe-comentarios></app-informe-comentarios>
     </div>
 </div>

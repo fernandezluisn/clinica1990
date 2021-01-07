@@ -49,7 +49,7 @@ export class LineasLogsComponent implements OnInit {
     let dec=0;
     logs.forEach(lo=>{
       let mes=lo.fecha.substr(4,3);
-      console.log(mes);
+      
       switch(mes){
         case "Jan":
           enero++;

@@ -14,9 +14,10 @@ import { paciente } from 'src/app/clases/paciente';
 export class DatosAdminComponent implements OnInit {
 
   vis=false; //no tagea
-  tur=true;
+  tur=false;
   med=false;
   sec=false;
+  enc=true;
 
   cargo=false;
   listadoTurnos:turno[];
@@ -25,8 +26,10 @@ export class DatosAdminComponent implements OnInit {
   listadoPacientes:paciente[];
   
   
+  
   constructor(private bda:TurnosService, private bdaMedicos:BdaService) {
-    this.bda.devolverListadoTurnos().subscribe(lista=>{
+    
+    this.bda.devolverListadoTurnos().subscribe(lista=>{      
       this.bdaMedicos.devolverListadoPacientes().subscribe(listaP=>this.listadoPacientes=listaP)
       this.listadoTurnos=lista;
       this.bdaMedicos.devolverListadoEmpleados().subscribe(listaE=>{
@@ -34,7 +37,7 @@ export class DatosAdminComponent implements OnInit {
         this.bdaMedicos.devolverListadoLogins().subscribe(
           listaB=>{
             this.listadoLogins=listaB;
-            console.log(this.listadoLogins);
+            
             this.cargo=true;
           }
         )
@@ -48,31 +51,43 @@ export class DatosAdminComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  verVis(){
-    this.vis=true; //no tagea
+  verEnc(){
+    this.vis=false; 
     this.tur=false;
     this.med=false;
     this.sec=false;
+    this.enc=true;
+  }
+
+  verVis(){
+    this.vis=true; 
+    this.tur=false;
+    this.med=false;
+    this.sec=false;
+    this.enc=false;
   }
 
   verTurnos(){
-    this.vis=false; //no tagea
+    this.vis=false; 
     this.tur=true;
     this.med=false;
     this.sec=false;
+    this.enc=false;
   }
 
   verMed(){
-    this.vis=false; //no tagea
+    this.vis=false;
     this.tur=false;
     this.med=true;
     this.sec=false;
+    this.enc=false;
   }
 
   verSec(){
-    this.vis=false; //no tagea
+    this.vis=false; 
     this.tur=false;
     this.med=false;
     this.sec=true;
+    this.enc=false;
   }
 }

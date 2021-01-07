@@ -1,0 +1,27 @@
+<div *ngIf="cargo">
+    <div style="display: block">
+                <canvas baseChart
+                [datasets]="barChartData"
+                [labels]="barChartLabels"
+                [options]="barChartOptions"
+                [plugins]="barChartPlugins"
+                [legend]="barChartLegend"
+                [chartType]="barChartType">
+                </canvas>
+    </div>
+
+    <div style="display: block;margin-top: 2rem;">
+        <canvas baseChart
+        [datasets]="barChartData2"
+        [labels]="barChartLabels2"
+        [options]="barChartOptions"
+        [plugins]="barChartPlugins"
+        [legend]="barChartLegend"
+        [chartType]="barChartType">
+        </canvas>
+</div>
+</div>
+
+<div *ngIf="!cargo">
+    <h3>No hay datos</h3>
+</div>

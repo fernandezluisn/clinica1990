@@ -1,8 +1,35 @@
-<h2>Operaciones por sector</h2>
+
 <div *ngIf="cargo">
+  <h2>Operaciones por sector</h2>
     <div class="chart">
       <canvas baseChart
         [data]="pieChartData"
+        [labels]="pieChartLabels"
+        [chartType]="pieChartType"
+        [options]="pieChartOptions"
+        [plugins]="pieChartPlugins"
+        [colors]="pieChartColors"
+        [legend]="pieChartLegend">
+      </canvas>
+    </div>
+    
+    <h2>Empleados por especialidad</h2>
+    <div class="chart">
+      <canvas baseChart
+        [data]="pieChartData2"
+        [labels]="pieChartLabels"
+        [chartType]="pieChartType"
+        [options]="pieChartOptions"
+        [plugins]="pieChartPlugins"
+        [colors]="pieChartColors"
+        [legend]="pieChartLegend">
+      </canvas>
+    </div>
+    
+    <h2>Pacientes por especialidad</h2>
+    <div class="chart">
+      <canvas baseChart
+        [data]="pieChartData3"
         [labels]="pieChartLabels"
         [chartType]="pieChartType"
         [options]="pieChartOptions"

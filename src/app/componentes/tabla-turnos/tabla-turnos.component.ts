@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, SimpleChange, ɵConsole } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { turno } from 'src/app/clases/turno';
 import {TurnosPipe} from '../../pipes/turnos.pipe';
 import { element } from 'protractor';

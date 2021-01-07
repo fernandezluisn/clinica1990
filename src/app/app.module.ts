@@ -59,6 +59,7 @@ import { DirecDirective } from './directivas/direc.directive';
 import { LineasLogsComponent } from './componentes/lineas-logs/lineas-logs.component';
 import { MedicosService } from './servicios/medicos.service';
 import { TurnosService } from './servicios/turnos.service';
+import { InformeComentariosComponent } from './componentes/informe-comentarios/informe-comentarios.component';
 
 
 
@@ -96,7 +97,7 @@ import { TurnosService } from './servicios/turnos.service';
     TurnosPorSectorComponent,
     CaptchaComponent,
     DirecDirective,    
-    LineasLogsComponent
+    LineasLogsComponent, InformeComentariosComponent
   ],
   imports: [
     BrowserModule,
