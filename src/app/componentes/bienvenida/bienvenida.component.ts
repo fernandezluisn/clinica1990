@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ServicioService } from 'src/app/servicios/servicio.service';
 import { BdaService } from 'src/app/servicios/bda.service';
-import { element } from 'protractor';
 import { isNull } from 'util';
 
 @Component({

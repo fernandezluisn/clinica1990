@@ -127,9 +127,7 @@ export class TurnosPorSectorComponent implements OnInit {
       this.pieChartData2=this.listaDatos2;
       this.pieChartData3=this.listaDatos3;
       this.pieChartLabels= this.listaLabels;
-      this.cargo=true;
-      console.log(this.listaDatos2);
-      console.log(this.listaDatos3);
+      this.cargo=true;      
       this.pieChartColors = [
         {
           backgroundColor: this.colores,

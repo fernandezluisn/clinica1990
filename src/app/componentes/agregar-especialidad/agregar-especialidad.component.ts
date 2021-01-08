@@ -20,7 +20,6 @@ export class AgregarEspecialidadComponent implements OnInit {
   constructor(private bda:BdaService) {
     this.bda.devolverListadoEspecialidades().subscribe(lista => {
       this.listaEspecialidades = lista;       
-      console.log(lista);
       });
    }
 

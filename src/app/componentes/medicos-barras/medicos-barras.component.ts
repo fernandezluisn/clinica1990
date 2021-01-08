@@ -129,7 +129,6 @@ export class MedicosBarrasComponent implements OnInit {
       })
 
       
-      console.log(empleado.email+" "+fechas.length);
       cantidadDias.push(fechas.length);
       logins.push(empleado.cantidadLogins);
       numeros.push(empleado.cantidadTurnos);

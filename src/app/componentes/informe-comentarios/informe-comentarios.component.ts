@@ -14,9 +14,16 @@ import { Label } from 'ng2-charts';
 })
 export class InformeComentariosComponent implements OnInit {
 
+  promedio:string;
+
+
   cargo=false;
   listaC:comentario[];
   constructor(private bda:TurnosService) {
+
+    
+
+    
     this.bda.devolverListadoComentarios().subscribe(listaC=>{
       this.listaC=listaC;
       this.cargarBarras();
@@ -37,12 +44,14 @@ export class InformeComentariosComponent implements OnInit {
   };
   public barChartLabels: Label[] = ["0"];
   public barChartLabels2: Label[] = ["0"];
+  public barChartLabels3: Label[] = ["0"];
   public barChartType: ChartType = 'bar';
   public barChartLegend = true;
   public barChartPlugins = [pluginDataLabels];
 
   public barChartData: ChartDataSets[]= [];
   public barChartData2: ChartDataSets[]= [];
+  public barChartData3: ChartDataSets[]= [];
 
   ngOnInit(): void {
   }
@@ -51,6 +60,10 @@ export class InformeComentariosComponent implements OnInit {
     let fam=0;
     let amig=0;
     let trab=0;
+
+    let est=0;
+
+    let medic=0;
 
     let b1=0;
     let b5=0;
@@ -84,12 +97,16 @@ export class InformeComentariosComponent implements OnInit {
         break;
       }
 
+      est=est+coment.preg3;
+
+      medic=medic+coment.preg1;
     });
 
     let n1=(fam/n)*100;
     let n2=(amig/n)*100;
     let n3=(trab/n)*100;
 
+    let n4=medic/n;
     
 
     let s=[{ data: [n1], label: 'familiares'},
@@ -104,14 +121,28 @@ export class InformeComentariosComponent implements OnInit {
     { data: [b5], label: 'Muy malo'}
    ];
 
+   let p=est/n;
+   this.promedio=Math.round(p).toString();
+
+   let s3=[{ data: [n4], label: 'puntuación del personal médico'}
+  ];
    
 
     this.barChartData=s;
-    this.barChartLabels=["Porcentaje de pacientes que tienen conocidos que se atienden en el hospital"];
+    this.barChartLabels=[""];
+
+    this.barChartData3=s3;
+    this.barChartLabels3=[""];
 
     this.barChartData2=s2;
-    this.barChartLabels2=["Calificación de la atención en el hospital"];
+    this.barChartLabels2=[""];
     this.cargo=true;
   }
+
+  
+
+  
+
+  
 
 }
