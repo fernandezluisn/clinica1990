@@ -13,11 +13,11 @@ import { paciente } from 'src/app/clases/paciente';
 })
 export class DatosAdminComponent implements OnInit {
 
-  vis=false; //no tagea
-  tur=false;
+  vis=false; 
+  tur=true;
   med=false;
   sec=false;
-  enc=true;
+  enc=false;
 
   cargo=false;
   listadoTurnos:turno[];

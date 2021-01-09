@@ -49,3 +49,8 @@ li:hover{
     cursor: pointer;
     
 }
+
+.table{
+    width: 80%;
+    font-size: small;
+}

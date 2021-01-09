@@ -1,6 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ServicioService } from 'src/app/servicios/servicio.service';
-import { isNull } from 'util';
 
 import { Router } from '@angular/router';
 

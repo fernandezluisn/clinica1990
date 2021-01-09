@@ -1,11 +1,11 @@
 <div *ngIf="cargo">
 
-    <div style="margin-top: 2rem;">
+    <div class="grafico">
         <h3>Calificación global promedio del hospital</h3>
             <h1 style="margin-left: 30%;">{{promedio}} <label class="star" id="estrella5">&#9733;</label></h1>
     </div>
 
-    <div style="display: block">
+    <div style="display: block" class="grafico">
         <h3>Porcentaje de pacientes que tienen conocidos que se atienden en el hospital</h3>
                 <canvas baseChart
                 [datasets]="barChartData"
@@ -19,7 +19,7 @@
 
     
 
-    <div style="display: block;margin-top: 2rem;">
+    <div style="display: block;" class="grafico">
         <h3>Calificación de la atención en el hospital</h3>
         <canvas baseChart
         [datasets]="barChartData2"
@@ -31,7 +31,7 @@
         </canvas>
     </div>
 
-    <div style="display: block">
+    <div style="display: block" class="grafico">
         <h3>Puntuación promedio de los médicos del hospital</h3>
                 <canvas baseChart
                 [datasets]="barChartData3"

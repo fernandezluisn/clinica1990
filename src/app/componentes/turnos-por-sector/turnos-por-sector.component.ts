@@ -100,7 +100,7 @@ export class TurnosPorSectorComponent implements OnInit {
     responsive: true,
     legend: {
       position: 'top',
-    },
+    }/*,
     plugins: {
       datalabels: {
         formatter: (value, ctx) => {
@@ -108,10 +108,11 @@ export class TurnosPorSectorComponent implements OnInit {
           return label;
         },
       },
-    }
+    }*/
   };
  
-  public pieChartType: ChartType = 'pie';
+  public pieChartType: ChartType = 'doughnut';
+  public pieChartType2: ChartType = 'pie';
   public pieChartLegend = true;
   public pieChartPlugins = [pluginDataLabels];
   public pieChartColors = [

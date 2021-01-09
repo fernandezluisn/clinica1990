@@ -15,19 +15,19 @@
         <app-lineas-logs style="margin: 1%;"></app-lineas-logs>
     </div>
 
-    <div class="grafico" *ngIf="tur">
+    <div  *ngIf="tur">
         <app-turnos-por-dia [listadoTurnos]="listadoTurnos" [pacientes]="listadoPacientes" style="margin: 1%;"></app-turnos-por-dia>
     </div>
 
-    <div class="grafico" *ngIf="med">
+    <div class="grafico2" *ngIf="med">
         <app-medicos-barras [listadoTurnos]="listadoTurnos" [listadoEmpleados]="listadoEmpleados" [listadoLogins]="listadoLogins" style="margin: 1%;"></app-medicos-barras>
     </div>
 
-    <div class="grafico" *ngIf="sec">
+    <div *ngIf="sec">
         <app-turnos-por-sector  [listadoTurnos]="listadoTurnos"></app-turnos-por-sector>
     </div>
 
-    <div class="grafico" *ngIf="enc">
+    <div *ngIf="enc">
         <app-informe-comentarios></app-informe-comentarios>
     </div>
 </div>

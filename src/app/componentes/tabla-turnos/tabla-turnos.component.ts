@@ -89,6 +89,7 @@ export class TablaTurnosComponent implements OnInit {
     this.listaFiltrada=listaB;
 
   }
+
  
 
 }

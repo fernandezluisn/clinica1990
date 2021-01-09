@@ -67,6 +67,8 @@ export class TurnosPorDiaComponent implements OnInit {
         console.log(elem.paciente.email)
       }
     })
+    tur.sort((a,b) => Number(Date.parse(a.fecha.toString())) - Number(Date.parse(b.fecha.toString())));
+
     this.turnosDelPaciente=tur;
 
     if(tur.length>0){
