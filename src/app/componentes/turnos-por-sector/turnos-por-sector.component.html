@@ -13,6 +13,9 @@
           [legend]="pieChartLegend">
         </canvas>
       </div>
+
+      <button class="btn btn-success" (click)="excel(1)">Imprimir en excel</button>
+      <button class="btn btn-danger" (click)="pdf()">Imprimir en pdf</button>
     </div>
 
     <div class="grafico">
@@ -28,6 +31,9 @@
           [legend]="pieChartLegend">
         </canvas>
       </div>
+
+      <button class="btn btn-success" (click)="excel(2)">Imprimir en excel</button>
+      <button class="btn btn-danger" (click)="pdf()">Imprimir en pdf</button>
     </div>
 
     <div class="grafico">
@@ -43,5 +49,8 @@
           [legend]="pieChartLegend">
         </canvas>
       </div>
+
+      <button class="btn btn-success" (click)="excel(3)">Imprimir en excel</button>
+      <button class="btn btn-danger" (click)="pdf()">Imprimir en pdf</button>
     </div>
   </div>

@@ -23,6 +23,7 @@ export class  turno {
     dato2v:any;
     dato3n:string;
     dato3v:any;
+    
    
 
     constructor(medico:empleado, paciente:paciente, estado:string, fecha:Date, turno:number, resenia:string, especialidad:string){
@@ -33,6 +34,7 @@ export class  turno {
         this.numeroTurno=turno;
         this.resenia=resenia;
         this.especialidad=especialidad;
+        
     }
     
 

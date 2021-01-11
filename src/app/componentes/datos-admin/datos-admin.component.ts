@@ -13,8 +13,8 @@ import { paciente } from 'src/app/clases/paciente';
 })
 export class DatosAdminComponent implements OnInit {
 
-  vis=false; 
-  tur=true;
+  vis=true; 
+  tur=false;
   med=false;
   sec=false;
   enc=false;

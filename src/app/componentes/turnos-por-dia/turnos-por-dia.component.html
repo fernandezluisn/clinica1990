@@ -33,6 +33,9 @@
           <div *ngIf="turnP" >           
 
             <app-tabla-turnos [listaTurnos]="turnosDelPaciente"></app-tabla-turnos>
+
+            <button class="btn btn-success" (click)="excel2()">Imprimir en excel</button>
+            <button class="btn btn-danger" (click)="pdf2()">Imprimir en pdf</button>
           </div>
 
           <div *ngIf="!turnP">

@@ -16,6 +16,9 @@
                 [chartType]="barChartType">
                 </canvas>
     </div>
+
+    <button class="btn btn-success" (click)="excel()">Imprimir en excel</button>
+    <button class="btn btn-danger" (click)="pdf()">Imprimir en pdf</button>
 </div>
 
 <div *ngIf="!cargo">

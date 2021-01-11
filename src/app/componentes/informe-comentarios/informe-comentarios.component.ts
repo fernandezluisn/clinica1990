@@ -6,6 +6,7 @@ import { TurnosService } from 'src/app/servicios/turnos.service';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { Label } from 'ng2-charts';
+import { ArchivosService } from 'src/app/servicios/archivos.service';
 
 @Component({
   selector: 'app-informe-comentarios',
@@ -19,7 +20,7 @@ export class InformeComentariosComponent implements OnInit {
 
   cargo=false;
   listaC:comentario[];
-  constructor(private bda:TurnosService) {
+  constructor(private bda:TurnosService, private impresor:ArchivosService) {
 
     
 
@@ -141,7 +142,13 @@ export class InformeComentariosComponent implements OnInit {
 
   
 
-  
+  excel(){
+   this.impresor.generarExcel(this.listaC,"encuestas");
+  }
+
+  pdf(){
+
+  }
 
   
 

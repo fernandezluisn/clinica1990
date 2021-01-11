@@ -4,6 +4,7 @@ import { Color, Label } from 'ng2-charts';
 import * as pluginAnnotations from 'chartjs-plugin-annotation';
 import { log } from 'src/app/clases/log';
 import { BdaService } from 'src/app/servicios/bda.service';
+import { ArchivosService } from 'src/app/servicios/archivos.service';
 
 @Component({
   selector: 'app-lineas-logs',
@@ -16,13 +17,14 @@ export class LineasLogsComponent implements OnInit {
   
   cargo=false;
 
-
+  ingresos:log[];
   
-  constructor(private bdaMedicos:BdaService) {
+  constructor(private bdaMedicos:BdaService, private impresor:ArchivosService) {
     
     this.bdaMedicos.devolverListadoLogins().subscribe(
       listaB=>{
-            
+        this.ingresos=listaB;
+        this.ingresos.sort((a,b) => Number(Date.parse(a.fecha.toString())) - Number(Date.parse(b.fecha.toString())));
         this.filtrarLogs(listaB);
       }      
     )
@@ -31,6 +33,14 @@ export class LineasLogsComponent implements OnInit {
 
   ngOnInit(): void {
     
+  }
+
+  excel(){    
+    this.impresor.generarExcel(this.ingresos, "ingresos"+new Date().getTime());
+  }
+
+  pdf(){
+
   }
 
   filtrarLogs(logs:log[]){

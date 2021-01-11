@@ -10,6 +10,7 @@ import * as pluginAnnotations from 'chartjs-plugin-annotation';
 import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
 import { paciente } from 'src/app/clases/paciente';
+import { infoTurno } from 'src/app/clases/infoTurn';
 
 @Component({
   selector: 'app-turnos-por-dia',
@@ -64,7 +65,6 @@ export class TurnosPorDiaComponent implements OnInit {
     this.listadoTurnos.filter(elem=>{      
       if(elem.paciente.email==this.pacienteE){
         tur.push(elem);
-        console.log(elem.paciente.email)
       }
     })
     tur.sort((a,b) => Number(Date.parse(a.fecha.toString())) - Number(Date.parse(b.fecha.toString())));
@@ -147,7 +147,29 @@ export class TurnosPorDiaComponent implements OnInit {
   }
 
   excel(){
-    this.impresor.generarExcel(this.listaFiltrada, "turnos"+Date().toString());
+    let listTurn:infoTurno[]=new Array();
+    this.listaFiltrada.forEach(elem=>{
+      let tr=new infoTurno(elem.fecha.toString(), elem.empleado.apellido+", "+elem.empleado.nombre, elem.especialidad, elem.paciente.apellido+", "+elem.paciente.nombre,
+      elem.numeroTurno.toString(), elem.estado);
+      listTurn.push(tr);
+    })
+    listTurn.sort((a,b) => Number(Date.parse(a.fecha.toString())) - Number(Date.parse(b.fecha.toString())));
+    this.impresor.generarExcel(listTurn, "turnos"+Date().toString());
+  }
+
+  pdf2(){
+
+  }
+
+  excel2(){
+    let listTurn:infoTurno[]=new Array();
+    this.turnosDelPaciente.forEach(elem=>{
+      let tr=new infoTurno(elem.fecha.toString(), elem.empleado.apellido+", "+elem.empleado.nombre, elem.especialidad, elem.paciente.apellido+", "+elem.paciente.nombre,
+      elem.numeroTurno.toString(), elem.estado);
+      listTurn.push(tr);
+    })
+    listTurn.sort((a,b) => Number(Date.parse(a.fecha.toString())) - Number(Date.parse(b.fecha.toString())));
+    this.impresor.generarExcel(listTurn, "turnos paciente "+this.pacienteE);
   }
 
   pdf(){

@@ -6,6 +6,8 @@ import { log } from 'src/app/clases/log';
 import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { Label } from 'ng2-charts';
+import { ArchivosService } from 'src/app/servicios/archivos.service';
+import { infoMedico } from 'src/app/clases/infoMedico';
 
 
 
@@ -30,9 +32,11 @@ export class MedicosBarrasComponent implements OnInit {
   @Input() listadoLogins:log[];
   listadoLoginsFiltrado:log[];
 
+  listaInfos:infoMedico[];
+
   @Input() listadoEmpleados:empleado[];
 
-  constructor() { 
+  constructor( private impresor:ArchivosService) { 
     this.lapso="la última semana";     
   }
 
@@ -64,7 +68,18 @@ export class MedicosBarrasComponent implements OnInit {
     this.cargo=false;
 }
 
+excel(){    
+  
+  this.impresor.generarExcel(this.listaInfos, "turnos "+this.lapso);
+  
+}
+
+pdf(){
+
+}
+
   carg(){
+    let infos:infoMedico[]=new Array();
     let hoy=new Date();
     this.diaInicial=new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate());
     switch(this.lapso){
@@ -108,6 +123,7 @@ export class MedicosBarrasComponent implements OnInit {
     let nombres=new Array();
     
     this.listadoEmpleados.forEach(empleado=>{
+      
       nombres.push(empleado.nombre+" "+empleado.apellido);
       empleado.cantidadTurnos=0;
       empleado.cantidadLogins=0;
@@ -132,7 +148,8 @@ export class MedicosBarrasComponent implements OnInit {
       cantidadDias.push(fechas.length);
       logins.push(empleado.cantidadLogins);
       numeros.push(empleado.cantidadTurnos);
-      
+      let im=new infoMedico(empleado.nombre+" "+empleado.apellido, empleado.cantidadTurnos, fechas.length, empleado.cantidadLogins);
+      infos.push(im);
     })
 
 
@@ -144,6 +161,7 @@ export class MedicosBarrasComponent implements OnInit {
     this.barChartData=s;
     this.barChartLabels=nombres;
     this.cargo=true;
+    this.listaInfos=infos;
     
   }
 

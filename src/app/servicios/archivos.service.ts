@@ -21,7 +21,7 @@ export class ArchivosService {
 
    ///Genera un archivo excel con el contenido y el nombre de archivo que se ingresa
   generarExcel(jsonData: any[], nombre: string): void {
-
+    
     const ws: XLSX.WorkSheet = XLSX.utils.json_to_sheet(jsonData);
     const wb: XLSX.WorkBook = { Sheets: { 'data': ws }, SheetNames: ['data'] };
     const excelBuffer: any = XLSX.write(wb, { bookType: 'xlsx', type: 'array' });
