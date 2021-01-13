@@ -1,4 +1,4 @@
-<h1>CLINICA ONLINE</h1>
+<h1>CLINICA ONLINE</h1> 🚑🚑🚑
 
 ##DESCRIPCION
 
@@ -39,3 +39,8 @@ Recibe email y password, en caso de estar bien ingresados los datos y
 estar registrado en el sistema, el usuario tendrá acceso al sistema de turnos.
 
 ##SISTEMA DE TURNOS ON-LINE
+
+<img src="https://github.com/fernandezluisn/clinica1990/blob/master/src/assets/turnos.png" width="1100"/>
+
+El sistema de turnos permite a los pacientes de la clínica solicitar turnos seleccionando primero el profesional y luego fecha, horario y especialidad.
+El usuario también tendrá ingreso a su agenda de turnos y su historia clínica. 
