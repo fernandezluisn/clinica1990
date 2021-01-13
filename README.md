@@ -1,4 +1,4 @@
-# CLINICA ONLINE
+<h1>CLINICA ONLINE</h1>
 
 ##DESCRIPCION
 
@@ -33,7 +33,9 @@ empleados deberán ingresar su area de trabajo.
 
 ##LOG IN
 
-Revibe email y password, en caso de estar bien ingresados los datos y
+<img src="https://github.com/fernandezluisn/clinica1990/blob/master/src/assets/login.png" width="1100"/>
+
+Recibe email y password, en caso de estar bien ingresados los datos y
 estar registrado en el sistema, el usuario tendrá acceso al sistema de turnos.
 
 ##SISTEMA DE TURNOS ON-LINE
