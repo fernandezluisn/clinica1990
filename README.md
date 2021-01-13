@@ -1,6 +1,6 @@
 <h1>CLINICA ONLINE</h1> 🚑🚑🚑
 
-##DESCRIPCION
+<h2>DESCRIPCION</h2>
 
 La clínica OnLine, especialista en salud, cuenta
 actualmente con consultorios (6 en la actualidad),
@@ -14,7 +14,7 @@ especialidades, que ocupan los consultorios acorde a su disponibilidad, y recibe
 pacientes con turno para consulta o tratamiento. Dichos turnos son pedidos por la web
 seleccionando el profesional o la especialidad.
 
-##REGISTRO
+<h2>REGISTRO</h2>
 
 En el registro se ingresan los datos de la persona o el empleado que se dará de alta en el sistema.
 En primer lugar debe seleccionar la etiqueta paciente o empleado, según quién se está registrando
@@ -31,16 +31,16 @@ registrará correctamente, caso contrario mostrará el error en una ventana.
 Los pacientes deberán ingresar dos imagenes para registrarse, mientras que los 
 empleados deberán ingresar su area de trabajo.
 
-##LOG IN
+<h2>LOG IN</h2>
 
 <img src="https://github.com/fernandezluisn/clinica1990/blob/master/src/assets/login.png" width="1100"/>
 
 Recibe email y password, en caso de estar bien ingresados los datos y
 estar registrado en el sistema, el usuario tendrá acceso al sistema de turnos.
 
-##SISTEMA DE TURNOS ON-LINE
+<h2>SISTEMA DE TURNOS ON-LINE</h2>
 
-<img src="https://github.com/fernandezluisn/clinica1990/blob/master/src/assets/turno.png" width="1100"/>
+<img src="https://github.com/fernandezluisn/clinica1990/blob/master/src/assets/turno2.png" width="1100"/>
 
 El sistema de turnos permite a los pacientes de la clínica solicitar turnos seleccionando primero el profesional y luego fecha, horario y especialidad.
 El usuario también tendrá ingreso a su agenda de turnos y su historia clínica. 
