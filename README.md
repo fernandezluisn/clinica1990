@@ -44,3 +44,9 @@ estar registrado en el sistema, el usuario tendrá acceso al sistema de turnos.
 
 El sistema de turnos permite a los pacientes de la clínica solicitar turnos seleccionando primero el profesional y luego fecha, horario y especialidad.
 El usuario también tendrá ingreso a su agenda de turnos y su historia clínica. 
+
+<h2>OPCIONES DE ADMINISTRADOR</h2>
+
+<img src="https://github.com/fernandezluisn/clinica1990/blob/master/src/assets/admin.png" width="1100"/>
+
+Los administradores del sitio tienen acceso a los datos de su utilización los cuales pueden ser descargados en formato excel o PDF. También pueden agregar especialidades a los profesionales, dar de alta otros administradores y dar de alta a los usuarios.
