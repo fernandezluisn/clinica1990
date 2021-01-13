@@ -19,8 +19,8 @@ seleccionando el profesional o la especialidad.
 En el registro se ingresan los datos de la persona o el empleado que se dará de alta en el sistema.
 En primer lugar debe seleccionar la etiqueta paciente o empleado, según quién se está registrando
 
-![Alt text]
-(https://github.com/fernandezluisn/clinica1990/blob/master/src/assets/usu-emp.png)
+<img src="https://github.com/fernandezluisn/clinica1990/blob/master/src/assets/usu-emp.png" width="1100"/>
+
 
 En segundo lugar llenar los datos de todos los casilleros con su información.
 El sistema validará el mail y los passwords ingresados. Luego
