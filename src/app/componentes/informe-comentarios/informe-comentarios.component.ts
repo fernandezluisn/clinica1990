@@ -7,6 +7,8 @@ import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import * as pluginDataLabels from 'chartjs-plugin-datalabels';
 import { Label } from 'ng2-charts';
 import { ArchivosService } from 'src/app/servicios/archivos.service';
+import { porcentaje } from 'src/app/clases/porcentajes';
+import { atencion } from 'src/app/clases/atencion';
 
 @Component({
   selector: 'app-informe-comentarios',
@@ -17,6 +19,8 @@ export class InformeComentariosComponent implements OnInit {
 
   promedio:string;
 
+  listaPorcentajes:porcentaje[];
+  listaAtenciones:atencion[];
 
   cargo=false;
   listaC:comentario[];
@@ -97,7 +101,10 @@ export class InformeComentariosComponent implements OnInit {
         b5++;
         break;
       }
-
+      let aten=new atencion(b1,b2,b3,b4,b5);
+      let atens:atencion[]=new Array();
+      atens.push(aten);
+      this.listaAtenciones=atens;
       est=est+coment.preg3;
 
       medic=medic+coment.preg1;
@@ -107,6 +114,11 @@ export class InformeComentariosComponent implements OnInit {
     let n2=(amig/n)*100;
     let n3=(trab/n)*100;
 
+    let inf=new porcentaje(n3, n2, n1);
+    let infd:porcentaje[]=new Array();
+    infd.push(inf);
+
+    this.listaPorcentajes=infd;
     let n4=medic/n;
     
 
@@ -142,8 +154,14 @@ export class InformeComentariosComponent implements OnInit {
 
   
 
-  excel(){
-   this.impresor.generarExcel(this.listaC,"encuestas");
+  excel(num:number){
+
+    if(num==1){
+      this.impresor.generarExcel(this.listaPorcentajes, "porcentajes");
+    }else if(num==2){
+      this.impresor.generarExcel(this.listaAtenciones, "calificacionAtencion");
+    }else
+      this.impresor.generarExcel(this.listaC,"encuestas");
   }
 
   pdf(){
