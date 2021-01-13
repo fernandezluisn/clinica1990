@@ -45,6 +45,13 @@ estar registrado en el sistema, el usuario tendrá acceso al sistema de turnos.
 El sistema de turnos permite a los pacientes de la clínica solicitar turnos seleccionando primero el profesional y luego fecha, horario y especialidad.
 El usuario también tendrá ingreso a su agenda de turnos y su historia clínica. 
 
+<h2>OPCIONES DE MEDICOS</h2>
+
+<img src="https://github.com/fernandezluisn/clinica1990/blob/master/src/assets/medico.png" width="1100"/>
+
+Los profesionales que trabajan en la clínica, luego de ser dados de alta por el administrador, podrán ingresar a la APP y gestionar su trabajo.
+Tienen opciones tanto para seguir su agenda de turnos, chequear el historial de pacientes, administrar su horario de trabajo, subir informes de las consultas y responder a las solicitudes de turnos recibidas.
+
 <h2>OPCIONES DE ADMINISTRADOR</h2>
 
 <img src="https://github.com/fernandezluisn/clinica1990/blob/master/src/assets/admin.png" width="1100"/>
