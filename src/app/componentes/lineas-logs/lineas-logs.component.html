@@ -1,6 +1,6 @@
-<div *ngIf=cargo>
+<div *ngIf=cargo class="grafico"  >
     <div style="display: block">
-        <canvas baseChart width="30" height="20"
+        <canvas id="lineas" baseChart 
         [datasets]="lineChartData"
         [labels]="lineChartLabels"
         [options]="lineChartOptions"

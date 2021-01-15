@@ -1,0 +1,9 @@
+.grafico{
+    margin-top: 1%;
+    margin-left: 10%;
+    width: 80%;
+    height: 60%;
+    border: solid black 0.3rem;
+    border-radius: 0.5rem;
+    background-color: rgb(249, 251, 252);
+}

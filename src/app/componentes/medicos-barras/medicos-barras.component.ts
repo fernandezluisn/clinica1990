@@ -11,6 +11,7 @@ import { infoMedico } from 'src/app/clases/infoMedico';
 
 
 
+
 @Component({
   selector: 'app-medicos-barras',
   templateUrl: './medicos-barras.component.html',
@@ -68,15 +69,14 @@ export class MedicosBarrasComponent implements OnInit {
     this.cargo=false;
 }
 
-excel(){    
-  
-  this.impresor.generarExcel(this.listaInfos, "turnos "+this.lapso);
-  
-}
+  excel(){      
+    this.impresor.generarExcel(this.listaInfos, "turnos "+this.lapso);  
+  }
 
-pdf(){
-
-}
+  pdf(){
+    var element=document.getElementById("barrasM");    
+    this.impresor.guardarImagenPdf(element, "barrasMedicos");
+  }
 
   carg(){
     let infos:infoMedico[]=new Array();

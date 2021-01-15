@@ -7,8 +7,7 @@ import { ChartDataSets, ChartOptions } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
 import * as pluginAnnotations from 'chartjs-plugin-annotation';
 
-import { jsPDF } from "jspdf";
-import html2canvas from "html2canvas";
+
 import { paciente } from 'src/app/clases/paciente';
 import { infoTurno } from 'src/app/clases/infoTurn';
 
@@ -173,20 +172,8 @@ export class TurnosPorDiaComponent implements OnInit {
   }
 
   pdf(){
-    //this.impresor.generarPdf(Date().toString(), this.listaFiltrada);
     var element=document.getElementById("my-canvas");
-
-    html2canvas(element).then(canvas=>{
-      console.log(canvas);
-      var imgData=canvas.toDataURL("image/png");
-
-      var doc= new jsPDF('p','pt','a4');
-
-      
-
-      doc.addImage(imgData, 0,0,600,400);
-      doc.save("image.pdf");
-    })
+    this.impresor.guardarImagenPdf(element, "turnosPorDía");    
   }
 
   filtrarListado(lista:turno[]){

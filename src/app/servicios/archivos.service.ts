@@ -5,6 +5,8 @@ import * as XLSX from 'xlsx';
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
+import { jsPDF } from "jspdf";
+import * as htmlToImage from 'html-to-image';
 
 @Injectable({
   providedIn: 'root'
@@ -106,5 +108,18 @@ export class ArchivosService {
         ]
       }
     };
+  }
+
+  guardarImagenPdf(elementoHTML:any, titulo:string){
+ 
+    htmlToImage.toPng(elementoHTML).then(canvas=>{
+      const img = new Image();
+      img.src = canvas;
+      const pdf = new jsPDF('l', 'mm', 'a4');
+      pdf.text('Clinica On-line', 20, 20);
+      pdf.setLineWidth(1);
+      pdf.addImage(img, 'PNG', 40, 60, 353, 176);
+      pdf.save(titulo+".pdf");       
+  })
   }
 }

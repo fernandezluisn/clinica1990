@@ -1,10 +1,12 @@
-import { Component, Input, OnInit,  } from '@angular/core';
+import { Component, OnInit,  } from '@angular/core';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import { Color, Label } from 'ng2-charts';
 import * as pluginAnnotations from 'chartjs-plugin-annotation';
 import { log } from 'src/app/clases/log';
 import { BdaService } from 'src/app/servicios/bda.service';
 import { ArchivosService } from 'src/app/servicios/archivos.service';
+
+
 
 @Component({
   selector: 'app-lineas-logs',
@@ -40,7 +42,9 @@ export class LineasLogsComponent implements OnInit {
   }
 
   pdf(){
+      var element=document.getElementById("lineas");
 
+      this.impresor.guardarImagenPdf(element, "ingresos");
   }
 
   filtrarLogs(logs:log[]){
