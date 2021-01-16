@@ -44,7 +44,7 @@ export class LineasLogsComponent implements OnInit {
   pdf(){
       var element=document.getElementById("lineas");
 
-      this.impresor.guardarImagenPdf(element, "ingresos");
+      this.impresor.guardarImagenPdf(element, "ingresos", "Ingresos al sistema por mes");
   }
 
   filtrarLogs(logs:log[]){

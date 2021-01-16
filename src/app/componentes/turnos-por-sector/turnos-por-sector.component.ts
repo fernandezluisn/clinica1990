@@ -111,8 +111,18 @@ export class TurnosPorSectorComponent implements OnInit {
     
   }
 
-  pdf(){
-
+  pdf(num:number){
+    var element=document.getElementById("turnos"+num);
+    let nombre="infoSector"+num;
+    let texto:string;
+    if(num==1){
+      texto="Operaciones por sector";
+    }else if (num==2){
+      texto="Empleados por especialidad";
+    }else{
+      texto="Pacientes por especialidad";
+    }
+    this.impresor.guardarImagenPdf(element, nombre, texto);
   }
 
   excel(graf:number){

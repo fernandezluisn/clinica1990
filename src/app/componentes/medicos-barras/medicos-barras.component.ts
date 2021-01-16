@@ -75,7 +75,7 @@ export class MedicosBarrasComponent implements OnInit {
 
   pdf(){
     var element=document.getElementById("barrasM");    
-    this.impresor.guardarImagenPdf(element, "barrasMedicos");
+    this.impresor.guardarImagenPdf(element, "barrasMedicos", "Información de los médicos");
   }
 
   carg(){

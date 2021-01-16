@@ -75,7 +75,7 @@ export class ArchivosService {
   generarTabla(listaIngresos:any) {
     const lista = [];
     let itemLista = [];
-    let columnas;
+    let columnas=[];
     let contenido;
     let datos;
     
@@ -93,7 +93,6 @@ export class ArchivosService {
 
       columnas.push(contenido);
         itemLista.push({columns: columnas});
-        console.log(contenido);
         lista.push(
           [{
           columns: columnas,
@@ -110,13 +109,15 @@ export class ArchivosService {
     };
   }
 
-  guardarImagenPdf(elementoHTML:any, titulo:string){
+  guardarImagenPdf(elementoHTML:any, titulo:string, texto:string){
  
     htmlToImage.toPng(elementoHTML).then(canvas=>{
       const img = new Image();
       img.src = canvas;
       const pdf = new jsPDF('l', 'mm', 'a4');
       pdf.text('Clinica On-line', 20, 20);
+
+      pdf.text(texto, 30, 50);
       pdf.setLineWidth(1);
       pdf.addImage(img, 'PNG', 40, 60, 353, 176);
       pdf.save(titulo+".pdf");       

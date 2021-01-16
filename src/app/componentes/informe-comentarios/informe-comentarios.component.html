@@ -7,7 +7,7 @@
 
     <div style="display: block" class="grafico">
         <h3>Porcentaje de pacientes que tienen conocidos que se atienden en el hospital</h3>
-                <canvas baseChart
+                <canvas id="graf1" baseChart
                 [datasets]="barChartData"
                 [labels]="barChartLabels"
                 [options]="barChartOptions"
@@ -17,14 +17,14 @@
                 </canvas>
 
                 <button class="btn btn-success" (click)="excel(1)">Imprimir en excel</button>
-                <button class="btn btn-danger" (click)="pdf()">Imprimir en pdf</button>
+                <button class="btn btn-danger" (click)="pdf(1)">Imprimir en pdf</button>
     </div>
 
     
 
     <div style="display: block;" class="grafico">
         <h3>Calificación de la atención en el hospital</h3>
-        <canvas baseChart
+        <canvas id="graf2" baseChart
         [datasets]="barChartData2"
         [labels]="barChartLabels2"
         [options]="barChartOptions"
@@ -35,12 +35,12 @@
 
 
         <button class="btn btn-success" (click)="excel(2)">Imprimir en excel</button>
-        <button class="btn btn-danger" (click)="pdf()">Imprimir en pdf</button>
+        <button class="btn btn-danger" (click)="pdf(2)">Imprimir en pdf</button>
     </div>
 
     <div style="display: block" class="grafico">
         <h3>Puntuación promedio de los médicos del hospital</h3>
-                <canvas baseChart
+                <canvas id="graf3" baseChart
                 [datasets]="barChartData3"
                 [labels]="barChartLabels3"
                 [options]="barChartOptions"
@@ -50,7 +50,7 @@
                 </canvas>
 
                 <button class="btn btn-success" (click)="excel(3)">Imprimir en excel</button>
-                <button class="btn btn-danger" (click)="pdf()">Imprimir en pdf</button>
+                <button class="btn btn-danger" (click)="pdf(3)">Imprimir en pdf</button>
     </div>
 
     

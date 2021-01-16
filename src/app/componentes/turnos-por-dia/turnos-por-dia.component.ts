@@ -157,7 +157,14 @@ export class TurnosPorDiaComponent implements OnInit {
   }
 
   pdf2(){
-
+    let listTurn:infoTurno[]=new Array();
+    this.turnosDelPaciente.forEach(elem=>{
+      let tr=new infoTurno("Fecha: "+elem.fecha.toString(), "Médico: "+elem.empleado.apellido+", "+elem.empleado.nombre, "Especialidad: "+elem.especialidad, "Paciente: "+ elem.paciente.apellido+", "+elem.paciente.nombre,
+      "Número del turno: "+elem.numeroTurno.toString(), "Estado del turno: "+elem.estado);
+      listTurn.push(tr);
+    })
+    listTurn.sort((a,b) => Number(Date.parse(a.fecha.toString())) - Number(Date.parse(b.fecha.toString())));
+    this.impresor.generarPdf("Turnos del paciente "+this.pacienteE, listTurn);
   }
 
   excel2(){
@@ -173,7 +180,7 @@ export class TurnosPorDiaComponent implements OnInit {
 
   pdf(){
     var element=document.getElementById("my-canvas");
-    this.impresor.guardarImagenPdf(element, "turnosPorDía");    
+    this.impresor.guardarImagenPdf(element, "turnosPorDía", "Turnos por día");    
   }
 
   filtrarListado(lista:turno[]){

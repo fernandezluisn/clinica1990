@@ -164,8 +164,19 @@ export class InformeComentariosComponent implements OnInit {
       this.impresor.generarExcel(this.listaC,"encuestas");
   }
 
-  pdf(){
+  pdf(num:number){
 
+    var element=document.getElementById("graf"+num);
+    let nombre="encu"+num;
+    let texto:string;
+    if(num==1){
+      texto="Porcentaje de pacientes que tienen conocidos que se atienden en el hospital";
+    }else if (num==2){
+      texto="Calificación de la atención en el hospital";
+    }else{
+      texto="Puntuación promedio de los médicos del hospital";
+    }
+    this.impresor.guardarImagenPdf(element, nombre, texto);
   }
 
   

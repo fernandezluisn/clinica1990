@@ -3,7 +3,7 @@
   <div class="grafico">
     <h2>Operaciones por sector</h2>
       <div class="chart">
-        <canvas baseChart
+        <canvas id="turnos1" baseChart
           [data]="pieChartData"
           [labels]="pieChartLabels"
           [chartType]="pieChartType2"
@@ -15,13 +15,13 @@
       </div>
 
       <button class="btn btn-success" (click)="excel(1)">Imprimir en excel</button>
-      <button class="btn btn-danger" (click)="pdf()">Imprimir en pdf</button>
+      <button class="btn btn-danger" (click)="pdf(1)">Imprimir en pdf</button>
     </div>
 
     <div class="grafico">
       <h2>Empleados por especialidad</h2>
       <div class="chart">
-        <canvas baseChart
+        <canvas id="turnos2" baseChart
           [data]="pieChartData2"
           [labels]="pieChartLabels"
           [chartType]="pieChartType"
@@ -33,13 +33,13 @@
       </div>
 
       <button class="btn btn-success" (click)="excel(2)">Imprimir en excel</button>
-      <button class="btn btn-danger" (click)="pdf()">Imprimir en pdf</button>
+      <button class="btn btn-danger" (click)="pdf(2)">Imprimir en pdf</button>
     </div>
 
     <div class="grafico">
       <h2>Pacientes por especialidad</h2>
       <div class="chart">
-        <canvas baseChart
+        <canvas id="turnos3" baseChart
           [data]="pieChartData3"
           [labels]="pieChartLabels"
           [chartType]="pieChartType"
@@ -51,6 +51,6 @@
       </div>
 
       <button class="btn btn-success" (click)="excel(3)">Imprimir en excel</button>
-      <button class="btn btn-danger" (click)="pdf()">Imprimir en pdf</button>
+      <button class="btn btn-danger" (click)="pdf(3)">Imprimir en pdf</button>
     </div>
   </div>
