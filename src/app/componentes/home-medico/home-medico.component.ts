@@ -5,7 +5,7 @@ import { empleado } from 'src/app/clases/empleado';
 import {TurnosHoraPipe} from '../../pipes/turnos-hora.pipe';
 import { MedicosService } from 'src/app/servicios/medicos.service';
 import { jornadaSemanal } from 'src/app/clases/jornadaSemanal';
-import { element } from 'protractor';
+
 
 @Component({
   selector: 'app-home-medico',
@@ -50,7 +50,23 @@ export class HomeMedicoComponent implements OnInit {
   
   tiempoTurno;
 
-  
+  lunesEE:string;
+  lunesES:string;
+
+  martesEE:string;
+  martesES:string;
+
+  mierEE:string;
+  mierES:string;
+
+  jueEE:string;
+  jueES:string;
+
+  vieEE:string;
+  vieES:string;
+
+  saEE:string;
+  saES:string;
 
   listaTurnosEntrada:number[];
   listaTurnosSalida:number[];
@@ -60,7 +76,7 @@ export class HomeMedicoComponent implements OnInit {
   jornadaActual:jornadaSemanal;
   hayJornada=false;
 
-  constructor(private service:ServicioService, private bda:BdaService, private medicoService:MedicosService) { 
+  constructor(private service:ServicioService, private bda:BdaService, private medicoService:MedicosService, private tpipe:TurnosHoraPipe) { 
     
     this.service.tomarUsuario().then(element=>{
       this.user=element;
@@ -70,13 +86,343 @@ export class HomeMedicoComponent implements OnInit {
           if(elementL.email.toLowerCase()==this.user.email.toLowerCase())
           {
           this.medicoLogeado=elementL;
-          this.descargo=true;       
           
           this.medicoService.devolverListadoJornadas().subscribe(listaJo=>{
             listaJo.filter(elementJo=>{
               if(elementJo.medico.email.toLowerCase()==this.user.email.toLowerCase()){
-                this.jornadaActual=elementJo;
+                this.jornadaActual=elementJo;              
+                
+                //lunes entrada
+                if(elementJo.lunesE==0){
+                  this.lunesEE="8:00";
+                }else if(elementJo.lunesE==1){
+                  this.lunesEE="9:00";
+                }else if(elementJo.lunesE==2){
+                  this.lunesEE="10:00";
+                }else if(elementJo.lunesE==3){
+                  this.lunesEE="11:00";
+                }else if(elementJo.lunesE==4){
+                  this.lunesEE="12:00";
+                }else if(elementJo.lunesE==5){
+                  this.lunesEE="13:00";
+                }else if(elementJo.lunesE==6){
+                  this.lunesEE="14:00";
+                }else if(elementJo.lunesE==7){
+                  this.lunesEE="15:00";
+                }else if(elementJo.lunesE==8){
+                  this.lunesEE="16:00";
+                }else if(elementJo.lunesE==9){
+                  this.lunesEE="17:00";
+                }else if(elementJo.lunesE==10){
+                  this.lunesEE="18:00";
+                }else if(elementJo.lunesE==11){
+                  this.lunesEE="19:00";
+                }else{
+                  this.lunesEE="Ausente";
+                }
+
+                //lunes salida
+                if(elementJo.lunesS==0){
+                  this.lunesES="8:00";
+                }else if(elementJo.lunesS==1){
+                  this.lunesES="9:00";
+                }else if(elementJo.lunesS==2){
+                  this.lunesES="10:00";
+                }else if(elementJo.lunesS==3){
+                  this.lunesES="11:00";
+                }else if(elementJo.lunesS==4){
+                  this.lunesES="12:00";
+                }else if(elementJo.lunesS==5){
+                  this.lunesES="13:00";
+                }else if(elementJo.lunesS==6){
+                  this.lunesES="14:00";
+                }else if(elementJo.lunesS==7){
+                  this.lunesES="15:00";
+                }else if(elementJo.lunesS==8){
+                  this.lunesES="16:00";
+                }else if(elementJo.lunesS==9){
+                  this.lunesES="17:00";
+                }else if(elementJo.lunesS==10){
+                  this.lunesES="18:00";
+                }else if(elementJo.lunesS==11){
+                  this.lunesES="19:00";
+                }else{
+                  this.lunesES="Ausente";
+                }
+
+                //martes entrada
+                if(elementJo.martesE==0){
+                  this.martesEE="8:00";
+                }else if(elementJo.martesE==1){
+                  this.martesEE="9:00";
+                }else if(elementJo.martesE==2){
+                  this.martesEE="10:00";
+                }else if(elementJo.martesE==3){
+                  this.martesEE="11:00";
+                }else if(elementJo.martesE==4){
+                  this.martesEE="12:00";
+                }else if(elementJo.martesE==5){
+                  this.martesEE="13:00";
+                }else if(elementJo.martesE==6){
+                  this.martesEE="14:00";
+                }else if(elementJo.martesE==7){
+                  this.martesEE="15:00";
+                }else if(elementJo.martesE==8){
+                  this.martesEE="16:00";
+                }else if(elementJo.martesE==9){
+                  this.martesEE="17:00";
+                }else if(elementJo.martesE==10){
+                  this.martesEE="18:00";
+                }else if(elementJo.martesE==11){
+                  this.martesEE="19:00";
+                }else{
+                  this.martesEE="Ausente";
+                }
+
+                 //martes salida
+                 if(elementJo.martesS==0){
+                  this.martesES="8:00";
+                }else if(elementJo.martesS==1){
+                  this.martesES="9:00";
+                }else if(elementJo.martesS==2){
+                  this.martesES="10:00";
+                }else if(elementJo.martesS==3){
+                  this.martesES="11:00";
+                }else if(elementJo.martesS==4){
+                  this.martesES="12:00";
+                }else if(elementJo.martesS==5){
+                  this.martesES="13:00";
+                }else if(elementJo.martesS==6){
+                  this.martesES="14:00";
+                }else if(elementJo.martesS==7){
+                  this.martesES="15:00";
+                }else if(elementJo.martesS==8){
+                  this.martesES="16:00";
+                }else if(elementJo.martesS==9){
+                  this.martesEE="17:00";
+                }else if(elementJo.martesS==10){
+                  this.martesES="18:00";
+                }else if(elementJo.martesS==11){
+                  this.martesES="19:00";
+                }else{
+                  this.martesES="Ausente";
+                }
+
+                //miercoles entrada
+                if(elementJo.miercolesE==0){
+                  this.mierEE="8:00";
+                }else if(elementJo.miercolesE==1){
+                  this.mierEE="9:00";
+                }else if(elementJo.miercolesE==2){
+                  this.mierEE="10:00";
+                }else if(elementJo.miercolesE==3){
+                  this.mierEE="11:00";
+                }else if(elementJo.miercolesE==4){
+                  this.mierEE="12:00";
+                }else if(elementJo.miercolesE==5){
+                  this.mierEE="13:00";
+                }else if(elementJo.miercolesE==6){
+                  this.mierEE="14:00";
+                }else if(elementJo.miercolesE==7){
+                  this.mierEE="15:00";
+                }else if(elementJo.miercolesE==8){
+                  this.mierEE="16:00";
+                }else if(elementJo.miercolesE==9){
+                  this.mierEE="17:00";
+                }else if(elementJo.miercolesE==10){
+                  this.mierEE="18:00";
+                }else if(elementJo.miercolesE==11){
+                  this.mierEE="19:00";
+                }else{
+                  this.mierEE="Ausente";
+                }
+
+                //miercoles salida
+                if(elementJo.miercolesS==0){
+                  this.mierES="8:00";
+                }else if(elementJo.miercolesS==1){
+                  this.mierES="9:00";
+                }else if(elementJo.miercolesS==2){
+                  this.mierES="10:00";
+                }else if(elementJo.miercolesS==3){
+                  this.mierES="11:00";
+                }else if(elementJo.miercolesS==4){
+                  this.mierES="12:00";
+                }else if(elementJo.miercolesS==5){
+                  this.mierES="13:00";
+                }else if(elementJo.miercolesS==6){
+                  this.mierES="14:00";
+                }else if(elementJo.miercolesS==7){
+                  this.mierES="15:00";
+                }else if(elementJo.miercolesS==8){
+                  this.mierES="16:00";
+                }else if(elementJo.miercolesS==9){
+                  this.mierES="17:00";
+                }else if(elementJo.miercolesS==10){
+                  this.mierES="18:00";
+                }else if(elementJo.miercolesS==11){
+                  this.mierES="19:00";
+                }else{
+                  this.mierES="Ausente";
+                }
+
+                //jueves entrada
+                if(elementJo.juevesE==0){
+                  this.jueEE="8:00";
+                }else if(elementJo.juevesE==1){
+                  this.jueEE="9:00";
+                }else if(elementJo.juevesE==2){
+                  this.jueEE="10:00";
+                }else if(elementJo.juevesE==3){
+                  this.jueEE="11:00";
+                }else if(elementJo.juevesE==4){
+                  this.jueEE="12:00";
+                }else if(elementJo.juevesE==5){
+                  this.jueEE="13:00";
+                }else if(elementJo.juevesE==6){
+                  this.jueEE="14:00";
+                }else if(elementJo.juevesE==7){
+                  this.jueEE="15:00";
+                }else if(elementJo.juevesE==8){
+                  this.jueEE="16:00";
+                }else if(elementJo.juevesE==9){
+                  this.jueEE="17:00";
+                }else if(elementJo.juevesE==10){
+                  this.jueEE="18:00";
+                }else if(elementJo.juevesE==11){
+                  this.jueEE="19:00";
+                }else{
+                  this.jueEE="Ausente";
+                }
+
+                //jueves salida
+                if(elementJo.juevesS==0){
+                  this.jueES="8:00";
+                }else if(elementJo.juevesS==1){
+                  this.jueES="9:00";
+                }else if(elementJo.juevesS==2){
+                  this.jueES="10:00";
+                }else if(elementJo.juevesS==3){
+                  this.jueES="11:00";
+                }else if(elementJo.juevesS==4){
+                  this.jueES="12:00";
+                }else if(elementJo.juevesS==5){
+                  this.jueES="13:00";
+                }else if(elementJo.juevesS==6){
+                  this.jueES="14:00";
+                }else if(elementJo.juevesS==7){
+                  this.jueES="15:00";
+                }else if(elementJo.juevesS==8){
+                  this.jueES="16:00";
+                }else if(elementJo.juevesS==9){
+                  this.jueES="17:00";
+                }else if(elementJo.juevesS==10){
+                  this.jueES="18:00";
+                }else if(elementJo.juevesS==11){
+                  this.jueES="19:00";
+                }else{
+                  this.jueES="Ausente";
+                }
+
+                //viernes entrada
+                if(elementJo.viernesE==0){
+                  this.vieEE="8:00";
+                }else if(elementJo.viernesE==1){
+                  this.vieEE="9:00";
+                }else if(elementJo.viernesE==2){
+                  this.vieEE="10:00";
+                }else if(elementJo.viernesE==3){
+                  this.vieEE="11:00";
+                }else if(elementJo.viernesE==4){
+                  this.vieEE="12:00";
+                }else if(elementJo.viernesE==5){
+                  this.vieEE="13:00";
+                }else if(elementJo.viernesE==6){
+                  this.vieEE="14:00";
+                }else if(elementJo.viernesE==7){
+                  this.vieEE="15:00";
+                }else if(elementJo.viernesE==8){
+                  this.vieEE="16:00";
+                }else if(elementJo.viernesE==9){
+                  this.vieEE="17:00";
+                }else if(elementJo.viernesE==10){
+                  this.vieEE="18:00";
+                }else if(elementJo.viernesE==11){
+                  this.vieEE="19:00";
+                }else{
+                  this.vieEE="Ausente";
+                }
+
+                //viernes salida
+                if(elementJo.viernesS==0){
+                  this.vieES="8:00";
+                }else if(elementJo.viernesS==1){
+                  this.vieES="9:00";
+                }else if(elementJo.viernesS==2){
+                  this.vieES="10:00";
+                }else if(elementJo.viernesS==3){
+                  this.vieES="11:00";
+                }else if(elementJo.viernesS==4){
+                  this.vieES="12:00";
+                }else if(elementJo.viernesS==5){
+                  this.vieES="13:00";
+                }else if(elementJo.viernesS==6){
+                  this.vieES="14:00";
+                }else if(elementJo.viernesS==7){
+                  this.vieES="15:00";
+                }else if(elementJo.viernesS==8){
+                  this.vieES="16:00";
+                }else if(elementJo.viernesS==9){
+                  this.vieES="17:00";
+                }else if(elementJo.viernesS==10){
+                  this.vieES="18:00";
+                }else if(elementJo.viernesS==11){
+                  this.vieES="19:00";
+                }else{
+                  this.vieES="Ausente";
+                }
+
+                //sabado entrada
+                if(elementJo.SabadoE==0){
+                  this.saEE="8:00";
+                }else if(elementJo.SabadoE==1){
+                  this.saEE="9:00";
+                }else if(elementJo.SabadoE==2){
+                  this.saEE="10:00";
+                }else if(elementJo.SabadoE==3){
+                  this.saEE="11:00";
+                }else if(elementJo.SabadoE==4){
+                  this.saEE="12:00";
+                }else if(elementJo.SabadoE==5){
+                  this.saEE="13:00";
+                }else if(elementJo.SabadoE==6){
+                  this.saEE="14:00";
+                }else {
+                  this.saEE="Ausente";
+                }
+
+                //sabado salida
+                if(elementJo.sabadoS==0){
+                  this.saES="8:00";
+                }else if(elementJo.sabadoS==1){
+                  this.saES="9:00";
+                }else if(elementJo.sabadoS==2){
+                  this.saES="10:00";
+                }else if(elementJo.sabadoS==3){
+                  this.saES="11:00";
+                }else if(elementJo.sabadoS==4){
+                  this.saES="12:00";
+                }else if(elementJo.sabadoS==5){
+                  this.saES="13:00";
+                }else if(elementJo.sabadoS==6){
+                  this.saES="14:00";
+                }else {
+                  this.saES="Ausente";
+                }
+
                 this.hayJornada=true;
+                this.descargo=true;       
+
               }
             })
           }
@@ -120,11 +466,6 @@ export class HomeMedicoComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
- 
-   
-     
-      
     
   
 

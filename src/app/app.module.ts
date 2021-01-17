@@ -111,7 +111,7 @@ import { InformeComentariosComponent } from './componentes/informe-comentarios/i
     NgxSpinnerModule,
     ChartsModule
   ],
-  providers: [ServicioService, AngularFireAuth, StorageService, BdaService, DatePipe, ArchivosService, MedicosService, TurnosService],
+  providers: [ServicioService, AngularFireAuth, StorageService, BdaService, DatePipe, ArchivosService, MedicosService, TurnosService, TurnosHoraPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

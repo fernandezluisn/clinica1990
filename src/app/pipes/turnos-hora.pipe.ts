@@ -5,8 +5,9 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class TurnosHoraPipe implements PipeTransform {
 
-  transform(value: unknown, ...args: unknown[]): unknown {
+  transform(value: number, ...args: unknown[]): string {
     let d;
+       
     switch(value){
       case(0):
       d="8:00";
@@ -47,6 +48,7 @@ export class TurnosHoraPipe implements PipeTransform {
      
     }
     return d;
+  
   }
 
 }

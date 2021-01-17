@@ -1,14 +1,14 @@
-<app-nav [tipoMedico]="true" [inicio]="false" [logeado]="true" [tipoPaciente]="false"></app-nav>
+<app-nav [tipoMedico]="true" [inicio]="false" [logeado]="true" [tipoPaciente]="false" style="width: 95rem;"></app-nav>
+<h1 *ngIf="descargo">Bienvenido/a {{medicoLogeado.nombre}}</h1>
+<h2 *ngIf="descargo">Aquí puede modificar los días y horarios en los que atenderás en la clínica, así como la duración de los turnos.</h2>
+<div class="prin" *ngIf="descargo">
     
-<div *ngIf="descargo">
-    <h1 >Bienvenido/a {{medicoLogeado.nombre}}</h1>
-        <h2>Aquí puede modificar los días y horarios en los que atenderás en la clínica, así como la duración de los turnos.</h2>
 
-    <div *ngIf="this.medicoLogeado.aprobadoPorAdmin" style="display: flex; justify-content: start; flex-direction: row;">
+    <div *ngIf="this.medicoLogeado.aprobadoPorAdmin" style="display: flex; justify-content: start; flex-direction: row; margin: 0%;">
         
-    <div style="width: 50%;">
-        <form>
-            <table class="table" style="width: 80%; text-align: center;">
+    <div style="width: 40rem; margin-left: 1%;">
+        
+            <table  style="width: 80%; text-align: center;">
                 <thead>
                     <tr>
                     <th scope="col"></th>
@@ -22,10 +22,10 @@
                     <tr>
                         <th scope="row"></th>
                         <td>Lunes</td>
-                        <td><select [(ngModel)]="nTurnoE1" class="form-control" style="width: 12rem;" name="SelectEsp" (change)="checkbox1()">
+                        <td><select [(ngModel)]="nTurnoE1" class="form-control" style="width: 6rem;" name="SelectEsp" (change)="checkbox1()">
                             <option [value]="item" *ngFor="let item of listaTurnosEntrada">{{item | turnosHora}}</option>
                           </select>  </td>
-                          <td><select [(ngModel)]="nTurnoS1" class="form-control" style="width: 12rem;" name="SelectEsp" (change)="checkbox1()">
+                          <td><select [(ngModel)]="nTurnoS1" class="form-control" style="width: 6rem;" name="SelectEsp" (change)="checkbox1()">
                             <option [value]="item" *ngFor="let item of listaTurnosSalida">{{item | turnosHora}}</option>
                           </select>  </td>
                         <td><input type="checkbox" (change)="checkbox1()"></td>
@@ -36,10 +36,10 @@
                     <tr>
                         <th scope="row"></th>
                         <td>Martes</td>
-                        <td><select [(ngModel)]="nTurnoE2" class="form-control" style="width: 12rem;" name="SelectEsp" (change)="checkbox2()">
+                        <td><select [(ngModel)]="nTurnoE2" class="form-control" style="width: 6rem;" name="SelectEsp" (change)="checkbox2()">
                             <option [value]="item" *ngFor="let item of listaTurnosEntrada">{{item | turnosHora}}</option>
                           </select>  </td>
-                          <td><select [(ngModel)]="nTurnoS2" class="form-control" style="width: 12rem;" name="SelectEsp" (change)="checkbox2()">
+                          <td><select [(ngModel)]="nTurnoS2" class="form-control" style="width: 6rem;" name="SelectEsp" (change)="checkbox2()">
                             <option [value]="item" *ngFor="let item of listaTurnosSalida">{{item | turnosHora}}</option>
                           </select>  </td>
                         <td><input type="checkbox" (change)="checkbox2()"></td>
@@ -48,10 +48,10 @@
                     <tr>
                         <th scope="row"></th>
                         <td>Miercoles</td>
-                        <td><select [(ngModel)]="nTurnoE3" class="form-control" style="width: 12rem;" name="SelectEsp" (change)="checkbox3()"> 
+                        <td><select [(ngModel)]="nTurnoE3" class="form-control" style="width: 6rem;" name="SelectEsp" (change)="checkbox3()"> 
                             <option [value]="item" *ngFor="let item of listaTurnosEntrada">{{item | turnosHora}}</option>
                           </select>  </td>
-                          <td><select [(ngModel)]="nTurnoS3" class="form-control" style="width: 12rem;" name="SelectEsp" (change)="checkbox3()">
+                          <td><select [(ngModel)]="nTurnoS3" class="form-control" style="width:6rem;" name="SelectEsp" (change)="checkbox3()">
                             <option [value]="item" *ngFor="let item of listaTurnosSalida">{{item | turnosHora}}</option>
                           </select>  </td>
                         <td><input type="checkbox" (change)="checkbox3()"></td>
@@ -59,10 +59,10 @@
                     <tr>
                         <th scope="row"></th>
                         <td>Jueves</td>
-                        <td><select [(ngModel)]="nTurnoE4" class="form-control" style="width: 12rem;" name="SelectEsp" (change)="checkbox4()">
+                        <td><select [(ngModel)]="nTurnoE4" class="form-control" style="width: 6rem;" name="SelectEsp" (change)="checkbox4()">
                             <option [value]="item" *ngFor="let item of listaTurnosEntrada">{{item | turnosHora}}</option>
                           </select>  </td>
-                          <td><select [(ngModel)]="nTurnoS4" class="form-control" style="width: 12rem;" name="SelectEsp" (change)="checkbox4()">
+                          <td><select [(ngModel)]="nTurnoS4" class="form-control" style="width: 6rem;" name="SelectEsp" (change)="checkbox4()">
                             <option [value]="item" *ngFor="let item of listaTurnosSalida">{{item | turnosHora}}</option>
                           </select>  </td>
                         <td><input type="checkbox" (change)="checkbox4()"></td>
@@ -71,10 +71,10 @@
                     <tr>
                         <th scope="row"></th>
                         <td>Viernes</td>
-                        <td><select [(ngModel)]="nTurnoE5" class="form-control" style="width: 12rem;" name="SelectEsp" (change)="checkbox5()">
+                        <td><select [(ngModel)]="nTurnoE5" class="form-control" style="width: 6rem;" name="SelectEsp" (change)="checkbox5()">
                             <option [value]="item" *ngFor="let item of listaTurnosEntrada">{{item | turnosHora}}</option>
                           </select>  </td>
-                          <td><select [(ngModel)]="nTurnoS5" class="form-control" style="width: 12rem;" name="SelectEsp" (change)="checkbox5()">
+                          <td><select [(ngModel)]="nTurnoS5" class="form-control" style="width: 6rem;" name="SelectEsp" (change)="checkbox5()">
                             <option [value]="item" *ngFor="let item of listaTurnosSalida">{{item | turnosHora}}</option>
                           </select>  </td>
                         <td><input type="checkbox" (change)="checkbox5()"></td>
@@ -83,10 +83,10 @@
                     <tr>
                         <th scope="row"></th>
                         <td>Sabado</td>
-                        <td><select [(ngModel)]="nTurnoE6" class="form-control" style="width: 12rem;" name="SelectEsp" (change)="checkbox6()">
+                        <td><select [(ngModel)]="nTurnoE6" class="form-control" style="width: 6rem;" name="SelectEsp" (change)="checkbox6()">
                             <option [value]="item" *ngFor="let item of listaTurnosEntradaSabado" >{{item | turnosHora}}</option>
                           </select>  </td>
-                          <td><select [(ngModel)]="nTurnoS6" class="form-control" style="width: 12rem;" name="SelectEsp" (change)="checkbox6()">
+                          <td><select [(ngModel)]="nTurnoS6" class="form-control" style="width: 6rem;" name="SelectEsp" (change)="checkbox6()">
                             <option [value]="item" *ngFor="let item of listaTurnosSalidaSabado">{{item | turnosHora}}</option>
                           </select>  </td>
                         <td><input type="checkbox" (change)="checkbox6()"></td>
@@ -95,7 +95,7 @@
 
             <div class="form-group">
                 <label for="tiempoTurno">Seleccione el tiempo de duración de los turnos.</label>
-                <td><select [(ngModel)]="tiempoTurno" class="form-control" style="width: 12rem;" name="SelectEsp">
+                <td><select [(ngModel)]="tiempoTurno" class="form-control" style="width: 10rem;" name="SelectEsp">
                     <option [value]=30>30 minutos</option>                   
                     <option [value]=60>60 minutos</option>
                   </select>  </td>
@@ -105,72 +105,72 @@
             <div class="form-group">
             <button (click)="subirHorarios()" class="btn btn-primary">Cargar horario.</button>
         </div>
-        </form>
+        
     </div>
 
-    <div style="width: 40%; margin-top: 5%; text-align: center;" *ngIf="!hayJornada">
+    <div style="width: 50%; margin-top: 10%; text-align: center;" *ngIf="!hayJornada">
     <h1>Usted no tiene horario registrado actualmente.</h1></div>
     
-    <div style="width: 40%; margin-top: 5%; text-align: center;" *ngIf="hayJornada">
+    <div style="width: 50%; margin: 5%; text-align: center;" *ngIf="hayJornada">
         <h2>Horario Registrado actualmente.</h2>
     
-        <table class="table">
+        <table  style="width: auto;">
             <thead>
             <tr>
                 <th scope="col"></th>
                 <th scope="col">Día</th>
                 <th scope="col">Horario de entrada</th> 
                 <th scope="col">Horario de salida</th> 
-                <th scope="col">Trabaja</th>                  
+                               
             </tr>
         </thead>
         <tbody>
             <tr>
                 <th scope="row"></th>
                     <td>Lunes</td>
-                    <td >{{jornadaActual.lunesE}}</td>
-                    <td>{{jornadaActual.lunesS}}</td>
-                    <td>{{jornadaActual.lunes}}</td>
+                    <td >{{lunesEE}}</td>
+                    <td>{{lunesES}}</td>
+                    
                 
             </tr>
             <tr>
                 <th scope="row"> </th>
                     <td>Martes</td>
-                    <td>{{jornadaActual.martesE}}</td>
-                    <td>{{jornadaActual.martesS}}</td>
-                    <td>{{jornadaActual.martes}}</td>
+                    <td>{{martesEE }}</td>
+                    <td>{{martesES }}</td>
+                    
                
             </tr>
             <tr>
                 <th scope="row"></th>
                     <td>Miercoles</td>
-                    <td>{{jornadaActual.miercolesE}}</td>
-                    <td>{{jornadaActual.miercolesS}}</td>
-                    <td>{{jornadaActual.miercoles}}</td>
+                    <td>{{mierEE}}</td>
+                    <td>{{mierES}}</td>
+                    
                 
             </tr>
             <tr>
                 <th scope="row"></th>
                     <td>Jueves</td>
-                    <td>{{jornadaActual.juevesE}}</td>
-                    <td>{{jornadaActual.juevesS}}</td>
-                    <td>{{jornadaActual.jueves}}</td>
+                    <td>{{jueEE}}</td>
+                    <td>{{jueES}}</td>
+                    
                 
             </tr>
             <tr>
                 <th scope="row"> </th>
                     <td>Viernes</td>
-                    <td>{{jornadaActual.viernesE}}</td>
-                    <td>{{jornadaActual.viernesS}}</td>
-                    <td>{{jornadaActual.viernes}}</td>
+                    <td>{{vieEE}}</td>
+                    <td>{{vieES}}</td>
+                    
                
             </tr>
             <tr>
                 <th scope="row"></th>
                     <td>Sabado</td>
-                    <td>{{jornadaActual.SabadoE}}</td>
-                    <td>{{jornadaActual.sabadoS}}</td>
-                    <td>{{jornadaActual.sabado}}</td>
+                    <td>{{saEE}}</td>
+                    <td>{{saES}}</td>
+                    
                 
             </tr>
         </tbody>
