@@ -20,6 +20,7 @@ import { especialidad } from 'src/app/clases/especialidad';
 
 
 
+
 @Component({
   selector: 'app-turnos',
   templateUrl: './turnos.component.html',
@@ -31,6 +32,8 @@ export class TurnosComponent implements OnInit {
 
   usuario;
   usuarioLista;
+
+  horaT:string;
 
   hayTurno=false;
 
@@ -443,6 +446,88 @@ export class TurnosComponent implements OnInit {
   mostrarHora(){
     this.v2=true;
     this.mostrarBoton();
+
+    let hora:string;
+    
+    if(this.jornada.tiempoTurnos.toString()=="60"){
+      if(this.nTurno==0){
+        hora="8:00";
+      }else if(this.nTurno==1){
+        hora="9:00";
+      }else if(this.nTurno==2){
+        hora="10:00";
+      }else if(this.nTurno==3){
+        hora="11:00";
+      }else if(this.nTurno==4){
+        hora="12:00";
+      }else if(this.nTurno==5){
+        hora="13:00";
+      }else if(this.nTurno==6){
+        hora="14:00";
+      }else if(this.nTurno==7){
+        hora="15:00";
+      }else if(this.nTurno==8){
+        hora="16:00";
+      }else if(this.nTurno==9){
+        hora="17:00";
+      }else if(this.nTurno==10){
+        hora="18:00";
+      }else if(this.nTurno==11){
+        hora="19:00";
+      }
+      
+    }else{
+      if(this.nTurno==0){
+        hora="8:00";
+      }else if(this.nTurno==1){
+        hora="8:30";
+      }else if(this.nTurno==2){
+        hora="9:00";
+      }else if(this.nTurno==3){
+        hora="9:30";
+      }else if(this.nTurno==4){
+        hora="10:00";
+      }else if(this.nTurno==5){
+        hora="10:30";
+      }else if(this.nTurno==6){
+        hora="11:00";
+      }else if(this.nTurno==7){
+        hora="11:30";
+      }else if(this.nTurno==8){
+        hora="12:00";
+      }else if(this.nTurno==9){
+        hora="12:30";
+      }else if(this.nTurno==10){
+        hora="13:00";
+      }else if(this.nTurno==11){
+        hora="13:30";
+      }else if(this.nTurno==12){
+        hora="14:00";
+      }else if(this.nTurno==13){
+        hora="14:30";
+      }else if(this.nTurno==14){
+        hora="15:00";
+      }else if(this.nTurno==15){
+        hora="15:30";
+      }else if(this.nTurno==16){
+        hora="16:00";
+      }else if(this.nTurno==17){
+        hora="16:30";
+      }else if(this.nTurno==18){
+        hora="17:00";
+      }else if(this.nTurno==19){
+        hora="17:30";
+      }else if(this.nTurno==20){
+        hora="18:00";
+      }else if(this.nTurno==21){
+        hora="18:30";
+      }else if(this.nTurno==22){
+        hora="19:00";
+      }        
+      
+    }
+    this.horaT=hora;
+    
     if(!isNull(this.medicoDetalle))
     this.hayTurno=true;
   }
@@ -474,7 +559,7 @@ export class TurnosComponent implements OnInit {
       alert("Debe seleccionar especialidad");
       
     }else{
-
+      
       let esp:especialidad;
 
       this.listadoEspecialidades.forEach(element=>{
@@ -486,8 +571,11 @@ export class TurnosComponent implements OnInit {
       esp.operaciones++;
 
       this.bda.updateEspecialidad(esp);
+
+     
       
-      let t=new turno(this.medicoDetalle, this.usuarioLista, "a confirmar", this.fecha, this.nTurno, "No hay", this.especialidad);      
+      
+      let t=new turno(this.medicoDetalle, this.usuarioLista, "a confirmar", this.fecha, this.nTurno, "No hay", this.especialidad, this.horaT);      
       this.turnosS.createTurno(t).then(res=>{
         alert("Su turno se ha registrado correctamente.");        
         this.router.navigate(["turnosAprobados"]);

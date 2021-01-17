@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { turno } from 'src/app/clases/turno';
-import {TurnosPipe} from '../../pipes/turnos.pipe';
-import { element } from 'protractor';
+
 import { isNullOrUndefined } from 'util';
 
 
@@ -16,6 +15,7 @@ export class TablaTurnosComponent implements OnInit {
   @Input() resenia=false;
   @Input() noConfirmados=false;
   @Input() confirmados=false;
+  
 
   @Input() listaTurnos:turno[];
   @Output() aprobarTurno:EventEmitter<any>=new EventEmitter<any>();
@@ -86,6 +86,8 @@ export class TablaTurnosComponent implements OnInit {
       }
     })
 
+    
+    
     this.listaFiltrada=listaB;
 
   }

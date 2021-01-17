@@ -14,6 +14,7 @@ export class HistorialPacientesComponent implements OnInit {
   user;
   hayTurno:boolean;
   turnoElegido:turno;
+  hora:string;
 
   constructor(private bda:TurnosService, private service:ServicioService) { 
     

@@ -26,7 +26,7 @@
             <td scope="row" >{{turno.empleado.nombre}} {{turno.empleado.apellido}}</td>
             <td scope="row" >{{turno.especialidad}}</td>
             <td scope="row" >{{turno.fecha}}</td>
-            <td scope="row" >{{turno.numeroTurno | turnos}}</td>
+            <td scope="row" >{{turno.hora }}</td>
             <td scope="row" >{{turno.estado}}</td>
             <td scope="row" *ngIf="resenia">{{turno.resenia}}</td>
             <td scope="row" *ngIf="confirmados"><button (click)="cancelar(turno)" class="btn btn-warning">Cancelar turno</button> </td>
