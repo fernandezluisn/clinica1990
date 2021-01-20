@@ -35,9 +35,9 @@
               <label for="d1" style="margin-right: 1rem;" *ngIf="!esDomingo">Horario disponible</label><br>
               <p *ngIf="esDomingo" style="color: red;">La clínica permanece cerrada los domingos, sepa disculpar.</p>
 
-              <div *ngIf="!noHayJornada">
+              <div *ngIf="!noHayJornada" style="margin-right: 0.3rem;">
                 <div *ngIf="turnosMedia">
-                  <select *ngIf="!esDomingo" [(ngModel)]="nTurno" class="form-control" style="width: 12rem;" (change)="mostrarHora()" name="SelectEsp">
+                  <select *ngIf="!esDomingo" [(ngModel)]="nTurno" class="form-control" style="width: 10rem;" (change)="mostrarHora()" name="SelectEsp">
                     <option (change)="mostrarHora()" [value]="item" *ngFor="let item of listaTurnosDia">{{item | turnos}}</option>
                   </select>   
                 </div>
@@ -60,7 +60,7 @@
           <br><br><br><br>
 
         
-            <div style="width: 10rem; bottom: 1rem; margin-left: 10%; position: absolute;">
+            <div style="width: 10rem; bottom: 2rem; margin-left: 10%; position: absolute;">
               <button type="button" (click)="subirTurno()" class="btn btn-primary" *ngIf="v3">Solicitar turno</button>
           </div>
       </div>
@@ -84,7 +84,7 @@
         <app-captcha (resp)="respuesta($event)"></app-captcha>
       </div>
 
-      <div *ngIf="!capt">
+      <div *ngIf="!capt" style="position: relative; margin-left: 2rem;">
         <h2>Captcha resuelto.</h2>
       </div>
     </div>

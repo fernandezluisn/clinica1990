@@ -7,7 +7,7 @@
 
     <div *ngIf="vacio"><h1>Usted no tiene Historia Clínica registrada en nuestra clínica.</h1></div>
 
-    <div *ngIf="hayTurno" style="width: 40%; margin: 4%; margin-top: 7%;">
+    <div *ngIf="hayTurno" style="width: 40%; margin-left: 12%; margin-top: 7%;">
         <app-detalle-resenia [turno]="turnoParaDetalle" [esPaciente]="true" [listadoComentarios]="comentarios"></app-detalle-resenia>
     </div>
 </div>

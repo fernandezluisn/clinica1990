@@ -1,15 +1,14 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { turno } from 'src/app/clases/turno';
 import { Router } from '@angular/router';
 import { comentario } from 'src/app/clases/comentario';
-import { element } from 'protractor';
 
 @Component({
   selector: 'app-detalle-resenia',
   templateUrl: './detalle-resenia.component.html',
   styleUrls: ['./detalle-resenia.component.css']
 })
-export class DetalleReseniaComponent implements OnInit {
+export class DetalleReseniaComponent implements OnChanges {
 
   @Input() turno:turno;
   @Input() esPaciente:boolean;
@@ -20,8 +19,8 @@ export class DetalleReseniaComponent implements OnInit {
   constructor(private router: Router) { 
     
   }
-
-  ngOnInit(): void {
+  ngOnChanges(changes: SimpleChanges): void {
+    this.existe=false;
     this.listadoComentarios.forEach(element=>{
       if(element.idTurno==this.turno.id){
         this.existe=true;
@@ -29,11 +28,16 @@ export class DetalleReseniaComponent implements OnInit {
     })
   }
 
+ 
+
   registrar(){
-    if(this.existe==false)
+    
+    if(this.existe==false && this.turno.estado=="atendido")
     this.router.navigate(["comentario/"+ this.turno.id]);
-    else
+    else if(this.turno.estado=="atendido")
     alert("Ya ha dejado un comentario de ese turno.");
+    else
+    alert("No puede dejar comentarios de un turno que no ha sido atendido");
   }
 
 }

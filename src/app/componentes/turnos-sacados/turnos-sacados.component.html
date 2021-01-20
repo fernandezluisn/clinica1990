@@ -1,7 +1,7 @@
 <app-nav [tipoPaciente]="true" [logeado]="true"></app-nav>
 
 <div *ngIf="mostrar">
-    <div *ngIf="hayTurnos">
+    <div *ngIf="hayTurnos" style="margin-left: 20%;">
         <app-tabla-turnos [confirmados]="true" [listaTurnos]="turnosDelPaciente" (cancelarTurno)="cancelar($event)"></app-tabla-turnos>
     </div>
 

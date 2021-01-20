@@ -110,16 +110,16 @@ export class InformeComentariosComponent implements OnInit {
       medic=medic+coment.preg1;
     });
 
-    let n1=(fam/n)*100;
-    let n2=(amig/n)*100;
-    let n3=(trab/n)*100;
+    let n1=Math.round((fam/n)*100);
+    let n2=Math.round((amig/n)*100);
+    let n3=Math.round((trab/n)*100);
 
     let inf=new porcentaje(n3, n2, n1);
     let infd:porcentaje[]=new Array();
     infd.push(inf);
 
     this.listaPorcentajes=infd;
-    let n4=medic/n;
+    let n4=Math.round(medic/n);
     
 
     let s=[{ data: [n1], label: 'familiares'},
@@ -134,7 +134,7 @@ export class InformeComentariosComponent implements OnInit {
     { data: [b5], label: 'Muy malo'}
    ];
 
-   let p=est/n;
+   let p=Math.round(est/n);
    this.promedio=Math.round(p).toString();
 
    let s3=[{ data: [n4], label: 'puntuación del personal médico'}

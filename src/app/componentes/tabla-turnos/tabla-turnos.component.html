@@ -1,4 +1,4 @@
-<div style="margin: 1rem;">
+<div style="margin: 0.3rem;">
   Puede filtrar la tabla por el nombre, el apellido, <br> 
   día o especialidad del medico <br> 
   <input type="text" [(ngModel)]="txtBuscar" (change)="filtrarLista()"><br><br>
@@ -29,8 +29,8 @@
             <td scope="row" >{{turno.hora }}</td>
             <td scope="row" >{{turno.estado}}</td>
             <td scope="row" *ngIf="resenia">{{turno.resenia}}</td>
-            <td scope="row" *ngIf="confirmados"><button (click)="cancelar(turno)" class="btn btn-warning">Cancelar turno</button> </td>
-            <td scope="row" *ngIf="noConfirmados"><button (click)="aprobar(turno)" class="btn btn-primary">Aprobar turno</button> </td>
+            <td scope="row" *ngIf="confirmados"><button (click)="cancelar(turno)" class="btn btn-warning btn-sm">Cancelar turno</button> </td>
+            <td scope="row" *ngIf="noConfirmados"><button (click)="aprobar(turno)" class="btn btn-primary btn-sm">Aprobar turno</button> </td>
           
             
           

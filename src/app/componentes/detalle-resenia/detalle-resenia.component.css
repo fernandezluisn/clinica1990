@@ -1,8 +1,8 @@
 .card{
     border-radius: 3rem;
-    background-color: rgba(167, 167, 236, 0.082);
+    background-color: rgba(14, 66, 75, 0.534);
     border:0.2rem solid rgba(0, 0, 0, 0.623);
-    width: 30rem;
+    width: 20rem;
     display: flex; 
     flex-direction: column; 
     justify-content: space-between;
