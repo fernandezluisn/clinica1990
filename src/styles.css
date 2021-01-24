@@ -18,7 +18,7 @@ body{
     background-image: url("../src/assets/fondo.jpg");
     background-repeat: repeat;
     background-size: 100%;
-   
+    min-width: 55rem;
 }
 
 form{
@@ -34,6 +34,12 @@ form{
     margin-top: 5%;
     margin-left: 5%;
     width: 90%;
+}
+
+.form-group2{
+    margin-top: 5%;
+    margin-left: 2%;
+    width: 60%;
 }
 
 button{
@@ -65,4 +71,5 @@ footer {
     width: 100%;   
     background-color: rgba(14, 66, 75, 0.534); 
     margin-top: 1rem;
+    min-width: 55rem;
   }

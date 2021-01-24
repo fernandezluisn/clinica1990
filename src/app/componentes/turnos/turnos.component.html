@@ -1,86 +1,88 @@
 <app-nav [tipoPaciente]="true" [logeado]="true"></app-nav>
 
-<div style="display: flex; justify-content:flex-start; flex-direction: row; margin: 1rem;">
-    <h2 *ngIf="cargoU">Bienvenido/a {{usuarioLista.nombre}}</h2> <img src="{{usuarioLista.img1}}" style="border-radius: 100%; height: 5rem; width: 5rem; position: absolute; right: 2rem;">
+<div style="display: flex; justify-content:flex-start; flex-direction: row; margin: 3rem;">
+    <h2 *ngIf="cargoU">Bienvenido/a {{usuarioLista.nombre}}</h2> <img src="{{usuarioLista.img1}}" style="border-radius: 100%; height: 7rem; width: 7rem; position: absolute; right: 4rem;">
 </div>
-    <h3 *ngIf="hayTurno" style="color: red;">Solicita turno con {{medicoDetalle.nombre}} {{medicoDetalle.apellido}} el día {{fecha | date: 'dd-MM-yyyy'}} a las {{ horaT }}. Cliquee el botón azul para solicitar.</h3>
+    <h3 *ngIf="hayTurno" style="color: red; margin-right: 10rem; margin-left: 3rem; margin-top: 1rem;">Solicita turno con {{medicoDetalle.nombre}} {{medicoDetalle.apellido}} el día {{fecha | date: 'dd-MM-yyyy'}} a las {{ horaT }}. Cliquee el botón azul para solicitar.</h3>
     
     
     
-    
-<div style="display: flex; justify-content:flex-start; flex-direction: row; min-height:25rem">
-    <div *ngIf="v0" >
-        <div style="margin-left: 5%; margin-top: 5%; margin-bottom: 2%;" >
-          <h2 >Solicite su próximo turno</h2>
-          <p>Las solicitudes están supeditadas a la disponibilidad del Dr. {{medicoDetalle.apellido}}</p>
+  <div style="display: flex; justify-content:flex-start; flex-direction: column; min-width: 50rem; margin-left: 2rem;"> 
+    <div style="display: flex; justify-content:flex-start; flex-direction: row;">
+      <div *ngIf="v0" >
+          <div style="margin-left: 5%; margin-top: 5%; margin-bottom: 2%;" >
+            <h2 >Solicite su próximo turno</h2>
+            <p>Las solicitudes están supeditadas a la disponibilidad del Dr. {{medicoDetalle.apellido}}</p>
+          </div>
+
+
+
+          
+          <div style="justify-content: flex-start; flex-direction: row; display: flex; background-color: rgba(128, 128, 128, 0.144); width: 45rem; height: 20rem; border-radius: 5rem; margin-left: 6%; margin-top: 2rem;">
+            <div class="form-group2" >
+              <label for="">Seleccione especialidad</label>
+              <select  [(ngModel)]="especialidad" class="form-control" style="width: 8rem;" (change)="mostrarEspecialidad()" name="SelectEsp">
+                <option (change)="mostrarHora()" [value]="item" *ngFor="let item of medicoDetalle.especialidades">{{item}}</option>
+              </select> 
+            </div>
+          
+          
+            <div class="form-group2" >      
+                <label for="d1" style="margin-right: 1rem;">Seleccione fecha</label><br>
+                <input min="{{hoy | date: 'yyyy-MM-dd'}}" max="{{quinceDias | date: 'yyyy-MM-dd'}}" [(ngModel)]="fecha" type="date" name="d1" id="d1" (change)="mostrarFecha()">            
+            </div>
+
+            <div class="form-group2" *ngIf="v1">  
+                <label for="d1" style="margin-right: 1rem;" *ngIf="!esDomingo">Horario disponible</label><br>
+                <p *ngIf="esDomingo" style="color: red;">La clínica permanece cerrada los domingos, sepa disculpar.</p>
+
+                <div *ngIf="!noHayJornada" style="margin-right: 0.3rem;">
+                  <div *ngIf="turnosMedia">
+                    <select *ngIf="!esDomingo" [(ngModel)]="nTurno" class="form-control" style="width: 10rem;" (change)="mostrarHora()" name="SelectEsp">
+                      <option (change)="mostrarHora()" [value]="item" *ngFor="let item of listaTurnosDia">{{item | turnos}}</option>
+                    </select>   
+                  </div>
+
+                  
+                  
+                  <div *ngIf="turnosHora">
+                    <select *ngIf="!esDomingo" [(ngModel)]="nTurno" class="form-control" style="width: 8rem;" (change)="mostrarHora()" name="SelectEsp">
+                      <option (change)="mostrarHora()" [value]="item" *ngFor="let item of listaTurnosDia">{{item | turnosHora}}</option>
+                    </select>  
+                  </div>
+                </div>
+                
+                <div *ngIf="noHayJornada">
+                  <h5>{{medicoDetalle.nombre}} {{medicoDetalle.apellido}} no tiene turnos disponibles este día. Disculpe la molestia.</h5>
+                </div>
+              
+            </div>
+            
+            <br><br><br><br>
+
+          
+              <div style="width: 10rem; bottom: 2rem; margin-left: 10%; position: absolute;">
+                <button type="button" (click)="subirTurno()" class="btn btn-primary" *ngIf="v3">Solicitar turno</button>
+            </div>
         </div>
 
-
-
         
-        <div style="justify-content: flex-start; flex-direction: row; display: flex; background-color: rgba(128, 128, 128, 0.144); width: 35rem; height: 20rem; border-radius: 5rem; margin-left: 6%; margin-top: 2rem;">
-          <div class="form-group">
-            <label for="">Seleccione especialidad</label>
-            <select  [(ngModel)]="especialidad" class="form-control" style="width: 8rem;" (change)="mostrarEspecialidad()" name="SelectEsp">
-              <option (change)="mostrarHora()" [value]="item" *ngFor="let item of medicoDetalle.especialidades">{{item}}</option>
-            </select> 
-          </div>
-         
-         
-          <div class="form-group">      
-              <label for="d1" style="margin-right: 1rem;">Seleccione fecha</label><br>
-              <input min="{{hoy | date: 'yyyy-MM-dd'}}" max="{{quinceDias | date: 'yyyy-MM-dd'}}" [(ngModel)]="fecha" type="date" name="d1" id="d1" (change)="mostrarFecha()">            
-          </div>
+      </div> 
 
-          <div class="form-group" *ngIf="v1">  
-              <label for="d1" style="margin-right: 1rem;" *ngIf="!esDomingo">Horario disponible</label><br>
-              <p *ngIf="esDomingo" style="color: red;">La clínica permanece cerrada los domingos, sepa disculpar.</p>
+      
 
-              <div *ngIf="!noHayJornada" style="margin-right: 0.3rem;">
-                <div *ngIf="turnosMedia">
-                  <select *ngIf="!esDomingo" [(ngModel)]="nTurno" class="form-control" style="width: 10rem;" (change)="mostrarHora()" name="SelectEsp">
-                    <option (change)="mostrarHora()" [value]="item" *ngFor="let item of listaTurnosDia">{{item | turnos}}</option>
-                  </select>   
-                </div>
+      <div style="margin-left: 10%; margin-top: 1rem;" *ngIf="!v0">
+        <h3 *ngIf="!hayTurno">Seleccione el médico con el cual quiere solicitar el turno.</h3>
 
-                
-                
-                <div *ngIf="turnosHora">
-                  <select *ngIf="!esDomingo" [(ngModel)]="nTurno" class="form-control" style="width: 8rem;" (change)="mostrarHora()" name="SelectEsp">
-                    <option (change)="mostrarHora()" [value]="item" *ngFor="let item of listaTurnosDia">{{item | turnosHora}}</option>
-                  </select>  
-                </div>
-              </div>
-              
-              <div *ngIf="noHayJornada">
-                <h5>{{medicoDetalle.nombre}} {{medicoDetalle.apellido}} no tiene turnos disponibles este día. Disculpe la molestia.</h5>
-              </div>
-            
-          </div>
-          
-          <br><br><br><br>
-
+        Puede filtrar la tabla por el nombre, día de la semana que atiende o especialidad del medico <input type="text" [(ngModel)]="txtBuscar" (change)="filtrarLista()"><br><br>
         
-            <div style="width: 10rem; bottom: 2rem; margin-left: 10%; position: absolute;">
-              <button type="button" (click)="subirTurno()" class="btn btn-primary" *ngIf="v3">Solicitar turno</button>
-          </div>
+        <app-tabla-medicos style="margin-top: 2%; height: 20rem;" [listaMedicos]="listadoEspecialistasB" (saleMedico)="tomarMedico($event)"></app-tabla-medicos>
+
       </div>
 
       
-    </div> 
-
-    
-
-    <div style="margin-left: 10%; margin-top: 1rem;" *ngIf="!v0">
-      <h3 *ngIf="!hayTurno">Seleccione el médico con el cual quiere solicitar el turno.</h3>
-
-      Puede filtrar la tabla por el nombre, día de la semana que atiende o especialidad del medico <input type="text" [(ngModel)]="txtBuscar" (change)="filtrarLista()"><br><br>
-      
-      <app-tabla-medicos style="margin-top: 2%; height: 20rem;" [listaMedicos]="listadoEspecialistasB" (saleMedico)="tomarMedico($event)"></app-tabla-medicos>
-
     </div>
-
-    <div *ngIf="v0" style="position: relative; top: 13rem; margin-left: 2rem;">
+    <div *ngIf="v0" style="position: relative; top: 0rem; margin-left: 2rem;">
       <div *ngIf="capt" >
         <app-captcha (resp)="respuesta($event)"></app-captcha>
       </div>
@@ -89,9 +91,9 @@
         <h2>Captcha resuelto.</h2>
       </div>
     </div>
-  </div>
-
-  <footer class="navbar navbar-fixed-bottom">  
+  </div> 
+  
+  <footer class="navbar navbar-fixed-bottom" style="min-width: 55rem;">  
     <button class="btn btn-dark" style="left: 1rem; position: absolute;" (click)="cerrar()">Cerrar sesión</button>
     
   </footer>
