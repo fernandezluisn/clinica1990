@@ -6,15 +6,7 @@ export class Mailer{
     transporter;
     constructor(){
 
-        this.transporter = nodemailer.createTransport({
-            host: 'smtp.gmail.com',
-            port: 465,
-            secure:true,
-            auth: {
-                user: 'clinica1990@gmail.com',
-                pass: 'tczzrbkzdgkidkvi'
-            }
-        });
+       
 
         
     }
