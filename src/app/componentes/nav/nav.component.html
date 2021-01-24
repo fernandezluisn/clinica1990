@@ -1,4 +1,4 @@
-<header style="background-color: rgb(158, 158, 209);" class="navbar navbar-dark bg-info navbar-expand  " >
+<header style="background-color: rgb(158, 158, 209);" class="navbar navbar-dark bg-info navbar-expand  " style="width: 80rem;">
     <div class="navbar-nav-scroll">
       <a class="navbar-brand" style="margin-top: 1%;; margin-bottom: 1%" routerLink='/'>Inicio</a>
       <a class="navbar-brand" style="margin-top: 1%;; margin-bottom: 1%" routerLink='/registro' *ngIf="!logeado">Registrarse</a>
@@ -15,7 +15,6 @@
       <a class="navbar-brand" style="margin-top: 1%; margin-bottom: 1%;" routerLink='/confirmados' *ngIf="tipoMedico">Agenda de turnos</a>
       <a class="navbar-brand" style="margin-top: 1%; margin-bottom: 1%;" routerLink='/historial' *ngIf="tipoMedico">Historial de pacientes</a>
       <a class="navbar-brand" style="margin-top: 1%; margin-bottom: 1%;" routerLink='/atencion' *ngIf="tipoMedico">Subir informe medico</a>
-      <button style="right: 1%; margin-top: 1%; margin-bottom: 1%; position:absolute;" class="btn btn-secondary" *ngIf="logeado" (click)="cerrar()">Cerrar sesión</button>      
      
       
       <!--img src="{{}}" alt="1rem"-->

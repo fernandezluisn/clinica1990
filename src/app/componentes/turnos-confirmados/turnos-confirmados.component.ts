@@ -5,6 +5,7 @@ import { TurnosService } from 'src/app/servicios/turnos.service';
 import { turno } from 'src/app/clases/turno';
 import { DatePipe } from '@angular/common'
 import { Mailer } from 'src/app/clases/mailer';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-turnos-confirmados',
@@ -20,7 +21,7 @@ export class TurnosConfirmadosComponent implements OnInit {
   noHayTurnos=false;
   
 
-  constructor(private service:ServicioService, private bda:BdaService, private turnosBDA:TurnosService, public datepipe:DatePipe) {
+  constructor(private service:ServicioService, private bda:BdaService, private turnosBDA:TurnosService, public datepipe:DatePipe, private router:Router) {
     this.service.tomarUsuario().then(element=>
       {
         this.user=element;
@@ -37,6 +38,11 @@ export class TurnosConfirmadosComponent implements OnInit {
    }
 
   ngOnInit(): void {
+  }
+
+  cerrar(){    
+    this.service.logOutUser();    
+    this.router.navigate(['']);
   }
 
   filtrarTurnos(){

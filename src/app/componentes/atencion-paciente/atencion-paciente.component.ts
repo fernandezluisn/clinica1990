@@ -5,7 +5,6 @@ import { TurnosService } from 'src/app/servicios/turnos.service';
 import { turno } from 'src/app/clases/turno';
 import { DatePipe } from '@angular/common'
 import { empleado } from 'src/app/clases/empleado';
-import { element } from 'protractor';
 import { Router } from '@angular/router';
 import { especialidad } from 'src/app/clases/especialidad';
 
@@ -175,56 +174,60 @@ export class AtencionPacienteComponent implements OnInit {
 
   subirResenia(){
 
-    let esp:especialidad;
-
-    this.listaEspecialidades.forEach(element=>{
-      if(element.nombre==this.turnoACompletar.especialidad){
-        esp=element;
-      }
-    })
-
-    esp.operaciones++;
-
-    this.bda.updateEspecialidad(esp);
-    
-    if(this.seAgregaronDatos)
+    if(!(this.turnoACompletar.estado=="atendido"))
     {
-      this.turnoACompletar.presión=this.presion;
-      this.turnoACompletar.edad=this.edad;
-      this.turnoACompletar.temperatura=this.temperatura;
-      if(this.n1 && this.n2 && this.n3){
-        this.turnoACompletar.dato1n=this.dato1n;
-        this.llenar1();
-        this.turnoACompletar.dato2n=this.dato2n;
-        this.llenar2();
-        this.turnoACompletar.dato3n=this.dato3n;
-        this.llenar3();  
-      }else if(this.n1 && this.n2){
-        this.turnoACompletar.dato1n=this.dato1n;
-        this.llenar1();
-        this.turnoACompletar.dato2n=this.dato2n;
-        this.llenar2();
+      let esp:especialidad;
+
+      this.listaEspecialidades.forEach(element=>{
+        if(element.nombre==this.turnoACompletar.especialidad){
+          esp=element;
+        }
+      })
+
+      esp.operaciones++;
+
+      this.bda.updateEspecialidad(esp);
+      
+      if(this.seAgregaronDatos)
+      {
+        this.turnoACompletar.presión=this.presion;
+        this.turnoACompletar.edad=this.edad;
+        this.turnoACompletar.temperatura=this.temperatura;
+        if(this.n1 && this.n2 && this.n3){
+          this.turnoACompletar.dato1n=this.dato1n;
+          this.llenar1();
+          this.turnoACompletar.dato2n=this.dato2n;
+          this.llenar2();
+          this.turnoACompletar.dato3n=this.dato3n;
+          this.llenar3();  
+        }else if(this.n1 && this.n2){
+          this.turnoACompletar.dato1n=this.dato1n;
+          this.llenar1();
+          this.turnoACompletar.dato2n=this.dato2n;
+          this.llenar2();
+          
+        }else if(this.n1){
+          this.turnoACompletar.dato1n=this.dato1n;
+          this.llenar1();
+        }        
         
-      }else if(this.n1){
-        this.turnoACompletar.dato1n=this.dato1n;
-        this.llenar1();
-      }        
-       
-              
-       
-    }
+                
+      }
+    
     
 
-    try{
-      this.turnoACompletar.resenia=this.txtResenia;
-      this.turnosService.actualizarTurno(this.turnoACompletar, 3);
-      alert("El turno se informó correctamente");
-      this.router.navigate(["encuesta/"+ this.turnoACompletar.id]);
-    }catch(err)
-    {
-      alert(err);
+      try{
+        this.turnoACompletar.resenia=this.txtResenia;
+        this.turnosService.actualizarTurno(this.turnoACompletar, 3);
+        alert("El turno se informó correctamente");
+        this.router.navigate(["encuesta/"+ this.turnoACompletar.id]);
+      }catch(err)
+      {
+        alert(err);
+      }
+    }else{
+      alert("Este turno ya ha sido informado");
     }
-    
   }
 
   llenar1(){
@@ -330,6 +333,11 @@ export class AtencionPacienteComponent implements OnInit {
       this.n3=true;
     }
     
+  }
+
+  cerrar(){    
+    this.service.logOutUser();    
+    this.router.navigate(['']);
   }
 
 }

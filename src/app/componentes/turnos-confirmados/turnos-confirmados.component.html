@@ -1,6 +1,6 @@
 <app-nav [tipoMedico]="true" [tipoPaciente]="false" [logeado]="true"></app-nav>
 
-<div *ngIf="descargo" style="margin-left: 20%;">
+<div *ngIf="descargo" style="margin-left: 20%;min-height:30rem">
     <div *ngIf="this.medicoLogeado.aprobadoPorAdmin">
         <div *ngIf="noHayTurnos">
             <h1>No tiene turnos en agenda.</h1>
@@ -16,3 +16,8 @@
         <h1 style="color:red">Debe ser habilitado por el administrador para poder utilizar esta página.</h1>
     </div>
 </div>
+
+<footer class="navbar navbar-fixed-bottom">  
+    <button class="btn btn-dark" style="left: 1rem; position: absolute;" (click)="cerrar()">Cerrar sesión</button>
+    
+  </footer>

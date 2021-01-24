@@ -44,16 +44,20 @@ export class EncuestaComponent implements OnInit {
           this.hayEncu=true;
         }
       })
+
+      if(this.hayEncu==false){
+        this.turnosS.devolverListadoTurnos().subscribe(listaT=>{
+          listaT.filter(elementT=>{
+            if(elementT.id==this.id)
+            this.turno=elementT;
+          })
+          this.cargo=true;
+        })
+      }
       
     })
 
-    this.turnosS.devolverListadoTurnos().subscribe(listaT=>{
-      listaT.filter(elementT=>{
-        if(elementT.id==this.id)
-        this.turno=elementT;
-      })
-      this.cargo=true;
-    })
+    
 
 
   }

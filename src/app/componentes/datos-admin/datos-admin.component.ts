@@ -5,6 +5,8 @@ import { turno } from 'src/app/clases/turno';
 import { empleado } from 'src/app/clases/empleado';
 import { log } from 'src/app/clases/log';
 import { paciente } from 'src/app/clases/paciente';
+import { ServicioService } from 'src/app/servicios/servicio.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-datos-admin',
@@ -27,7 +29,7 @@ export class DatosAdminComponent implements OnInit {
   
   
   
-  constructor(private bda:TurnosService, private bdaMedicos:BdaService) {
+  constructor(private bda:TurnosService, private bdaMedicos:BdaService, private service:ServicioService, private router:Router) {
     
     this.bda.devolverListadoTurnos().subscribe(lista=>{      
       this.bdaMedicos.devolverListadoPacientes().subscribe(listaP=>this.listadoPacientes=listaP)
@@ -89,5 +91,10 @@ export class DatosAdminComponent implements OnInit {
     this.med=false;
     this.sec=true;
     this.enc=false;
+  }
+
+  cerrar(){    
+    this.service.logOutUser();    
+    this.router.navigate(['']);
   }
 }

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { BdaService } from 'src/app/servicios/bda.service';
 import { empleado } from 'src/app/clases/empleado';
+import { ServicioService } from 'src/app/servicios/servicio.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-habilitar-usuarios',
@@ -12,8 +14,9 @@ export class HabilitarUsuariosComponent implements OnInit {
   listaFiltrada;
   medicoElegido:empleado;
   hayMedico=false;
+  hay=false;
 
-  constructor(private bda:BdaService) {
+  constructor(private bda:BdaService, private service:ServicioService, private router:Router) {
 
     this.actualizarLista();
     
@@ -36,8 +39,18 @@ export class HabilitarUsuariosComponent implements OnInit {
         b.push(element);
       });
     });
+    
+    if(b.length>0)
+    this.hay=true;
+    else
+    this.hay=false;
 
     this.listaFiltrada=b;
+  }
+
+  cerrar(){    
+    this.service.logOutUser();    
+    this.router.navigate(['']);
   }
 
   habilitar(medico){

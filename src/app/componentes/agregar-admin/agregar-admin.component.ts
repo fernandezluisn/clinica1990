@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ServicioService } from 'src/app/servicios/servicio.service';
 import { BdaService } from 'src/app/servicios/bda.service';
 import { admin } from 'src/app/clases/admin';
-import { isNull } from 'util';
-import { error } from 'console';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-agregar-admin',
@@ -18,7 +18,7 @@ export class AgregarAdminComponent implements OnInit {
   pass1:string;
   pass2:string;
 
-  constructor(private service:ServicioService, private bda:BdaService ) { }
+  constructor(private service:ServicioService, private bda:BdaService, private router:Router ) { }
 
   ngOnInit(): void {
     this.mail=null;
@@ -28,7 +28,7 @@ export class AgregarAdminComponent implements OnInit {
   }
 
   registrar(){
-    if(isNull(this.mail) || isNull(this.apellido) || isNull(this.nombre) || isNull(this.pass1)){
+    if((this.mail) || (this.apellido) || (this.nombre) || (this.pass1)){
       alert("Faltan ingresar datos");
     }else{
       if(this.pass1==this.pass2)
@@ -48,6 +48,11 @@ export class AgregarAdminComponent implements OnInit {
       }
     }     
     
+  }
+
+  cerrar(){    
+    this.service.logOutUser();    
+    this.router.navigate(['']);
   }
 
 }

@@ -1,6 +1,6 @@
 <app-nav [tipoAdmin]="true" [tipoPaciente]="false" [tipoMedico]="false" [logeado]="true"></app-nav>
 
-<h1>Bienvenido {{adminLogeado.nombre}}</h1>
+<h1 *ngIf="adminLogeado">Bienvenido {{adminLogeado.nombre}}</h1>
 <p>Acá podes agregar especialidades a los médicos</p>
 
 <div style="justify-content: flex-start; flex-direction: row; display: flex; padding-left: 1rem;  width: 60%; height: 30rem; border-radius: 5rem; margin-left: 6%; margin-top: 2rem;">
@@ -18,3 +18,9 @@
     </div>
     
 </div>
+
+<footer class="navbar navbar-fixed-bottom">  
+    <button class="btn btn-dark" style="left: 1rem; position: absolute;" (click)="cerrar()">Cerrar sesión</button>    
+  </footer>
+
+

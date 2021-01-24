@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { turno } from 'src/app/clases/turno';
 import { ServicioService } from 'src/app/servicios/servicio.service';
 import { TurnosService } from 'src/app/servicios/turnos.service';
@@ -16,7 +17,7 @@ export class HistorialPacientesComponent implements OnInit {
   turnoElegido:turno;
   hora:string;
 
-  constructor(private bda:TurnosService, private service:ServicioService) { 
+  constructor(private bda:TurnosService, private service:ServicioService, private router:Router) { 
     
     this.hayTurno=false;
     
@@ -37,6 +38,11 @@ export class HistorialPacientesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  cerrar(){    
+    this.service.logOutUser();    
+    this.router.navigate(['']);
   }
 
   tomarTurno(turno){

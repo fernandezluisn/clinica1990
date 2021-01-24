@@ -7,12 +7,12 @@ export class Mailer{
     constructor(){
 
         this.transporter = nodemailer.createTransport({
-            host: 'smtp.ethereal.email',
-            port: 587,
-            secure:false,
+            host: 'smtp.gmail.com',
+            port: 465,
+            secure:true,
             auth: {
-                user: 'harley.white@ethereal.email',
-                pass: 'CVNdDvXSpfxtE8E3ZR'
+                user: 'clinica1990@gmail.com',
+                pass: 'tczzrbkzdgkidkvi'
             }
         });
 
@@ -21,7 +21,7 @@ export class Mailer{
 
     async sendMail(email:string){
         let info = await this.transporter.sendMail({
-            from: '"Harley 👻" <harley.white@ethereal.email>', // sender address
+            from: '"Clinica 1990 👻" <clinica1990@gmail.com>', // sender address
             to: "fernandezluisn@gmail.com", // list of receivers
             subject: "Hello ✔", // Subject line
             text: "Hello world?", // plain text body

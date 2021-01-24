@@ -5,7 +5,8 @@ import { TurnosService } from 'src/app/servicios/turnos.service';
 import { empleado } from 'src/app/clases/empleado';
 import { BdaService } from 'src/app/servicios/bda.service';
 import { especialidad } from 'src/app/clases/especialidad';
-import { element } from 'protractor';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-turnos-aconfirmar',
@@ -21,7 +22,7 @@ export class TurnosAConfirmarComponent implements OnInit {
   noHayTurnos=false;
   listaEspecialidades:especialidad[];
 
-  constructor(private service:ServicioService, private turnosBDA:TurnosService, private bda:BdaService) { 
+  constructor(private router:Router,private service:ServicioService, private turnosBDA:TurnosService, private bda:BdaService) { 
     this.service.tomarUsuario().then(element=>
       {
         this.listaTurnosA=new Array();
@@ -44,6 +45,11 @@ export class TurnosAConfirmarComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  cerrar(){    
+    this.service.logOutUser();    
+    this.router.navigate(['']);
   }
 
   filtrarTurnos(){
@@ -93,12 +99,16 @@ export class TurnosAConfirmarComponent implements OnInit {
       turno.resenia="No hay";
       this.turnosBDA.actualizarTurno(turno, 2);
       this.filtrarTurnos();
+      
       alert("El turno se aprobó correctamente.");
+      this.router.navigate(["confirmados"]);
       
     }catch(err){
       alert(err.message)
     }
     
   }
+
+  
 
 }

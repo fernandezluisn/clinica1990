@@ -5,6 +5,7 @@ import { empleado } from 'src/app/clases/empleado';
 import {TurnosHoraPipe} from '../../pipes/turnos-hora.pipe';
 import { MedicosService } from 'src/app/servicios/medicos.service';
 import { jornadaSemanal } from 'src/app/clases/jornadaSemanal';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -76,7 +77,7 @@ export class HomeMedicoComponent implements OnInit {
   jornadaActual:jornadaSemanal;
   hayJornada=false;
 
-  constructor(private service:ServicioService, private bda:BdaService, private medicoService:MedicosService, private tpipe:TurnosHoraPipe) { 
+  constructor(private router:Router,private service:ServicioService, private bda:BdaService, private medicoService:MedicosService, private tpipe:TurnosHoraPipe) { 
     
     this.service.tomarUsuario().then(element=>{
       this.user=element;
@@ -550,6 +551,8 @@ export class HomeMedicoComponent implements OnInit {
     }
   }
 
+  
+
   checkbox6(){
     if(this.ch6==false)
     this.ch6=true;
@@ -672,6 +675,11 @@ export class HomeMedicoComponent implements OnInit {
   
 
     
+  }
+
+  cerrar(){    
+    this.service.logOutUser();    
+    this.router.navigate(['']);
   }
   
 

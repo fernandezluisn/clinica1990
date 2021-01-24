@@ -20,7 +20,7 @@ export class BienvenidaComponent implements OnInit {
       
       this.usuario=res;   
 
-      if(!isNull(this.usuario))
+      if(this.usuario)
       {
         this.bda.devolverListadoPacientes().subscribe(lista=>{
           lista.forEach(element=>{
@@ -59,6 +59,7 @@ export class BienvenidaComponent implements OnInit {
         });
       }else{
         this.esPaciente=true;
+        this.estaLogeado=false;
       }
     
     })

@@ -4,6 +4,7 @@ import { BdaService } from 'src/app/servicios/bda.service';
 import { element } from 'protractor';
 import { empleado } from 'src/app/clases/empleado';
 import { admin } from 'src/app/clases/admin';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-horario-medicos',
@@ -19,7 +20,7 @@ export class HorarioMedicosComponent implements OnInit {
   user;
   descargo:boolean;
 
-  constructor(private service: ServicioService, private bda:BdaService) {
+  constructor(private service: ServicioService, private bda:BdaService, private router:Router) {
     this.hayMedico=false;
 
     this.bda.devolverListadoEmpleados().subscribe(lista=>{
@@ -28,7 +29,7 @@ export class HorarioMedicosComponent implements OnInit {
 
     this.service.tomarUsuario().then(element=>{
       this.user=element;
-      console.log(this.user.email);
+      
       this.bda.devolverListadoAdministradores().subscribe(lista=>{
         lista.forEach(elementB=>{
           if(element.email.toLowerCase()===elementB.email.toLowerCase())
@@ -67,6 +68,11 @@ export class HorarioMedicosComponent implements OnInit {
   tomarMedico(medico){
     this.medicoElegido=medico;
     this.hayMedico=true;
+  }
+
+  cerrar(){    
+    this.service.logOutUser();    
+    this.router.navigate(['']);
   }
 
 }

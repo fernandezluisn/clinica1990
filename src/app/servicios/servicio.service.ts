@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {AngularFireAuth} from '@angular/fire/auth';
+import { Router } from '@angular/router';
 
 
 
@@ -20,7 +21,7 @@ export class ServicioService {
   user;
 
   
-  constructor(public afAuth:AngularFireAuth) { 
+  constructor(public afAuth:AngularFireAuth, private router:Router) { 
     this.user=this.tomarUsuario().then(res=>this.user=res);    
     this.d = new Date();
     this.n = this.d.getMonth();    
@@ -45,7 +46,7 @@ loginUser(email:string, password:string){
 
 
 logOutUser(){
-  return this.afAuth.signOut();
+  return this.afAuth.signOut();  
 }
 
 registrarUsuario(mail:string, password: string){

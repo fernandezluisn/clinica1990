@@ -97,7 +97,8 @@ import { InformeComentariosComponent } from './componentes/informe-comentarios/i
     TurnosPorSectorComponent,
     CaptchaComponent,
     DirecDirective,    
-    LineasLogsComponent, InformeComentariosComponent
+    LineasLogsComponent, 
+    InformeComentariosComponent
   ],
   imports: [
     BrowserModule,

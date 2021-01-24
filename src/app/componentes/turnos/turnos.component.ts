@@ -12,7 +12,6 @@ import { isNull } from 'util';
 import { DatePipe } from '@angular/common';
 import { MedicosService } from 'src/app/servicios/medicos.service';
 import { jornadaSemanal } from 'src/app/clases/jornadaSemanal';
-import {Mailer} from '../../clases/mailer';
 import { Router } from '@angular/router';
 import { especialidad } from 'src/app/clases/especialidad';
 
@@ -81,7 +80,6 @@ export class TurnosComponent implements OnInit {
   listadoEspecialidades:especialidad[];
 
   events: any[];
-  mailer:Mailer;
 
   options: any;
 
@@ -584,6 +582,11 @@ export class TurnosComponent implements OnInit {
 
     }
      // this.mailer.sendMail("aaa");
+  }
+
+  cerrar(){    
+    this.serv.logOutUser();    
+    this.router.navigate(['']);
   }
  
 

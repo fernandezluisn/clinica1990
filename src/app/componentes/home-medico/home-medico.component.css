@@ -5,4 +5,5 @@
     border: black 0.61rem solid;
     border-radius: 0.5rem;
     background-color: rgba(14, 66, 75, 0.397);
+    max-height: 32rem;
 }

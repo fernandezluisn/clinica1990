@@ -7,7 +7,7 @@
     
     
     
-<div style="display: flex; justify-content:flex-start; flex-direction: row;">
+<div style="display: flex; justify-content:flex-start; flex-direction: row; min-height:25rem">
     <div *ngIf="v0" >
         <div style="margin-left: 5%; margin-top: 5%; margin-bottom: 2%;" >
           <h2 >Solicite su próximo turno</h2>
@@ -89,6 +89,11 @@
       </div>
     </div>
   </div>
+
+  <footer class="navbar navbar-fixed-bottom">  
+    <button class="btn btn-dark" style="left: 1rem; position: absolute;" (click)="cerrar()">Cerrar sesión</button>
+    
+  </footer>
 
 
     
