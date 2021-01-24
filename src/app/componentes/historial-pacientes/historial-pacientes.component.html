@@ -1,6 +1,6 @@
 <app-nav [tipoMedico]="true" [inicio]="false" [logeado]="true" [tipoPaciente]="false"></app-nav>
 
-<div style="display: flex; justify-content: left; flex-direction: row;">
+<div style="display: flex; justify-content: left; flex-direction: row; min-height: 95%;">
     <div style="width: 50%; margin: 3%;">
         <app-tabla-turnos [listaTurnos]="listaTurnosC" (pasarTurno)="tomarTurno($event)"></app-tabla-turnos>
     </div>

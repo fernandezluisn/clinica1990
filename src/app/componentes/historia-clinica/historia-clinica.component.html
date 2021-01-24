@@ -1,6 +1,6 @@
 <app-nav [tipoPaciente]="true" [logeado]="true"></app-nav>
 
-<div *ngIf="cargo" style="display: flex; justify-content: start; flex-direction: row;min-height:25rem">
+<div *ngIf="cargo" style="display: flex; justify-content: start; flex-direction: row;min-height:95%">
     <div *ngIf="!vacio" style="width: 50%;">
     <app-tabla-turnos [listaTurnos]="turnosDelPaciente" [confirmados]="false" [noConfirmados]="false" [resenia]="true" (pasarTurno)="tomarTurno($event)"></app-tabla-turnos>
     </div>

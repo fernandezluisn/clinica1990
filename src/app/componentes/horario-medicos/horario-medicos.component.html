@@ -2,23 +2,23 @@
 
 <h1 *ngIf="adminLogeado">Bienvenido {{adminLogeado.nombre}}</h1>
 <p>Acá podes agregar especialidades a los médicos</p>
-
-<div style="justify-content: flex-start; flex-direction: row; display: flex; padding-left: 1rem;  width: 60%; height: 30rem; border-radius: 5rem; margin-left: 6%; margin-top: 2rem;">
- 
-    <div>
-        <app-tabla-medicos [listaMedicos]="listadoEspecialistas" (saleMedico)="tomarMedico($event)"></app-tabla-medicos>
-    </div>
-
-    <div style="margin-left: 10%;" *ngIf="hayMedico">
-        <app-agregar-especialidad (actualizar)="agregar($event)"></app-agregar-especialidad>
-    </div>
-
-    <div style="margin-left: 20%;" >
-        <app-detalle-empleado *ngIf="hayMedico" [empleado]="medicoElegido"></app-detalle-empleado>
-    </div>
+<div style="min-height: 95%;">
+    <div style="justify-content: flex-start; flex-direction: row; display: flex; padding-left: 1rem;  width: 60%; height: 30rem; border-radius: 5rem; margin-left: 6%; margin-top: 2rem;">
     
-</div>
+        <div>
+            <app-tabla-medicos [listaMedicos]="listadoEspecialistas" (saleMedico)="tomarMedico($event)"></app-tabla-medicos>
+        </div>
 
+        <div style="margin-left: 10%;" *ngIf="hayMedico">
+            <app-agregar-especialidad (actualizar)="agregar($event)"></app-agregar-especialidad>
+        </div>
+
+        <div style="margin-left: 20%;" >
+            <app-detalle-empleado *ngIf="hayMedico" [empleado]="medicoElegido"></app-detalle-empleado>
+        </div>
+        
+    </div>
+</div>
 <footer class="navbar navbar-fixed-bottom">  
     <button class="btn btn-dark" style="left: 1rem; position: absolute;" (click)="cerrar()">Cerrar sesión</button>    
   </footer>
