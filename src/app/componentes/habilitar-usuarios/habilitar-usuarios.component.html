@@ -1,6 +1,6 @@
 <app-nav [tipoAdmin]="true" [tipoPaciente]="false" [tipoMedico]="false" [logeado]="true"></app-nav>
 
-<div style="min-height: 55rem">
+<div style="min-height: 52rem">
     <div style="margin:5%; width: 50%; " *ngIf="hay">
     <app-tabla-medicos [listaMedicos]="listaFiltrada" (saleMedico)="tomarMedico($event)"></app-tabla-medicos>
     </div>
