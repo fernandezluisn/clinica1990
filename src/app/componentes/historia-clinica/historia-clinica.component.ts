@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { turno } from 'src/app/clases/turno';
 import { ServicioService } from 'src/app/servicios/servicio.service';
 import { TurnosService } from 'src/app/servicios/turnos.service';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { comentario } from 'src/app/clases/comentario';
 import { Router } from '@angular/router';
 
@@ -23,7 +22,7 @@ export class HistoriaClinicaComponent implements OnInit {
 
   comentarios:comentario[];
 
-  constructor(private servicio:ServicioService, private turnosService:TurnosService, private ngx:NgxSpinnerService, private router:Router) { 
+  constructor(private servicio:ServicioService, private turnosService:TurnosService, private router:Router) { 
   
     this.servicio.tomarUsuario().then(res=>{
       this.user=res;
@@ -84,15 +83,6 @@ export class HistoriaClinicaComponent implements OnInit {
     this.hayTurno=true;
   }
 
-  spinner(){
-    if(this.cargo==false)
-    {
-      this.ngx.show();
-      setTimeout(()=>{
-        this.ngx.hide();
-      }, 2000)
-    }
-    
-  }
+  
 
 }

@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {FormsModule} from '@angular/forms';
-import { NgxSpinnerModule } from "ngx-spinner";
 
 
 import {AngularFireModule} from '@angular/fire'; 
@@ -107,7 +106,6 @@ import { InformeComentariosComponent } from './componentes/informe-comentarios/i
     RecaptchaModule,
     RecaptchaFormsModule,
     BrowserAnimationsModule,
-    NgxSpinnerModule,
     ChartsModule
   ],
   providers: [ServicioService, AngularFireAuth, StorageService, BdaService, DatePipe, ArchivosService, MedicosService, TurnosService, TurnosHoraPipe],
