@@ -4,7 +4,6 @@ import { BdaService } from 'src/app/servicios/bda.service';
 import { TurnosService } from 'src/app/servicios/turnos.service';
 import { turno } from 'src/app/clases/turno';
 import { DatePipe } from '@angular/common'
-import { Mailer } from 'src/app/clases/mailer';
 import { Router } from '@angular/router';
 
 @Component({

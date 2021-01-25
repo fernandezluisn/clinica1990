@@ -40,7 +40,6 @@ import { AgregarAdminComponent } from './componentes/agregar-admin/agregar-admin
 import { HabilitarUsuariosComponent } from './componentes/habilitar-usuarios/habilitar-usuarios.component';
 import { AtencionPacienteComponent } from './componentes/atencion-paciente/atencion-paciente.component';
 import { TurnosHoraPipe } from './pipes/turnos-hora.pipe';
-import { TurnosCuarentaPipe } from './pipes/turnos-cuarenta.pipe';
 
 
 import { DatePipe } from '@angular/common';
@@ -83,8 +82,7 @@ import { InformeComentariosComponent } from './componentes/informe-comentarios/i
     AgregarAdminComponent,
     HabilitarUsuariosComponent,
     AtencionPacienteComponent,
-    TurnosHoraPipe,
-    TurnosCuarentaPipe,
+    TurnosHoraPipe,    
     TurnosSacadosComponent,
     HistoriaClinicaComponent,
     EncuestaComponent,
