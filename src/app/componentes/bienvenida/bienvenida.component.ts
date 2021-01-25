@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component} from '@angular/core';
 import { ServicioService } from 'src/app/servicios/servicio.service';
 import { BdaService } from 'src/app/servicios/bda.service';
-import { isNull } from 'util';
+
 
 @Component({
   selector: 'app-bienvenida',
   templateUrl: './bienvenida.component.html',
   styleUrls: ['./bienvenida.component.css']
 })
-export class BienvenidaComponent implements OnInit {
+export class BienvenidaComponent{
 
   usuario;
   esEmpleado=false;
@@ -65,7 +65,6 @@ export class BienvenidaComponent implements OnInit {
     })
   }
 
-  ngOnInit(): void {
-  }
+  
 
 }

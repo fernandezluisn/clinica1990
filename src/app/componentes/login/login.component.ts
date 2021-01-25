@@ -28,9 +28,8 @@ export class LoginComponent implements OnInit {
     
   }
 
-  onLogin(){
-    console.log(this.email);
-    let v=false;
+  onLogin(){  
+    
     this.servicio.loginUser(this.email, this.pass).then
     ((res)=>{
       this.log=true;    
@@ -99,9 +98,5 @@ export class LoginComponent implements OnInit {
     })
   }
 
-  onLogOut(){
-    this.servicio.logOutUser();
-    this.log=false;
-    this.logeado.emit(this.log);
-  }
+ 
 }

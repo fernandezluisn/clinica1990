@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { BdaService } from 'src/app/servicios/bda.service';
 import { especialidad } from 'src/app/clases/especialidad';
 
@@ -8,7 +8,7 @@ import { especialidad } from 'src/app/clases/especialidad';
   templateUrl: './agregar-especialidad.component.html',
   styleUrls: ['./agregar-especialidad.component.css']
 })
-export class AgregarEspecialidadComponent{
+export class AgregarEspecialidadComponent implements OnInit {
 
   @Output() actualizar:EventEmitter<any>=new EventEmitter<any>();
   
@@ -23,7 +23,8 @@ export class AgregarEspecialidadComponent{
       });
    }
 
-  
+  ngOnInit(): void {
+  }
 
   carg(){
     

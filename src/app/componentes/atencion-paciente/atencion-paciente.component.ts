@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ServicioService } from 'src/app/servicios/servicio.service';
 import { BdaService } from 'src/app/servicios/bda.service';
 import { TurnosService } from 'src/app/servicios/turnos.service';
@@ -14,7 +14,7 @@ import { especialidad } from 'src/app/clases/especialidad';
   templateUrl: './atencion-paciente.component.html',
   styleUrls: ['./atencion-paciente.component.css']
 })
-export class AtencionPacienteComponent{
+export class AtencionPacienteComponent implements OnInit {
 
   txtResenia:string;
   user;
@@ -141,7 +141,9 @@ export class AtencionPacienteComponent{
     });
   }
 
-  
+  ngOnInit(): void {
+    
+  }
 
   ordenarTabla(){
     
