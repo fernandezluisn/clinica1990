@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ServicioService} from '../../servicios/servicio.service';
 import { Router } from '@angular/router';
-import {NgxSpinnerService} from 'ngx-spinner';
 
 import {AngularFireStorage} from '@angular/fire/storage';
 
@@ -45,7 +44,7 @@ export class RegistroComponent implements OnInit {
   uploadPercent2: Observable<number>;
   url2: string;
 
-  constructor(private ngx:NgxSpinnerService, private servicio:ServicioService, private router:Router, private storage:AngularFireStorage, private bda:BdaService, private bdaEspecialidades:MedicosService) { 
+  constructor(private servicio:ServicioService, private router:Router, private storage:AngularFireStorage, private bda:BdaService, private bdaEspecialidades:MedicosService) { 
     this.mail="";
     this.pass2="";
     this.pass1="";
@@ -72,14 +71,7 @@ export class RegistroComponent implements OnInit {
 
   ngOnInit(): void {
     
-  }
-
-  spinner(){
-    this.ngx.show();
-    setTimeout(()=>{
-      this.ngx.hide();
-    }, 3000)
-  }
+  }  
 
   cambiarP(){
     this.tipoU=true;
@@ -124,8 +116,8 @@ export class RegistroComponent implements OnInit {
         
         
         if(this.tipoU)        
-        {        
-          this.spinner();
+        {     
+          
          u=new paciente(this.nombre, this.apellido, this.url1, this.url2, this.mail);
          this.bda.createUsuario(u);
          this.bda.createPaciente(u).then(async (res)=>{
@@ -146,7 +138,7 @@ export class RegistroComponent implements OnInit {
             u=new empleado(this.nombre, this.apellido,  j, this.mail, false);
             this.bdaEspecialidades.createEspecialidad(u, this.mail);
           }
-          this.spinner();
+          
           this.bda.createUsuario(u);
          
           this.bda.createEmpleado(u).then(async (res)=>{

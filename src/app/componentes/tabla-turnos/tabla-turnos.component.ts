@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { turno } from 'src/app/clases/turno';
 
-import { isNullOrUndefined } from 'util';
+
 
 
 
@@ -71,17 +71,17 @@ export class TablaTurnosComponent implements OnInit {
         listaB.push(element);
       }else
 
-      if(!isNullOrUndefined(element.temperatura)){
+      if((element.temperatura)){
         if(element.temperatura.toString().includes(this.txtBuscar)){
           listaB.push(element);
         }
-      }else if (!isNullOrUndefined(element.dato1v) && element.dato1v.includes(this.txtBuscar)){        
+      }else if ((element.dato1v) && element.dato1v.includes(this.txtBuscar)){        
         listaB.push(element);
-      }else if (!isNullOrUndefined(element.dato2v && element.dato2v.includes(this.txtBuscar))){        
+      }else if ((element.dato2v && element.dato2v.includes(this.txtBuscar))){        
         listaB.push(element);
-      }else if (!isNullOrUndefined(element.dato3v) && element.dato3v.includes(this.txtBuscar)){        
+      }else if ((element.dato3v) && element.dato3v.includes(this.txtBuscar)){        
         listaB.push(element);
-      }else if(!isNullOrUndefined(element.resenia) && element.resenia.includes(this.txtBuscar)){
+      }else if((element.resenia) && element.resenia.includes(this.txtBuscar)){
         listaB.push(element);
       }
     })

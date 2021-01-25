@@ -8,7 +8,6 @@ import {TurnosHoraPipe} from '../../pipes/turnos-hora.pipe';
 import { TurnosService } from 'src/app/servicios/turnos.service';
 import { turno } from 'src/app/clases/turno';
 import { empleado } from 'src/app/clases/empleado';
-import { isNull } from 'util';
 import { DatePipe } from '@angular/common';
 import { MedicosService } from 'src/app/servicios/medicos.service';
 import { jornadaSemanal } from 'src/app/clases/jornadaSemanal';
@@ -312,7 +311,7 @@ export class TurnosComponent implements OnInit {
         this.jornada=element;
       }
     })
-    if(!isNull(this.jornada))
+    if(this.jornada)
     {
       if(this.jornada.tiempoTurnos==30)
       {
@@ -526,7 +525,7 @@ export class TurnosComponent implements OnInit {
     }
     this.horaT=hora;
     
-    if(!isNull(this.medicoDetalle))
+    if(this.medicoDetalle)
     this.hayTurno=true;
   }
 
@@ -547,13 +546,13 @@ export class TurnosComponent implements OnInit {
       alert("debe resolver el captcha");
     }else
 
-    if(isNull(this.medicoDetalle))
+    if(!(this.medicoDetalle))
     {
       alert("Debe seleccionar un médico presionando sobre la tabla.");
-    }else if(isNull(this.nTurno)){
+    }else if(!(this.nTurno)){
       alert("No es posible reservar turno este día");
       
-    }else if(isNull(this.especialidad)){
+    }else if(!(this.especialidad)){
       alert("Debe seleccionar especialidad");
       
     }else{

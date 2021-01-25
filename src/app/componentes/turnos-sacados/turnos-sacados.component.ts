@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { TurnosService } from 'src/app/servicios/turnos.service';
 import { turno } from 'src/app/clases/turno';
 import { ServicioService } from 'src/app/servicios/servicio.service';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
 
 @Component({
@@ -18,9 +17,9 @@ export class TurnosSacadosComponent implements OnInit {
   user;
   mostrar:boolean=false;;
 
-  constructor(private ngx:NgxSpinnerService,private turnosService:TurnosService, private service:ServicioService, private router:Router) { 
+  constructor(private turnosService:TurnosService, private service:ServicioService, private router:Router) { 
     this.turnosDelPaciente=new Array();
-    this.spinner();
+    
     this.service.tomarUsuario().then(res=>{
       this.user=res;
       this.hayUsuario=true;    
@@ -60,17 +59,7 @@ export class TurnosSacadosComponent implements OnInit {
     this.turnosService.actualizarTurno(turno, 4);
     alert("El turno se ha cancelado");
   }
-
-  spinner(){
-    if(this.mostrar==false)
-    {
-      this.ngx.show();
-      setTimeout(()=>{
-        this.ngx.hide();
-      }, 2000)
-    }
-    
-  }
+  
 
   cerrar(){    
     this.service.logOutUser();    
