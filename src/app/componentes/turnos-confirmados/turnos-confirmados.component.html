@@ -1,6 +1,6 @@
 <app-nav [tipoMedico]="true" [tipoPaciente]="false" [logeado]="true"></app-nav>
 
-<div *ngIf="descargo" style="margin-left: 20%;min-height:95%">
+<div *ngIf="descargo" style="margin-left: 20%;min-height:55rem">
     <div *ngIf="this.medicoLogeado.aprobadoPorAdmin">
         <div *ngIf="noHayTurnos">
             <h1>No tiene turnos en agenda.</h1>
