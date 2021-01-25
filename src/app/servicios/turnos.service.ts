@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import {AngularFirestore, DocumentReference} from '@angular/fire/firestore';
 import { turno } from '../clases/turno';
 import { map } from 'rxjs/operators';
-import {TurnosPipe} from '../pipes/turnos.pipe';
 import { Observable } from 'rxjs';
 import { encuesta } from '../clases/encuesta';
 import { comentario } from '../clases/comentario';
