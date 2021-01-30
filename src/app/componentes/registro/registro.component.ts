@@ -32,10 +32,8 @@ export class RegistroComponent implements OnInit {
   captchaResuelto:boolean;
   captchaResuelto2:boolean;
   capt:boolean;
-  listaEspecialidades;
+  listaEspecialidades;  
   
-  //n1:number;
-  //n2:number;
   
 
   uploadPercent1: Observable<number>;
@@ -56,9 +54,7 @@ export class RegistroComponent implements OnInit {
     this.captchaResuelto=false;
     this.captchaResuelto2=false;
     this.capt=true;
-
-    //this.n1=Math.floor(Math.random()*10);
-    //this.n2=Math.floor(Math.random()*10);
+    
 
     this.bda.devolverListadoEspecialidades().subscribe(lista => {
       this.listaEspecialidades = lista;       

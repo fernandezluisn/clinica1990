@@ -1,7 +1,7 @@
 <app-nav [tipoMedico]="true" [inicio]="false" [logeado]="true" [tipoPaciente]="false" style="width: 50rem;"></app-nav>
 <h1 *ngIf="descargo">Bienvenido/a {{medicoLogeado.nombre}}</h1>
 <h2 *ngIf="descargo" style="margin-top: 1rem;">Aquí puede modificar los días y horarios en los que atenderás en la clínica, así como la duración de los turnos.</h2>
-<div class="prin" *ngIf="descargo">
+<div class="prin" *ngIf="descargo" style="min-height: 53rem;">
     
 
     <div *ngIf="this.medicoLogeado.aprobadoPorAdmin" style="display: flex; justify-content: start; flex-direction: row; margin: 0%; ">

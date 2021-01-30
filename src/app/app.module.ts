@@ -13,7 +13,7 @@ import {AngularFireStorageModule} from '@angular/fire/storage';
 import {RecaptchaModule, RecaptchaFormsModule} from 'ng-recaptcha';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-
+import { NgxSpinnerModule } from "ngx-spinner";  
 
 import { AppComponent } from './app.component';
 import {RutasRoutingModule} from '../app/rutas/rutas-routing.module';
@@ -106,7 +106,8 @@ import { InformeComentariosComponent } from './componentes/informe-comentarios/i
     RecaptchaModule,
     RecaptchaFormsModule,
     BrowserAnimationsModule,
-    ChartsModule
+    ChartsModule,
+    NgxSpinnerModule
   ],
   providers: [ServicioService, AngularFireAuth, StorageService, BdaService, DatePipe, ArchivosService, MedicosService, TurnosService, TurnosHoraPipe],
   bootstrap: [AppComponent]

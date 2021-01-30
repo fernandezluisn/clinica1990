@@ -3,7 +3,6 @@ import {ActivatedRoute, Router} from '@angular/router';
 import { encuesta } from 'src/app/clases/encuesta';
 import { TurnosService } from 'src/app/servicios/turnos.service';
 import { turno } from 'src/app/clases/turno';
-import { element } from 'protractor';
 
 
 @Component({

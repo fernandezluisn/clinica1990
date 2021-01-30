@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { turno } from 'src/app/clases/turno';
 import { Router } from '@angular/router';
 import { comentario } from 'src/app/clases/comentario';

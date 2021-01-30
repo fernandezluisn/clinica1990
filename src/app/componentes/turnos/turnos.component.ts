@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
 import { especialidad } from 'src/app/clases/especialidad';
 
 
-
+import {NgxSpinnerService} from 'ngx-spinner';
 
 
 
@@ -82,7 +82,7 @@ export class TurnosComponent implements OnInit {
 
   options: any;
 
-  constructor( private serv:ServicioService, private bda:BdaService, private turnosS:TurnosService, public datepipe: DatePipe, private medicoS:MedicosService, private router:Router) { 
+  constructor( private spin:NgxSpinnerService,private serv:ServicioService, private bda:BdaService, private turnosS:TurnosService, public datepipe: DatePipe, private medicoS:MedicosService, private router:Router) { 
     this.nTurno=null;
 
     this.bda.devolverListadoEspecialidades().subscribe(lista=>{
@@ -134,8 +134,15 @@ export class TurnosComponent implements OnInit {
   }
 
   ngOnInit(): void {  
-  
+  this.spinner();
     
+  }
+
+  spinner():void{
+    this.spin.show();
+    setTimeout(()=>{
+      this.spin.hide();
+    }, 5000)
   }
 
   respuesta(a:boolean){

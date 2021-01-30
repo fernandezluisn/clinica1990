@@ -4,6 +4,7 @@ import { ServicioService } from 'src/app/servicios/servicio.service';
 import { TurnosService } from 'src/app/servicios/turnos.service';
 import { comentario } from 'src/app/clases/comentario';
 import { Router } from '@angular/router';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 
 @Component({
@@ -22,7 +23,7 @@ export class HistoriaClinicaComponent implements OnInit {
 
   comentarios:comentario[];
 
-  constructor(private servicio:ServicioService, private turnosService:TurnosService, private router:Router) { 
+  constructor(private servicio:ServicioService, private turnosService:TurnosService, private router:Router, private spin:NgxSpinnerService) { 
   
     this.servicio.tomarUsuario().then(res=>{
       this.user=res;
@@ -38,6 +39,14 @@ export class HistoriaClinicaComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.spinner();
+  }
+
+  spinner():void{
+    this.spin.show();
+    setTimeout(()=>{
+      this.spin.hide();
+    }, 4000)
   }
 
   cerrar(){    
@@ -79,6 +88,7 @@ export class HistoriaClinicaComponent implements OnInit {
   }
   
   tomarTurno(turno){
+    this.spinner();
     this.turnoParaDetalle=turno;
     this.hayTurno=true;
   }
