@@ -190,7 +190,7 @@ export class AtencionPacienteComponent implements OnInit {
       
       if(this.seAgregaronDatos)
       {
-        this.turnoACompletar.presión=this.presion;
+        this.turnoACompletar.presion=this.presion;
         this.turnoACompletar.edad=this.edad;
         this.turnoACompletar.temperatura=this.temperatura;
         if(this.n1 && this.n2 && this.n3){

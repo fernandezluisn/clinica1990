@@ -46,7 +46,7 @@ export class HistoriaClinicaComponent implements OnInit {
     this.spin.show();
     setTimeout(()=>{
       this.spin.hide();
-    }, 4000)
+    }, 2000)
   }
 
   cerrar(){    

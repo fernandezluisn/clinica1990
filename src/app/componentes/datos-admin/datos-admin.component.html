@@ -2,7 +2,7 @@
 
 <h1>Aquí puede visualizar información sobre la utilización de la app.</h1>
 
-<div *ngIf="cargo" style="min-height: 55rem;">
+<div *ngIf="cargo" style="min-height: 53rem;">
     <ul class="nav nav-tabs" style="background-color: rgb(233, 219, 219);">
         <li class="active" (click)="verVis()" style="margin-left: 1rem; ">Visitas</li>
         <li (click)="verTurnos()" style="margin-left: 1rem; ">Turnos</li>
@@ -36,3 +36,12 @@
     <button class="btn btn-dark" style="left: 1rem; position: absolute;" (click)="cerrar()">Cerrar sesión</button>
     
   </footer>
+
+  <ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-scale-multiple"
+> 
+  <p style="font-size: 20px; color: white">cargando...</p>
+</ngx-spinner> 

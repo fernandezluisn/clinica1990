@@ -1,30 +1,30 @@
 <app-nav [tipoAdmin]="true" [tipoPaciente]="false" [tipoMedico]="false" [logeado]="true"></app-nav>
-  
-<div style="border-radius: 2rem; border: black 0.2rem solid;width: 85%;margin-left: 7.5%; margin-top: 1rem; text-align: center; background-color: rgba(0, 0, 0, 0.144); min-height: 60rem;">
-    <h2>Ingrese los datos del nuevo administrador.</h2>
-  <div class="form-group">    
-    <input [(ngModel)]="nombre"  class="form-control"  aria-describedby="emailHelp" placeholder="Nombre" [ngModelOptions]="{standalone: true}">    
+<div style="min-height: 57rem;">
+  <div style="border-radius: 2rem; border: black 0.2rem solid;width: 85%;margin-left: 7.5%; margin-top: 1rem; text-align: center; background-color: rgba(0, 0, 0, 0.144); ">
+      <h2>Ingrese los datos del nuevo administrador.</h2>
+    <div class="form-group">    
+      <input [(ngModel)]="nombre"  class="form-control"  aria-describedby="emailHelp" placeholder="Nombre" [ngModelOptions]="{standalone: true}">    
+    </div>
+    
+    <div class="form-group">    
+      <input [(ngModel)]="apellido"  class="form-control"  aria-describedby="emailHelp" placeholder="Apellido" [ngModelOptions]="{standalone: true}">    
+    </div>
+
+      <div class="form-group">        
+          <input [(ngModel)]="mail" type="email" class="form-control"  aria-describedby="emailHelp" placeholder="Email" [ngModelOptions]="{standalone: true}">        
+      </div>
+
+      <div class="form-group">        
+          <input [(ngModel)]="pass1" type="password" class="form-control" id="exampleInputPassword1" placeholder="Ingrese su Password" [ngModelOptions]="{standalone: true}">
+      </div>
+
+      <div class="form-group">        
+          <input [(ngModel)]="pass2" type="password" class="form-control" id="exampleInputPassword3" placeholder="Ingrese nuevamente su Password" [ngModelOptions]="{standalone: true}">
+      </div>
+
+      <button (click)="registrar()" class="btn btn-primary">Registrarse</button>
   </div>
-  
-  <div class="form-group">    
-    <input [(ngModel)]="apellido"  class="form-control"  aria-describedby="emailHelp" placeholder="Apellido" [ngModelOptions]="{standalone: true}">    
-  </div>
-
-    <div class="form-group">        
-        <input [(ngModel)]="mail" type="email" class="form-control"  aria-describedby="emailHelp" placeholder="Email" [ngModelOptions]="{standalone: true}">        
-    </div>
-
-    <div class="form-group">        
-        <input [(ngModel)]="pass1" type="password" class="form-control" id="exampleInputPassword1" placeholder="Ingrese su Password" [ngModelOptions]="{standalone: true}">
-    </div>
-
-    <div class="form-group">        
-        <input [(ngModel)]="pass2" type="password" class="form-control" id="exampleInputPassword3" placeholder="Ingrese nuevamente su Password" [ngModelOptions]="{standalone: true}">
-    </div>
-
-    <button (click)="registrar()" class="btn btn-primary">Registrarse</button>
-</div>
-
+</div> 
 <footer class="navbar navbar-fixed-bottom">  
   <button class="btn btn-dark" style="left: 1rem; position: absolute;" (click)="cerrar()">Cerrar sesión</button>
   

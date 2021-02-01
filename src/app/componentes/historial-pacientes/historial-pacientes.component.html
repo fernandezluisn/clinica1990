@@ -1,6 +1,6 @@
 <app-nav [tipoMedico]="true" [inicio]="false" [logeado]="true" [tipoPaciente]="false"></app-nav>
 
-<div style="display: flex; justify-content: left; flex-direction: row; min-height: 55rem;">
+<div style="display: flex; justify-content: left; flex-direction: row; min-height: 53rem;">
     <div style="width: 50%; margin: 3%;">
         <app-tabla-turnos [listaTurnos]="listaTurnosC" (pasarTurno)="tomarTurno($event)"></app-tabla-turnos>
     </div>
@@ -13,3 +13,12 @@
     <button class="btn btn-dark" style="left: 1rem; position: absolute;" (click)="cerrar()">Cerrar sesión</button>
     
   </footer>
+
+  <ngx-spinner
+  bdColor="rgba(51,51,51,0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-scale-multiple"
+> 
+  <p style="font-size: 20px; color: white">cargando...</p>
+</ngx-spinner> 

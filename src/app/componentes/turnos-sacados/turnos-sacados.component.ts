@@ -44,9 +44,19 @@ export class TurnosSacadosComponent implements OnInit {
           
         }
       })
+      let b=false
+      j.forEach(ele=>{
+        if(ele.estado=="confirmado"){
+          b=true;
+        }
+      })
+      
       this.turnosDelPaciente=j;
       this.turnosDelPaciente.sort((a,b) => Number(Date.parse(a.fecha.toString())) - Number(Date.parse(b.fecha.toString())));
-      if(this.turnosDelPaciente.length==0)
+      if(b){
+        alert("Usted tiene turno/s confirmado/s en las próximas dos semanas");
+      }
+    if(this.turnosDelPaciente.length==0)
     this.hayTurnos=false;
     else
     this.hayTurnos=true;

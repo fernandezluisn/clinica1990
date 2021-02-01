@@ -16,7 +16,7 @@ export class  turno {
     comentario:string;
     edad:number;
     temperatura:number;
-    presión:number;
+    presion:number;
     dato1n:string;
     dato1v:any;
     dato2n:string;
