@@ -1,14 +1,16 @@
 <app-nav [logeado]="false" [inicio]="true"></app-nav>
 
+<app-popup *mostrarPopup="mostrar" [mensaje]="mensaje" [color]="'alert-warning'" (cerrarPopup)="cerrarPopup($event)"></app-popup>
+
 <form action="">
     <div class="form-group">
-        <label >Ingrese su email</label>
-        <input [(ngModel)]='email' type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email" [ngModelOptions]="{standalone: true}">
+        <label >Ingrese su correo electrónico</label>
+        <input [(ngModel)]='email' type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Correo electrónico" [ngModelOptions]="{standalone: true}">
         
       </div>
       <div class="form-group">
         <label for="exampleInputPassword1">Ingrese su contraseña</label>
-        <input [(ngModel)]='pass' type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" [ngModelOptions]="{standalone: true}">
+        <input [(ngModel)]='pass' type="password" class="form-control" id="exampleInputPassword1" placeholder="Contraseña" [ngModelOptions]="{standalone: true}">
       </div>
       
       <div class="form-group">

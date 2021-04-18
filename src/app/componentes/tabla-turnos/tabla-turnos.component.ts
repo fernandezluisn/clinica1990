@@ -69,19 +69,21 @@ export class TablaTurnosComponent implements OnInit {
       element.fecha.toString().includes(this.txtBuscar) ||
       element.estado.toLowerCase().includes(this.txtBuscar.toLowerCase())){
         listaB.push(element);
-      }else
-
-      if((element.temperatura)){
-        if(element.temperatura.toString().includes(this.txtBuscar)){
-          listaB.push(element);
-        }
-      }else if ((element.dato1v) && element.dato1v.includes(this.txtBuscar)){        
+      }else if((element.temperatura && element.temperatura.toString().includes(this.txtBuscar))){        
+          listaB.push(element);        
+      }else if (element.dato1v && element.dato1v.toString().toLowerCase().includes(this.txtBuscar.toLowerCase())){        
         listaB.push(element);
-      }else if ((element.dato2v && element.dato2v.includes(this.txtBuscar))){        
+      }else if (element.dato2v && element.dato2v.toString().toLowerCase().includes(this.txtBuscar.toLowerCase())){        
         listaB.push(element);
-      }else if ((element.dato3v) && element.dato3v.includes(this.txtBuscar)){        
+      }else if (element.dato3v && element.dato3v.toString().toLowerCase().includes(this.txtBuscar.toLowerCase())){        
         listaB.push(element);
-      }else if((element.resenia) && element.resenia.includes(this.txtBuscar)){
+      }else if (element.dato1n && element.dato1n.toLowerCase().includes(this.txtBuscar.toLowerCase())){        
+        listaB.push(element);
+      }else if (element.dato2n && element.dato2n.toLowerCase().includes(this.txtBuscar.toLowerCase())){        
+        listaB.push(element);
+      }else if (element.dato3n && element.dato3n.toLowerCase().includes(this.txtBuscar.toLowerCase())){        
+        listaB.push(element);
+      }else if(element.resenia && element.resenia.toLowerCase().includes(this.txtBuscar.toLowerCase())){
         listaB.push(element);
       }
     })

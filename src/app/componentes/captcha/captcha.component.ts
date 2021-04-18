@@ -26,7 +26,7 @@ export class CaptchaComponent implements OnInit {
     if(this.respuesta==this.n3){
       this.resp.emit(true);
     }else{
-      alert("La respuesta de la suma es incorrecta");
+      this.resp.emit(false);
     }
   }
 

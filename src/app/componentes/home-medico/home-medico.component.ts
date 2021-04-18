@@ -19,6 +19,10 @@ export class HomeMedicoComponent implements OnInit {
   
   user;
 
+  mostrarT=false;
+  mensaje:string;
+  color:string;
+
   descargo=false;  
 
   nTurnoE1:number=0;
@@ -482,7 +486,10 @@ export class HomeMedicoComponent implements OnInit {
     }
     else{
       this.sePuedeSubir1=false;
-      alert("El turno de salida del lunes debe ser posterior al de entrada.");
+      this.color="alert-warning";
+      this.mensaje="El turno de salida del lunes debe ser posterior al de entrada."; 
+      this.mostrarT=true; 
+     
     }
   }
 
@@ -498,7 +505,10 @@ export class HomeMedicoComponent implements OnInit {
     }
     else{
       this.sePuedeSubir2=false;
-      alert("El turno de salida del martes debe ser posterior al de entrada.");
+      this.color="alert-warning";
+      this.mensaje="El turno de salida del Martes debe ser posterior al de entrada."; 
+      this.mostrarT=true; 
+      
     }
   }
 
@@ -515,7 +525,9 @@ export class HomeMedicoComponent implements OnInit {
     }
     else{
       this.sePuedeSubir3=false;
-      alert("El turno de salida del miércoles debe ser posterior al de entrada.");
+      this.color="alert-warning";
+      this.mensaje="El turno de salida del miércoles debe ser posterior al de entrada."; 
+      this.mostrarT=true; 
     }
   }
 
@@ -531,7 +543,9 @@ export class HomeMedicoComponent implements OnInit {
     }
     else{
       this.sePuedeSubir4=false;
-      alert("El turno de salida del Jueves debe ser posterior al de entrada.");
+      this.color="alert-warning";
+      this.mensaje="El turno de salida del jueves debe ser posterior al de entrada."; 
+      this.mostrarT=true; 
     }
   }
 
@@ -547,7 +561,9 @@ export class HomeMedicoComponent implements OnInit {
     }
     else{
       this.sePuedeSubir5=false;
-      alert("El turno de salida del viernes debe ser posterior al de entrada.");
+      this.color="alert-warning";
+      this.mensaje="El turno de salida del viernes debe ser posterior al de entrada."; 
+      this.mostrarT=true; 
     }
   }
 
@@ -564,10 +580,17 @@ export class HomeMedicoComponent implements OnInit {
       this.sePuedeSubir6=true;
     }
     else{
-      alert("El turno de salida del sábado debe ser posterior al de entrada.");
+      this.color="alert-warning";
+      this.mensaje="El turno de salida del sábado debe ser posterior al de entrada."; 
+      this.mostrarT=true; 
       this.sePuedeSubir6=false;
     }
   }
+
+  cerrarPopup(mostrar2:boolean){
+    this.mostrarT=mostrar2;
+  }
+
 
   subirHorarios(){   
  
@@ -617,8 +640,15 @@ export class HomeMedicoComponent implements OnInit {
 
     
       this.medicoService.createHorario(j).then(res=>{
-        alert("Sus horarios se han cargado correctamente");
+        
+        this.medicoLogeado.tieneJornada=true;
+        this.bda.updateEmpleado(this.medicoLogeado);
+        this.color="alert-info";
+        this.mensaje="Sus horarios se han cargado correctamente"; 
+        this.mostrarT=true; 
       })
+
+      
     }else{
       
       if(this.ch1)
@@ -666,9 +696,14 @@ export class HomeMedicoComponent implements OnInit {
       if(this.sePuedeSubir1 && this.sePuedeSubir2 && this.sePuedeSubir3 && this.sePuedeSubir4 && this.sePuedeSubir5 && this.sePuedeSubir6){
         this.medicoService.updateJornada(this.jornadaActual);
         
-        alert("Sus horarios se han cargado correctamente");
+        this.color="alert-info";
+      this.mensaje="Sus horarios se han cargado correctamente"; 
+      this.mostrarT=true; 
       }else{
-        alert("Los horarios ingresados no son validos")
+        this.color="alert-warning";
+      this.mensaje="Los horarios ingresados no son validos"; 
+      this.mostrarT=true; 
+        
       }
         
     }

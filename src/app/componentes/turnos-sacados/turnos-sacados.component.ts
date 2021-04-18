@@ -15,7 +15,11 @@ export class TurnosSacadosComponent implements OnInit {
   turnosDelPaciente:turno[];
   hayUsuario=false;
   user;
-  mostrar:boolean=false;;
+  mostrar:boolean=false;
+
+  mostrarT=false;
+  mensaje:string;
+  color:string;
 
   constructor(private turnosService:TurnosService, private service:ServicioService, private router:Router) { 
     this.turnosDelPaciente=new Array();
@@ -54,7 +58,9 @@ export class TurnosSacadosComponent implements OnInit {
       this.turnosDelPaciente=j;
       this.turnosDelPaciente.sort((a,b) => Number(Date.parse(a.fecha.toString())) - Number(Date.parse(b.fecha.toString())));
       if(b){
-        alert("Usted tiene turno/s confirmado/s en las próximas dos semanas");
+        this.color="alert-info";
+        this.mensaje="Usted tiene turnos confirmados los proximos quince días."; 
+        this.mostrarT=true; 
       }
     if(this.turnosDelPaciente.length==0)
     this.hayTurnos=false;
@@ -67,13 +73,19 @@ export class TurnosSacadosComponent implements OnInit {
 
   cancelar(turno){
     this.turnosService.actualizarTurno(turno, 4);
-    alert("El turno se ha cancelado");
+    this.color="alert-warning";
+    this.mensaje="El turno fue cancelado"; 
+    this.mostrarT=true; 
   }
   
 
   cerrar(){    
     this.service.logOutUser();    
     this.router.navigate(['']);
+  }
+
+  cerrarPopup(mostrar2:boolean){
+    this.mostrarT=mostrar2;
   }
 
 }

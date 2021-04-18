@@ -53,12 +53,16 @@ import { DatosAdminComponent } from './componentes/datos-admin/datos-admin.compo
 import { MedicosBarrasComponent } from './componentes/medicos-barras/medicos-barras.component';
 import { TurnosPorSectorComponent } from './componentes/turnos-por-sector/turnos-por-sector.component';
 import { CaptchaComponent } from './componentes/captcha/captcha.component';
-import { DirecDirective } from './directivas/direc.directive';
 import { LineasLogsComponent } from './componentes/lineas-logs/lineas-logs.component';
 import { MedicosService } from './servicios/medicos.service';
 import { TurnosService } from './servicios/turnos.service';
 import { InformeComentariosComponent } from './componentes/informe-comentarios/informe-comentarios.component';
+import {PopupComponent} from './componentes/popup/popup.component';
 
+import { DirecDirective } from './directivas/direc.directive';
+import { MostrarPopupDirective } from './directivas/mostrar-popup.directive';
+import { FotoRotaDirective } from './directivas/foto-rota.directive';
+import { FechaPipe } from './pipes/fecha.pipe';
 
 
 @NgModule({
@@ -95,7 +99,11 @@ import { InformeComentariosComponent } from './componentes/informe-comentarios/i
     CaptchaComponent,
     DirecDirective,    
     LineasLogsComponent, 
-    InformeComentariosComponent
+    InformeComentariosComponent, 
+    MostrarPopupDirective,
+    PopupComponent,
+    FotoRotaDirective,
+    FechaPipe
   ],
   imports: [
     BrowserModule,

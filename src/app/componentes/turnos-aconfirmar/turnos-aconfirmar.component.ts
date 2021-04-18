@@ -22,6 +22,10 @@ export class TurnosAConfirmarComponent implements OnInit {
   noHayTurnos=false;
   listaEspecialidades:especialidad[];
 
+  mostrarT=false;
+  mensaje:string;
+  color:string;
+
   constructor(private router:Router,private service:ServicioService, private turnosBDA:TurnosService, private bda:BdaService) { 
     this.service.tomarUsuario().then(element=>
       {
@@ -59,8 +63,7 @@ export class TurnosAConfirmarComponent implements OnInit {
       lista.filter(element=>{
         if(element.estado=="a confirmar" && element.empleado.email==this.user.email)
         {
-          j.push(element);
-          console.log(element);
+          j.push(element);          
         }
         
       })
@@ -98,17 +101,22 @@ export class TurnosAConfirmarComponent implements OnInit {
       this.bda.updateEspecialidad(e);
       turno.resenia="No hay";
       this.turnosBDA.actualizarTurno(turno, 2);
-      this.filtrarTurnos();
+      this.filtrarTurnos();      
       
-      alert("El turno se aprobó correctamente.");
       this.router.navigate(["confirmados"]);
       
     }catch(err){
-      alert(err.message)
+      this.color="alert-danger";
+        this.mensaje=err.message; 
+        this.mostrarT=true; 
+      
     }
     
   }
 
-  
+  cerrarPopup(mostrar2:boolean){
+    this.mostrarT=mostrar2;
+  }
+
 
 }

@@ -18,6 +18,10 @@ export class TurnosConfirmadosComponent implements OnInit {
   medicoLogeado;
   descargo:boolean;
   noHayTurnos=false;
+
+  mostrarT=false;
+  mensaje:string;
+  color:string;
   
 
   constructor(private service:ServicioService, private bda:BdaService, private turnosBDA:TurnosService, public datepipe:DatePipe, private router:Router) {
@@ -39,6 +43,10 @@ export class TurnosConfirmadosComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  cerrarPopup(mostrar2:boolean){
+    this.mostrarT=mostrar2;
+  }
+
   cerrar(){    
     this.service.logOutUser();    
     this.router.navigate(['']);
@@ -46,10 +54,11 @@ export class TurnosConfirmadosComponent implements OnInit {
 
   filtrarTurnos(){
     let j=new Array();
+    let d=new Date();
     
     this.turnosBDA.devolverListadoTurnos().subscribe(lista=>{
       lista.filter(element=>{
-        if(element.estado=="confirmado" && element.empleado.email==this.user.email)
+        if(element.estado=="confirmado" && element.empleado.email==this.user.email && Number(Date.parse(element.fecha.toString()))>=Number(Date.parse(d.toString())))
         j.push(element);
       })
 
@@ -63,7 +72,10 @@ export class TurnosConfirmadosComponent implements OnInit {
   cancelar(turno:turno){
     this.turnosBDA.actualizarTurno(turno, 4);
     this.filtrarTurnos();
-    alert("El turno se ha cancelado y se le informará al paciente.");
+    this.color="alert-danger";
+    this.mensaje="El turno se ha cancelado y se le informará al paciente."; 
+    this.mostrarT=true; 
+    
   }
 
   ordenarTabla(){

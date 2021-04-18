@@ -1,5 +1,7 @@
 <app-nav [tipoPaciente]="true" [logeado]="true"></app-nav>
 
+<app-popup *ngIf="mostrarT" [mensaje]="mensaje" [color]="color" (cerrarPopup)="cerrarPopup($event)"></app-popup>
+
 <div *ngIf="mostrar" style="min-height: 54rem;">
     <div *ngIf="hayTurnos" style="margin-left: 20%;">
         <app-tabla-turnos [confirmados]="true" [listaTurnos]="turnosDelPaciente" (cancelarTurno)="cancelar($event)"></app-tabla-turnos>

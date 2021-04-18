@@ -17,6 +17,10 @@ export class LoginComponent implements OnInit {
   email:string;
   pass:string;
   log:boolean;
+  
+
+  mostrar=false;
+  mensaje="";
   constructor(private router: Router, private servicio:ServicioService, private bda:BdaService) {
     this.log=false;
     this.email="";
@@ -54,8 +58,14 @@ export class LoginComponent implements OnInit {
         )
       this.router.navigate(["turnos"]);
       
-    }).catch(error=>{
-      alert(error.message);      
+    }).catch(error=>{      
+      this.mostrar=true;
+      if(error.message=="The email address is badly formatted.")
+      this.mensaje="El formato del correo electrónico no es el correcto.";  
+      else if(error.message=="The password is invalid or the user does not have a password.")
+      this.mensaje="La contraseña ingresada no es correcta o el usuario no tiene una.";  
+      else 
+      this.mensaje=error.message    
     }
     );
     
@@ -96,6 +106,10 @@ export class LoginComponent implements OnInit {
       this.bda.guardarLogin("juanc@gmail.com"); 
       this.router.navigate(['homeMedico']);
     })
+  }
+
+  cerrarPopup(mostrar2:boolean){
+    this.mostrar=mostrar2;
   }
 
  

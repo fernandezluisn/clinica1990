@@ -1,5 +1,8 @@
 <app-nav [tipoMedico]="true" [tipoPaciente]="false" [logeado]="true"></app-nav>
 
+<app-popup *ngIf="mostrarT" [mensaje]="mensaje" [color]="color" (cerrarPopup)="cerrarPopup($event)"></app-popup>
+
+
 <div *ngIf="descargo" style="margin-left: 20%;min-height:53rem">
     <div *ngIf="this.medicoLogeado.aprobadoPorAdmin">
         <div *ngIf="noHayTurnos">

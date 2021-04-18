@@ -4,6 +4,7 @@ import {BdaService} from '../../servicios/bda.service';
 
 import {TurnosPipe} from '../../pipes/turnos.pipe';
 import {TurnosHoraPipe} from '../../pipes/turnos-hora.pipe';
+import {FechaPipe} from '../../pipes/fecha.pipe';
 
 import { TurnosService } from 'src/app/servicios/turnos.service';
 import { turno } from 'src/app/clases/turno';
@@ -31,9 +32,11 @@ export class TurnosComponent implements OnInit {
   usuario;
   usuarioLista;
 
-  horaT:string;
+  mostrar=false;
+  mensaje:string;
+  color:string;
 
-  hayTurno=false;
+  horaT:string; 
 
   fecha:Date;
 
@@ -42,11 +45,8 @@ export class TurnosComponent implements OnInit {
   capt=true;
 
   hoy;
-  quinceDias;
-  v0:boolean;
-  v1:boolean;
-  v2:boolean;
-  v3:boolean;
+  
+  etapa=0;
   esDomingo:boolean;
   nTurno:number;
 
@@ -63,17 +63,20 @@ export class TurnosComponent implements OnInit {
 
   nohayTurnosDia=false;
 
+  dias1:string[];
+  dias2:string[];
   jornada:jornadaSemanal;
 
   turnosHora=false;
-  turnosMedia=false;
-  turnosCuarenta=false;
+  turnosMedia=false;  
   noHayJornada=false;
   
   
   listaHorariosTurnos;
   listaTurnosTomados;
   listaTurnosDia;
+  listaTurnosDia2;
+  listaTurnosDia3;
   listaJornadas:jornadaSemanal[];
 
   listadoEspecialidades:especialidad[];
@@ -94,9 +97,11 @@ export class TurnosComponent implements OnInit {
       this.usuario=res;   
 
       let j=new Array();
+     
       this.bda.devolverListadoEmpleados().subscribe(lista=>{
         
         lista.filter(element=>{
+          
           if(element.aprobadoPorAdmin==true)
           {
             j.push(element);
@@ -120,17 +125,15 @@ export class TurnosComponent implements OnInit {
       })
      
     }).catch(err=>{
-      alert(err);
+      this.color="alert-warning";
+          this.mensaje=err.message; 
+          this.mostrar=true; 
     });
 
     this.esDomingo=false;
     this.hoy=new Date();
-    this.quinceDias=new Date(this.hoy.getFullYear(), this.hoy.getMonth(), this.hoy.getDate()+15);
-   
-    this.v0=false;
-    this.v1=false;
-    this.v2=false;
-    this.v3=false;
+      
+    this.generarDias();
   }
 
   ngOnInit(): void {  
@@ -280,8 +283,9 @@ export class TurnosComponent implements OnInit {
           
           this.listaTurnosDia.forEach(elementF => {
             
-            if(elementT.numeroTurno==elementF && elementT.fecha.toString()==this.fecha.toString() && elementT.estado!="cancelado")
-            {             
+            if(elementT.numeroTurno==elementF && elementT.fecha.toString()==this.datepipe.transform(this.fecha, "yyyy-MM-dd") && elementT.estado!="cancelado")
+            {         
+              
               let indice=this.listaTurnosDia.indexOf(elementF);
               this.listaTurnosDia.splice(indice, 1);
             }
@@ -292,25 +296,71 @@ export class TurnosComponent implements OnInit {
       }
     )
 
-    if(this.listaTurnosDia.length==0){
-    this.noHayJornada=true
+    if(this.listaTurnosDia.length>7){
+      this.noHayJornada=false;
+      if(this.listaTurnosDia.length>14){
+        this.listaTurnosDia2=this.listaTurnosDia.splice(7,this.listaTurnosDia.length);
+        this.listaTurnosDia3=this.listaTurnosDia2.splice(14,this.listaTurnosDia.length);
+      }else{        
+        this.listaTurnosDia2=this.listaTurnosDia.splice(7,this.listaTurnosDia.length);
+        this.listaTurnosDia3=null;
+      }
+      
+    }else if(this.listaTurnosDia.length==0){
+      this.noHayJornada=true
     }else{
       this.noHayJornada=false;
+      this.listaTurnosDia2=null;
     }
   }
 
   
+  generarDias(){
+       
+    
+    let dia1=new Date(this.hoy.getFullYear(), this.hoy.getMonth(), this.hoy.getDate()+0);
+    let dia2=new Date(this.hoy.getFullYear(), this.hoy.getMonth(), this.hoy.getDate()+1);
+    let dia3=new Date(this.hoy.getFullYear(), this.hoy.getMonth(), this.hoy.getDate()+2);
+    let dia4=new Date(this.hoy.getFullYear(), this.hoy.getMonth(), this.hoy.getDate()+3);
+    let dia5=new Date(this.hoy.getFullYear(), this.hoy.getMonth(), this.hoy.getDate()+4);
+    let dia6=new Date(this.hoy.getFullYear(), this.hoy.getMonth(), this.hoy.getDate()+5);
+    let dia7=new Date(this.hoy.getFullYear(), this.hoy.getMonth(), this.hoy.getDate()+6);
+    let dia8=new Date(this.hoy.getFullYear(), this.hoy.getMonth(), this.hoy.getDate()+7);
+    let dia9=new Date(this.hoy.getFullYear(), this.hoy.getMonth(), this.hoy.getDate()+8);
+    let dia10=new Date(this.hoy.getFullYear(), this.hoy.getMonth(), this.hoy.getDate()+9);
+    let dia11=new Date(this.hoy.getFullYear(), this.hoy.getMonth(), this.hoy.getDate()+10);
+    let dia12=new Date(this.hoy.getFullYear(), this.hoy.getMonth(), this.hoy.getDate()+11);
+    let dia13=new Date(this.hoy.getFullYear(), this.hoy.getMonth(), this.hoy.getDate()+12);
+    let dia14=new Date(this.hoy.getFullYear(), this.hoy.getMonth(), this.hoy.getDate()+13);
+    
+    let dias1a=new Array(); 
+    let dias2a=new Array(); 
+    
+    dias1a.push(dia1);
+    dias1a.push(dia2);
+    dias1a.push(dia3);
+    dias1a.push(dia4);
+    dias1a.push(dia5);
+    dias1a.push(dia6);
+    dias1a.push(dia7);
+    
+    dias2a.push(dia8);
+    dias2a.push(dia9);
+    dias2a.push(dia10);
+    dias2a.push(dia11);
+    dias2a.push(dia12);
+    dias2a.push(dia13);
+    dias2a.push(dia14);
 
-  mostrarBoton(){
-    if(this.v1==true && this.v2==true && !this.esDomingo){
-      this.v3=true;
-    }
+    
+    this.dias1=dias1a;
+    this.dias2=dias2a;
   }
+  
 
   mostrarFecha(){
-    this.listaTurnosDia=new Array();
-    
-    let d=new Date(this.fecha);
+    this.listaTurnosDia=new Array();   
+    console.log(this.fecha.getDay());
      
     this.listaJornadas.filter(element=>{
       if(element.medico.email.toLowerCase()==this.medicoDetalle.email.toLowerCase())
@@ -318,6 +368,8 @@ export class TurnosComponent implements OnInit {
         this.jornada=element;
       }
     })
+
+
     if(this.jornada)
     {
       if(this.jornada.tiempoTurnos==30)
@@ -325,50 +377,49 @@ export class TurnosComponent implements OnInit {
   
   
         this.turnosHora=false;
-        this.turnosMedia=true;
-        this.turnosCuarenta=false;
+        this.turnosMedia=true;        
         this.noHayJornada=false;
   
-        switch(d.getDay()){
-          case 6:
+        switch(this.fecha.getDay()){
+          case 0:            
             this.esDomingo=true;
           break;
-          case 0:
+          case 1:
             this.esDomingo=false;
             for(let n:number=(this.jornada.lunesE*2); n<(this.jornada.lunesS*2); n++)
             {
               this.listaTurnosDia.push(n);
             }
           break;
-          case 1:
+          case 2:
             this.esDomingo=false;
             for(let n=(this.jornada.martesE*2); n<(this.jornada.martesS*2); n++)
             {
               this.listaTurnosDia.push(n);
             }
           break;
-          case 2:
+          case 3:
             this.esDomingo=false;
             for(let n=(this.jornada.miercolesE*2); n<(this.jornada.miercolesS*2); n++)
             {
               this.listaTurnosDia.push(n);
             }
           break;
-          case 3:
+          case 4:
             this.esDomingo=false;
             for(let n=(this.jornada.juevesE*2); n<(this.jornada.juevesS*2); n++)
             {
               this.listaTurnosDia.push(n);
             }
           break;
-          case 4:
+          case 5:
             this.esDomingo=false;
             for(let n=(this.jornada.viernesE*2); n<(this.jornada.viernesS*2); n++)
             {
               this.listaTurnosDia.push(n);
             }
           break;
-          case 5:
+          case 6:
             this.esDomingo=false;
             for(let n=(this.jornada.SabadoE*2); n<(this.jornada.sabadoS*2); n++)
             {
@@ -381,51 +432,50 @@ export class TurnosComponent implements OnInit {
       }else{
   
         this.turnosHora=true;
-        this.turnosMedia=false;
-        this.turnosCuarenta=false;
+        this.turnosMedia=false;        
         this.noHayJornada=false;
   
   
-        switch(d.getDay()){
-          case 6:
+        switch(this.fecha.getDay()){
+          case 0:            
             this.esDomingo=true;
           break;
-          case 0:
+          case 1:
             this.esDomingo=false;
             for(let n=this.jornada.lunesE*1; n<this.jornada.lunesS; n++)
             {
               this.listaTurnosDia.push(n);
             }
           break;
-          case 1:
+          case 2:
             this.esDomingo=false;
             for(let n=this.jornada.martesE*1; n<this.jornada.martesS; n++)
             {
               this.listaTurnosDia.push(n);
             }
           break;
-          case 2:
+          case 3:
             this.esDomingo=false;
             for(let n=this.jornada.miercolesE*1; n<this.jornada.miercolesS; n++)
             {
               this.listaTurnosDia.push(n);
             }
           break;
-          case 3:
+          case 4:
             this.esDomingo=false;
             for(let n=this.jornada.juevesE*1; n<this.jornada.juevesS; n++)
             {
               this.listaTurnosDia.push(n);
             }
           break;
-          case 4:
+          case 5:
             this.esDomingo=false;
             for(let n=this.jornada.viernesE*1; n<this.jornada.viernesS; n++)
             {
               this.listaTurnosDia.push(n);
             }
           break;
-          case 5:
+          case 6:
             this.esDomingo=false;
             for(let n=this.jornada.SabadoE*1; n<this.jornada.sabadoS; n++)
             {
@@ -438,18 +488,44 @@ export class TurnosComponent implements OnInit {
       this.filtrarListaTurnosDia();
     }else{
       this.turnosHora=false;
-        this.turnosMedia=false;
-        this.turnosCuarenta=false;
+        this.turnosMedia=false;        
         this.noHayJornada=true;
     }
     
-    this.v1=true;
+    this.etapa=1;
     
   }
 
-  mostrarHora(){
-    this.v2=true;
-    this.mostrarBoton();
+  atras(){
+    this.etapa=this.etapa-1;
+  }
+
+  pasarPantalla0(medico){
+    this.medicoDetalle=medico;
+    this.etapa=1;    
+    this.especialidad=null;
+  }
+
+  pasarPantalla1(esp:string){
+    this.especialidad=esp;
+    console.log(esp);   
+    
+
+    
+    
+    this.etapa=2;   
+  }
+
+  pasarPantalla2(dia:string){
+    this.fecha=new Date(dia);
+    console.log(this.fecha);
+    this.mostrarFecha();
+    this.etapa=3;
+  }
+
+  mostrarHora(nTurno:number){
+    this.nTurno=nTurno;
+        
 
     let hora:string;
     
@@ -532,37 +608,13 @@ export class TurnosComponent implements OnInit {
     }
     this.horaT=hora;
     
-    if(this.medicoDetalle)
-    this.hayTurno=true;
+    this.etapa=4;
   }
 
-  tomarMedico(medico){
-    this.medicoDetalle=medico;
-    this.v0=true;
-    this.mostrarFecha();
-    this.especialidad=null;
-  }
+  
+  
 
-  mostrarEspecialidad(){
-    this.especialidad;
-  }
-
-  subirTurno(){
-    if(this.captchaResuelto==false)
-    {
-      alert("debe resolver el captcha");
-    }else
-
-    if(!(this.medicoDetalle))
-    {
-      alert("Debe seleccionar un médico presionando sobre la tabla.");
-    }else if(!(this.nTurno)){
-      alert("No es posible reservar turno este día");
-      
-    }else if(!(this.especialidad)){
-      alert("Debe seleccionar especialidad");
-      
-    }else{
+  subirTurno(){     
       
       let esp:especialidad;
 
@@ -579,20 +631,22 @@ export class TurnosComponent implements OnInit {
      
       
       
-      let t=new turno(this.medicoDetalle, this.usuarioLista, "a confirmar", this.fecha, this.nTurno, "No hay", this.especialidad, this.horaT);      
+      let t=new turno(this.medicoDetalle, this.usuarioLista, "a confirmar", this.datepipe.transform(this.fecha, "yyyy-MM-dd"), this.nTurno, "No hay", this.especialidad, this.horaT);      
+      console.log(t);
       this.turnosS.createTurno(t).then(res=>{
-        alert("Su turno se ha registrado correctamente.");        
+                        
         this.router.navigate(["turnosAprobados"]);
-      });
-
-
-    }
-     // this.mailer.sendMail("aaa");
+      });    
+     
   }
 
   cerrar(){    
     this.serv.logOutUser();    
     this.router.navigate(['']);
+  }
+
+  cerrarPopup(mostrar2:boolean){
+    this.mostrar=mostrar2;
   }
  
 

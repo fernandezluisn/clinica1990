@@ -30,6 +30,19 @@ form{
     background-color: rgba(14, 66, 75, 0.534);
 }
 
+
+
+.popupS{
+    width: 10%;
+    margin-left: 45%;
+    margin-top: 50%;
+    border: rgb(185, 7, 7) 0.61rem solid;
+    border-radius: 0.5rem;
+    background-color: rgba(7, 7, 7, 0.739);
+    color: white;
+    position: absolute;
+}
+
 .form-group{
     margin-top: 5%;
     margin-left: 5%;

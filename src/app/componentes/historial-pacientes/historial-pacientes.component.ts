@@ -23,19 +23,22 @@ export class HistorialPacientesComponent implements OnInit {
     this.hayTurno=false;
     
     this.service.tomarUsuario().then(element=>{
-      this.user=element;
-      let c=new Array();
+      this.user=element;     
+      
+    })
+
+    let c=new Array();
 
       this.bda.devolverListadoTurnos().subscribe(lista=>{
+        
         lista.filter(elementL=>{
-          if(elementL.empleado.email.toLowerCase()==element.email.toLowerCase() && elementL.estado=="atendido")
+          
+          if(elementL.empleado.email.toLowerCase()==this.user.email.toLowerCase() && elementL.estado=="atendido")
           c.push(elementL);
         })
 
-        
+        this.listaTurnosC=c;
       })
-      this.listaTurnosC=c;
-    })
   }
 
   ngOnInit(): void {

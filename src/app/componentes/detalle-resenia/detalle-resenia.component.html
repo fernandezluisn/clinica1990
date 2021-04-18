@@ -13,6 +13,10 @@
     <p *ngIf="turno.presion">Presión: {{turno.presion}}</p>
     
     <h5 *ngIf="turno.resenia=='no hay'" style="margin-top: 1rem; margin-bottom: 1rem; color: brown;">No hay reseña</h5>
+    <p *ngIf="turno.dato1n">{{turno.dato1n}}: {{turno.dato1v}}</p>
+    <p *ngIf="turno.dato2n">{{turno.dato2n}}: {{turno.dato2v}}</p>
+    <p *ngIf="turno.dato3n">{{turno.dato3n}}: {{turno.dato3v}}</p>
+    
     
     <div *ngIf="turno.comentario">
         <h5 *ngIf="!esPaciente">Comentario</h5>

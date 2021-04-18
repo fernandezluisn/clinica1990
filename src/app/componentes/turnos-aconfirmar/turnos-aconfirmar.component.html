@@ -1,5 +1,8 @@
 <app-nav [tipoMedico]="true" [logeado]="true" [tipoPaciente]="false"></app-nav>
 
+<app-popup *ngIf="mostrarT" [mensaje]="mensaje" [color]="color" (cerrarPopup)="cerrarPopup($event)"></app-popup>
+
+
 <div *ngIf="descargo" style="min-height: 53rem;" >
     <div *ngIf="!this.medicoLogeado.aprobadoPorAdmin">
         <h1 style="color:red">Debe ser habilitado por el administrador para poder utilizar esta página.</h1>

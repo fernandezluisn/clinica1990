@@ -77,6 +77,10 @@ export class AtencionPacienteComponent implements OnInit {
   n2=false;
   n3=false;
 
+  mostrarT=false;
+  mensaje:string;
+  color:string;
+
   
 
  
@@ -172,6 +176,10 @@ export class AtencionPacienteComponent implements OnInit {
     this.traerTurnosDelPaciente();
   }
 
+  cerrarPopup(mostrar2:boolean){
+    this.mostrarT=mostrar2;
+  }
+
   subirResenia(){
 
     if(!(this.turnoACompletar.estado=="atendido"))
@@ -219,14 +227,23 @@ export class AtencionPacienteComponent implements OnInit {
       try{
         this.turnoACompletar.resenia=this.txtResenia;
         this.turnosService.actualizarTurno(this.turnoACompletar, 3);
-        alert("El turno se informó correctamente");
+        this.color="alert-info";
+        this.mensaje="El turno se informó correctamente"; 
+        this.mostrarT=true; 
+        
         this.router.navigate(["encuesta/"+ this.turnoACompletar.id]);
       }catch(err)
       {
-        alert(err);
+        this.color="alert-warning";
+        this.mensaje=err; 
+        this.mostrarT=true; 
+        
       }
     }else{
-      alert("Este turno ya ha sido informado");
+      this.color="alert-info";
+        this.mensaje="Este turno ya ha sido informado"; 
+        this.mostrarT=true; 
+      
     }
   }
 
@@ -247,7 +264,7 @@ export class AtencionPacienteComponent implements OnInit {
     else
     this.turnoACompletar.dato2v=this.rango2R;
 
-    console.log(this.turnoACompletar.dato2v);
+    
   }
 
   llenar3(){

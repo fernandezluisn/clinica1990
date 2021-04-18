@@ -1,5 +1,7 @@
 <app-nav [logeado]="false" [inicio]="true"></app-nav>
 
+<app-popup *ngIf="mostrar" [mensaje]="mensaje" [color]="color" (cerrarPopup)="cerrarPopup($event)"></app-popup>
+
 <form (ngSubmit)="registrar()">
   <ul class="nav nav-tabs" style="background-color: rgb(233, 219, 219);">
     <li class="active" (click)="cambiarP()" style="margin-left: 1rem; ">Paciente</li>
@@ -19,7 +21,7 @@
   </div>
     <div class="form-group">
         
-        <input [(ngModel)]="mail" type="email" class="form-control"  aria-describedby="emailHelp" placeholder="Email" [ngModelOptions]="{standalone: true}">
+        <input [(ngModel)]="mail" type="email" class="form-control"  aria-describedby="emailHelp" placeholder="Correo electrónico" [ngModelOptions]="{standalone: true}">
         
       </div>
       <div class="form-group">

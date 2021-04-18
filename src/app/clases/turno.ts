@@ -7,7 +7,7 @@ export class  turno {
     empleado:empleado;
     paciente:paciente;
     estado:string;
-    fecha:Date;
+    fecha:string;
     numeroTurno:number;
     resenia: string;    
     especialidad:string;
@@ -27,7 +27,7 @@ export class  turno {
     
    
 
-    constructor(medico:empleado, paciente:paciente, estado:string, fecha:Date, turno:number, resenia:string, especialidad:string, hora:string){
+    constructor(medico:empleado, paciente:paciente, estado:string, fecha:string, turno:number, resenia:string, especialidad:string, hora:string){
         this.fecha=fecha;
         this.paciente=paciente;
         this.empleado=medico;

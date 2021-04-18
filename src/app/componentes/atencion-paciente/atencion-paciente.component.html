@@ -1,5 +1,6 @@
 <app-nav [tipoMedico]="true" [logeado]="true" [tipoPaciente]="false"></app-nav>
     
+<app-popup *ngIf="mostrarT" [mensaje]="mensaje" [color]="color" (cerrarPopup)="cerrarPopup($event)"></app-popup>
 
 
 

@@ -34,7 +34,9 @@ export class RegistroComponent implements OnInit {
   capt:boolean;
   listaEspecialidades;  
   
-  
+  mostrar=false;
+  mensaje:string;
+  color:string;
 
   uploadPercent1: Observable<number>;
   url1: string;
@@ -119,7 +121,9 @@ export class RegistroComponent implements OnInit {
          this.bda.createPaciente(u).then(async (res)=>{
           this.router.navigate(['turnos']);
          }).catch(err=>{
-           alert("error en el guardado de datos "+err.message);
+          this.color="alert-warning";
+          this.mensaje="error en el guardado de datos "+err.message; 
+          this.mostrar=true;  
          });
         }          
         else
@@ -140,16 +144,28 @@ export class RegistroComponent implements OnInit {
           this.bda.createEmpleado(u).then(async (res)=>{
             this.bda.guardarLogin(this.mail);
             this.router.navigate(['homeMedico']);
-          }).catch(err=>alert("error en el guardado de datos "+err.message));
+          }).catch(err=>{
+            this.color="alert-warning";
+            this.mensaje="error en el guardado de datos "+err.message; 
+            this.mostrar=true;  
+            
+          });
         }}).catch(error=>{
-          alert(error.message);      
+          this.color="alert-danger";
+            this.mensaje=error.message; 
+            this.mostrar=true;      
         });
 
 
-    }else if(this.pass1!=this.pass2){      
-      alert("Los passwords no coinciden.");
+    }else if(this.pass1!=this.pass2){  
+      this.color="alert-warning";
+      this.mensaje="Los passwords no coinciden."; 
+      this.mostrar=true;           
+      
     }else{
-      alert("Marque el captcha");
+      this.color="alert-warning";
+      this.mensaje="Marque el captcha"; 
+      this.mostrar=true;       
     }
 
   }
@@ -180,13 +196,25 @@ export class RegistroComponent implements OnInit {
     
   }
 
-  hecho(e){
-   
+  hecho(e){   
     this.captchaResuelto=true;
   }
 
   respuesta(a:boolean){
     this.captchaResuelto2=a;
-    alert("Cuenta resuelta correctamente.");
+    if(a==true){
+      this.color="alert-success";
+      this.mensaje="Suma resuelta correctamente."; 
+      this.mostrar=true; 
+    }else{
+      this.color="alert-danger";
+      this.mensaje="La suma no fue resuelta correctamente."; 
+      this.mostrar=true; 
+    }
+    
+  }
+
+  cerrarPopup(mostrar2:boolean){
+    this.mostrar=mostrar2;
   }
 }

@@ -1,22 +1,36 @@
-import { Directive, Input, Renderer2, ElementRef, ViewChild } from '@angular/core';
+import { Directive, ElementRef, Input, Renderer2} from '@angular/core';
+import { empleado } from '../clases/empleado';
 
 @Directive({
   selector: '[appDirec]'
 })
-export class DirecDirective {
+export class DirecDirective { 
 
- // @ViewChild("miTexto") miTexto: ElementRef;
+  constructor(private el:ElementRef, private renderer: Renderer2) {
+    
+   }
 
-  @Input('appDirec') n1: number;
-  @Input() n2: number;
+  @Input()   set appDirec(doctor:empleado) {
+    if(doctor.tieneJornada){
+      this.renderer.setStyle(this.el.nativeElement, 'backgroundColor', "blue");
+      this.renderer.setStyle(this.el.nativeElement, 'color', "white");
+      console.log("Tiene turnos "+doctor.apellido);      
+    }    
+    else{
+      this.renderer.setStyle(this.el.nativeElement, 'backgroundColor', "red");
+      this.renderer.setStyle(this.el.nativeElement, 'color', "black");
+      console.log("No tiene turnos "+doctor.apellido);
+    }
 
-  constructor(private el: Renderer2) { 
-    //this.sumar();
   }
+       
 
-  /*private sumar(){
-    let text = this.el.createText(this.n1+" + "+this.n2);
-    this.el.appendChild(this.miTexto.nativeElement, text);
-  }*/
-
+    
+    
+  
+  
 }
+
+  
+
+
