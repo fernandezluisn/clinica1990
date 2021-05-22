@@ -34,6 +34,10 @@ export class EncuestaComponent implements OnInit {
   cargo=false;
   hayEncu=false;
 
+  mostrar=false;
+  mensaje="";
+  color:string;
+
   constructor(private router: Router, private tomarId:ActivatedRoute, private turnosS:TurnosService) { 
     this.id=this.tomarId.snapshot.paramMap.get('idTurno');
     
@@ -83,15 +87,25 @@ export class EncuestaComponent implements OnInit {
       this.turno.encuestaRespondidaMedico=true;
       this.turnosS.actualizarTurno(this.turno, 3);
       this.turnosS.createEncuesta(encu);
-      alert("Gracias por responder");
+      this.mensaje="Gracias por responder";  
+      this.color="alert-success";
+      this.mostrar=true;
       this.router.navigate(["homeMedico"]);
     }else{
-      alert("Debe contestar todas las preguntas");
+      this.color="alert-warning";
+
+      this.mostrar=true;
+      this.mensaje="Debe contestar todas las preguntas";
+      
     }
   }
 
   seguir(){
     this.router.navigate(["homeMedico"]);
+  }
+
+  cerrarPopup(mostrar2:boolean){
+    this.mostrar=mostrar2;
   }
 
 }

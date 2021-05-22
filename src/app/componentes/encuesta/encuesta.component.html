@@ -1,4 +1,7 @@
- <div *ngIf="cargo">   
+ <div *ngIf="cargo">  
+
+     <app-popup *mostrarPopup="mostrar" [mensaje]="mensaje" [color]="color" (cerrarPopup)="cerrarPopup($event)"></app-popup>
+ 
      <div *ngIf="!hayEncu">
         <h1> Antes de finalizar le solicitamos que responda esta breve encuesta.</h1>
         <div class="form-group">
